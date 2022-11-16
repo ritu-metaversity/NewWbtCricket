@@ -16,7 +16,7 @@ export const SummaryCardTitle = styled(Typography)({
 export const SummaryCardContainer = styled(Box)({
     backgroundColor: "#ddd",
     textAlign: "center",
-    margin: 5,
+    marginBlock: 10,
     border: "1px dashed #000",
     borderRadius: "10px",
 })

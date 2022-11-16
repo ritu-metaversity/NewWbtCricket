@@ -2,8 +2,6 @@ import { Box, Button, Grid, MenuItem, Select } from "@mui/material";
 import React from "react";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
 import { TitleStyled } from "../../components/custom/styledComponents";
-import StickyHeadTable from "../../components/custom/Table";
-import { Column } from "../Ledger/Ledger";
 
 const gridItemProps = {
   item: true,
@@ -38,7 +36,7 @@ const gridData = [
 const Profile = () => {
   const handleRatingChange = (e: any) => {};
   return (
-    <Box maxWidth={"lg"} p={0.5} fontWeight={700} mx="auto">
+    <Box p={0.5} fontWeight={700} mx="auto">
       <BacktoMenuButton />
       <TitleStyled>rate information</TitleStyled>
       <Grid container columns={12} mb={4}>

@@ -9,6 +9,7 @@ export interface Column {
   id: "matchName" | "wonBy" | "won" | "lost" | "balance" | string;
   label: string;
   minWidth?: number;
+  colorCoded?: boolean;
   align?: "right" | "center";
   format?: (value: number) => string;
 }

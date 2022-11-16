@@ -7,16 +7,37 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Typography,
+} from "@mui/material";
 import { Column } from "../../Pages/Ledger/Ledger";
-import { TitleStyled } from "./styledComponents";
+import {
+  TableCellText,
+  TableHeadText,
+  TableResultContainer,
+  TitleStyled,
+} from "./styledComponents";
+import { blue } from "@mui/material/colors";
+import { ExpandCircleDown } from "@mui/icons-material";
 
 interface StickyHeadTableProps {
   title?: string;
   rows: readonly any[];
-  columns:readonly Column[];
+  columns: readonly Column[];
+  result?: string | React.ReactElement;
+  accordion?: boolean;
 }
- const StickyHeadTable:React.FC<StickyHeadTableProps> =({title, rows, columns}) =>{
+const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
+  title,
+  rows,
+  columns,
+  result,
+  accordion,
+}) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -32,70 +53,48 @@ interface StickyHeadTableProps {
   };
 
   return (
-    <Paper sx={{ width: "100%", maxWidth: "100vw", overflow: "hidden" }}>
-      {Boolean(title) && <TitleStyled>{title}</TitleStyled>}
-      <TableContainer sx={{ maxHeight: "70vh", width: "100%" }}>
-        <Table
-          stickyHeader
-          aria-label="sticky table"
-          sx={{ width: "100%", border: "1px solid white" }}
-        >
-          <TableHead>
-            <TableRow sx={{ width: "100%" }}>
-              {columns.map((column) => (
-                <TableCell
-                  sx={{
-                    bgcolor: "secondary.light",
-                    color: "white",
-                    fontWeight: "600",
-                    border: "1px solid white",
-                  }}
-                  key={column.id}
-                  // align={column.align}
-                  align="center"
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow
-                    hover
-                    sx={{ width: "100%" }}
-                    role="checkbox"
-                    tabIndex={-1}
-                    key={row.balance}
-                  >
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          sx={{
-                            border: "0.01px solid #d9d9d9",
-                            p: 1,
-                            fontSize: "0.9rem",
-                          }}
-                        >
-                          {column.format && typeof value === "number"
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      {accordion ? (
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandCircleDown />}>
+            <TitleStyled>{title}</TitleStyled>
+          </AccordionSummary>
+          <AccordionDetails>
+            <TableContainer sx={{ maxHeight: "70vh", width: "100%" }}>
+              <Tables
+                columns={columns}
+                rows={rows}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                // value={value}
+              />
+              {result && (
+                <TableResultContainer textAlign={"center"}>
+                  {result}
+                </TableResultContainer>
+              )}
+            </TableContainer>
+          </AccordionDetails>
+        </Accordion>
+      ) : (
+        <>
+          <TitleStyled>{title}</TitleStyled>
+          <TableContainer sx={{ maxHeight: "70vh", width: "100%" }}>
+            <Tables
+              columns={columns}
+              rows={rows}
+              page={page}
+              rowsPerPage={rowsPerPage}
+              // value={value}
+            />
+            {result && (
+              <TableResultContainer textAlign={"center"}>
+                {result}
+              </TableResultContainer>
+            )}
+          </TableContainer>
+        </>
+      )}
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
@@ -107,7 +106,98 @@ interface StickyHeadTableProps {
       />
     </Paper>
   );
+};
+
+export function Tables({
+  columns,
+  rows,
+  value,
+  page,
+  rowsPerPage,
+}: {
+  columns: readonly Column[];
+  rows: any;
+  value?: any;
+  page: number;
+  rowsPerPage: number;
+}) {
+  return (
+    <Table
+      stickyHeader
+      aria-label="sticky table"
+      sx={{
+        width: "100%",
+        border: "1px solid white",
+      }}
+    >
+      <TableHead>
+        <TableRow
+          sx={{
+            width: "100%",
+          }}
+        >
+          {columns.map((column) => (
+            <TableCell
+              sx={{
+                bgcolor: blue[50],
+                color: "primary.main",
+                border: "1px solid #d9d9d9",
+              }}
+              key={column.id} // align={column.align}
+              align="center"
+              style={{
+                minWidth: column.minWidth,
+              }}
+            >
+              <TableHeadText>{column.label}</TableHeadText>
+            </TableCell>
+          ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {rows
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((row: any) => {
+            return (
+              <TableRow
+                hover
+                sx={{
+                  width: "100%",
+                }}
+                role="checkbox"
+                tabIndex={-1}
+                key={row.balance}
+              >
+                {columns.map((column) => {
+                  const value = row[column.id];
+                  return (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      sx={{
+                        border: "0.01px solid #d9d9d9",
+                        p: 1,
+                        fontSize: "0.9rem",
+                        color: column.colorCoded
+                          ? value < 0
+                            ? "red"
+                            : "green"
+                          : "",
+                      }}
+                    >
+                      <TableCellText>
+                        {column.format && typeof value === "number"
+                          ? column.format(value)
+                          : value}
+                      </TableCellText>
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            );
+          })}
+      </TableBody>
+    </Table>
+  );
 }
-
-
-export default StickyHeadTable
+export default StickyHeadTable;

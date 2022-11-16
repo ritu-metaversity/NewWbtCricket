@@ -16,7 +16,8 @@ const Dialog: FC<Props> = ({ titlSD, maxWidth, actions, ...restProps }) => {
 
     const handleCloseIconClick = (e:any) => {
         if (restProps.onClose) {
-            restProps.onClose(e,"backdropClick")
+          restProps.onClose(e, "backdropClick")
+          console.log(restProps)
         }
     }
   return (

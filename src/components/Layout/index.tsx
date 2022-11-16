@@ -1,6 +1,7 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import Headers from './Headers';
+import { Box } from "@mui/material";
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Headers from "./Headers";
 
 const Layout = () => {
   return (
@@ -8,10 +9,11 @@ const Layout = () => {
       <header>
         <Headers />
       </header>
-
-      <Outlet />
+      <Box py={2} m="auto" boxSizing={"content-box"} maxWidth={{ xs: "94vw", sm: "lg" }}>
+        <Outlet />
+      </Box>
     </div>
   );
-}
+};
 
-export default Layout
+export default Layout;

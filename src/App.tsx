@@ -13,6 +13,10 @@ import ChangePassword from './Pages/ChangePassword';
 import Layout from './components/Layout';
 import Ledger from './Pages/Ledger';
 import Profile from './Pages/Profile';
+import SetButtonValue from './Pages/SetButtonValue';
+import InPlayDetails from './Pages/InPlayDetails';
+import CompleteDetails from './Pages/completeDetails';
+import Account from './Pages/accountStatement';
 
 function App() {
   return (
@@ -26,7 +30,11 @@ function App() {
               <Route path="in-play" element={<Inplay />} />
               <Route path="complete-games" element={<Complete />} />
               <Route path="my-ledger" element={<Ledger />} />
-              <Route path="profile" element={<Profile/>} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="set-button-value" element={<SetButtonValue />} />
+              <Route path="in-play-details" element={<InPlayDetails />} />
+              <Route path="completed-details" element={<CompleteDetails />} />
+              <Route path="account-summary" element={<Account />} />
             </Route>
             <Route path="password-change" element={<ChangePassword />} />
             <Route path="terms" element={<Terms />} />

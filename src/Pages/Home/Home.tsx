@@ -7,7 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { Outlet, Route, Routes, useRoutes } from "react-router-dom";
+import { Link, Outlet, Route, Routes, useRoutes } from "react-router-dom";
 import { Inplay } from "../InPlay";
 import Complete from "../Complete/Complete";
 import { ChildCare } from "@mui/icons-material";
@@ -20,34 +20,36 @@ interface ActionCardProps {
 }
 export const ActionAreaCard:FC<ActionCardProps>=({ cardTitle, cardForwardHref , cardImageSrc, cardDesc })=> {
   return (
-    <Card sx={{ width: 345,height:"100%" }}>
-      <CardActionArea href={cardForwardHref} sx={{ height: "100%" }}>
-        <CardMedia
-          component="img"
-          // width="100px"
-          sx={{
-            alignSelf:"center",
-            // height: "100px",
-            width: "100%",
-            maxWidth: "220px",
-            maxHeight: "220px",
-            margin: "auto",
-            pt: 2, 
-          }}
-          // height= "200"
-          image={cardImageSrc}
-          // image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
-          alt="icon-image"
-        />
-        <CardContent sx={{mt:""}}>
-          <Typography gutterBottom variant="h5" component="div">
-            {cardTitle}
-          </Typography>
-          {/* <Typography variant="body2" color="text.secondary">
+    <Card sx={{ width: 345, height: "100%" }}>
+      <Link to={cardForwardHref} style={{textDecoration:"none", color:"unset"}}>
+        <CardActionArea sx={{ height: "100%" }}>
+          <CardMedia
+            component="img"
+            // width="100px"
+            sx={{
+              alignSelf: "center",
+              // height: "100px",
+              width: "100%",
+              maxWidth: "220px",
+              maxHeight: "220px",
+              margin: "auto",
+              pt: 2,
+            }}
+            // height= "200"
+            image={cardImageSrc}
+            // image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+            alt="icon-image"
+          />
+          <CardContent sx={{ mt: "" }}>
+            <Typography gutterBottom variant="h5" component="div">
+              {cardTitle}
+            </Typography>
+            {/* <Typography variant="body2" color="text.secondary">
             {cardDesc}
           </Typography> */}
-        </CardContent>
-      </CardActionArea>
+          </CardContent>
+        </CardActionArea>
+      </Link>
     </Card>
   );
 }

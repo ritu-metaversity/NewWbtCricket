@@ -8,6 +8,6 @@ export const HeaderTextStyle = styled((Typography))({
 })
  
 export const UserIconImage = styled.img({
-    width: 75,
+    width: 65,
     aspectRatio:1,
 })
