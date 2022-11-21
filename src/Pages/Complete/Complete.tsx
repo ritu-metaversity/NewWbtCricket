@@ -4,8 +4,8 @@ import BacktoMenuButton from "../../components/BacktoMenuButton";
 import SummaryCard from "../../components/Inplay/SummaryCard";
 
 const data = {
-  matchTitle: "SYDNEY SIXERS W V MELBOURNE RENEGADES W (WBBL T-20)",
-  matchTime: "2022-11-10 09:30:00",
+  matchName: "SYDNEY SIXERS W V MELBOURNE RENEGADES W (WBBL T-20)",
+  openDate: "2022-11-10 09:30:00",
   to: "/completed-details",
 
   gridData: [

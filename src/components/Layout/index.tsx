@@ -9,7 +9,7 @@ const Layout = () => {
       <header>
         <Headers />
       </header>
-      <Box py={2} m="auto" boxSizing={"content-box"} maxWidth={{ xs: "94vw", sm: "lg" }}>
+      <Box py={2} m="auto" boxSizing={"content-box"} maxWidth={{ xs:"100vw", sm: "lg" }}>
         <Outlet />
       </Box>
     </div>

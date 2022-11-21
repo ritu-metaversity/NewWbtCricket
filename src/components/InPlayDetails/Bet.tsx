@@ -25,7 +25,7 @@ const Bet = () => {
         <AccordionSummary expandIcon={<ExpandCircleDown />}>
           Match Odds
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails sx={{ p: 0 }}>
           <MatchOddsGrid />
         </AccordionDetails>
       </Accordion>
@@ -34,7 +34,7 @@ const Bet = () => {
         <AccordionSummary expandIcon={<ExpandCircleDown />}>
           Session Odds
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails sx={{ p: 0 }}>
           <SessionOddsGrid />
         </AccordionDetails>
       </Accordion>
@@ -43,7 +43,7 @@ const Bet = () => {
         <AccordionSummary expandIcon={<ExpandCircleDown />}>
           Bookmaker Odds
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails sx={{ p: 0 }}>
           <MatchOddsGrid />
         </AccordionDetails>
       </Accordion>
@@ -80,6 +80,7 @@ const BetGridItemGridItemProps = {
   bgcolor: "white",
   p: 0.5,
   fontWeight: 700,
+  marginInline:"auto"
 };
 
 const BetGridItem = ({ title, values }: { title?: boolean; values: any[] }) => {
@@ -94,7 +95,7 @@ const BetGridItem = ({ title, values }: { title?: boolean; values: any[] }) => {
   };
   return (
     <>
-      <Grid {...Props} xs={5.7} lg={5.9}>
+      <Grid {...Props} xs={5.6} lg={5.9}>
         {values[0]}
       </Grid>
       <Grid {...Props} xs={3}>
@@ -111,7 +112,7 @@ export default Bet;
 
 function MatchOddsGrid({}) {
   return (
-    <Grid container bgcolor="#dfdfdf" gap={0.5} p={1}>
+    <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
       <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
       <BetGridItem
         values={[
@@ -134,7 +135,7 @@ function MatchOddsGrid({}) {
 
 function SessionOddsGrid({}) {
   return (
-    <Grid container bgcolor="#dfdfdf" gap={0.5} p={1}>
+    <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
       <BetGridItem title values={["SESSION", "NOT", "YES"]} />
       <BetGridItem
         values={[

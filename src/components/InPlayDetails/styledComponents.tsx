@@ -4,7 +4,7 @@ import { Grid, Typography } from "@mui/material";
 export const ScoreCardGridItem = styled(Grid)({
     border: '2px dotted black ',
     padding: 4,
-    margin:2,
+    margin:"0",
     boxSizing: "border-box"
 })
 

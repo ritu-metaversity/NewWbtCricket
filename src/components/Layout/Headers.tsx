@@ -9,25 +9,39 @@ import {
   Toolbar,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoneyTwoTone";
 import MoneyIcon from "@mui/icons-material/MoneyTwoTone";
 import { HeaderTextStyle, UserIconImage } from "./styledComponents";
 import { Logout } from "@mui/icons-material";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { userServices } from "../../utils/api/user/services";
 
 const data = {
-  clientName: "SABKA CLIENT",
-  coins: 300,
+  balance: 0,
+  liability: 0,
+  uplineAmount: 0,
 };
 
 const Headers = () => {
-  const { clientName, coins } = data;
+  const [wallet, setWallet] = useState(data);
   const navigation = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mouseOverButton, setMouseOverButton] = React.useState<Boolean>(false);
   const [mouseOverMenu, setMouseOverMenu] = React.useState<Boolean>(false);
+
+  useEffect(() => {
+    const getWallet = async () => {
+      const { response } = await userServices.wallet();
+      if (response?.data) {
+        setWallet(response.data);
+      }
+    };
+    getWallet();
+    return () => {};
+  }, []);
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -58,8 +72,13 @@ const Headers = () => {
           <KeyboardBackspaceIcon fontSize="large" htmlColor="white" />
         </IconButton>
         <Box>
-          <HeaderTextStyle>{clientName}</HeaderTextStyle>
-          <HeaderTextStyle>Coins: {coins}</HeaderTextStyle>
+          <HeaderTextStyle></HeaderTextStyle>
+          <HeaderTextStyle>
+            Coins: {wallet.balance - wallet.liability}
+          </HeaderTextStyle>
+          <HeaderTextStyle>
+            Liability: { wallet.liability}
+          </HeaderTextStyle>
         </Box>
         <IconButton
           // onClick={handleClick}
