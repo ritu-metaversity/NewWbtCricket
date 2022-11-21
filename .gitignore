@@ -13,7 +13,7 @@
 
 
 # package lock  files
-package-*.json
+/package-*.json
 
 
 # misc
