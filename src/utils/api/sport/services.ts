@@ -20,5 +20,12 @@ export const sportServices = {
           params: { eventIds },
         };
         return apiHandler(params);
+    },
+    eventOdds: (eventId: number) => {
+        const params:ApiServiceInterface = {
+            resource: sportsResourses.GET_EVENT_ODDS,
+            pathVars: {eventId}
+        }
+        return apiHandler(params);
     }
 }

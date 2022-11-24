@@ -15,7 +15,7 @@ export function ScoreCardGrid({ }) {
           <ScoreCardGridText>6 BALLS :</ScoreCardGridText>
         </ScoreCardGridItem>
         <ScoreCardGridItem item xs={2}>
-          <img src="/BC.png" alt="" />
+          <img style={{width:"100%", maxWidth:70}} src="/BC.png" alt="" />
         </ScoreCardGridItem>
       </Grid>;
 }

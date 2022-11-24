@@ -10,11 +10,15 @@ import {
 } from "@mui/material";
 import { blue } from "@mui/material/colors";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { TitleStyled } from "../custom/styledComponents";
 import { BetText, BetTextMedium, BetTextSmall } from "./styledComponents";
 
-const Bet = () => {
+interface BetProps {
+  Odds: MatchOddsGridProps[];
+  Bookmaker: MatchOddsGridProps[];
+}
+const Bet:FC<BetProps> = ({Odds, Bookmaker}) => {
   const [amount, setAmount] = useState(10);
   const handleChange = (e: any) => {
     setAmount(e.target.value);
@@ -26,9 +30,18 @@ const Bet = () => {
           Match Odds
         </AccordionSummary>
         <AccordionDetails sx={{ p: 0 }}>
-          <MatchOddsGrid />
+          <MatchOddsGrid {...Odds[0]} />
         </AccordionDetails>
       </Accordion>
+
+      {Bookmaker && <Accordion>
+        <AccordionSummary expandIcon={<ExpandCircleDown />}>
+          Bookmaker Odds
+        </AccordionSummary>
+        <AccordionDetails sx={{ p: 0 }}>
+          <MatchOddsGrid {...Bookmaker[0]} />
+        </AccordionDetails>
+      </Accordion>}
 
       <Accordion>
         <AccordionSummary expandIcon={<ExpandCircleDown />}>
@@ -36,15 +49,6 @@ const Bet = () => {
         </AccordionSummary>
         <AccordionDetails sx={{ p: 0 }}>
           <SessionOddsGrid />
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandCircleDown />}>
-          Bookmaker Odds
-        </AccordionSummary>
-        <AccordionDetails sx={{ p: 0 }}>
-          <MatchOddsGrid />
         </AccordionDetails>
       </Accordion>
 
@@ -83,7 +87,7 @@ const BetGridItemGridItemProps = {
   marginInline:"auto"
 };
 
-const BetGridItem = ({ title, values }: { title?: boolean; values: any[] }) => {
+const BetGridItem = ({ title, values, suspended }: { title?: boolean; suspended?:boolean, values: any[] }) => {
   const Props = {
     ...BetGridItemGridItemProps,
     ...(title
@@ -93,11 +97,8 @@ const BetGridItem = ({ title, values }: { title?: boolean; values: any[] }) => {
         }
       : {}),
   };
-  return (
+  const gridItems = (
     <>
-      <Grid {...Props} xs={5.6} lg={5.9}>
-        {values[0]}
-      </Grid>
       <Grid {...Props} xs={3}>
         {values[1]}
       </Grid>
@@ -106,30 +107,97 @@ const BetGridItem = ({ title, values }: { title?: boolean; values: any[] }) => {
       </Grid>
     </>
   );
+  return (
+    <>
+      <Grid {...Props} xs={5.6} lg={5.9}>
+        {values[0]}
+      </Grid>
+      {!title && suspended ? (
+        <Grid item xs={6.2} lg={6}>
+          <Grid display="grid">
+            <Box
+              sx={{
+                gridArea: "1/1",
+                color: "#FF3B3C",
+                padding: 0.5,
+                fontWeight: 700,
+                position: "relative",
+                bgcolor: "rgba(0,0,0,0.7)",
+              }}
+            >
+              Suspended
+            </Box>
+            <Grid container sx={{ gridArea: "1/1" }} columns={6}>
+              {gridItems}
+            </Grid>
+          </Grid>
+        </Grid>
+      ) : (
+        <>{gridItems}</>
+      )}
+    </>
+  );
 };
 
 export default Bet;
 
-function MatchOddsGrid({}) {
+interface MatchOddsGridProps {
+  runner: {
+    back1price: number;
+    lay1price: number;
+    team: string;
+    runnerStatus: string;
+    selectionId: number;
+  }[];
+  maxBet: number;
+  betDelay: number;
+  inPlay: boolean;
+  isActive: boolean;
+  isPause: boolean;
+  status: string;
+}
+const MatchOddsGrid: FC<MatchOddsGridProps> = ({ runner,status, maxBet, betDelay, isActive, isPause, inPlay }) => {
+  if (!runner) { return null; }
+  console.log(isActive,isPause,inPlay,"21");
   return (
-    <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
-      <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
-      <BetGridItem
-        values={[
-          "SYDNEY W: 0",
-          <BetText color="blue">0.00</BetText>,
-          <BetText color="red">0.00</BetText>,
-        ]}
-      />
-      <BetGridItem
-        values={[
-          "MELBOURNE W: 0",
-          <BetText color="blue">0.00</BetText>,
-          <BetText color="red">0.00</BetText>,
-        ]}
-      />
-      {/* <BetGridItem title /> */}
-    </Grid>
+    <>
+      <Box display="flex" justifyContent={"space-evenly"}>
+        <BetTextMedium>Max Bet:{maxBet}</BetTextMedium>
+        <BetTextMedium>Bet Delay:{betDelay}</BetTextMedium>
+      </Box>
+      <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
+        <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
+        <BetGridItem
+          suspended={
+            ["SUSPENDED", "CLOSED"].includes(status) ||
+            runner[0]?.runnerStatus === "SUSPENDED" ||
+            !isActive ||
+            isPause ||
+            !inPlay
+          }
+          values={[
+            runner[0]?.team,
+            <BetText color="blue">{runner[0]?.back1price}</BetText>,
+            <BetText color="red">{runner[0]?.lay1price}</BetText>,
+          ]}
+        />
+        <BetGridItem
+          suspended={
+            ["SUSPENDED", "CLOSED"].includes(status) ||
+            runner[1]?.runnerStatus === "SUSPENDED" ||
+            !isActive ||
+            isPause ||
+            !inPlay
+          }
+          values={[
+            runner[1]?.team,
+            <BetText color="blue">{runner[1]?.back1price}</BetText>,
+            <BetText color="red">{runner[1]?.lay1price}</BetText>,
+          ]}
+        />
+        {/* <BetGridItem title /> */}
+      </Grid>
+    </>
   );
 }
 

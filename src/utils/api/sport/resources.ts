@@ -13,4 +13,8 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     URL: "https://odds-api.kalyanexch.com/event-odds/match-odds",
     METHOD: "GET",
   },
+  GET_EVENT_ODDS: {
+    URL: "https://odds-api.kalyanexch.com/event-odds/odds/:eventId",
+    METHOD: "GET",
+  },
 };
