@@ -1,7 +1,7 @@
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
-import SummaryCard from "../../components/Inplay/SummaryCard";
+import SummaryCard, { SummaryCardProps } from "../../components/Inplay/SummaryCard";
 import { sportsResourses } from "../../utils/api/sport/resources";
 import { sportServices } from "../../utils/api/sport/services";
 
@@ -39,7 +39,7 @@ function a11yProps(index: number) {
 
 const Inplay = () => {
   const [activeSportList, setActiveSportList] = useState([]);
-  const [activeEventList, setActiveEventList] = useState([]);
+  const [activeEventList, setActiveEventList] = useState<SummaryCardProps[]>([]);
   const [tabValue, setTab] = useState(0);
   useEffect(() => {
     const getList = async () => {
@@ -99,7 +99,7 @@ const Inplay = () => {
         ))}
       </Tabs>
       {activeEventList?.length > 0 ? (
-        activeEventList.map((item) => <SummaryCard data={item} />)
+        activeEventList.map((item) => <SummaryCard {...item} />)
       ) : (
         <Typography mt="15vh" variant="h4" color="error">
           {"No active event found"}

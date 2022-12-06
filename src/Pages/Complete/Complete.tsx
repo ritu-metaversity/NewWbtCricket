@@ -35,9 +35,9 @@ const Complete = () => {
     <div>
       <Box maxWidth={900} mx="auto">
         <BacktoMenuButton />
+        {/* <SummaryCard data={data} />
         <SummaryCard data={data} />
-        <SummaryCard data={data} />
-        <SummaryCard data={data} />
+        <SummaryCard data={data} /> */}
       </Box>
     </div>
   );

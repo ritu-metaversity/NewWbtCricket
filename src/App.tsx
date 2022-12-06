@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Login from './components/login';
 import Footer from './components/Footer';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import Home from './Pages/Home';
 import Terms from './Pages/Terms';
 import { Inplay } from './Pages/InPlay';
@@ -21,22 +21,23 @@ import { SnackbarUtilsConfigurator } from './components/Layout/snackBarUtil';
 
 
 function App() {
+  
   return (
     <div className="App">
-      <SnackbarProvider maxSnack={5}>
+      <SnackbarProvider maxSnack={5} autoHideDuration={1000} >
         <main>
           <BrowserRouter>
             <Routes>
-              <Route path="sign-in" element={<Login />} />
+              <Route path="/sign-in" element={<Login />} />
               <Route path="/" element={<Layout />}>
                 <Route path="/" element={<Home />} />
                 <Route path="in-play" element={<Inplay />} />
+                <Route path="in-play-details" element={<InPlayDetails />} />
                 <Route path="complete-games" element={<Complete />} />
                 <Route path="my-ledger" element={<Ledger />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="set-button-value" element={<SetButtonValue />} />
-                <Route path="in-play-details" element={<InPlayDetails />} />
-                <Route path="completed-details" element={<CompleteDetails />} />
+                {/* <Route path="in-play-details" element={<InPlayDetails />} /> */}
                 <Route path="account-summary" element={<Account />} />
               </Route>
               <Route path="password-change" element={<ChangePassword />} />
