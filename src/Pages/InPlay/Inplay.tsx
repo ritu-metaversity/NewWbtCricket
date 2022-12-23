@@ -5,6 +5,9 @@ import SummaryCard, { SummaryCardProps } from "../../components/Inplay/SummaryCa
 import { sportsResourses } from "../../utils/api/sport/resources";
 import { sportServices } from "../../utils/api/sport/services";
 
+
+
+
 const data = {
   id: "",
   matchName: "SYDNEY SIXERS W V MELBOURNE RENEGADES W (WBBL T-20)",
@@ -44,7 +47,7 @@ const Inplay = () => {
   useEffect(() => {
     const getList = async () => {
       const { response } = await sportServices.activeSportList();
-      console.log(response);
+      console.log(JSON.stringify(response));
       if (response?.data) {
         setActiveSportList(response.data);
       }
@@ -56,29 +59,34 @@ const Inplay = () => {
   };
   useEffect(() => {
     const getNewEvent = async () => {
-      const { sportid } = activeSportList[tabValue];
-      if (!sportid) return;
-
-      const { response } = await sportServices.activeEventFromSport(sportid);
-
+      console.log(activeSportList);
+      if(!activeSportList.length) return;
+      const { sportId } = activeSportList[tabValue];
+      if (!sportId) return;
+      
+      const { response } = await sportServices.activeEventFromSport(sportId);
       if (response?.data) {
-        // setActiveEventList(response.data);
+      
+        
         if (response?.data?.length > 0) {
-          const events = response?.data.map((item: any) => item.eventId);
-          const { response: response1 } = await sportServices.matchOdds(events);
-          console.log(response1);
-          if (response1?.data?.length > 0) {
-            const newEventList = response.data.map((event: any) => {
-              const match = response1.data.find(
-                (i: any) => i.matchId === event.eventId
-              );
-              event["inPlay"] = match?.inPlay;
-              event["runner"] = match?.runner;
-              return event;
-            });
-            setActiveEventList(newEventList);
-            console.log(newEventList);
-          }
+          console.log(response," this is response");
+          setActiveEventList(response.data)
+          console.log(activeEventList ," this us")
+          // const events = response?.data.map((item: any) => item.eventId);
+          // const { response: response1 } = await sportServices.matchOdds(events);
+          // console.log(response1);
+          // if (response1?.data?.length > 0) {
+          //   const newEventList = response.data.map((event: any) => {
+          //     const match = response1.data.find(
+          //       (i: any) => i.matchId === event.eventId
+          //     );
+          //     event["inPlay"] = match?.inPlay;
+          //     event["runner"] = match?.runner;
+          //     return event;
+          //   });
+          //   setActiveEventList(newEventList);
+          //   console.log(newEventList);
+          // }
         }
       } else {
         setActiveEventList([]);
@@ -95,11 +103,11 @@ const Inplay = () => {
         aria-label="basic tabs example"
       >
         {activeSportList.map((s: any) => (
-          <Tab label={s?.name} {...a11yProps(0)} />
+          <Tab key={s.sportId+"tab"} label={s?.sportName} {...a11yProps(0)} />
         ))}
       </Tabs>
       {activeEventList?.length > 0 ? (
-        activeEventList.map((item) => <SummaryCard {...item} />)
+        activeEventList.map((item) => <SummaryCard key={item.matchId+"summaryCard"} {...item} />)
       ) : (
         <Typography mt="15vh" variant="h4" color="error">
           {"No active event found"}

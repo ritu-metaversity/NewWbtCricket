@@ -1,36 +1,39 @@
-import { Box } from "@mui/material";
-import React from "react";
+import { Box, Typography } from "@mui/material";
+import { border } from "@mui/system";
+import React, { useEffect } from "react";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
 import StickyHeadTable from "../../components/custom/Table";
+import StickyTable from "../../components/custom/TableWithoutPagination";
+import { userServices } from "../../utils/api/user/services";
 
 export interface Column {
   id: "matchName" | "wonBy" | "won" | "lost" | "balance" | string;
   label: string;
   minWidth?: number;
-    align?: "right" | "center";
-    colorCoded?: boolean;
+  align?: "right" | "center";
+  colorCoded?: boolean;
   format?: (value: number) => string;
 }
 
 const columns: readonly Column[] = [
-  { id: "sr", label: "Sr.", minWidth: 30 },
+  { id: "sno", label: "Sr.", minWidth: 30 },
   { id: "date", label: "Date", align: "center", minWidth: 120 },
   {
-    id: "won",
+    id: "credit",
     label: "Credit",
     minWidth: 20,
     align: "right",
     colorCoded: true,
   },
   {
-    id: "lost",
+    id: "debit",
     label: "Debit",
     minWidth: 20,
     align: "right",
     colorCoded: true,
   },
   {
-    id: "balance",
+    id: "pts",
     label: "Balance",
     minWidth: 20,
     align: "right",
@@ -48,34 +51,94 @@ interface Data {
   balance: number;
 }
 
-function createData(remark: string, won: number, lost: number): Data {
-  const sr = 1;
-  const date = new Date().toDateString();
-  const balance = won + lost;
-  return { sr, remark, date, won, lost, balance };
-}
-
-const rows = [
-  createData("SYDNEY SIXERS W 15/10/2022", 44, -30),
-  createData("SYDNEY SIXERS W 15/10/2022", 44, -30),
-  createData("SYDNEY SIXERS W 15/10/2022", 44, -30),
-  createData("SYDNEY SIXERS W 15/10/2022", 44, 30),
-  createData("SYDNEY SIXERS W 15/10/2022", 44, 30),
-  createData("SYDNEY SIXERS W 15/10/2022", 44, -30),
-  createData("SYDNEY SIXERS W 15/10/2022", 44, 30),
-  createData("SYDNEY SIXERS W 15/10/2022", 44, 30),
-  createData("SYDNEY SIXERS W 15/10/2022", 44, -300),
-];
 
 const Account = () => {
+
+  const style = { display: "inline-flex" ,padding:"10px"}
+  const inputStyle={padding: "10px" ,borderRadius:"5px",marginRight:" 8px"}
+  const lableStyle={alignSelf: "center"}
+  const date = new Date();
+  const futureDate = date.getDate() - 60;
+  date.setDate(futureDate);
+  const defaultValue = date.toLocaleDateString('en-CA');
+  const current = new Date();
+  const currentValue = current.toLocaleDateString('en-CA');
+  const [formData, setFormData] = React.useState({
+    fromDate: defaultValue,
+    toDate: currentValue,
+    type: 1,
+    index: 0,
+    noOfRecords: 10,
+  })
+
+  function handleChange(event: { target: { name: any; value: any; }; }) {
+    setFormData(preState => {
+      return {
+        ...preState,
+        [event.target.name]: event.target.value
+      }
+    })
+  }
+  const [accountStatement, setAccountStatement] = React.useState([]);
+  useEffect(() => {
+    const getList = async () => {
+      const { response } = await userServices.getAccountStatement(formData);
+      if (response?.data?.dataList) {
+        setAccountStatement(response.data.dataList)
+        // console.log(response.data)
+      }
+    };
+    getList();
+  }, []);
+
+  const handleClick = () => {
+    const getList = async () => {
+      const { response } = await userServices.getAccountStatement(formData);
+      if (response?.data?.dataList) {
+        setAccountStatement(response.data.dataList)
+      }
+    };
+    getList();
+  };
+
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
       <BacktoMenuButton />
-      <StickyHeadTable
-        rows={rows}
-        columns={columns}
-        title={"Account Summary"}
-      />
+      <form style={style}>
+      <label style={lableStyle} htmlFor="fromDate">From Date</label>
+        <input style={inputStyle} type="date" defaultValue={formData.fromDate} placeholder="YYYY-MM-DD" onChange={handleChange} name="fromDate" />
+        <label style={lableStyle} htmlFor="toDate">To Date</label>
+        <input style={inputStyle} type="date" defaultValue={formData.toDate} placeholder="YYYY-MM-DD" onChange={handleChange} name="toDate" />
+        <label style={lableStyle} htmlFor="type">Type</label>
+        <select style={inputStyle} onChange={handleChange} name="type">
+          <option selected value="1">ALL</option>
+          <option value="2">Deposit/Withdarw Report</option>
+          <option value="3">Game Report</option>
+        </select>
+        <label style={lableStyle} htmlFor="noOfRecords">No Of Rows</label>
+        <select style={inputStyle} onChange={handleChange} name="noOfRecords">
+          <option selected value="1">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+        <button type="button" onClick={handleClick}>Search</button>
+      </form>
+      <br />
+      <br />
+
+      {accountStatement?.length > 0 ? (
+        <StickyTable
+          rows={accountStatement}
+          columns={columns}
+          title={"Account Summary"}
+          // noOfRecords={formData.noOfRecords}
+        />)
+        : (
+          <Typography mt="15vh" variant="h4" color="error">
+            {"No Data Found"}
+          </Typography>)
+      }
     </Box>
   );
 };

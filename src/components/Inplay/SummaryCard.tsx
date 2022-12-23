@@ -6,19 +6,21 @@ import { SummaryCardContainer, SummaryCardTitle } from "./styledComponents";
 
 export interface SummaryCardProps {
   matchName: string;
+  matchId:number;
   openDate: string;
-  eventId: string;
   inPlay: string;
-  runner: {
-    back1price: string;
-    lay1price: string;
-  }[];
+  "team1Back": null
+  "team1Lay": null
+  "team2Back": null
+  "team2Lay": null
+  "drawBack": null
+  "drawLay": null
 }
 const SummaryCard: FC<SummaryCardProps> = (data) => {
-  const { matchName, openDate, inPlay, eventId, runner } = data;
+  const { matchName, openDate, inPlay, matchId } = data;
   return (
     <SummaryCardContainer>
-      <Link to={"/in-play-details/?event-id=" + eventId}>
+      <Link to={"/in-play-details/?event-id=" + matchId}>
         <SummaryCardTitle bgcolor="secondary.main">
           {matchName}
         </SummaryCardTitle>
@@ -60,22 +62,22 @@ const SummaryCard: FC<SummaryCardProps> = (data) => {
           2
         </Grid>
         <Grid item xs={2} py={1} bgcolor="skyblue">
-          {runner[0]?.back1price}
+          {data.team1Back}
         </Grid>
         <Grid item xs={2} py={1} bgcolor="pink">
-          {runner[0]?.lay1price}
+          {data?.team1Lay}
         </Grid>
         <Grid item xs={2} py={1} bgcolor="skyblue">
-          {runner[2]?.back1price || "0"}
+          {data.drawBack || "0"}
         </Grid>
         <Grid item xs={2} py={1} bgcolor="pink">
-          {runner[2]?.lay1price || "0"}
+          {data.drawLay || "0"}
         </Grid>
         <Grid item xs={2} py={1} bgcolor="skyblue">
-          {runner[1]?.back1price}
+          {data.team2Back}
         </Grid>
         <Grid item xs={2} py={1} bgcolor="pink">
-          {runner[1]?.lay1price}
+          {data.team2Lay}
         </Grid>
       </Grid>
     </SummaryCardContainer>

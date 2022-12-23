@@ -15,11 +15,10 @@ import { ExpandCircleDown } from "@mui/icons-material";
 import { useSearchParams } from "react-router-dom";
 import { sportServices } from "../../utils/api/sport/services";
 
-const InPlayDetails = () => {
+const InPlayDetails = () => { 
   const commentary = "MELDOURNE STARS WOMAN WON BY 4 WKTS ";
   const [eventId, setEventId] = useState(0);
   const [odds, setOdds] = useState<any>(null);
-
   const [searchParams, setSearchParams] = useSearchParams();
   console.log(searchParams.get("event-id"));
   useEffect(() => {
@@ -63,7 +62,7 @@ const InPlayDetails = () => {
       <ScoreCardGrid />
 
       <Bet {...odds} />
-      <BetRecord />
+      <BetRecord item={eventId}/>
     </Box>
   );
 };

@@ -1,7 +1,7 @@
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useEffect } from "react";
 import StickyTable from "../custom/TableWithoutPagination";
-
+import { sportServices } from "../../utils/api/sport/services";
 export interface Column {
   id: "matchName" | "wonBy" | "won" | "lost" | "balance" | string;
   label: string;
@@ -11,11 +11,11 @@ export interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: "sr", label: "Sr." },
-  { id: "rate", label: "Rate", align: "center" },
+  { id: "sr", label: "Sr.", align: "right" },
+  { id: "rate", label: "Rate", align: "right" },
   { id: "amount", label: "Amount", align: "right" },
-  { id: "mode", label: "Mode", align: "right" },
-  { id: "team", label: "Team", align: "center" },
+  { id: "back", label: "Mode", align: "right" },
+  { id: "nation", label: "Team", align: "center" },
 ];
 
 interface Data {
@@ -43,8 +43,8 @@ const rows = [
 
 const columns2: readonly Column[] = [
   { id: "sr", label: "Sr.", align: "center" },
-  { id: "rate", label: "Rate", align: "center" },
-  { id: "session", label: "Session", align: "center" },
+  { id: "nation", label: "Rate", align: "center" },
+  { id: "rate", label: "Session", align: "center" },
   { id: "amount", label: "Amount", align: "right" },
   { id: "run", label: "Run", align: "right" },
   { id: "mode", label: "Mode", align: "center" },
@@ -78,27 +78,33 @@ const rows2 = [
   createData2("ADELAIDE STRIKERS W", "NO", 0.04, 30, 32, 0),
 ];
 
-const BetRecord = () => {
+const BetRecord = (props: { item: any; }) => {
+  const [betRecord, setBetRecord] = React.useState<any>();
+  useEffect(() => {
+    const getList = async () => {
+      const { response } = await sportServices.betListByMatchId(31846653);
+      if (response?.data) {
+        setBetRecord(response.data)
+      }
+    };
+    getList();
+  }, []);
   return (
     <Box display="flex" flexDirection="column" gap={2}>
-      <StickyTable
-        rows={rows}
+      {betRecord && Object.keys(betRecord).map(key => <StickyTable
+        rows={betRecord[key].map((value: any, index: string) => 
+          
+          { value.color = (value.back ? "#72BBEF" : "#F994BA"); value.back = (value.back ? "Lagai" : "Khayi");
+           value.sr = index + 1;
+          
+            return value 
+          })}
+
         columns={columns}
-        title={"Match Bets"}
+        title={key}
         accordion
       />
-      <StickyTable
-        rows={rows2}
-        columns={columns2}
-        title={"Session Bets"}
-        accordion
-      />
-      <StickyTable
-        rows={rows}
-        columns={columns}
-        title={"Bookmaker Bets"}
-        accordion
-      />
+      )}
     </Box>
   );
 };

@@ -1,12 +1,6 @@
 import * as React from "react";
 import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
 import { Column } from "../../Pages/Ledger/Ledger";
 import {
   TableCellText,
@@ -30,6 +24,8 @@ interface StickyHeadTableProps {
   accordion?: boolean;
   columns: readonly Column[];
   result?: string | React.ReactElement;
+  noOfRecords?:number;
+  totalPage?:number
 }
 const StickyTable: React.FC<StickyHeadTableProps> = ({
   title,
@@ -37,10 +33,13 @@ const StickyTable: React.FC<StickyHeadTableProps> = ({
   accordion,
   columns,
   result,
+  noOfRecords,
+  totalPage,
 }) => {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(noOfRecords ? noOfRecords : 10);
 
+  
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -88,7 +87,7 @@ const StickyTable: React.FC<StickyHeadTableProps> = ({
               rows={rows}
               page={page}
               rowsPerPage={rowsPerPage}
-              // value={value}
+              
             />
             {result && (
               <TableResultContainer textAlign={"center"}>

@@ -31,6 +31,15 @@ export const userServices = {
     };
     return await apiWithSnackbar(params);
   },
+
+  profile: async () => {
+    const params = {
+      resource: userResources.USER_PROFILE,
+    };
+    return await apiWithSnackbar(params);
+  },
+
+
   changePassword: async (data: ChangePasswordPayload) => {
     const params = { resource: userResources.CHANGE_PASSWORD, data };
     return await apiWithSnackbar(params);
@@ -55,4 +64,52 @@ export const userServices = {
     };
     return await apiWithSnackbar(params);
   },
+
+  getLoginHistory:async () => {
+    const params ={
+    resource:userResources.LOGIN_HISTORY_VALUES,
+    data:{userId:""}
+    };
+    return await apiWithSnackbar(params);
+  },
+
+  getChangePasswordHistory:async () => {
+    const params ={
+    resource:userResources.CHANGE_PASSWORD_HISTORY,
+    data:{userId:""}
+    };
+    return await apiWithSnackbar(params);
+  },
+
+  getAccountStatement:async (data:any) =>{
+    const params ={
+      resource:userResources.USER_STATEMENT,
+      data
+    };
+    return await apiWithSnackbar(params);
+  },
+
+  getCurrentBets:async (data:any) => {
+    const params ={
+      resource:userResources.CURRENT_BET,
+      data
+    };
+    return await apiWithSnackbar(params);
+  },
+
+  getBetHistory:async (data:any) => {
+    const params ={
+      resource:userResources.BET_HISTORY,
+      data
+    };
+    return await apiWithSnackbar(params);
+  },
+
+  getTestApi:async () => {
+    const params={
+      resource:userResources.TEST_API
+    }
+    return await apiWithSnackbar(params);
+  }
+ 
 };

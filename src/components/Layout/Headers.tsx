@@ -17,10 +17,11 @@ import { HeaderTextStyle, UserIconImage } from "./styledComponents";
 import { Logout } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { userServices } from "../../utils/api/user/services";
+import SummarizeIcon from '@mui/icons-material/Summarize';
 
 const data = {
   balance: 0,
-  liability: 0,
+  libality: 0,
   uplineAmount: 0,
 };
 
@@ -41,6 +42,7 @@ const Headers = () => {
     getWallet();
     return () => {};
   }, []);
+
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -74,10 +76,10 @@ const Headers = () => {
         <Box>
           <HeaderTextStyle></HeaderTextStyle>
           <HeaderTextStyle>
-            Coins: {wallet.balance - wallet.liability}
+            Coins: {wallet.balance}
           </HeaderTextStyle>
           <HeaderTextStyle>
-            Liability: { wallet.liability}
+            Liability: { wallet.libality}
           </HeaderTextStyle>
         </Box>
         <IconButton
@@ -142,6 +144,22 @@ const Headers = () => {
             <AttachMoneyIcon /> Account Statement
           </MenuItem>
         </Link>
+        <Link to="/login-history">
+          <MenuItem>
+            <SummarizeIcon /> Login History
+          </MenuItem>
+        </Link>
+        <Link to="/current-bet">
+          <MenuItem>
+            <AttachMoneyIcon /> Current Bet
+          </MenuItem>
+        </Link>
+        <Link to="/bet-history">
+          <MenuItem>
+            <AttachMoneyIcon /> Bet History
+          </MenuItem>
+        </Link>
+        
         <Link to="/set-button-value">
           <MenuItem>
             <MoneyIcon /> Set button value

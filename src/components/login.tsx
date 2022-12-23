@@ -7,26 +7,21 @@ import snackBarUtil from "./Layout/snackBarUtil";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [login, setLogin] = useState("");
+  const [userId, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
   const handleClick = async () => {
     let res;
-    try {
-      res = await axios.get("https://geolocation-db.com/json/");
-    } catch (err) {}
-    // console.log(res?.data);
+   
+   
     const data = {
-      login,
-      userIp: res?.data?.IPv4,
-      password,
-      userType: "3",
-      type: "mobile",
+      userId,
+      password
     };
     const { response } = await authServices.login(data);
-    console.log(response);
     if (response?.token) {
       localStorage.setItem("token", response?.token);
-      if (response.data.passwordtype === "old") {
+      if (response.passwordtype === "old") {
         navigate("/password-change", { replace: true });
       } else {
         navigate("/terms", { replace: true });
@@ -35,6 +30,7 @@ const Login = () => {
       snackBarUtil.error("Some unknown error occurred !");
     }
   };
+
   const handleChange = (e: any) => {
     if (e.target.name === "login") {
       setLogin(e.target.value);
@@ -67,7 +63,7 @@ const Login = () => {
         label="User Name"
         name="login"
         fullWidth
-        value={login}
+        value={userId}
         onChange={handleChange}
       />
       <Box textAlign={"left"}>

@@ -76,35 +76,41 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
 const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
   args
 ) => {
+  // const navigate = useNavigate();
   let result: any;
   await apiService(args)
     .catch((error) => {
-      result = error.response?.data;
+      result = {error: error.response?.data}
+      if(error.response.status === 401){
+        localStorage.removeItem("token")
+        window.location.replace("/sign-in");
+      }
     })
     .then((response) => {
       if (response) {
-        result = response.data;
+        result = {response: response.data}
       }
-    });
-  if (result?.responseCode === 403) {
-    localStorage.clear();
-    snackBarUtil.error("Session changed. Please login again!");
-    alert("Session changed. Please login again!");
-    window.location.replace("/sign-in");
+    });    
+    return result;
+  // if (result?.responseCode === 403) {
+  //   localStorage.clear();
+  //   snackBarUtil.error("Session changed. Please login again!");
+  //   alert("Session changed. Please login again!");
+  //   window.location.replace("/sign-in");
 
-    // Navigate({ to: "/sign-in", replace: true });
-  }
-  if (result?.type === "success") {
-    return {
-      response: { ...result },
-      error: null,
-    };
-  } else {
-    return {
-      error: { message: result?.message },
-      response: null,
-    };
-  }
+  //   // Navigate({ to: "/sign-in", replace: true });
+  // }
+  // if (result?.type === "success") {
+  //   return {
+  //     response: { ...result },
+  //     error: null,
+  //   };
+  // } else {
+  //   return {
+  //     error: { message: result?.message },
+  //     response: null,
+  //   };
+  // }
 };
 
 const apiSnackbarNotifications: (
@@ -129,4 +135,6 @@ const apiWithSnackbar: (
   const result = await apiHandler(args);
   return apiSnackbarNotifications(result);
 };
+
+
 export { apiService, apiHandler, apiWithSnackbar };

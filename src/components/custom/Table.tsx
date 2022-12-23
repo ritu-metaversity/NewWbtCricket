@@ -30,6 +30,8 @@ interface StickyHeadTableProps {
   columns: readonly Column[];
   result?: string | React.ReactElement;
   accordion?: boolean;
+  noOfRecords?:number;
+  
 }
 const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
   title,
@@ -37,9 +39,11 @@ const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
   columns,
   result,
   accordion,
+  noOfRecords,
+  
 }) => {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(noOfRecords ? noOfRecords : 10);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -133,6 +137,7 @@ export function Tables({
       <TableHead>
         <TableRow
           sx={{
+           
             width: "100%",
           }}
         >
@@ -157,16 +162,17 @@ export function Tables({
       <TableBody>
         {rows
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-          .map((row: any) => {
+          .map((row: any,index:number) => {
             return (
               <TableRow
                 hover
                 sx={{
+                  bgcolor:row.color,
                   width: "100%",
                 }}
                 role="checkbox"
                 tabIndex={-1}
-                key={row.balance}
+                key={index}
               >
                 {columns.map((column) => {
                   const value = row[column.id];
@@ -175,7 +181,7 @@ export function Tables({
                       key={column.id}
                       align={column.align}
                       sx={{
-                        border: "0.01px solid #d9d9d9",
+                        // border: "0.01px solid #d9d9d9",
                         p: 1,
                         fontSize: "0.9rem",
                         color: column.colorCoded

@@ -1,7 +1,9 @@
 import { Box, Button, Grid, MenuItem, Select } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { isTemplateExpression } from "typescript";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
 import { TitleStyled } from "../../components/custom/styledComponents";
+import { userServices } from "../../utils/api/user/services";
 
 const gridItemProps = {
   item: true,
@@ -33,12 +35,31 @@ const gridData = [
     value: "India",
   },
 ];
+
+
 const Profile = () => {
   const handleRatingChange = (e: any) => {};
+
+  const [prolile, setProfile] = React.useState<any>([]);
+
+  useEffect(() => {
+   
+    const getProfile = async () => {
+      if(!prolile?.userId){
+      const { response } = await userServices.profile();
+      if (response?.data) {
+        setProfile(response.data);
+      }
+    }
+    };
+  
+    getProfile();
+    return () => {};
+  }, [prolile]);
   return (
     <Box p={0.5} fontWeight={700} mx="auto">
       <BacktoMenuButton />
-      <TitleStyled>rate information</TitleStyled>
+      {/* <TitleStyled>rate information</TitleStyled>
       <Grid container columns={12} mb={4}>
         <Grid {...gridItemProps}>Rate Difference:</Grid>
         <Grid {...gridItemProps}>
@@ -56,17 +77,27 @@ const Profile = () => {
                 <MenuItem value={item + 1}>{item + 1}</MenuItem>
               ))}
           </Select>
-        </Grid>
-        <Grid {...gridItemProps}>
+        </Grid> */}
+        {/* <Grid {...gridItemProps}>
           <Button color="success" fullWidth variant="contained">
             Update
           </Button>
-        </Grid>
-      </Grid>
+        </Grid> */}
+      {/* </Grid> */}
 
       <TitleStyled>personal information</TitleStyled>
       <Grid container columns={8} mb={4} bgcolor="white">
-        {gridData.map((item: any) => (
+        <Grid {...gridItemProps}>Client Code:</Grid>
+        <Grid {...gridItemProps}>{prolile?.userId}</Grid>
+        <Grid {...gridItemProps}>Client Name:</Grid>
+        <Grid {...gridItemProps}>{prolile?.username}</Grid>
+        <Grid {...gridItemProps}>Contact No:</Grid>
+        <Grid {...gridItemProps}>{prolile?.mobile}</Grid>
+        <Grid {...gridItemProps}>Date of Joining:</Grid>
+        <Grid {...gridItemProps}>{prolile?.doj}</Grid>
+        <Grid {...gridItemProps}>Address:</Grid>
+        <Grid {...gridItemProps}>{prolile?.city}</Grid>
+        {/* {gridData.map((item: any) => (
           <>
             <Grid {...gridItemProps} color={item?.color}>
               {item?.title}
@@ -75,16 +106,16 @@ const Profile = () => {
               {item?.value}
             </Grid>
           </>
-        ))}
+        ))} */}
       </Grid>
 
-      <TitleStyled>personal information</TitleStyled>
+      {/* <TitleStyled>personal information</TitleStyled>
       <Grid container columns={8}>
         <Grid {...gridItemProps}>HELP LINE NO: </Grid>
         <Grid {...gridItemProps}></Grid>
-      </Grid>
+      </Grid> */}
       {/* <StickyHeadTable title="rate information" rows={[]} columns={[]} /> */}
-      <BacktoMenuButton />
+      {/* <BacktoMenuButton /> */}
     </Box>
   );
 };

@@ -1,0 +1,58 @@
+.odds-down {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+}
+
+.odds-up {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+}
+
+
+.odds-down::before {
+    content: "";
+    background: #ff000080;
+    transform: scale(0,0);
+    animation: oddsdown .5s ease-out;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 4px
+}
+
+.odds-up::before {
+    content: "";
+    background: #13c41380;
+    transform: scale(0,0);
+    animation: oddsup .5s ease-out;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 4px
+}
+
+@keyframes oddsdown {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+@keyframes oddsup {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}

@@ -10,9 +10,11 @@ import {
 } from "@mui/material";
 import { blue } from "@mui/material/colors";
 import { Box } from "@mui/system";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { TitleStyled } from "../custom/styledComponents";
 import { BetText, BetTextMedium, BetTextSmall } from "./styledComponents";
+import { sportServices } from "../../utils/api/sport/services";
+import "./custom.css"
 
 interface BetProps {
   Odds: MatchOddsGridProps[];
@@ -23,18 +25,62 @@ const Bet:FC<BetProps> = ({Odds, Bookmaker}) => {
   const handleChange = (e: any) => {
     setAmount(e.target.value);
   };
+
+
+  const [activeFancy, setActiveFancy]=useState<any[]>([]);
+  const [matchOdd, setMatchOdds]=useState<any[]>([]);
+  const [preMatchOdds, setPreMetchOdds]=useState<any[]>([]);
+
+  useEffect(() => {
+    const getData=async () => {
+      const { response } = await sportServices.getActiveFancy(31975576);
+      if(response?.data?.marketList){
+     
+        setActiveFancy(response.data.marketList)
+      }
+    }
+    getData();
+  },[]);
+
+  
+  useEffect(() =>{
+    const getOdds =async () => {
+      const request=activeFancy.map(item => item.marketId).join(", ");
+      const { response }= await sportServices.getMatchOdds(request);
+      if(response){
+        if(matchOdd.length){
+          setPreMetchOdds([...matchOdd])
+        }else{
+          setPreMetchOdds(response)
+        }
+        setMatchOdds(response)
+      }
+    };
+    setTimeout(()=> getOdds(),1000)
+  },[activeFancy, matchOdd])
   return (
-    <>
+    <>{
+     activeFancy.map(item =>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandCircleDown />}>
-          Match Odds
+          { item?.type}
         </AccordionSummary>
         <AccordionDetails sx={{ p: 0 }}>
-          <MatchOddsGrid {...Odds[0]} />
+          {
+            matchOdd.map((match,index) =>{
+              if(match.marketId === item.marketId){
+                  return <MatchOddsGrid CurrentOdd={match} PrevOdds={preMatchOdds[index]} />
+              }
+            })
+          }
+          
         </AccordionDetails>
       </Accordion>
+      )
+    }
+      
 
-      {Bookmaker && <Accordion>
+      {/* {Bookmaker && <Accordion>
         <AccordionSummary expandIcon={<ExpandCircleDown />}>
           Bookmaker Odds
         </AccordionSummary>
@@ -50,7 +96,7 @@ const Bet:FC<BetProps> = ({Odds, Bookmaker}) => {
         <AccordionDetails sx={{ p: 0 }}>
           <SessionOddsGrid />
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
       <Box
         display="flex"
@@ -142,12 +188,22 @@ const BetGridItem = ({ title, values, suspended }: { title?: boolean; suspended?
 export default Bet;
 
 interface MatchOddsGridProps {
-  runner: {
+  runners: {
     back1price: number;
     lay1price: number;
     team: string;
     runnerStatus: string;
     selectionId: number;
+    ex:{
+    availableToBack:{
+      price:string,
+      size:string
+    }[],
+    availableToLay:{
+      price:string,
+      size:string
+    }[];
+  }
   }[];
   maxBet: number;
   betDelay: number;
@@ -156,45 +212,69 @@ interface MatchOddsGridProps {
   isPause: boolean;
   status: string;
 }
-const MatchOddsGrid: FC<MatchOddsGridProps> = ({ runner,status, maxBet, betDelay, isActive, isPause, inPlay }) => {
-  if (!runner) { return null; }
-  console.log(isActive,isPause,inPlay,"21");
+const MatchOddsGrid: FC<{CurrentOdd:MatchOddsGridProps;PrevOdds:MatchOddsGridProps}> = ({CurrentOdd,PrevOdds}
+  ) => {
+   
+  const { runners,status, maxBet, betDelay, isActive, isPause, inPlay }=CurrentOdd;
+  const { runners:PrevRunner }=PrevOdds;
+  // if (!runner) { return null; }
+
   return (
     <>
       <Box display="flex" justifyContent={"space-evenly"}>
         <BetTextMedium>Max Bet:{maxBet}</BetTextMedium>
         <BetTextMedium>Bet Delay:{betDelay}</BetTextMedium>
       </Box>
+      
       <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
         <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
-        <BetGridItem
+        {
+          runners.map((item,index) =>{
+           return <BetGridItem
+          suspended={
+            ["SUSPENDED", "CLOSED"].includes(status) 
+            // status === "SUSPENDED" ||
+            // !isActive ||
+            // isPause ||
+            // !inPlay
+          }
+          values={[
+            item.selectionId,
+            <Box className={PrevRunner[index].ex.availableToBack[0].price < item.ex.availableToBack[0].price
+              ? "odds-up"
+              : PrevRunner[index].ex.availableToBack[0].price > item.ex.availableToBack[0].price
+              ? "odds-down"
+              : ""}>
+            <BetText color="blue">{item.ex.availableToBack[0].price}</BetText>
+            {item.ex.availableToBack[0].size}
+            </Box>,
+            <Box  className={PrevRunner[index].ex.availableToLay[0].price < item.ex.availableToLay[0].price
+              ? "odds-up"
+              : PrevRunner[index].ex.availableToLay[0].price > item.ex.availableToLay[0].price
+              ? "odds-down"
+              : ""}><BetText color="red">{item.ex.availableToLay[0].price}</BetText>
+            {item.ex.availableToLay[0].size}</Box>
+            
+          ]}
+        />
+          })
+          
+        }
+        
+        {/* <BetGridItem
           suspended={
             ["SUSPENDED", "CLOSED"].includes(status) ||
-            runner[0]?.runnerStatus === "SUSPENDED" ||
+            runners[1]?.runnerStatus === "SUSPENDED" ||
             !isActive ||
             isPause ||
             !inPlay
           }
           values={[
-            runner[0]?.team,
-            <BetText color="blue">{runner[0]?.back1price}</BetText>,
-            <BetText color="red">{runner[0]?.lay1price}</BetText>,
+            runners[1]?.team,
+            <BetText color="blue">{runners[1]?.back1price}</BetText>,
+            <BetText color="red">{runners[1]?.lay1price}</BetText>,
           ]}
-        />
-        <BetGridItem
-          suspended={
-            ["SUSPENDED", "CLOSED"].includes(status) ||
-            runner[1]?.runnerStatus === "SUSPENDED" ||
-            !isActive ||
-            isPause ||
-            !inPlay
-          }
-          values={[
-            runner[1]?.team,
-            <BetText color="blue">{runner[1]?.back1price}</BetText>,
-            <BetText color="red">{runner[1]?.lay1price}</BetText>,
-          ]}
-        />
+        /> */}
         {/* <BetGridItem title /> */}
       </Grid>
     </>

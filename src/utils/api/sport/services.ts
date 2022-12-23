@@ -1,5 +1,10 @@
 import { sportsResourses } from "./resources"
 import { apiHandler, ApiServiceInterface } from "../apiService";
+
+interface GetSportsDataPayload {
+    sportId: number;
+    }
+
 export const sportServices = {
     activeSportList: () => {
         const params = {
@@ -7,10 +12,11 @@ export const sportServices = {
         };
         return apiHandler(params);
     }, 
-    activeEventFromSport: (sport_id: number) => { 
+    activeEventFromSport: (sportId: number) => { 
+
         const params:ApiServiceInterface = {
             resource: sportsResourses.GET_EVENT_FROM_SPORTS,
-            pathVars: {sport_id}
+            data:{sportId}
         }
         return apiHandler(params);
     },
@@ -25,6 +31,30 @@ export const sportServices = {
         const params:ApiServiceInterface = {
             resource: sportsResourses.GET_EVENT_ODDS,
             pathVars: {eventId}
+        }
+        return apiHandler(params);
+    },
+
+    betListByMatchId: (matchId: number) => {
+        const params:ApiServiceInterface = {
+            resource: sportsResourses.GET_BETLIST_BY_MATCHID,
+            data: {matchId}
+        }
+        return apiHandler(params);
+    },
+
+    getActiveFancy:(matchId: number)=>{
+        const params:ApiServiceInterface = {
+            resource: sportsResourses.GET_ACTIVE_FANCY,
+            data: {matchId}
+        }
+        return apiHandler(params);
+    },
+
+    getMatchOdds:(marketIds: any)=>{
+        const params:ApiServiceInterface = {
+            resource: sportsResourses.GET_MATCH_ODDS,
+            data: {marketIds}
         }
         return apiHandler(params);
     }

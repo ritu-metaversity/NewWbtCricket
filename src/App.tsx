@@ -17,6 +17,9 @@ import CompleteDetails from './Pages/completeDetails';
 import Account from './Pages/accountStatement';
 import { SnackbarProvider } from "notistack";
 import { SnackbarUtilsConfigurator } from './components/Layout/snackBarUtil';
+import LoginHistory from './Pages/loginHistory';
+import CurrentBet from './Pages/CurrnetBet';
+import BetHistory from './Pages/BetHistory';
 
 
 
@@ -39,6 +42,9 @@ function App() {
                 <Route path="set-button-value" element={<SetButtonValue />} />
                 {/* <Route path="in-play-details" element={<InPlayDetails />} /> */}
                 <Route path="account-summary" element={<Account />} />
+                <Route path="login-history" element={<LoginHistory />} /> 
+                <Route path="bet-history" element={<BetHistory />} /> 
+                <Route path="current-bet" element={<CurrentBet />} /> 
               </Route>
               <Route path="password-change" element={<ChangePassword />} />
               <Route path="terms" element={<Terms />} />

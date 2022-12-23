@@ -4,7 +4,7 @@ export const authResourcs: {
   [x: string]: ApiResource;
 } = {
   LOGIN: {
-    URL: "auth/login",
+    URL: "login/client-login",
     METHOD: "POST",
   },
   SIGN_UP: {
@@ -24,7 +24,7 @@ export const authResourcs: {
     METHOD: "GET",
   },
   CHANGE_PASSWORD: {
-    URL: "auth/change-password",
+    URL: "enduser/change-password",
     METHOD: "POST",
   },
   RESET_PASSWORD: {
