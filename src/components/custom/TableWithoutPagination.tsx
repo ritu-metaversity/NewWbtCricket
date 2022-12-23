@@ -34,6 +34,7 @@ const StickyTable: React.FC<StickyHeadTableProps> = ({
   columns,
   result,
   noOfRecords,
+  
   totalPage,
 }) => {
   const [page, setPage] = React.useState(0);

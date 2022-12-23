@@ -165,7 +165,10 @@ export function Tables({
           .map((row: any,index:number) => {
             return (
               <TableRow
-                hover
+                // hover
+                style={{
+                  borderLeft:'5px solid #b3d9f5'
+                }}
                 sx={{
                   bgcolor:row.color,
                   width: "100%",

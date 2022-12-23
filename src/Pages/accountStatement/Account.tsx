@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { border } from "@mui/system";
 import React, { useEffect } from "react";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
@@ -54,8 +54,8 @@ interface Data {
 
 const Account = () => {
 
-  const style = { display: "inline-flex" ,padding:"10px"}
-  const inputStyle={padding: "10px" ,borderRadius:"5px",marginRight:" 8px"}
+  const style = { display: "flex" , alignItems:'center', justifyContent:'space-between', padding:"10px"}
+  const inputStyle={padding: "10px" ,borderRadius:"5px",marginRight:" 8px", width:'100%',maxWidth:'200px',  }
   const lableStyle={alignSelf: "center"}
   const date = new Date();
   const futureDate = date.getDate() - 60;
@@ -101,6 +101,8 @@ const Account = () => {
     getList();
   };
 
+ 
+
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
       <BacktoMenuButton />
@@ -115,14 +117,21 @@ const Account = () => {
           <option value="2">Deposit/Withdarw Report</option>
           <option value="3">Game Report</option>
         </select>
-        <label style={lableStyle} htmlFor="noOfRecords">No Of Rows</label>
+        {/* <button type="button" onClick={handleClick} style={{
+
+        }}>Search</button>  */}
+
+<Button type="button" variant="contained" onClick={handleClick}>
+  search
+</Button>
+        {/* <label style={lableStyle} htmlFor="noOfRecords">No Of Rows</label>
         <select style={inputStyle} onChange={handleChange} name="noOfRecords">
           <option selected value="1">10</option>
           <option value="20">20</option>
           <option value="50">50</option>
           <option value="100">100</option>
         </select>
-        <button type="button" onClick={handleClick}>Search</button>
+        */}
       </form>
       <br />
       <br />
