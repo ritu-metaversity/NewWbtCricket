@@ -19,6 +19,7 @@ const Login = () => {
       password
     };
     const { response } = await authServices.login(data);
+    console.log(response+" ")
     if (response?.token) {
       localStorage.setItem("token", response?.token);
       if (response.passwordtype === "old") {

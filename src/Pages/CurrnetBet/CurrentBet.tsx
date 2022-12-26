@@ -46,7 +46,7 @@ const CurrentBet = () => {
 
   const [formData, setFormData] = React.useState({
     sportType: 1,
-    betType: 1,
+    betType: "1",
     noOfRecords: 25,
     index: 0
   });
@@ -67,6 +67,7 @@ const CurrentBet = () => {
   function handleChange(event: { target: { name: any; value: any; }; }) {
     setFormData(preState => {
       return {
+        
         ...preState,
         [event.target.name]: event.target.value,
       }
@@ -99,7 +100,8 @@ const CurrentBet = () => {
         <input
           type="radio"
           id="all"
-          checked
+          checked={formData.betType === "1"}
+          
           name="betType"
           value="1"
           onChange={handleChange}
@@ -111,6 +113,7 @@ const CurrentBet = () => {
           id="back"
           name="betType"
           value="2"
+          checked={formData.betType === "2"}
           onChange={handleChange}
         />
         <label htmlFor="back">Lagai</label>
@@ -120,6 +123,7 @@ const CurrentBet = () => {
           id="lay"
           name="betType"
           value="3"
+          checked={formData.betType === "3"}
           onChange={handleChange}
         />
         <label htmlFor="lay">Khayi</label>
@@ -130,6 +134,7 @@ const CurrentBet = () => {
           { value.color = (value.isback ? "#b3d9f5" : "#f5bad0");
           value.border = (value.isback ? "5px solid #7dc7fc" : "5px solid #ff7bac");
             return value 
+            
           })}
         columns={columns}
         title={"Current Bets"}

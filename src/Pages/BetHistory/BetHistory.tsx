@@ -48,7 +48,8 @@ const BetHistory = () => {
     sportType: 1,
     betType: 1,
     noOfRecords: 25,
-    index: 0
+    index: 0,
+    isDeleted:false
   });
   const [accountStatement, setAccountStatement] = React.useState([]);
   useEffect(() => {
