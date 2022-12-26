@@ -132,6 +132,7 @@ export function Tables({
       sx={{
         width: "100%",
         border: "1px solid white",
+        borderCollapse: 'collapse'
       }}
     >
       <TableHead>
@@ -167,7 +168,7 @@ export function Tables({
               <TableRow
                 // hover
                 style={{
-                  borderLeft:'5px solid #b3d9f5'
+                  borderLeft:row.border
                 }}
                 sx={{
                   bgcolor:row.color,

@@ -128,7 +128,7 @@ const CurrentBet = () => {
       <StickyTable
         rows={accountStatement.map((value: any) => 
           { value.color = (value.isback ? "#b3d9f5" : "#f5bad0");
-          // value.border = (value.isback ? "2px solid #b3d9f5" : "2px solid #f5bad0");
+          value.border = (value.isback ? "5px solid #7dc7fc" : "5px solid #ff7bac");
             return value 
           })}
         columns={columns}
