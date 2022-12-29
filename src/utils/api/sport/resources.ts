@@ -29,4 +29,9 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     URL:"/enduser/get-odds",
     METHOD:"POST"
   }
+  ,
+  GET_ACTIVE_FANCY_ODDS:{
+    URL:"/enduser/get-fancy-odds",
+    METHOD:"POST"
+  }
 };

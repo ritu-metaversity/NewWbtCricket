@@ -105,6 +105,23 @@ export const userServices = {
     return await apiWithSnackbar(params);
   },
 
+  getSportsForList:async () => {
+    const params ={
+      resource:userResources.BET_SPORTS_FOR_LIST,
+      
+    };
+    return await apiWithSnackbar(params);
+  },
+
+  getMatchForList:async (sportId:number) => {
+    const params ={
+      resource:userResources.BET_MATCH_FOR_LIST,
+      data:{sportId}
+      
+    };
+    return await apiWithSnackbar(params);
+  },
+
   getTestApi:async () => {
     const params={
       resource:userResources.TEST_API

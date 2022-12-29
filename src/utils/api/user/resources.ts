@@ -60,6 +60,14 @@ export const userResources: {
     URL:"/enduser/settled-bet",
     METHOD:"POST"
   },
+  BET_SPORTS_FOR_LIST:{
+    URL:"/sport/active-sport-list",
+    METHOD:"POST"
+  },
+  BET_MATCH_FOR_LIST:{
+    URL:"/sport/event-detail-sport-wise",
+    METHOD:"POST"
+  },
   TEST_API:{
     URL:"http://89.39.105.69:9001/betfairodds/1.207796438",
     METHOD:"GET"

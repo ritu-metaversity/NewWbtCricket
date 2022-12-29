@@ -1,5 +1,6 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { border } from "@mui/system";
+import TablePagination from "@mui/material/TablePagination";
 import React, { useEffect } from "react";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
 import StickyHeadTable from "../../components/custom/Table";
@@ -65,6 +66,7 @@ const Account = () => {
     width: "100%",
     maxWidth: "200px",
   };
+  const [countPage, setCount] = React.useState();
   const lableStyle = { alignSelf: "center" };
   const date = new Date();
   const futureDate = date.getDate() - 60;
@@ -98,7 +100,7 @@ const Account = () => {
       }
     };
     getList();
-  }, []);
+  }, [formData]);
 
   const handleClick = () => {
     const getList = async () => {
@@ -109,6 +111,27 @@ const Account = () => {
     };
     getList();
   };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFormData(preState => {
+      return {
+        ...preState,
+        noOfRecords: +event.target.value,
+        index: 0
+      }
+    });
+    // setPage(0);
+  };
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setFormData(preState => {
+      return {...preState,
+      index: newPage,
+    }}
+    )
+  }
 
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
@@ -178,17 +201,33 @@ const Account = () => {
       <br />
 
       {accountStatement?.length > 0 ? (
-        <StickyTable
-          rows={accountStatement}
-          columns={columns}
-          title={"Account Summary"}
-          // noOfRecords={formData.noOfRecords}
-        />
+        <> <StickyTable
+        rows={accountStatement}
+        columns={columns}
+        title={"Account Summary"}
+        // noOfRecords={formData.noOfRecords}
+      />
+        <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={countPage ? countPage * formData.noOfRecords : -1}
+        rowsPerPage={formData.noOfRecords}
+        page={formData.index}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        labelRowsPerPage={<span>Rows: </span>}
+        labelDisplayedRows={({page}) =>{
+          return `Page : ${page + 1}`
+        }}
+      /></>
+        
+        
       ) : (
         <Typography mt="15vh" variant="h4" color="error">
           {"No Data Found"}
         </Typography>
-      )}
+      )
+      }
     </Box>
   );
 };

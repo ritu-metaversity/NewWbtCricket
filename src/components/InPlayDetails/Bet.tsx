@@ -20,72 +20,104 @@ interface BetProps {
   Odds: MatchOddsGridProps[];
   Bookmaker: MatchOddsGridProps[];
 }
-const Bet:FC<BetProps> = ({Odds, Bookmaker}) => {
+const Bet: FC<BetProps> = ({ Odds, Bookmaker }) => {
   const [amount, setAmount] = useState(10);
   const handleChange = (e: any) => {
     setAmount(e.target.value);
   };
 
 
-  const [activeFancy, setActiveFancy]=useState<any[]>([]);
-  const [matchOdd, setMatchOdds]=useState<any[]>([]);
-  const [preMatchOdds, setPreMetchOdds]=useState<any[]>([]);
+  const [activeFancy, setActiveFancy] = useState<any>();
+  const [matchOdd, setMatchOdds] = useState<any[]>([]);
+  const [preMatchOdds, setPreMetchOdds] = useState<any[]>([]);
+  const [preFancyOdds, setPreFancyOdds] = useState<any>();
+
+  const [bookmakerOdd, setBookMakerOdds]= useState<any>();
+  const [prvbookmakerOdd, setPrvBookMakerOdds]= useState<any>();
+
+
+  // useEffect(() => {
+  //   const getData=async () => {
+  //     const { response } = await sportServices.getActiveFancy(31978746);
+  //     if(response?.data?.marketList){
+
+  //       setActiveFancy(response.data.marketList)
+  //     }
+  //   }
+  //   getData();
+  // },[]);
 
   useEffect(() => {
-    const getData=async () => {
-      const { response } = await sportServices.getActiveFancy(31975576);
-      if(response?.data?.marketList){
-     
-        setActiveFancy(response.data.marketList)
+    const getActiveFancyOdds = async () => {
+      const { response } = await sportServices.getActiveFancyOdds(31978746);
+      if (response) {
+          setBookMakerOdds(response.Bookmaker)
+        if(bookmakerOdd){
+          setPrvBookMakerOdds([...bookmakerOdd])
+        }else{
+          setPrvBookMakerOdds(response.Bookmaker)
+        }
+        setMatchOdds(response.Odds)
+        if (matchOdd.length) {
+          setPreMetchOdds([...matchOdd])
+        } else {
+          setPreMetchOdds(response.Odds)
+        }
+        if (activeFancy) {
+          setPreFancyOdds([...activeFancy])
+        } else {
+          const newResponse = { ...response }
+          newResponse.Odds = undefined;
+          setPreFancyOdds(newResponse);
+        }
+        const newResponse = { ...response }
+        newResponse.Odds = undefined;
+        setActiveFancy(newResponse);
       }
     }
-    getData();
-  },[]);
+    setTimeout(()=> getActiveFancyOdds(),500)
+  }, [activeFancy, matchOdd]);
 
-  
-  useEffect(() =>{
-    const getOdds =async () => {
-      const request=activeFancy.map(item => item.marketId).join(", ");
-      const { response }= await sportServices.getMatchOdds(request);
-      if(response){
-        if(matchOdd.length){
-          setPreMetchOdds([...matchOdd])
-        }else{
-          setPreMetchOdds(response)
-        }
-        setMatchOdds(response)
-      }
-    };
-    setTimeout(()=> getOdds(),1000)
-  },[activeFancy, matchOdd])
+ 
+  // useEffect(() =>{
+  //   const getOdds =async () => {
+  //     const request=activeFancy.map(item => item.marketId).join(", ");
+  //     const { response }= await sportServices.getMatchOdds(request);
+  //     if(response){
+  //       if(matchOdd.length){
+  //         setPreMetchOdds([...matchOdd])
+  //       }else{
+  //         setPreMetchOdds(response)
+  //       }
+  //       setMatchOdds(response)
+  //     }
+  //   };
+  //   setTimeout(()=> getOdds(),1000)
+  // },[activeFancy, matchOdd])
   return (
     <>{
-     activeFancy.map(item =>
+      matchOdd.length &&
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandCircleDown />}>
-          { item?.type}
-        </AccordionSummary>
+        {
+          <AccordionSummary expandIcon={<ExpandCircleDown />}>
+            Match Odds
+          </AccordionSummary>
+        }
         <AccordionDetails sx={{ p: 0 }}>
           {
-            matchOdd.map((match,index) =>{
-              if(match.marketId === item.marketId){
-                  return <MatchOddsGrid CurrentOdd={match} PrevOdds={preMatchOdds[index]} />
-              }
+            matchOdd.map((match, index) => {
+              return <MatchOddsGrid CurrentOdd={match} PrevOdds={preMatchOdds[index]} />
             })
           }
-          
         </AccordionDetails>
       </Accordion>
-      )
     }
-      
-
-      {/* {Bookmaker && <Accordion>
+      {bookmakerOdd && <Accordion>
         <AccordionSummary expandIcon={<ExpandCircleDown />}>
           Bookmaker Odds
         </AccordionSummary>
         <AccordionDetails sx={{ p: 0 }}>
-          <MatchOddsGrid {...Bookmaker[0]} />
+          <BookMakerOddsgrid CurrentOdd={bookmakerOdd} PrevOdds={prvbookmakerOdd}   />
         </AccordionDetails>
       </Accordion>}
 
@@ -94,9 +126,16 @@ const Bet:FC<BetProps> = ({Odds, Bookmaker}) => {
           Session Odds
         </AccordionSummary>
         <AccordionDetails sx={{ p: 0 }}>
-          <SessionOddsGrid />
+          {
+            activeFancy && Object.keys(activeFancy).map(keys => {
+              if (["Fancy2", "Fancy3", "OddEven"].includes(keys)) {
+                  return <SessionOddsGrid CurrentOdd={activeFancy[keys]} PrevOdds={preFancyOdds[keys]}  title={keys}/>
+                
+              } else return
+            })
+          }
         </AccordionDetails>
-      </Accordion> */}
+      </Accordion>
 
       <Box
         display="flex"
@@ -130,17 +169,17 @@ const BetGridItemGridItemProps = {
   bgcolor: "white",
   p: 0.5,
   fontWeight: 700,
-  marginInline:"auto"
+  marginInline: "auto"
 };
 
-const BetGridItem = ({ title, values, suspended }: { title?: boolean; suspended?:boolean, values: any[] }) => {
+const BetGridItem = ({ title, values, suspended }: { title?: boolean; suspended?: boolean, values: any[] }) => {
   const Props = {
     ...BetGridItemGridItemProps,
     ...(title
       ? {
-          bgcolor: blue[50],
-          color: "primary.main",
-        }
+        bgcolor: blue[50],
+        color: "primary.main",
+      }
       : {}),
   };
   const gridItems = (
@@ -194,16 +233,16 @@ interface MatchOddsGridProps {
     team: string;
     runnerStatus: string;
     selectionId: number;
-    ex:{
-    availableToBack:{
-      price:string,
-      size:string
-    }[],
-    availableToLay:{
-      price:string,
-      size:string
-    }[];
-  }
+    ex: {
+      availableToBack: {
+        price: string,
+        size: string
+      }[],
+      availableToLay: {
+        price: string,
+        size: string
+      }[];
+    }
   }[];
   maxBet: number;
   betDelay: number;
@@ -212,11 +251,24 @@ interface MatchOddsGridProps {
   isPause: boolean;
   status: string;
 }
-const MatchOddsGrid: FC<{CurrentOdd:MatchOddsGridProps;PrevOdds:MatchOddsGridProps}> = ({CurrentOdd,PrevOdds}
-  ) => {
-   
-  const { runners,status, maxBet, betDelay, isActive, isPause, inPlay }=CurrentOdd;
-  const { runners:PrevRunner }=PrevOdds;
+
+interface SessionOddsGridProps {
+  sid: string,
+  nation: string,
+  b1: string,
+  bs1: string,
+  l1: string,
+  ls1: string,
+  gstatus: string
+}
+
+
+
+const MatchOddsGrid: FC<{ CurrentOdd: MatchOddsGridProps; PrevOdds: MatchOddsGridProps }> = ({ CurrentOdd, PrevOdds }
+) => {
+
+  const { runners, status, maxBet, betDelay, isActive, isPause, inPlay } = CurrentOdd;
+  const { runners: PrevRunner } = PrevOdds;
   // if (!runner) { return null; }
 
   return (
@@ -225,42 +277,42 @@ const MatchOddsGrid: FC<{CurrentOdd:MatchOddsGridProps;PrevOdds:MatchOddsGridPro
         <BetTextMedium>Max Bet:{maxBet}</BetTextMedium>
         <BetTextMedium>Bet Delay:{betDelay}</BetTextMedium>
       </Box>
-      
+
       <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
         <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
         {
-          runners.map((item,index) =>{
-           return <BetGridItem
-          suspended={
-            ["SUSPENDED", "CLOSED"].includes(status) 
-            // status === "SUSPENDED" ||
-            // !isActive ||
-            // isPause ||
-            // !inPlay
-          }
-          values={[
-            item.selectionId,
-            <Box className={PrevRunner[index].ex.availableToBack[0].price < item.ex.availableToBack[0].price
-              ? "odds-up"
-              : PrevRunner[index].ex.availableToBack[0].price > item.ex.availableToBack[0].price
-              ? "odds-down"
-              : ""}>
-            <BetText color="blue">{item.ex.availableToBack[0].price}</BetText>
-            {item.ex.availableToBack[0].size}
-            </Box>,
-            <Box  className={PrevRunner[index].ex.availableToLay[0].price < item.ex.availableToLay[0].price
-              ? "odds-up"
-              : PrevRunner[index].ex.availableToLay[0].price > item.ex.availableToLay[0].price
-              ? "odds-down"
-              : ""}><BetText color="red">{item.ex.availableToLay[0].price}</BetText>
-            {item.ex.availableToLay[0].size}</Box>
-            
-          ]}
-        />
+          runners.map((item, index) => {
+            return <BetGridItem
+              suspended={
+                ["SUSPENDED", "CLOSED"].includes(status)
+                // status === "SUSPENDED" ||
+                // !isActive ||
+                // isPause ||
+                // !inPlay
+              }
+              values={[
+                item.selectionId,
+                <Box className={PrevRunner[index].ex.availableToBack[0].price < item.ex.availableToBack[0].price
+                  ? "odds-up"
+                  : PrevRunner[index].ex.availableToBack[0].price > item.ex.availableToBack[0].price
+                    ? "odds-down"
+                    : ""}>
+                  <BetText color="blue">{item.ex.availableToBack[0].price}</BetText>
+                  {item.ex.availableToBack[0].size}
+                </Box>,
+                <Box className={PrevRunner[index].ex.availableToLay[0].price < item.ex.availableToLay[0].price
+                  ? "odds-up"
+                  : PrevRunner[index].ex.availableToLay[0].price > item.ex.availableToLay[0].price
+                    ? "odds-down"
+                    : ""}><BetText color="red">{item.ex.availableToLay[0].price}</BetText>
+                  {item.ex.availableToLay[0].size}</Box>
+
+              ]}
+            />
           })
-          
+
         }
-        
+
         {/* <BetGridItem
           suspended={
             ["SUSPENDED", "CLOSED"].includes(status) ||
@@ -281,71 +333,135 @@ const MatchOddsGrid: FC<{CurrentOdd:MatchOddsGridProps;PrevOdds:MatchOddsGridPro
   );
 }
 
-function SessionOddsGrid({}) {
+// const SessionOddsGrid:FC<({ odds:SessionOddsGridProps }) {
+const SessionOddsGrid: FC<{ CurrentOdd: any; PrevOdds: any ; title:any}> = ({ CurrentOdd, PrevOdds,title }
+) => {
   return (
+    <>
+    {title}
     <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
+      
       <BetGridItem title values={["SESSION", "NOT", "YES"]} />
-      <BetGridItem
+      {
+        CurrentOdd.map((item:any, index:any) =>
+        <BetGridItem
         values={[
           <>
-            <BetTextMedium>6 OVER RUNS ST W</BetTextMedium>
+            <BetTextMedium>{item?.nation}</BetTextMedium>
             <BetTextSmall>Session Limit: 50k</BetTextSmall>
           </>,
-          <BetText color="red">
-            35
-            <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
+          <Box className={PrevOdds[index].b1< item.b1
+            ? "odds-up"
+            :PrevOdds[index].b1 > item.b1
+              ? "odds-down"
+              : ""}> 
+            <BetText color="red">
+          {item.b1}
+          <BetTextSmall>{item.bs1}</BetTextSmall>
+        </BetText></Box>
+         ,
+         <Box className={PrevOdds[index].l1< item.l1
+          ? "odds-up"
+          :PrevOdds[index].l1 > item.l1
+            ? "odds-down"
+            : ""}>
           <BetText color="blue">
-            35 <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
-        ]}
-      />{" "}
-      <BetGridItem
-        values={[
-          <>
-            <BetTextMedium>6 OVER RUNS ST W</BetTextMedium>
-            <BetTextSmall>Session Limit: 50k</BetTextSmall>
-          </>,
-          <BetText color="red">
-            35
-            <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
-          <BetText color="blue">
-            35 <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
-        ]}
-      />{" "}
-      <BetGridItem
-        values={[
-          <>
-            <BetTextMedium>6 OVER RUNS ST W</BetTextMedium>
-            <BetTextSmall>Session Limit: 50k</BetTextSmall>
-          </>,
-          <BetText color="red">
-            35
-            <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
-          <BetText color="blue">
-            35 <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
-        ]}
-      />{" "}
-      <BetGridItem
-        values={[
-          <>
-            <BetTextMedium>6 OVER RUNS ST W</BetTextMedium>
-            <BetTextSmall>Session Limit: 50k</BetTextSmall>
-          </>,
-          <BetText color="red">
-            35
-            <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
-          <BetText color="blue">
-            35 <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
+            {item.l1} <BetTextSmall>{item.ls1}</BetTextSmall>
+          </BetText>
+          </Box>,
         ]}
       />
+        )
+     
+}
+
+{/* <Box className={PrevRunner[index].ex.availableToBack[0].price < item.ex.availableToBack[0].price
+                  ? "odds-up"
+                  : PrevRunner[index].ex.availableToBack[0].price > item.ex.availableToBack[0].price
+                    ? "odds-down"
+                    : ""}>
+                  <BetText color="blue">{item.ex.availableToBack[0].price}</BetText>
+                  {item.ex.availableToBack[0].size}
+                </Box> */}
+      {/* <BetGridItem
+        values={[
+          <>
+            <BetTextMedium>6 OVER RUNS ST W</BetTextMedium>
+            <BetTextSmall>Session Limit: 50k</BetTextSmall>
+          </>,
+          <BetText color="red">
+            35
+            <BetTextSmall>1.00</BetTextSmall>
+          </BetText>,
+          <BetText color="blue">
+            35 <BetTextSmall>1.00</BetTextSmall>
+          </BetText>,
+        ]}
+      />{" "}
+      <BetGridItem
+        values={[
+          <>
+            <BetTextMedium>6 OVER RUNS ST W</BetTextMedium>
+            <BetTextSmall>Session Limit: 50k</BetTextSmall>
+          </>,
+          <BetText color="red">
+            35
+            <BetTextSmall>1.00</BetTextSmall>
+          </BetText>,
+          <BetText color="blue">
+            35 <BetTextSmall>1.00</BetTextSmall>
+          </BetText>,
+        ]}
+      />{" "}
+      <BetGridItem
+        values={[
+          <>
+            <BetTextMedium>6 OVER RUNS ST W</BetTextMedium>
+            <BetTextSmall>Session Limit: 50k</BetTextSmall>
+          </>,
+          <BetText color="red">
+            35
+            <BetTextSmall>1.00</BetTextSmall>
+          </BetText>,
+          <BetText color="blue">
+            35 <BetTextSmall>1.00</BetTextSmall>
+          </BetText>,
+        ]}
+      /> */}
       {/* <BetGridItem title /> */}
     </Grid>
+    </>
   );
 }
+
+
+const BookMakerOddsgrid: FC<{ CurrentOdd: any; PrevOdds: any}> = ({ CurrentOdd, PrevOdds }
+  ) => {
+    return (
+      <>
+      <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
+        
+        <BetGridItem title values={["SESSION", "NOT", "YES"]} />
+        {
+           CurrentOdd.map((item:any, index:any) =>
+          <BetGridItem
+          values={[
+            <>
+              <BetTextMedium>{item?.nation}</BetTextMedium>
+              <BetTextSmall>Session Limit: 50k</BetTextSmall>
+            </>,
+            <BetText color="red">
+              {item.b1}
+              <BetTextSmall>{item.bs1}</BetTextSmall>
+            </BetText>,
+            <BetText color="blue">
+              {item.l1} <BetTextSmall>{item.ls1}</BetTextSmall>
+            </BetText>,
+          ]}
+        />
+           )
+        }
+      </Grid>
+      </>
+    );
+      }

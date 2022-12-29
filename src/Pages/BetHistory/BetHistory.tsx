@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { userServices } from "../../utils/api/user/services";
 import StickyTable from "../../components/custom/TableWithoutPagination";
 import TablePagination from "@mui/material/TablePagination";
+import { getValue } from "@testing-library/user-event/dist/utils";
 
 
 export interface Column {
@@ -12,6 +13,16 @@ export interface Column {
   align?: "right" | "center";
   colorCoded?: boolean;
   format?: (value: number) => string;
+}
+
+export interface SportsListResponse{
+  sportId:number,
+  sportName:string
+}
+
+export interface MatchListResponse{
+  eventId:number,
+  eventName:string
 }
 
 const columns: readonly Column[] = [
@@ -46,12 +57,22 @@ const BetHistory = () => {
 
   const [formData, setFormData] = React.useState({
     sportType: 1,
-    betType: 1,
+    betType: "1",
     noOfRecords: 25,
     index: 0,
-    isDeleted:false
+    isDeleted:"false"
   });
+
+  // const [sportsId, setSportsId]=React.useState();
+
+  // const [sportList, setSportsList]= React.useState<SportsListResponse[]>([]);
+  // const [matchList, setMatchList]= React.useState<MatchListResponse[]>([]);
+
+
+
   const [accountStatement, setAccountStatement] = React.useState([]);
+
+ 
   useEffect(() => {
     const getList = async () => {
       const { response } = await userServices.getBetHistory(formData);
@@ -63,7 +84,28 @@ const BetHistory = () => {
       }
     };
     getList();
-  }, [formData.index, formData.noOfRecords]);
+  }, [formData]);
+
+  // useEffect(() => {
+  //   const getSportList = async () => {
+  //     const { response } = await userServices.getSportsForList();
+  //     if (response?.data) {
+  //       setSportsList(response.data)
+  //     }
+  //   };
+  //   getSportList();
+  // }, []);
+ 
+  // useEffect(() => {
+  //   if(!sportsId) return;
+  //   const getMatchList = async () => {
+  //     const { response } = await userServices.getMatchForList(sportsId!);
+  //     if (response?.data) {
+  //       setMatchList(response.data)
+  //     }
+  //   };
+  //   getMatchList();
+  // }, [sportsId]);
 
   function handleChange(event: { target: { name: any; value: any; }; }) {
     setFormData(preState => {
@@ -82,6 +124,8 @@ const BetHistory = () => {
     )
   }
 
+
+
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -92,7 +136,16 @@ const BetHistory = () => {
         index: 0
       }
     });
-    // setPage(0);
+ 
+  };
+
+  const inputStyle = {
+    padding: "10px",
+    borderRadius: "5px",
+    marginRight: " 8px",
+    width: "100%",
+    maxWidth: "200px",
+    minWidth:"100px"
   };
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
@@ -100,7 +153,7 @@ const BetHistory = () => {
         <input
           type="radio"
           id="all"
-          checked
+          checked={formData.betType === "1"}
           name="betType"
           value="1"
           onChange={handleChange}
@@ -112,6 +165,7 @@ const BetHistory = () => {
           id="back"
           name="betType"
           value="2"
+          checked={formData.betType === "2"}
           onChange={handleChange}
         />
         <label htmlFor="back">Lagai</label>
@@ -121,13 +175,44 @@ const BetHistory = () => {
           id="lay"
           name="betType"
           value="3"
+          checked={formData.betType === "3"}
           onChange={handleChange}
         />
         <label htmlFor="lay">Khayi</label>
         <br />
+
+
+        <input style={{marginLeft:"30px"}}
+          type="radio"
+          id="all"
+          checked={formData.isDeleted === "false"}
+          name="isDeleted"
+          value="false"
+          onChange={handleChange}
+        />
+        <label htmlFor="all">Matched</label>
+        <br />
+        <input
+          type="radio"
+          id="back"
+          name="isDeleted"
+          value="true"
+          checked={formData.isDeleted==="true"}
+          onChange={handleChange}
+        />
+        <label htmlFor="back">Deleted</label>
+        <br />
+       
+
       </form>
       <StickyTable
-        rows={accountStatement}
+        // rows={accountStatement}
+        rows={accountStatement.map((value: any) => 
+          { value.color = (value.isback ? "#b3d9f5" : "#f5bad0");
+          value.border = (value.isback ? "5px solid #7dc7fc" : "5px solid #ff7bac");
+            return value 
+            
+          })}
         columns={columns}
         title={"Current Bets"}
         noOfRecords={formData.noOfRecords}

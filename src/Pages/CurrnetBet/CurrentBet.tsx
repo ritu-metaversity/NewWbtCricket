@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { userServices } from "../../utils/api/user/services";
 import StickyTable from "../../components/custom/TableWithoutPagination";
 import TablePagination from "@mui/material/TablePagination";
+import BacktoMenuButton from "../../components/BacktoMenuButton";
 
 
 export interface Column {
@@ -96,6 +97,7 @@ const CurrentBet = () => {
   };
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
+       <BacktoMenuButton />
       <form style={{ display: "inline-flex", padding: "10px" }}>
         <input
           type="radio"

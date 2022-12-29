@@ -62,6 +62,7 @@ const InPlayDetails = () => {
       <ScoreCardGrid />
 
       <Bet {...odds} />
+      
       <BetRecord item={eventId}/>
     </Box>
   );

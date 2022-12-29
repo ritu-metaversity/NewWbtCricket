@@ -57,5 +57,13 @@ export const sportServices = {
             data: {marketIds}
         }
         return apiHandler(params);
+    },
+
+    getActiveFancyOdds:(eventId:number)=>{
+        const params:ApiServiceInterface = {
+            resource: sportsResourses.GET_ACTIVE_FANCY_ODDS,
+            data: {eventId}
+        }
+        return apiHandler(params);
     }
 }
