@@ -82,7 +82,7 @@ const BetRecord = (props: { item: any; }) => {
   const [betRecord, setBetRecord] = React.useState<any>();
   useEffect(() => {
     const getList = async () => {
-      const { response } = await sportServices.betListByMatchId(31846653);
+      const { response } = await sportServices.betListByMatchId(props.item);
       if (response?.data) {
         setBetRecord(response.data)
       }

@@ -61,7 +61,7 @@ const InPlayDetails = () => {
       <TitleStyled>{commentary}</TitleStyled>
       <ScoreCardGrid />
 
-      <Bet {...odds} />
+      <Bet  event={eventId} />
       
       <BetRecord item={eventId}/>
     </Box>

@@ -20,7 +20,7 @@ interface BetProps {
   Odds: MatchOddsGridProps[];
   Bookmaker: MatchOddsGridProps[];
 }
-const Bet: FC<BetProps> = ({ Odds, Bookmaker }) => {
+const Bet: FC<any> = (props: { event: number }) => {
   const [amount, setAmount] = useState(10);
   const handleChange = (e: any) => {
     setAmount(e.target.value);
@@ -49,7 +49,7 @@ const Bet: FC<BetProps> = ({ Odds, Bookmaker }) => {
 
   useEffect(() => {
     const getActiveFancyOdds = async () => {
-      const { response } = await sportServices.getActiveFancyOdds(31978746);
+      const { response } = await sportServices.getActiveFancyOdds(props.event);
       if (response) {
           setBookMakerOdds(response.Bookmaker)
         if(bookmakerOdd){
@@ -65,7 +65,6 @@ const Bet: FC<BetProps> = ({ Odds, Bookmaker }) => {
         }
         if (activeFancy) {
           setPreFancyOdds([...activeFancy])
-          
         } else {
           const newResponse = { ...response }
           newResponse.Odds = undefined;
@@ -103,6 +102,7 @@ const Bet: FC<BetProps> = ({ Odds, Bookmaker }) => {
           <AccordionSummary expandIcon={<ExpandCircleDown />}>
             Match Odds
           </AccordionSummary>
+          
         }
         <AccordionDetails sx={{ p: 0 }}>
           {
