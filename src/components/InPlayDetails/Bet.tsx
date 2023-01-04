@@ -65,6 +65,7 @@ const Bet: FC<BetProps> = ({ Odds, Bookmaker }) => {
         }
         if (activeFancy) {
           setPreFancyOdds([...activeFancy])
+          
         } else {
           const newResponse = { ...response }
           newResponse.Odds = undefined;
