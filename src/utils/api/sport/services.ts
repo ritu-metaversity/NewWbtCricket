@@ -65,5 +65,13 @@ export const sportServices = {
             data: {eventId}
         }
         return apiHandler(params);
+    },
+
+    updateBetPlace:(data:any) =>{
+        const params:ApiServiceInterface={
+            resource: sportsResourses.PLACE_BET,
+            data,
+        }
+        return apiHandler(params);
     }
 }

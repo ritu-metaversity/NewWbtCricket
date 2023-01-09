@@ -6,7 +6,9 @@ import {
   Button,
   ButtonGroup,
   Grid,
+  Modal,
   TextField,
+  Typography,
 } from "@mui/material";
 import { blue } from "@mui/material/colors";
 import { Box } from "@mui/system";
@@ -14,12 +16,15 @@ import React, { FC, useEffect, useState } from "react";
 import { TitleStyled } from "../custom/styledComponents";
 import { BetText, BetTextMedium, BetTextSmall } from "./styledComponents";
 import { sportServices } from "../../utils/api/sport/services";
-import "./custom.css"
+import "./custom.css";
+import snackBarUtil from "../Layout/snackBarUtil";
 
-interface BetProps {
-  Odds: MatchOddsGridProps[];
-  Bookmaker: MatchOddsGridProps[];
-}
+
+// const [open, setOpen] = React.useState(false);
+//   const handleOpen = () => setOpen(true);
+//   const handleClose = () => setOpen(false);
+
+
 const Bet: FC<any> = (props: { event: number }) => {
   const [amount, setAmount] = useState(10);
   const handleChange = (e: any) => {
@@ -27,35 +32,83 @@ const Bet: FC<any> = (props: { event: number }) => {
   };
 
 
-  const [activeFancy, setActiveFancy] = useState<any>();
+
+
+  const [activeFancy, setActiveFancy] = useState<any[]>([]);
   const [matchOdd, setMatchOdds] = useState<any[]>([]);
   const [preMatchOdds, setPreMetchOdds] = useState<any[]>([]);
   const [preFancyOdds, setPreFancyOdds] = useState<any>();
 
-  const [bookmakerOdd, setBookMakerOdds]= useState<any>();
-  const [prvbookmakerOdd, setPrvBookMakerOdds]= useState<any>();
+  const [bookmakerOdd, setBookMakerOdds] = useState<any[]>([]);
+
+  const [originBookMaker, setOriginbookMaker]= useState<any[]>([]);
+  const [prvbookmakerOdd, setPrvBookMakerOdds] = useState<any>();
+
+  const [bookmakerToss, setBookMakerToss]= useState<any[]>([]);
+  const [preBookmakerToss, setPreBookMakerToss]= useState<any[]>([]);
 
 
-  // useEffect(() => {
-  //   const getData=async () => {
-  //     const { response } = await sportServices.getActiveFancy(31978746);
-  //     if(response?.data?.marketList){
 
-  //       setActiveFancy(response.data.marketList)
-  //     }
-  //   }
-  //   getData();
-  // },[]);
+
+  const [bet, setBet] = useState<any>({
+    "isBack": false, "odds": 1.93, "stake": 900, "selectionId": 7659, "marketId": "1.207796438", "matchId": 31975576, "placeTime": "2022-12-12 14:09:10", "priceValue": 90, "isFancy": false,
+    "deviceInfo": { "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36", "os": "Windows", "browser": "Chrome", "device": "Unknown", "os_version": "windows-10", "browser_version": "108.0.0.0", "deviceType": "desktop", "orientation": "landscape", "userIp": "115.246.121.179" }
+  })
+
+
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'white',
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+
 
   useEffect(() => {
     const getActiveFancyOdds = async () => {
       const { response } = await sportServices.getActiveFancyOdds(props.event);
       if (response) {
-          setBookMakerOdds(response.Bookmaker)
-        if(bookmakerOdd){
-          setPrvBookMakerOdds([...bookmakerOdd])
-        }else{
-          setPrvBookMakerOdds(response.Bookmaker)
+        setBookMakerOdds(response.Bookmaker)
+        if (bookmakerOdd) {
+          setBookMakerToss(() => bookmakerOdd.map( item =>{
+            if(item.t === "TOSS"){
+              return item;
+            }
+          }).filter((item) => item != null));
+
+          setOriginbookMaker(() => bookmakerOdd.map( item =>{
+            if(item.t !== "TOSS"){
+              return item;
+            }
+          }).filter((item) => item != null)
+          );
+          if(originBookMaker.length){
+            setPrvBookMakerOdds([...originBookMaker])
+          }else{
+            setPrvBookMakerOdds(() => bookmakerOdd.map( item =>{
+              if(item.t !== "TOSS"){
+                return item;
+              }
+            }).filter((item) => item != null));
+          }
+          if(bookmakerToss.length){
+            setPreBookMakerToss([...bookmakerToss])
+          }else{
+            setPreBookMakerToss(() => bookmakerOdd.map( item =>{
+              if(item.t === "TOSS"){
+                return item;
+              }
+            }).filter((item) => item != null));
+          }
         }
         setMatchOdds(response.Odds)
         if (matchOdd.length) {
@@ -63,7 +116,7 @@ const Bet: FC<any> = (props: { event: number }) => {
         } else {
           setPreMetchOdds(response.Odds)
         }
-        if (activeFancy) {
+        if (activeFancy.length) {
           setPreFancyOdds([...activeFancy])
         } else {
           const newResponse = { ...response }
@@ -75,50 +128,45 @@ const Bet: FC<any> = (props: { event: number }) => {
         setActiveFancy(newResponse);
       }
     }
-    setTimeout(()=> getActiveFancyOdds(),500)
+    setTimeout(() => getActiveFancyOdds(), 500)
   }, [activeFancy, matchOdd]);
 
- 
-  // useEffect(() =>{
-  //   const getOdds =async () => {
-  //     const request=activeFancy.map(item => item.marketId).join(", ");
-  //     const { response }= await sportServices.getMatchOdds(request);
-  //     if(response){
-  //       if(matchOdd.length){
-  //         setPreMetchOdds([...matchOdd])
-  //       }else{
-  //         setPreMetchOdds(response)
-  //       }
-  //       setMatchOdds(response)
-  //     }
-  //   };
-  //   setTimeout(()=> getOdds(),1000)
-  // },[activeFancy, matchOdd])
+  const handleClick = async () => await sportServices.updateBetPlace(bet);
+
   return (
     <>{
-      matchOdd.length &&
+      matchOdd.length > 0 &&
       <Accordion>
         {
           <AccordionSummary expandIcon={<ExpandCircleDown />}>
             Match Odds
           </AccordionSummary>
-          
+
         }
         <AccordionDetails sx={{ p: 0 }}>
           {
             matchOdd.map((match, index) => {
-              return <MatchOddsGrid CurrentOdd={match} PrevOdds={preMatchOdds[index]} />
+              return <MatchOddsGrid CurrentOdd={match} PrevOdds={preMatchOdds[index]} matchId={props.event} />
             })
           }
         </AccordionDetails>
       </Accordion>
     }
-      {bookmakerOdd && <Accordion>
+      {originBookMaker.length > 0 && <Accordion>
         <AccordionSummary expandIcon={<ExpandCircleDown />}>
           Bookmaker Odds
         </AccordionSummary>
         <AccordionDetails sx={{ p: 0 }}>
-          <BookMakerOddsgrid CurrentOdd={bookmakerOdd} PrevOdds={prvbookmakerOdd}   />
+          <BookMakerOddsgrid CurrentOdd={originBookMaker} PrevOdds={prvbookmakerOdd} matchId={props.event} />
+        </AccordionDetails>
+      </Accordion>}
+
+      {bookmakerToss.length > 0 && <Accordion>
+        <AccordionSummary expandIcon={<ExpandCircleDown />}>
+          Bookmaker Toss
+        </AccordionSummary>
+        <AccordionDetails sx={{ p: 0 }}>
+          <BookMakerOddsgrid CurrentOdd={bookmakerToss} PrevOdds={prvbookmakerOdd} matchId={props.event} />
         </AccordionDetails>
       </Accordion>}
 
@@ -128,10 +176,9 @@ const Bet: FC<any> = (props: { event: number }) => {
         </AccordionSummary>
         <AccordionDetails sx={{ p: 0 }}>
           {
-            activeFancy && Object.keys(activeFancy).map(keys => {
+            activeFancy && Object.keys(activeFancy).map((keys:any) => {
               if (["Fancy2", "Fancy3", "OddEven"].includes(keys)) {
-                  return <SessionOddsGrid CurrentOdd={activeFancy[keys]} PrevOdds={preFancyOdds[keys]}  title={keys}/>
-                
+                return <SessionOddsGrid CurrentOdd={activeFancy[keys]} PrevOdds={preFancyOdds[keys]} matchId={props.event} title={keys} />
               } else return
             })
           }
@@ -158,13 +205,49 @@ const Bet: FC<any> = (props: { event: number }) => {
             <Button onClick={() => setAmount(item)}>{item}</Button>
           ))}
         </ButtonGroup>
-        <Button variant="contained" sx={{ width: "200px", m: "auto" }}>
+        <Button variant="contained" onClick={handleOpen} sx={{ width: "200px", m: "auto" }}>
           Bet
         </Button>
       </Box>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Match Odds
+          </Typography>
+
+          <Box
+            display="flex"
+            flexDirection={"column"}
+            gap={2}
+            my={3}
+            alignItems="center"
+          >
+            <TextField
+              size="small"
+              sx={{ width: "200px", margin: "auto" }}
+              value={amount}
+              onChange={handleChange}
+            />
+            <ButtonGroup sx={{ maxWidth: "100%" }}>
+              {[10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((item) => (
+                <Button onClick={() => setAmount(item)}>{item}</Button>
+              ))}
+            </ButtonGroup>
+            <Button variant="contained" onClick={handleClick} sx={{ width: "200px", m: "auto" }}>
+              Bet
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
     </>
   );
 };
+
 const BetGridItemGridItemProps = {
   item: true,
   bgcolor: "white",
@@ -251,26 +334,81 @@ interface MatchOddsGridProps {
   isActive: boolean;
   isPause: boolean;
   status: string;
-}
-
-interface SessionOddsGridProps {
-  sid: string,
-  nation: string,
-  b1: string,
-  bs1: string,
-  l1: string,
-  ls1: string,
-  gstatus: string
+  marketId: string;
 }
 
 
 
-const MatchOddsGrid: FC<{ CurrentOdd: MatchOddsGridProps; PrevOdds: MatchOddsGridProps }> = ({ CurrentOdd, PrevOdds }
+
+
+const MatchOddsGrid: FC<{ CurrentOdd: MatchOddsGridProps; PrevOdds: MatchOddsGridProps; matchId: number }> = ({ CurrentOdd, PrevOdds, matchId }
 ) => {
 
-  const { runners, status, maxBet, betDelay, isActive, isPause, inPlay } = CurrentOdd;
+  const { runners, status, maxBet, betDelay, marketId } = CurrentOdd;
   const { runners: PrevRunner } = PrevOdds;
-  // if (!runner) { return null; }
+
+  const [bet, setBet] = useState<any>({
+    "isBack": false, "odds": 1.93, "stake": 900, "selectionId": 7659, "marketId": "1.207796438", "matchId": matchId, "placeTime": "2022-12-12 14:09:10", "priceValue": 90, "isFancy": false,
+    "deviceInfo": { "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36", "os": "Windows", "browser": "Chrome", "device": "Unknown", "os_version": "windows-10", "browser_version": "108.0.0.0", "deviceType": "desktop", "orientation": "landscape", "userIp": "115.246.121.179" }
+  })
+
+
+  var today = new Date(),
+
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'white',
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const [amount, setAmount] = useState(10);
+  const handleChange = (e: any) => {
+    setAmount(e.target.value);
+  };
+  const handleClose = () => setOpen(false);
+
+  // const handleClick = async () => await sportServices.updateBetPlace(bet);
+
+  async function clickHandler(){
+  const {response} =await sportServices.updateBetPlace(bet);
+  snackBarUtil.success(response.message);
+  handleClose();
+  }
+
+  const updateBet = (isBack: boolean,
+    odds: number,
+    stake: number,
+    selectionId: number,
+    marketId: string,
+    matchId: number,
+    placeTime: string,
+    priceValue: number,
+    isFancy: boolean) => {
+      if(odds > 0){
+        handleOpen()
+      }
+    setBet({
+      ...bet,
+      isBack: isBack,
+      odds: odds,
+      stake: stake,
+      selectionId: selectionId,
+      marketId: marketId,
+      matchId: matchId,
+      placeTime: placeTime,
+      priceValue: priceValue,
+      isFancy: isFancy,
+    });
+  }
 
   return (
     <>
@@ -298,171 +436,337 @@ const MatchOddsGrid: FC<{ CurrentOdd: MatchOddsGridProps; PrevOdds: MatchOddsGri
                   : PrevRunner[index].ex.availableToBack[0].price > item.ex.availableToBack[0].price
                     ? "odds-down"
                     : ""}>
-                  <BetText color="blue">{item.ex.availableToBack[0].price}</BetText>
+                  <BetText onClick={() => updateBet(true, +item.ex.availableToBack[0].price, 100, item.selectionId, marketId, matchId, date, +item.ex.availableToBack[0].price, false)} color="blue">{item.ex.availableToBack[0].price}</BetText>
                   {item.ex.availableToBack[0].size}
                 </Box>,
                 <Box className={PrevRunner[index].ex.availableToLay[0].price < item.ex.availableToLay[0].price
                   ? "odds-up"
                   : PrevRunner[index].ex.availableToLay[0].price > item.ex.availableToLay[0].price
                     ? "odds-down"
-                    : ""}><BetText color="red">{item.ex.availableToLay[0].price}</BetText>
+                    : ""}><BetText onClick={() => updateBet(false, +item.ex.availableToLay[0].price, 100, item.selectionId, marketId, matchId, date, +item.ex.availableToLay[0].price, false)} color="red">{item.ex.availableToLay[0].price}</BetText>
                   {item.ex.availableToLay[0].size}</Box>
-
               ]}
             />
           })
-
         }
-
-        {/* <BetGridItem
-          suspended={
-            ["SUSPENDED", "CLOSED"].includes(status) ||
-            runners[1]?.runnerStatus === "SUSPENDED" ||
-            !isActive ||
-            isPause ||
-            !inPlay
-          }
-          values={[
-            runners[1]?.team,
-            <BetText color="blue">{runners[1]?.back1price}</BetText>,
-            <BetText color="red">{runners[1]?.lay1price}</BetText>,
-          ]}
-        /> */}
-        {/* <BetGridItem title /> */}
       </Grid>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Match Odds
+          </Typography>
+
+          <Box
+            display="flex"
+            flexDirection={"column"}
+            gap={2}
+            my={3}
+            alignItems="center"
+          >
+            <div style={{ display: "flex" }}>
+              <TextField
+                size="small"
+                sx={{ width: "200px", margin: "auto" }}
+                value={amount}
+                onChange={handleChange}
+              />
+              <p style={{ marginLeft: "20px" }} className="MuiTypography-root MuiTypography-body1 css-33qhfi">Profit: {(bet.odds - 1) * amount}</p>
+            </div>
+            <ButtonGroup sx={{ maxWidth: "100%" }}>
+              {[10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((item) => (
+                <Button onClick={() => setAmount(item)}>{item}</Button>
+              ))}
+            </ButtonGroup>
+            <Button variant="contained" onClick={clickHandler} sx={{ width: "200px", m: "auto" }}>
+              Bet
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
+
     </>
   );
 }
 
 // const SessionOddsGrid:FC<({ odds:SessionOddsGridProps }) {
-const SessionOddsGrid: FC<{ CurrentOdd: any; PrevOdds: any ; title:any}> = ({ CurrentOdd, PrevOdds,title }
+const SessionOddsGrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number; title: any }> = ({ CurrentOdd, PrevOdds, matchId, title }
 ) => {
+
+  const [bet, setBet] = useState<any>({
+    "isBack": false, "odds": 1.93, "stake": 900, "selectionId": 7659, "marketId": "1.207796438", "matchId": matchId, "placeTime": "2022-12-12 14:09:10", "priceValue": 90, "isFancy": false,
+    "deviceInfo": { "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36", "os": "Windows", "browser": "Chrome", "device": "Unknown", "os_version": "windows-10", "browser_version": "108.0.0.0", "deviceType": "desktop", "orientation": "landscape", "userIp": "115.246.121.179" }
+  })
+
+
+  var today = new Date(),
+
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'white',
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const [amount, setAmount] = useState(10);
+  const handleChange = (e: any) => {
+    setAmount(e.target.value);
+  };
+  const handleClose = () => setOpen(false);
+
+  // const handleClick = async () => await sportServices.updateBetPlace(bet);
+
+  async function clickHandler(){
+    await sportServices.updateBetPlace(bet);
+    handleClose();
+    }
+
+  const updateBet = (isBack: boolean,
+    odds: number,
+    stake: number,
+    selectionId: number,
+    marketId: string,
+    matchId: number,
+    placeTime: string,
+    priceValue: number,
+    isFancy: boolean) => {
+      if(odds > 0){
+        handleOpen()
+      }
+    setBet({
+      ...bet,
+      isBack: isBack,
+      odds: odds,
+      stake: stake,
+      selectionId: selectionId,
+      marketId: marketId,
+      matchId: matchId,
+      placeTime: placeTime,
+      priceValue: priceValue,
+      isFancy: isFancy,
+    });
+  }
   return (
     <>
-    {title}
-    <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
-      
-      <BetGridItem title values={["SESSION", "NOT", "YES"]} />
-      {
-        CurrentOdd.map((item:any, index:any) =>
-        <BetGridItem
-        values={[
-          <>
-            <BetTextMedium>{item?.nation}</BetTextMedium>
-            <BetTextSmall>Session Limit: 50k</BetTextSmall>
-          </>,
-          <Box className={PrevOdds[index].b1< item.b1
-            ? "odds-up"
-            :PrevOdds[index].b1 > item.b1
-              ? "odds-down"
-              : ""}> 
-            <BetText color="red">
-          {item.b1}
-          <BetTextSmall>{item.bs1}</BetTextSmall>
-        </BetText></Box>
-         ,
-         <Box className={PrevOdds[index].l1< item.l1
-          ? "odds-up"
-          :PrevOdds[index].l1 > item.l1
-            ? "odds-down"
-            : ""}>
-          <BetText color="blue">
-            {item.l1} <BetTextSmall>{item.ls1}</BetTextSmall>
-          </BetText>
-          </Box>,
-        ]}
-      />
-        )
-     
-}
+      {title}
+      <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
 
-{/* <Box className={PrevRunner[index].ex.availableToBack[0].price < item.ex.availableToBack[0].price
+        <BetGridItem title values={["SESSION", "NOT", "YES"]} />
+        {
+          CurrentOdd.map((item: any, index: any) =>
+            <BetGridItem
+              values={[
+                <>
+                  <BetTextMedium>{item?.nation}</BetTextMedium>
+                  <BetTextSmall>Session Limit: 50k</BetTextSmall>
+                </>,
+                <Box className={PrevOdds[index].b1 < item.b1
                   ? "odds-up"
-                  : PrevRunner[index].ex.availableToBack[0].price > item.ex.availableToBack[0].price
+                  : PrevOdds[index].b1 > item.b1
                     ? "odds-down"
                     : ""}>
-                  <BetText color="blue">{item.ex.availableToBack[0].price}</BetText>
-                  {item.ex.availableToBack[0].size}
-                </Box> */}
-      {/* <BetGridItem
-        values={[
-          <>
-            <BetTextMedium>6 OVER RUNS ST W</BetTextMedium>
-            <BetTextSmall>Session Limit: 50k</BetTextSmall>
-          </>,
-          <BetText color="red">
-            35
-            <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
-          <BetText color="blue">
-            35 <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
-        ]}
-      />{" "}
-      <BetGridItem
-        values={[
-          <>
-            <BetTextMedium>6 OVER RUNS ST W</BetTextMedium>
-            <BetTextSmall>Session Limit: 50k</BetTextSmall>
-          </>,
-          <BetText color="red">
-            35
-            <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
-          <BetText color="blue">
-            35 <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
-        ]}
-      />{" "}
-      <BetGridItem
-        values={[
-          <>
-            <BetTextMedium>6 OVER RUNS ST W</BetTextMedium>
-            <BetTextSmall>Session Limit: 50k</BetTextSmall>
-          </>,
-          <BetText color="red">
-            35
-            <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
-          <BetText color="blue">
-            35 <BetTextSmall>1.00</BetTextSmall>
-          </BetText>,
-        ]}
-      /> */}
-      {/* <BetGridItem title /> */}
-    </Grid>
+                  <BetText onClick={() => updateBet(true, +item.b1, amount, amount, item.sid, matchId, date, +item.b1, false)} color="red">
+                    {item.b1}
+                    <BetTextSmall>{item.bs1}</BetTextSmall>
+                  </BetText></Box>
+                ,
+                <Box className={PrevOdds[index].l1 < item.l1
+                  ? "odds-up"
+                  : PrevOdds[index].l1 > item.l1
+                    ? "odds-down"
+                    : ""}>
+                  <BetText onClick={() => updateBet(false, +item.l1, amount, amount, item.sid, matchId, date, +item.l1, false)} color="blue">
+                    {item.l1} <BetTextSmall>{item.ls1}</BetTextSmall>
+                  </BetText>
+                </Box>,
+              ]}
+            />
+          )
+        }
+      </Grid>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Session Odds
+          </Typography>
+
+          <Box
+            display="flex"
+            flexDirection={"column"}
+            gap={2}
+            my={3}
+            alignItems="center"
+          >
+            <div style={{ display: "flex" }}>
+              <TextField
+                size="small"
+                sx={{ width: "200px", margin: "auto" }}
+                value={amount}
+                onChange={handleChange}
+              />
+              <p style={{ marginLeft: "20px" }} className="MuiTypography-root MuiTypography-body1 css-33qhfi">Profit: { amount}</p>
+            </div>
+            <ButtonGroup sx={{ maxWidth: "100%" }}>
+              {[10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((item) => (
+                <Button onClick={() => setAmount(item)}>{item}</Button>
+              ))}
+            </ButtonGroup>
+            <Button variant="contained" onClick={clickHandler} sx={{ width: "200px", m: "auto" }}>
+              Bet
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
+
     </>
   );
 }
 
+const BookMakerOddsgrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number }> = ({ CurrentOdd, matchId }
+) => {
 
-const BookMakerOddsgrid: FC<{ CurrentOdd: any; PrevOdds: any}> = ({ CurrentOdd, PrevOdds }
-  ) => {
-    return (
-      <>
+  const [bet, setBet] = useState<any>({
+    "isBack": false, "odds": 1.93, "stake": 900, "selectionId": 7659, "marketId": "1.207796438", "matchId": matchId, "placeTime": "2022-12-12 14:09:10", "priceValue": 90, "isFancy": false,
+    "deviceInfo": { "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36", "os": "Windows", "browser": "Chrome", "device": "Unknown", "os_version": "windows-10", "browser_version": "108.0.0.0", "deviceType": "desktop", "orientation": "landscape", "userIp": "115.246.121.179" }
+  })
+
+
+  var today = new Date(),
+
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'white',
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const [amount, setAmount] = useState(10);
+  const handleChange = (e: any) => {
+    setAmount(e.target.value);
+  };
+  const handleClose = () => setOpen(false);
+
+  // const handleClick = async () => await sportServices.updateBetPlace(bet);
+
+  async function clickHandler(){
+    await sportServices.updateBetPlace(bet);
+    handleClose();
+    }
+
+  const updateBet = (isBack: boolean,
+    odds: number,
+    stake: number,
+    selectionId: number,
+    marketId: string,
+    matchId: number,
+    placeTime: string,
+    priceValue: number,
+    isFancy: boolean) => {
+      if(odds > 0){
+        handleOpen()
+      }
+    setBet({
+      ...bet,
+      isBack: isBack,
+      odds: odds,
+      stake: stake,
+      selectionId: selectionId,
+      marketId: marketId,
+      matchId: matchId,
+      placeTime: placeTime,
+      priceValue: priceValue,
+      isFancy: isFancy,
+    });
+  }
+  return (
+    <>
       <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
-        
-        <BetGridItem title values={["SESSION", "NOT", "YES"]} />
+
+        <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
         {
-           CurrentOdd.map((item:any, index:any) =>
-          <BetGridItem
-          values={[
-            <>
-              <BetTextMedium>{item?.nation}</BetTextMedium>
-              <BetTextSmall>Session Limit: 50k</BetTextSmall>
-            </>,
-            <BetText color="red">
-              {item.b1}
-              <BetTextSmall>{item.bs1}</BetTextSmall>
-            </BetText>,
-            <BetText color="blue">
-              {item.l1} <BetTextSmall>{item.ls1}</BetTextSmall>
-            </BetText>,
-          ]}
-        />
-           )
+          CurrentOdd.map((item: any) =>
+            <BetGridItem
+              values={[
+                <>
+                  <BetTextMedium>{item?.nation}</BetTextMedium>
+                  <BetTextSmall>Session Limit: 50k</BetTextSmall>
+                </>,
+                <BetText onClick={() => updateBet(true, +item.b1, amount, amount, item.sid, matchId, date, +item.b1, false)} color="red">
+                  {item.b1}
+                  <BetTextSmall>{item.bs1}</BetTextSmall>
+                </BetText>,
+                <BetText onClick={() => updateBet(false, +item.l1, amount, amount, item.sid, matchId, date, +item.l1, false)} color="blue">
+                  {item.l1} <BetTextSmall >{item.ls1}</BetTextSmall>
+                </BetText>,
+              ]}
+            />
+          )
         }
       </Grid>
-      </>
-    );
-      }
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Book Maker
+          </Typography>
+
+          <Box
+            display="flex"
+            flexDirection={"column"}
+            gap={2}
+            my={3}
+            alignItems="center"
+          >
+            <div style={{ display: "flex" }}>
+              <TextField
+                size="small"
+                sx={{ width: "200px", margin: "auto" }}
+                value={amount}
+                onChange={handleChange}
+              />
+              <p style={{ marginLeft: "20px" }} className="MuiTypography-root MuiTypography-body1 css-33qhfi">Profit: {amount}</p>
+            </div>
+            <ButtonGroup sx={{ maxWidth: "100%" }}>
+              {[10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((item) => (
+                <Button onClick={() => setAmount(item)}>{item}</Button>
+              ))}
+            </ButtonGroup>
+            <Button variant="contained" onClick={clickHandler} sx={{ width: "200px", m: "auto" }}>
+              Bet
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
+    </>
+  );
+}

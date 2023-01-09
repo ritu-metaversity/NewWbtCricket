@@ -33,5 +33,10 @@ export const sportsResourses: { [x: string]: ApiResource } = {
   GET_ACTIVE_FANCY_ODDS:{
     URL:"/enduser/get-fancy-odds",
     METHOD:"POST"
+  },
+  
+  PLACE_BET:{
+    URL:"/enduser/place-bets",
+    METHOD:"POST"
   }
 };
