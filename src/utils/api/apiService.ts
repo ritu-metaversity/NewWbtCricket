@@ -83,7 +83,7 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
       result = {error: error.response?.data}
       if(error.response.status === 401){
         localStorage.removeItem("token")
-        window.location.replace("/sign-in");
+        window.location.replace("/welcome");
       }
     })
     .then((response) => {

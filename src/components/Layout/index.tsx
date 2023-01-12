@@ -8,7 +8,7 @@ const Layout = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/sign-in");
+      navigate("/welcome");
     }
   }, []);
   return (

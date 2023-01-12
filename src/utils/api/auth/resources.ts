@@ -30,5 +30,13 @@ export const authResourcs: {
   RESET_PASSWORD: {
     URL: "auth/reset-password",
     METHOD: "POST",
+  },
+  GET_ACTIVE_SPORTS_LIST: {
+    URL: "/enduser/active-sport-list",
+    METHOD: "POST",
+  },
+  GET_EVENT_FROM_SPORTS: {
+    URL: "/enduser/active-match-sport-wise-open",
+    METHOD: "POST",
   }
 };

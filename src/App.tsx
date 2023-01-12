@@ -20,6 +20,7 @@ import { SnackbarUtilsConfigurator } from './components/Layout/snackBarUtil';
 import LoginHistory from './Pages/loginHistory';
 import CurrentBet from './Pages/CurrnetBet';
 import BetHistory from './Pages/BetHistory';
+import LoginDashboard from './components/loginDashboard';
 
 
 
@@ -31,8 +32,10 @@ function App() {
         <main>
           <BrowserRouter>
             <Routes>
+            <Route path="/welcome" element={<LoginDashboard />} />
               <Route path="/sign-in" element={<Login />} />
               <Route path="/" element={<Layout />}>
+              
                 <Route path="/" element={<Home />} />
                 <Route path="in-play" element={<Inplay />} />
                 <Route path="in-play-details" element={<InPlayDetails />} />

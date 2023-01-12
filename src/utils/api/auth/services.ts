@@ -1,4 +1,4 @@
-import { apiWithSnackbar } from "../apiService";
+import { apiHandler, ApiServiceInterface, apiWithSnackbar } from "../apiService";
 import { authResourcs as authResources } from "./resources";
 
 interface LoginPayload {
@@ -45,4 +45,19 @@ export const authServices = {
     const params = { resource: authResources.RESEND_OTP, data };
     return await apiWithSnackbar(params);
   },
+  
+  activeSportList: () => {
+    const params = {
+        resource: authResources.GET_ACTIVE_SPORTS_LIST,
+    };
+    return apiHandler(params);
+}, 
+activeEventFromSport: (sportId: number) => { 
+
+    const params:ApiServiceInterface = {
+        resource: authResources.GET_EVENT_FROM_SPORTS,
+        data:{sportId}
+    }
+    return apiHandler(params);
+}
 };

@@ -437,6 +437,7 @@ const MatchOddsGrid: FC<{ CurrentOdd: MatchOddsGridProps; PrevOdds: MatchOddsGri
 
   async function clickHandler(){
   const {response} =await sportServices.updateBetPlace(bet);
+  console.log(response.status+" this is status")
   snackBarUtil.success(response.message);
   handleClose();
   }
@@ -593,7 +594,9 @@ const SessionOddsGrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number; tit
   // const handleClick = async () => await sportServices.updateBetPlace(bet);
 
   async function clickHandler(){
-    await sportServices.updateBetPlace(bet);
+    const {response} =await sportServices.updateBetPlace(bet);
+    console.log(response.status+" this is status")
+    snackBarUtil.success(response.message);
     handleClose();
     }
 
@@ -756,7 +759,9 @@ const BookMakerOddsgrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number ; 
   // const handleClick = async () => await sportServices.updateBetPlace(bet);
 
   async function clickHandler(){
-    await sportServices.updateBetPlace(bet);
+    const {response} =await sportServices.updateBetPlace(bet);
+    console.log(response.status+" this is status")
+    snackBarUtil.success(response.message);
     handleClose();
     }
 

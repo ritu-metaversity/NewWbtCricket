@@ -6,7 +6,7 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     METHOD: "POST",
   },
   GET_EVENT_FROM_SPORTS: {
-    URL: "/enduser/active-sport-match-wise",
+    URL: "/enduser/active-match-sport-wise",
     METHOD: "POST",
   },
   GET_EVENT_MARKET: {
