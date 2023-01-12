@@ -73,5 +73,21 @@ export const sportServices = {
             data,
         }
         return apiHandler(params);
+    },
+
+    getuserOddsPnl:(matchId:any) =>{
+        const params: ApiServiceInterface={
+            resource:sportsResourses.USER_ODDS_PNL,
+            data: {matchId}
+        }
+        return apiHandler(params);
+    },
+
+    getuserFancyPnl:(matchId:any) =>{
+        const params: ApiServiceInterface={
+            resource:sportsResourses.USER_FANCY_PNL,
+            data: {matchId}
+        }
+        return apiHandler(params);
     }
 }

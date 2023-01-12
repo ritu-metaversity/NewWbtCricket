@@ -38,5 +38,15 @@ export const sportsResourses: { [x: string]: ApiResource } = {
   PLACE_BET:{
     URL:"/enduser/place-bets",
     METHOD:"POST"
+  },
+
+  USER_FANCY_PNL:{
+    URL:"/enduser/user-fancy-pnl",
+    METHOD:"POST"
+  },
+
+  USER_ODDS_PNL:{
+    URL:"/enduser/user-odds-pnl",
+    METHOD:"POST"
   }
 };

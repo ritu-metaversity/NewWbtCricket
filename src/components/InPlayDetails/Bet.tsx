@@ -47,6 +47,9 @@ const Bet: FC<any> = (props: { event: number }) => {
   const [bookmakerToss, setBookMakerToss]= useState<any[]>([]);
   const [preBookmakerToss, setPreBookMakerToss]= useState<any[]>([]);
 
+  const [fancyPnl, setFancyPnl]=useState<FancyPnl[]>([]);
+  const [oddPnl, setOddsPnl]=useState<Pnl[]>([]);
+
 
 
 
@@ -131,8 +134,34 @@ const Bet: FC<any> = (props: { event: number }) => {
     setTimeout(() => getActiveFancyOdds(), 500)
   }, [activeFancy, matchOdd]);
 
+
+  const getFancyPnl = async () => {
+    const { response } = await sportServices.getuserFancyPnl(props.event);
+    if(response){
+      setFancyPnl(response.data);
+    }
+  }
+
+  const getOddsPnl = async () => {
+    const { response } = await sportServices.getuserOddsPnl(props.event);
+    if(response){
+      setOddsPnl(response.data);
+    }
+  }
+
+
+ 
+  useEffect(() =>{
+    getFancyPnl();
+  },[])
+
+  useEffect(() =>{
+    getOddsPnl();
+  },[])
+
   const handleClick = async () => await sportServices.updateBetPlace(bet);
 
+  console.log(fancyPnl," yhi si s")
   return (
     <>{
       matchOdd.length > 0 &&
@@ -146,7 +175,7 @@ const Bet: FC<any> = (props: { event: number }) => {
         <AccordionDetails sx={{ p: 0 }}>
           {
             matchOdd.map((match, index) => {
-              return <MatchOddsGrid CurrentOdd={match} PrevOdds={preMatchOdds[index]} matchId={props.event} />
+              return <MatchOddsGrid CurrentOdd={match} PrevOdds={preMatchOdds[index]} matchId={props.event}  OddsPnl={oddPnl} />
             })
           }
         </AccordionDetails>
@@ -157,7 +186,7 @@ const Bet: FC<any> = (props: { event: number }) => {
           Bookmaker Odds
         </AccordionSummary>
         <AccordionDetails sx={{ p: 0 }}>
-          <BookMakerOddsgrid CurrentOdd={originBookMaker} PrevOdds={prvbookmakerOdd} matchId={props.event} />
+          <BookMakerOddsgrid CurrentOdd={originBookMaker} PrevOdds={prvbookmakerOdd} matchId={props.event} OddsPnl={oddPnl}/>
         </AccordionDetails>
       </Accordion>}
 
@@ -166,7 +195,7 @@ const Bet: FC<any> = (props: { event: number }) => {
           Bookmaker Toss
         </AccordionSummary>
         <AccordionDetails sx={{ p: 0 }}>
-          <BookMakerOddsgrid CurrentOdd={bookmakerToss} PrevOdds={prvbookmakerOdd} matchId={props.event} />
+          <BookMakerOddsgrid CurrentOdd={bookmakerToss} PrevOdds={preBookmakerToss} matchId={props.event}  OddsPnl={oddPnl}/>
         </AccordionDetails>
       </Accordion>}
 
@@ -178,7 +207,7 @@ const Bet: FC<any> = (props: { event: number }) => {
           {
             activeFancy && Object.keys(activeFancy).map((keys:any) => {
               if (["Fancy2", "Fancy3", "OddEven"].includes(keys)) {
-                return <SessionOddsGrid CurrentOdd={activeFancy[keys]} PrevOdds={preFancyOdds[keys]} matchId={props.event} title={keys} />
+                return <SessionOddsGrid CurrentOdd={activeFancy[keys]} PrevOdds={preFancyOdds[keys]} matchId={props.event} title={keys} FancyPnl={fancyPnl} />
               } else return
             })
           }
@@ -338,14 +367,39 @@ interface MatchOddsGridProps {
 }
 
 
+export interface Pnl {
+  marketId: string;
+  pnl1: number;
+  pnl2: number;
+  pnl3: number;
+  selection1: string | number;
+  selection2: string | number;
+  selection3: string | number;
+}
+export interface FancyPnl {
+  marketId: string;
+  pnl: number;
+}
 
 
-
-const MatchOddsGrid: FC<{ CurrentOdd: MatchOddsGridProps; PrevOdds: MatchOddsGridProps; matchId: number }> = ({ CurrentOdd, PrevOdds, matchId }
+const MatchOddsGrid: FC<{ CurrentOdd: MatchOddsGridProps; PrevOdds: MatchOddsGridProps; matchId: number, OddsPnl:Pnl[] }> = ({ CurrentOdd, PrevOdds, matchId , OddsPnl}
 ) => {
 
   const { runners, status, maxBet, betDelay, marketId } = CurrentOdd;
   const { runners: PrevRunner } = PrevOdds;
+
+  const pnlsOdds = OddsPnl?.find(
+    (element) => element?.marketId == marketId
+  );
+  const plnOddsArray = pnlsOdds
+    ? [
+        { pnl: pnlsOdds.pnl1, selectionId: pnlsOdds.selection1 },
+        { pnl: pnlsOdds.pnl2, selectionId: pnlsOdds.selection2 },
+        { pnl: pnlsOdds.pnl3, selectionId: pnlsOdds.selection3 },
+      ]
+    : [];
+
+  
 
   const [bet, setBet] = useState<any>({
     "isBack": false, "odds": 1.93, "stake": 900, "selectionId": 7659, "marketId": "1.207796438", "matchId": matchId, "placeTime": "2022-12-12 14:09:10", "priceValue": 90, "isFancy": false,
@@ -355,7 +409,7 @@ const MatchOddsGrid: FC<{ CurrentOdd: MatchOddsGridProps; PrevOdds: MatchOddsGri
 
   var today = new Date(),
 
-    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() +' '+ today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
   const style = {
     position: 'absolute' as 'absolute',
@@ -373,6 +427,9 @@ const MatchOddsGrid: FC<{ CurrentOdd: MatchOddsGridProps; PrevOdds: MatchOddsGri
   const [amount, setAmount] = useState(10);
   const handleChange = (e: any) => {
     setAmount(e.target.value);
+    setBet({
+      ...bet,
+    stake:e.target.value})
   };
   const handleClose = () => setOpen(false);
 
@@ -421,7 +478,7 @@ const MatchOddsGrid: FC<{ CurrentOdd: MatchOddsGridProps; PrevOdds: MatchOddsGri
         <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
         {
           runners.map((item, index) => {
-            return <BetGridItem
+            return <BetGridItem 
               suspended={
                 ["SUSPENDED", "CLOSED"].includes(status)
                 // status === "SUSPENDED" ||
@@ -430,20 +487,24 @@ const MatchOddsGrid: FC<{ CurrentOdd: MatchOddsGridProps; PrevOdds: MatchOddsGri
                 // !inPlay
               }
               values={[
-                item.selectionId,
+                <> {item.selectionId }
+                {redGreenComponent( plnOddsArray.find(
+                  (pnl) => pnl.selectionId == item.selectionId
+                )?.pnl || 0)}
+                </>,
                 <Box className={PrevRunner[index].ex.availableToBack[0].price < item.ex.availableToBack[0].price
                   ? "odds-up"
                   : PrevRunner[index].ex.availableToBack[0].price > item.ex.availableToBack[0].price
                     ? "odds-down"
                     : ""}>
-                  <BetText onClick={() => updateBet(true, +item.ex.availableToBack[0].price, 100, item.selectionId, marketId, matchId, date, +item.ex.availableToBack[0].price, false)} color="blue">{item.ex.availableToBack[0].price}</BetText>
+                  <BetText onClick={() => updateBet(true, +item.ex.availableToBack[0].price, amount, item.selectionId, marketId, matchId, date, +item.ex.availableToBack[0].price, false)} color="blue">{item.ex.availableToBack[0].price}</BetText>
                   {item.ex.availableToBack[0].size}
                 </Box>,
                 <Box className={PrevRunner[index].ex.availableToLay[0].price < item.ex.availableToLay[0].price
                   ? "odds-up"
                   : PrevRunner[index].ex.availableToLay[0].price > item.ex.availableToLay[0].price
                     ? "odds-down"
-                    : ""}><BetText onClick={() => updateBet(false, +item.ex.availableToLay[0].price, 100, item.selectionId, marketId, matchId, date, +item.ex.availableToLay[0].price, false)} color="red">{item.ex.availableToLay[0].price}</BetText>
+                    : ""}><BetText onClick={() => updateBet(false, +item.ex.availableToLay[0].price, amount, item.selectionId, marketId, matchId, date, +item.ex.availableToLay[0].price, false)} color="red">{item.ex.availableToLay[0].price}</BetText>
                   {item.ex.availableToLay[0].size}</Box>
               ]}
             />
@@ -494,7 +555,7 @@ const MatchOddsGrid: FC<{ CurrentOdd: MatchOddsGridProps; PrevOdds: MatchOddsGri
 }
 
 // const SessionOddsGrid:FC<({ odds:SessionOddsGridProps }) {
-const SessionOddsGrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number; title: any }> = ({ CurrentOdd, PrevOdds, matchId, title }
+const SessionOddsGrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number; title: any ; FancyPnl: FancyPnl[]}> = ({ CurrentOdd, PrevOdds, matchId, title, FancyPnl }
 ) => {
 
   const [bet, setBet] = useState<any>({
@@ -505,7 +566,7 @@ const SessionOddsGrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number; tit
 
   var today = new Date(),
 
-    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() +' '+ today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
   const style = {
     position: 'absolute' as 'absolute',
@@ -523,6 +584,9 @@ const SessionOddsGrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number; tit
   const [amount, setAmount] = useState(10);
   const handleChange = (e: any) => {
     setAmount(e.target.value);
+    setBet({
+      ...bet,
+    stake:e.target.value})
   };
   const handleClose = () => setOpen(false);
 
@@ -533,7 +597,8 @@ const SessionOddsGrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number; tit
     handleClose();
     }
 
-  const updateBet = (isBack: boolean,
+  const updateBet = (
+    isBack: boolean,
     odds: number,
     stake: number,
     selectionId: number,
@@ -571,13 +636,16 @@ const SessionOddsGrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number; tit
                 <>
                   <BetTextMedium>{item?.nation}</BetTextMedium>
                   <BetTextSmall>Session Limit: 50k</BetTextSmall>
+                  {redGreenComponent(FancyPnl?.find(
+        (pnl) => pnl.marketId === CurrentOdd.sid
+      )?.pnl || 0)}
                 </>,
                 <Box className={PrevOdds[index].b1 < item.b1
                   ? "odds-up"
                   : PrevOdds[index].b1 > item.b1
                     ? "odds-down"
                     : ""}>
-                  <BetText onClick={() => updateBet(true, +item.b1, amount, amount, item.sid, matchId, date, +item.b1, false)} color="red">
+                  <BetText onClick={() => updateBet(true, +item.b1, amount,0, item.sid, matchId, date, +item.bs1, true)} color="red">
                     {item.b1}
                     <BetTextSmall>{item.bs1}</BetTextSmall>
                   </BetText></Box>
@@ -587,7 +655,7 @@ const SessionOddsGrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number; tit
                   : PrevOdds[index].l1 > item.l1
                     ? "odds-down"
                     : ""}>
-                  <BetText onClick={() => updateBet(false, +item.l1, amount, amount, item.sid, matchId, date, +item.l1, false)} color="blue">
+                  <BetText onClick={() => updateBet(false, +item.l1, amount,0, item.sid, matchId, date, +item.ls1, true)} color="blue">
                     {item.l1} <BetTextSmall>{item.ls1}</BetTextSmall>
                   </BetText>
                 </Box>,
@@ -639,7 +707,7 @@ const SessionOddsGrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number; tit
   );
 }
 
-const BookMakerOddsgrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number }> = ({ CurrentOdd, matchId }
+const BookMakerOddsgrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number ; OddsPnl:any }> = ({ CurrentOdd, matchId, OddsPnl }
 ) => {
 
   const [bet, setBet] = useState<any>({
@@ -647,10 +715,20 @@ const BookMakerOddsgrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number }>
     "deviceInfo": { "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36", "os": "Windows", "browser": "Chrome", "device": "Unknown", "os_version": "windows-10", "browser_version": "108.0.0.0", "deviceType": "desktop", "orientation": "landscape", "userIp": "115.246.121.179" }
   })
 
+  const pnlsOdds = OddsPnl?.find(
+    (element: { marketId: any; }) => element?.marketId == CurrentOdd[0].mid
+  );
+  const plnOddsArray = pnlsOdds
+    ? [
+        { pnl: pnlsOdds.pnl1, selectionId: pnlsOdds.selection1 },
+        { pnl: pnlsOdds.pnl2, selectionId: pnlsOdds.selection2 },
+        { pnl: pnlsOdds.pnl3, selectionId: pnlsOdds.selection3 },
+      ]
+    : [];
 
   var today = new Date(),
 
-    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() +' '+ today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
   const style = {
     position: 'absolute' as 'absolute',
@@ -668,7 +746,11 @@ const BookMakerOddsgrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number }>
   const [amount, setAmount] = useState(10);
   const handleChange = (e: any) => {
     setAmount(e.target.value);
+    setBet({
+      ...bet,
+    stake:e.target.value})
   };
+
   const handleClose = () => setOpen(false);
 
   // const handleClick = async () => await sportServices.updateBetPlace(bet);
@@ -694,7 +776,7 @@ const BookMakerOddsgrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number }>
       ...bet,
       isBack: isBack,
       odds: odds,
-      stake: stake,
+      stake: amount,
       selectionId: selectionId,
       marketId: marketId,
       matchId: matchId,
@@ -703,6 +785,7 @@ const BookMakerOddsgrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number }>
       isFancy: isFancy,
     });
   }
+
   return (
     <>
       <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
@@ -715,12 +798,17 @@ const BookMakerOddsgrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number }>
                 <>
                   <BetTextMedium>{item?.nation}</BetTextMedium>
                   <BetTextSmall>Session Limit: 50k</BetTextSmall>
-                </>,
-                <BetText onClick={() => updateBet(true, +item.b1, amount, amount, item.sid, matchId, date, +item.b1, false)} color="red">
+                   {item.sid }
+                {redGreenComponent( plnOddsArray.find(
+                  (pnl) => pnl.selectionId == item.sid
+                )?.pnl || 0)}
+                </>
+                ,
+                <BetText onClick={() => updateBet(true, +item.b1, amount, item.sid,item.mid, matchId, date, +item.b1, false)} color="red">
                   {item.b1}
                   <BetTextSmall>{item.bs1}</BetTextSmall>
                 </BetText>,
-                <BetText onClick={() => updateBet(false, +item.l1, amount, amount, item.sid, matchId, date, +item.l1, false)} color="blue">
+                <BetText onClick={() => updateBet(false, +item.l1, amount,  item.sid,item.mid, matchId, date, +item.l1, false)} color="blue">
                   {item.l1} <BetTextSmall >{item.ls1}</BetTextSmall>
                 </BetText>,
               ]}
@@ -769,4 +857,16 @@ const BookMakerOddsgrid: FC<{ CurrentOdd: any; PrevOdds: any; matchId: number }>
       </Modal>
     </>
   );
+}
+
+
+const redGreenComponent =(value: any)=>{
+
+  return <><Typography
+  color={value >= 0 ? "green" : "red"}
+  fontSize={"0.8rem"}
+  mr={0.5}
+>
+  {Number(value?.toFixed(2))}
+</Typography></>
 }
