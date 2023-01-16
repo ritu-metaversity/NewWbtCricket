@@ -44,6 +44,7 @@ const Inplay = () => {
   const [activeSportList, setActiveSportList] = useState([]);
   const [activeEventList, setActiveEventList] = useState<SummaryCardProps[]>([]);
   const [tabValue, setTab] = useState(0);
+  const [show, setShow]=useState(false);
   useEffect(() => {
     const getList = async () => {
       const { response } = await sportServices.activeSportList();
@@ -70,9 +71,11 @@ const Inplay = () => {
         
         if (response?.data?.length > 0) {
           setActiveEventList(response.data)
+          setShow(false)
         }
       } else {
         setActiveEventList([]);
+        setShow(true);
       }
     };
     getNewEvent();
@@ -91,7 +94,7 @@ const Inplay = () => {
       </Tabs>
       {activeEventList?.length > 0 ? (
         activeEventList.map((item) => <SummaryCard key={item.matchId+"summaryCard"} {...item} />)
-      ) : (
+      ) : ( show &&
         <Typography mt="15vh" variant="h4" color="error">
           {"No active event found"}
         </Typography>

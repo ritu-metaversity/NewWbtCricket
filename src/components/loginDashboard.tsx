@@ -18,6 +18,7 @@ const LoginDashboard = () => {
     const [activeSportList, setActiveSportList] = useState([]);
   const [activeEventList, setActiveEventList] = useState<SummaryCardProps[]>([]);
   const [tabValue, setTab] = useState(0);
+  const [show, setShow]=useState(false);
   useEffect(() => {
     const getList = async () => {
       const { response } = await authServices.activeSportList();
@@ -44,9 +45,11 @@ const LoginDashboard = () => {
         
         if (response?.data?.length > 0) {
           setActiveEventList(response.data)
+          setShow(false)
         }
       } else {
         setActiveEventList([]);
+        setShow(true)
       }
     };
     getNewEvent();
@@ -120,7 +123,7 @@ const LoginDashboard = () => {
         
         
         )
-        ) : (
+        ) : ( show &&
           <Typography mt="15vh" variant="h4" color="error">
           {"No active event found"}
         </Typography>

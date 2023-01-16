@@ -136,33 +136,33 @@ const Headers = () => {
       >
         <Link to="/profile">
           <MenuItem>
-            <Avatar /> Profile
+            <Avatar  /> <a style={{color:"black"}}> Profile </a>
           </MenuItem>
         </Link>
         <Link to="/account-summary">
-          <MenuItem>
-            <AttachMoneyIcon /> Account Statement
+          <MenuItem >
+            <AttachMoneyIcon style={{ color:"black"}}/> <a style={{color:"black"}}>Account Statement</a> 
           </MenuItem>
         </Link>
         <Link to="/login-history">
           <MenuItem>
-            <SummarizeIcon /> Login History
+            <SummarizeIcon  style={{ color:"black"}}/> <a style={{color:"black"}}> Login History </a>
           </MenuItem>
         </Link>
         <Link to="/current-bet">
           <MenuItem>
-            <AttachMoneyIcon /> Current Bet
+            <AttachMoneyIcon  style={{ color:"black"}}/> <a style={{color:"black"}}> Current Bet</a>
           </MenuItem>
         </Link>
         <Link to="/bet-history">
           <MenuItem>
-            <AttachMoneyIcon /> Bet History
+            <AttachMoneyIcon style={{ color:"black"}}/> <a style={{color:"black"}}> Bet History</a>
           </MenuItem>
         </Link>
         
         <Link to="/set-button-value">
           <MenuItem>
-            <MoneyIcon /> Set button value
+            <MoneyIcon  style={{ color:"black"}}/> <a style={{color:"black"}}> Set button value </a>
           </MenuItem>
         </Link>
         <Divider />
