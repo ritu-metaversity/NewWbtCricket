@@ -59,5 +59,12 @@ activeEventFromSport: (sportId: number) => {
         data:{sportId}
     }
     return apiHandler(params);
+},
+registeration:(data:any)=>{
+  const params:ApiServiceInterface = {
+    resource: authResources.SELF_REGISTER,
+    data
+}
+return apiHandler(params);
 }
 };

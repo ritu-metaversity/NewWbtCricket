@@ -86,7 +86,7 @@ const LoginDashboard = () => {
                             </Link>
                         </Button>
                         <Button sx={{fontSize:"0.7rem"}} style={{ marginLeft: "10px" }} variant="contained" color="secondary">
-                        <Link to={"/sign-in"}>
+                        <Link to={"/sign-up"}>
                             Sign Up
                             </Link>
                         </Button>

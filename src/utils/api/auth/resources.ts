@@ -38,5 +38,9 @@ export const authResourcs: {
   GET_EVENT_FROM_SPORTS: {
     URL: "/enduser/active-match-sport-wise-open",
     METHOD: "POST",
+  },
+  SELF_REGISTER:{
+    URL: "/user/self-register",
+    METHOD: "POST",
   }
 };

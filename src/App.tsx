@@ -21,6 +21,7 @@ import LoginHistory from './Pages/loginHistory';
 import CurrentBet from './Pages/CurrnetBet';
 import BetHistory from './Pages/BetHistory';
 import LoginDashboard from './components/loginDashboard';
+import Register from './components/register';
 
 
 
@@ -34,6 +35,7 @@ function App() {
             <Routes>
             <Route path="/welcome" element={<LoginDashboard />} />
               <Route path="/sign-in" element={<Login />} />
+              <Route path="/sign-up" element={<Register />} />
               <Route path="/" element={<Layout />}>
               
                 <Route path="/" element={<Home />} />
