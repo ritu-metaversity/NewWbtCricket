@@ -16,7 +16,10 @@
   padding-right: 4px;
   padding-bottom: env(safe-area-inset-bottom);
 }
-
+a strong {
+  font-size: small;
+  line-height: 0.5;
+}
 a{
    flex:  1 0 0%;
    color: white;

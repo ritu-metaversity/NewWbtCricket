@@ -66,7 +66,7 @@ const LoginDashboard = () => {
                     {/* <IconButton title="Go back" onClick={() => navigation(-1)}>
             <KeyboardBackspaceIcon fontSize="large" htmlColor="white" />
           </IconButton> */}
-                    <h1>Test Exchange</h1>
+                    <h3>Exchange</h3>
                     <Box>
                         <HeaderTextStyle></HeaderTextStyle>
                         <HeaderTextStyle>
@@ -77,12 +77,12 @@ const LoginDashboard = () => {
                         </HeaderTextStyle>
                     </Box>
                     <div style={{ display: "flex" }}>
-                        <Button variant="contained" color="primary">
+                        <Button sx={{fontSize:"0.7rem"}} variant="contained" color="primary">
                         <Link to={"/sign-in"}>
                             Login
                             </Link>
                         </Button>
-                        <Button style={{ marginLeft: "10px" }} variant="contained" color="secondary">
+                        <Button sx={{fontSize:"0.7rem"}} style={{ marginLeft: "10px" }} variant="contained" color="secondary">
                         <Link to={"/sign-in"}>
                             Sign Up
                             </Link>
@@ -97,24 +97,36 @@ const LoginDashboard = () => {
                 </Toolbar>
 
             </AppBar>
+            <Box py={2} m="auto" boxSizing={"content-box"} maxWidth={{ xs:"100vw",lg:"lg" }}>
+
             <Box maxWidth={900} mx="auto">
       <Tabs
         value={tabValue}
+        scrollButtons
+        variant="scrollable"
         onChange={handleChange}
         aria-label="basic tabs example"
-      >
+        sx={{overflowX:'scroll', width:'100%', fontSize:{xs:'.8rem'}}}
+        >
         {activeSportList.map((s: any) => (
           <Tab key={s.sportId+"tab"} label={s?.sportName} {...a11yProps(0)} />
-        ))}
+          ))}
       </Tabs>
       {activeEventList?.length > 0 ? (
-        activeEventList.map((item) => <SummaryCardWithOutLogin key={item.matchId+"summaryCard"} {...item} />)
-      ) : (
-        <Typography mt="15vh" variant="h4" color="error">
+        activeEventList.map((item) => 
+        
+        <SummaryCardWithOutLogin key={item.matchId+"summaryCard"}
+        {...item} />
+        
+        
+        )
+        ) : (
+          <Typography mt="15vh" variant="h4" color="error">
           {"No active event found"}
         </Typography>
       )}
     </Box>
+      </Box>
                 <div className="appBottomMenu" >
                     <a >
                     <Link to={"/sign-in"}>
@@ -131,10 +143,10 @@ const LoginDashboard = () => {
                     <Link to={"/sign-in"}><HomeIcon /><br /> <strong>Home</strong></Link>
                     </a>
                     <a ><Link to={"/sign-in"}><PushPinIcon /><br />
-                    <strong>Multi Market</strong></Link>
+                    <strong>Market</strong></Link>
                     </a>
                     <a ><Link to={"/sign-in"}><AccountCircleIcon /><br />
-                    <strong> Account</strong>
+                    <strong>Account</strong>
                     </Link>
                     </a>
                 </div>

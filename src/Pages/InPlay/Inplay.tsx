@@ -69,24 +69,7 @@ const Inplay = () => {
       
         
         if (response?.data?.length > 0) {
-          console.log(response," this is response");
           setActiveEventList(response.data)
-          console.log(activeEventList ," this us")
-          // const events = response?.data.map((item: any) => item.eventId);
-          // const { response: response1 } = await sportServices.matchOdds(events);
-          // console.log(response1);
-          // if (response1?.data?.length > 0) {
-          //   const newEventList = response.data.map((event: any) => {
-          //     const match = response1.data.find(
-          //       (i: any) => i.matchId === event.eventId
-          //     );
-          //     event["inPlay"] = match?.inPlay;
-          //     event["runner"] = match?.runner;
-          //     return event;
-          //   });
-          //   setActiveEventList(newEventList);
-          //   console.log(newEventList);
-          // }
         }
       } else {
         setActiveEventList([]);

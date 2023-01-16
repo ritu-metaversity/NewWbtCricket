@@ -2,6 +2,7 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import "./index.css";
+import { Container } from '@mui/material';
 import { SummaryCardContainer, SummaryCardTitle } from "./styledComponents";
 
 export interface SummaryCardProps {
@@ -19,7 +20,9 @@ export interface SummaryCardProps {
 const SummaryCardWithOutLogin: FC<SummaryCardProps> = (data) => {
   const { matchName, openDate, inPlay, matchId } = data;
   return (
-    <SummaryCardContainer>
+
+
+     <SummaryCardContainer >
       {/* <Link to={"/in-play-details/?event-id=" + matchId}> */}
         <SummaryCardTitle bgcolor="secondary.main">
           {matchName}
