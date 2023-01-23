@@ -7,6 +7,10 @@ export const authResourcs: {
     URL: "login/client-login",
     METHOD: "POST",
   },
+  LOGOUT: {
+    URL: "login/logout",
+    METHOD: "POST",
+  },
   SIGN_UP: {
     URL: "auth/signup",
     METHOD: "POST",

@@ -1,6 +1,7 @@
 import {
   AppBar,
   Avatar,
+  Button,
   Divider,
   IconButton,
   ListItemIcon,
@@ -17,7 +18,9 @@ import { HeaderTextStyle, UserIconImage } from "./styledComponents";
 import { Logout } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { userServices } from "../../utils/api/user/services";
+import { authServices } from "../../utils/api/auth/services";
 import SummarizeIcon from '@mui/icons-material/Summarize';
+     
 
 const data = {
   balance: 0,
@@ -28,6 +31,7 @@ const data = {
 const Headers = () => {
   const [wallet, setWallet] = useState(data);
   const navigation = useNavigate();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mouseOverButton, setMouseOverButton] = React.useState<Boolean>(false);
   const [mouseOverMenu, setMouseOverMenu] = React.useState<Boolean>(false);
@@ -42,6 +46,15 @@ const Headers = () => {
     getWallet();
     return () => {};
   }, []);
+
+  // const handleClick = async (e: any) =>  await authServices.logout();
+
+
+  async function clickHandler(){
+    const {response} =await authServices.logout();
+    localStorage.removeItem("token");
+    navigation("/welcome");
+    }
 
 
   const handleClose = () => {
@@ -134,6 +147,20 @@ const Headers = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
+        <Box style={{display:"flex"}}>
+        <Link to="/deposit">
+          <MenuItem>
+          <Button variant="contained" style={{borderRadius:"10px"}} color="success">Deposit</Button>
+            {/* <Avatar  /> <a style={{color:"black"}}> Deposit </a> */}
+          </MenuItem>
+        </Link>
+        <Link to="/withdraw">
+          <MenuItem>
+          <Button variant="contained" style={{borderRadius:"10px"}} color="error">Withdraw</Button>
+            {/* <Avatar  /> <a style={{color:"black"}}> Profile </a> */}
+          </MenuItem>
+        </Link>
+        </Box>
         <Link to="/profile">
           <MenuItem>
             <Avatar  /> <a style={{color:"black"}}> Profile </a>
@@ -179,7 +206,7 @@ const Headers = () => {
           Settings
         </MenuItem> */}
         <MenuItem
-        // onClick={handleLogout}
+        onClick={clickHandler}
         >
           <ListItemIcon>
             <Logout fontSize="small" />

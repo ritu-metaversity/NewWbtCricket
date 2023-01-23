@@ -19,7 +19,7 @@ const Register = () => {
    
     
     const { response } = await authServices.registeration(register);
-    console.log(response.status)
+   
     if (response.status) {
         snackBarUtil.success(response.message);
         navigate("/sign-in", { replace: true });
@@ -28,11 +28,9 @@ const Register = () => {
       }
   };
   const handleChange = (e: any) => {
-    // if (e.target.name === "login") {
-      setRegistration({ ...register, [e.target.name]: e.target.value,appUrl: "atozscore.com"});
-   
+      setRegistration({ ...register, [e.target.name]: e.target.value,appUrl:window.location.hostname});
   };
-  console.log(register );
+ 
   
   return (
     <Box

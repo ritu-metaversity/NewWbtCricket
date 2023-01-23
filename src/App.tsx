@@ -22,6 +22,8 @@ import CurrentBet from './Pages/CurrnetBet';
 import BetHistory from './Pages/BetHistory';
 import LoginDashboard from './components/loginDashboard';
 import Register from './components/register';
+import Deposit from './Pages/deposit/Deposit';
+import Withdraw from './Pages/withdraw/withdraw';
 
 
 
@@ -39,6 +41,8 @@ function App() {
               <Route path="/" element={<Layout />}>
               
                 <Route path="/" element={<Home />} />
+                <Route path="/deposit" element={<Deposit />} />
+                <Route path="/withdraw" element={<Withdraw />} />
                 <Route path="in-play" element={<Inplay />} />
                 <Route path="in-play-details" element={<InPlayDetails />} />
                 <Route path="complete-games" element={<Complete />} />

@@ -66,5 +66,13 @@ registeration:(data:any)=>{
     data
 }
 return apiHandler(params);
+},
+
+logout:() =>{
+  const params:ApiServiceInterface={
+    resource:authResources.LOGOUT
+  }
+  //
+  return apiHandler(params)
 }
 };
