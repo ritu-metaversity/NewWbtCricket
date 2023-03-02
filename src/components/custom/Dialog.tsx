@@ -13,16 +13,15 @@ interface Props extends DialogProps {
   actions?: any;
 }
 const Dialog: FC<Props> = ({ titlSD, maxWidth, actions, ...restProps }) => {
-
-    const handleCloseIconClick = (e:any) => {
-        if (restProps.onClose) {
-          restProps.onClose(e, "backdropClick")
-          console.log(restProps)
-        }
+  const handleCloseIconClick = (e: any) => {
+    if (restProps.onClose) {
+      restProps.onClose(e, "backdropClick");
+      console.log(restProps);
     }
+  };
   return (
     <MuiDialog {...restProps} fullWidth maxWidth={maxWidth || "xs"}>
-      <DialogTitle bgcolor={"primary.main"} px={4} position="relative">
+      <DialogTitle bgcolor={"#52b5e1"} px={4} position="relative">
         <>
           {titlSD}
           <IconButton
@@ -31,7 +30,7 @@ const Dialog: FC<Props> = ({ titlSD, maxWidth, actions, ...restProps }) => {
               top: 0,
               right: 0,
             }}
-             onClick={handleCloseIconClick}
+            onClick={handleCloseIconClick}
           >
             <CloseIcon htmlColor="white" />
           </IconButton>
@@ -39,7 +38,7 @@ const Dialog: FC<Props> = ({ titlSD, maxWidth, actions, ...restProps }) => {
       </DialogTitle>
       <DialogContent>{restProps.children}</DialogContent>
       <DialogActions
-        sx={{ p: 2, bgcolor: "primary.main", justifyContent: "center" }}
+        sx={{ p: 2, bgcolor: "#52b5e1", justifyContent: "center" }}
       >
         {actions}
       </DialogActions>

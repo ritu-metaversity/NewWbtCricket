@@ -1,4 +1,11 @@
-import { Box, Button, Checkbox, FormControlLabel, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  TextField,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
 import React, { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,30 +15,33 @@ import snackBarUtil from "./Layout/snackBarUtil";
 const Register = () => {
   const navigate = useNavigate();
   const [register, setRegistration] = useState<any>({
-    username:"",
-    password:"", mobile:"", appUrl:""
+    username: "",
+    password: "",
+    mobile: "",
+    appUrl: "",
   });
-//   const [password, setPassword] = useState("");
+  //   const [password, setPassword] = useState("");
 
   const handleClick = async () => {
     let res;
-   
-   
-    
+
     const { response } = await authServices.registeration(register);
-   
-    if (response.status) {
-        snackBarUtil.success(response.message);
-        navigate("/sign-in", { replace: true });
-      } else {
-        snackBarUtil.error("Some unknown error occurred !");
-      }
+
+    if (response?.status) {
+      snackBarUtil.success(response.message);
+      navigate("/sign-in", { replace: true });
+    } else {
+      snackBarUtil.error("Some unknown error occurred !");
+    }
   };
   const handleChange = (e: any) => {
-      setRegistration({ ...register, [e.target.name]: e.target.value,appUrl:window.location.hostname});
+    setRegistration({
+      ...register,
+      [e.target.name]: e.target.value,
+      appUrl: window.location.hostname,
+    });
   };
- 
-  
+
   return (
     <Box
       maxWidth={"450px"}
@@ -57,13 +67,13 @@ const Register = () => {
         onChange={handleChange}
       />
       <TextField
-          required
-          name="mobile"
-          label="Mobile No"
-          value={register?.mobile}
-          onChange={handleChange}
-          fullWidth
-        />
+        required
+        name="mobile"
+        label="Mobile No"
+        value={register?.mobile}
+        onChange={handleChange}
+        fullWidth
+      />
       <Box textAlign={"left"}>
         <TextField
           required
@@ -74,7 +84,6 @@ const Register = () => {
           onChange={handleChange}
           fullWidth
         />
-        
       </Box>
       <Button variant="contained" size="large" onClick={handleClick} fullWidth>
         Sign Up
@@ -82,6 +91,5 @@ const Register = () => {
     </Box>
   );
 };
-
 
 export default Register;

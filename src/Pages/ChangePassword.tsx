@@ -1,31 +1,36 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Paper, TextField, Typography } from "@mui/material";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import { Box } from "@mui/system";
 import { userServices } from "../utils/api/user/services";
 import { useNavigate } from "react-router-dom";
+import { LoaderContext } from "../App";
 
 const ChangePassword = () => {
   const navigate = useNavigate();
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-
-  const handleClick = async (e: any) => { 
-    const { response } = await userServices.changePassword({ oldPassword, newPassword })
+  const { loading, setLoading } = useContext(LoaderContext);
+  const handleClick = async (e: any) => {
+    setLoading && setLoading((prev) => ({ ...prev, handleClick: true }));
+    const { response } = await userServices.changePassword({
+      oldPassword,
+      newPassword,
+    });
     if (response?.type === "success") {
       navigate("/sign-in");
       localStorage.clear();
     }
-  }
+    setLoading && setLoading((prev) => ({ ...prev, handleClick: false }));
+  };
 
   const handleChange = (e: any) => {
     if (e.target.name === "oldPassword") {
-      setOldPassword(e.target.value)
-    } else if (e.target.name === "newPassword") { 
-      setNewPassword(e.target.value)
+      setOldPassword(e.target.value);
+    } else if (e.target.name === "newPassword") {
+      setNewPassword(e.target.value);
     }
-
-  }
+  };
   return (
     <Box
       sx={{

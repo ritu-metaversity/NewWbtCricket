@@ -2,12 +2,12 @@ import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 
 export const TitleStyled = styled(Typography)({
-    backgroundColor: "GrayText",
-    fontWeight: 700,
-    padding: 8,
-    textTransform: "uppercase",
-    color:"white"
-})
+  backgroundColor: "#00FFFF",
+  fontWeight: 700,
+  padding: 8,
+  textTransform: "uppercase",
+  color: "#00F",
+});
 
 export const TableCellText = styled(Typography)({
   fontSize: "0.7rem",
@@ -16,7 +16,7 @@ export const TableCellText = styled(Typography)({
 
 export const TableHeadText = styled(Typography)({
   fontSize: "0.8rem",
-    fontWeight: 700,
+  fontWeight: 700,
 });
 
 export const TableResultContainer = styled(Box)({

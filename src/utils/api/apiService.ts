@@ -27,16 +27,16 @@ interface ApiResponse {
 }
 
 const filterQuery = (query: Query) => {
-  const newQuery:Query={};
-   Object.keys(query).forEach(item => {
-     if (Array.isArray(query[item])) {
-       newQuery[item]=query[item].toString();
-    } else { 
-       newQuery[item] = query[item];
-     }
-   })
+  const newQuery: Query = {};
+  Object.keys(query).forEach((item) => {
+    if (Array.isArray(query[item])) {
+      newQuery[item] = query[item].toString();
+    } else {
+      newQuery[item] = query[item];
+    }
+  });
   return newQuery;
-}
+};
 const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
   resource,
   data = {},
@@ -52,14 +52,14 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
   });
   let config;
   const baseURL = url.includes("http") ? "" : process.env.REACT_APP_API_URL;
-  
+
   try {
     config = {
       method: METHOD || "GET",
       baseURL,
       url,
       data,
-      params:filterQuery(params),
+      params: filterQuery(params),
       headers: {
         ...headers,
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
@@ -80,18 +80,18 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
   let result: any;
   await apiService(args)
     .catch((error) => {
-      result = {error: error.response?.data}
-      if(error.response.status === 401){
-        localStorage.removeItem("token")
-        window.location.replace("/welcome");
+      result = { error: error.response?.data };
+      if (error.response.status === 401) {
+        // localStorage.removeItem("token");
+        // window.location.replace("/welcome");
       }
     })
     .then((response) => {
       if (response) {
-        result = {response: response.data}
+        result = { response: response.data };
       }
-    });    
-    return result;
+    });
+  return result;
   // if (result?.responseCode === 403) {
   //   localStorage.clear();
   //   snackBarUtil.error("Session changed. Please login again!");
@@ -135,6 +135,5 @@ const apiWithSnackbar: (
   const result = await apiHandler(args);
   return apiSnackbarNotifications(result);
 };
-
 
 export { apiService, apiHandler, apiWithSnackbar };

@@ -78,33 +78,36 @@ const rows2 = [
   createData2("ADELAIDE STRIKERS W", "NO", 0.04, 30, 32, 0),
 ];
 
-const BetRecord = (props: { item: any; }) => {
+const BetRecord = (props: { item: any }) => {
   const [betRecord, setBetRecord] = React.useState<any>();
   useEffect(() => {
     const getList = async () => {
       const { response } = await sportServices.betListByMatchId(props.item);
       if (response?.data) {
-        setBetRecord(response.data)
+        setBetRecord(response.data);
+        console.log(response.data);
       }
     };
     getList();
   }, []);
+
   return (
     <Box display="flex" flexDirection="column" gap={2}>
-      {betRecord && Object.keys(betRecord).map(key => <StickyTable
-        rows={betRecord[key].map((value: any, index: string) => 
-          
-          { value.color = (value.back ? "#72BBEF" : "#F994BA"); value.back = (value.back ? "Lagai" : "Khayi");
-           value.sr = index + 1;
-          
-            return value 
-          })}
+      {betRecord &&
+        Object.keys(betRecord).map((key) => (
+          <StickyTable
+            rows={betRecord[key].map((value: any, index: string) => {
+              value.color = value.back ? "#72BBEF" : "#F994BA";
+              value.back = value.back ? "Lagai" : "Khayi";
+              value.sr = index + 1;
 
-        columns={columns}
-        title={key}
-        accordion
-      />
-      )}
+              return value;
+            })}
+            columns={columns}
+            title={key}
+            accordion
+          />
+        ))}
     </Box>
   );
 };

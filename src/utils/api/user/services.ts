@@ -1,3 +1,4 @@
+import { HistoryPayload } from "../../../Pages/loginHistory/LoginHistoryDetails";
 import { apiWithSnackbar } from "../apiService";
 import { userResources } from "./resources";
 
@@ -39,7 +40,6 @@ export const userServices = {
     return await apiWithSnackbar(params);
   },
 
-
   changePassword: async (data: ChangePasswordPayload) => {
     const params = { resource: userResources.CHANGE_PASSWORD, data };
     return await apiWithSnackbar(params);
@@ -65,68 +65,65 @@ export const userServices = {
     return await apiWithSnackbar(params);
   },
 
-  getLoginHistory:async () => {
-    const params ={
-    resource:userResources.LOGIN_HISTORY_VALUES,
-    data:{userId:""}
+  getLoginHistory: async (data: any) => {
+    const params = {
+      resource: userResources.LOGIN_HISTORY_VALUES,
+      data: data,
     };
     return await apiWithSnackbar(params);
   },
 
-  getChangePasswordHistory:async () => {
-    const params ={
-    resource:userResources.CHANGE_PASSWORD_HISTORY,
-    data:{userId:""}
+  getChangePasswordHistory: async (data: any) => {
+    const params = {
+      resource: userResources.CHANGE_PASSWORD_HISTORY,
+      data: data,
     };
     return await apiWithSnackbar(params);
   },
 
-  getAccountStatement:async (data:any) =>{
-    const params ={
-      resource:userResources.USER_STATEMENT,
-      data
+  getAccountStatement: async (data: any) => {
+    const params = {
+      resource: userResources.USER_STATEMENT,
+      data,
     };
     return await apiWithSnackbar(params);
   },
 
-  getCurrentBets:async (data:any) => {
-    const params ={
-      resource:userResources.CURRENT_BET,
-      data
+  getCurrentBets: async (data: any) => {
+    const params = {
+      resource: userResources.CURRENT_BET,
+      data,
     };
     return await apiWithSnackbar(params);
   },
 
-  getBetHistory:async (data:any) => {
-    const params ={
-      resource:userResources.BET_HISTORY,
-      data
+  getBetHistory: async (data: any) => {
+    const params = {
+      resource: userResources.BET_HISTORY,
+      data,
     };
     return await apiWithSnackbar(params);
   },
 
-  getSportsForList:async () => {
-    const params ={
-      resource:userResources.BET_SPORTS_FOR_LIST,
-      
+  getSportsForList: async () => {
+    const params = {
+      resource: userResources.BET_SPORTS_FOR_LIST,
     };
     return await apiWithSnackbar(params);
   },
 
-  getMatchForList:async (sportId:number) => {
-    const params ={
-      resource:userResources.BET_MATCH_FOR_LIST,
-      data:{sportId}
-      
+  getMatchForList: async (sportId: number) => {
+    const params = {
+      resource: userResources.BET_MATCH_FOR_LIST,
+      data: { sportId },
     };
     return await apiWithSnackbar(params);
   },
 
-  getTestApi:async () => {
-    const params={
-      resource:userResources.TEST_API
-    }
+  getTestApi: async () => {
+    const params = {
+      resource: userResources.TEST_API,
+    };
     return await apiWithSnackbar(params);
-  }
- 
+  },
 };

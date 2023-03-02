@@ -18,16 +18,16 @@ const HeaderStyleProps: any = {
 export const HeaderStyle = styled(Typography)(HeaderStyleProps);
 export const FooterStyle = styled(Typography)({
   ...HeaderStyleProps,
-  fontSize: "1.3rem",
+  fontSize: "1.5rem",
 });
 
 export const WelcomeModalBodyP = styled(Typography)({
   textAlign: "center",
   margin: "1em",
   lineHeight: 1.6,
-  fontSize: "0.9rem",
-  letterSpacing: 0.5,
-  fontWeight: 600,
+  fontSize: "0.7rem",
+  letterSpacing: 0.8,
+  fontWeight: 800,
 });
 
 export const TermsHeader = styled(Box)({
@@ -42,10 +42,10 @@ export const TermsHeader = styled(Box)({
 export const TermsContainer = styled(Box)({
   padding: 10,
   display: "flex",
-    flexDirection: "column",
+  flexDirection: "column",
   position: "relative",
-    gap: 10,
-    backgroundColor: "#ddd",
+  gap: 10,
+  backgroundColor: "#ddd",
 });
 
 export const TermsListContainer = styled(Box)({
@@ -53,15 +53,15 @@ export const TermsListContainer = styled(Box)({
   fontWeight: 600,
   wordSpacing: 0,
   fontSize: "0.9rem",
-    lineHeight: 2,
-  paddingRight: 10
+  lineHeight: 2,
+  paddingRight: 10,
 });
 
 export const TermsFooter = styled(Box)({
   backgroundColor: "#ddd",
-    position: "sticky",
-    bottom: 0,
-  marginTop:"auto",
+  position: "sticky",
+  bottom: 0,
+  marginTop: "auto",
   padding: "10px 0",
 });
 

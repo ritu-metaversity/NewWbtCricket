@@ -13,6 +13,7 @@ const BacktoMenuButton = () => {
           p: 1,
           fontSize: "1.2rem",
           fontWeight: 700,
+          bgcolor: "#52b5e1",
         }}
         LinkComponent={Link}
         to="/"

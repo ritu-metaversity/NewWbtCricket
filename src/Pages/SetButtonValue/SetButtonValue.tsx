@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { TitleStyled } from "../../components/custom/styledComponents";
 import { userServices } from "../../utils/api/user/services";
 import { isTemplateMiddleOrTemplateTail } from "typescript";
+import { LoaderContext } from "../../App";
 
 const GridItemProps = {
   item: true,
@@ -75,24 +76,30 @@ const SetButtonValue = () => {
     stack9: 0,
     stack10: 0,
   });
-  
+
   const handleChange = (e: any) => {
     const buttons = { ...buttonValue };
     setButtonValue({ ...buttons, [e.target.name]: e.target.value });
   };
-
+  const { loading, setLoading } = useContext(LoaderContext);
   useEffect(() => {
     const getButtonValue = async () => {
+      setLoading && setLoading((prev) => ({ ...prev, getButtonValue: true }));
       const { response } = await userServices.getButtonValue();
       if (response?.data) {
-        setButtonValue(response.data)
+        setButtonValue(response.data);
       }
+      setLoading && setLoading((prev) => ({ ...prev, getButtonValue: false }));
     };
     getButtonValue();
     return () => {};
   }, []);
 
-  const handleClick = async (e: any) =>  await userServices.updateButtonValue(buttonValue)
+  const handleClick = async (e: any) => {
+    setLoading && setLoading((prev) => ({ ...prev, SubmitButtonValue: true }));
+    await userServices.updateButtonValue(buttonValue);
+    setLoading && setLoading((prev) => ({ ...prev, SubmitButtonValue: false }));
+  };
   return (
     <Box mx="auto" my={{ sx: 0, md: 4 }}>
       <TitleStyled variant="h4">Change Button Value</TitleStyled>
@@ -111,7 +118,7 @@ const SetButtonValue = () => {
                 />
               </Grid>
             </>
-          )
+          );
         })}
       </Grid>
       <Button

@@ -1,13 +1,21 @@
 import { Box } from "@mui/system";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { userServices } from "../../utils/api/user/services";
 import StickyTable from "../../components/custom/TableWithoutPagination";
 import TablePagination from "@mui/material/TablePagination";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
-
+import { LoaderContext } from "../../App";
 
 export interface Column {
-  id: "sportName" | "eventName" | "marketname" | "nation" | "rate" | "amount" | "time" | string;
+  id:
+    | "sportName"
+    | "eventName"
+    | "marketname"
+    | "nation"
+    | "rate"
+    | "amount"
+    | "time"
+    | string;
   label: string;
   minWidth?: number;
   align?: "right" | "center";
@@ -49,61 +57,60 @@ const CurrentBet = () => {
     sportType: 1,
     betType: "1",
     noOfRecords: 25,
-    index: 0
+    index: 0,
   });
   const [accountStatement, setAccountStatement] = React.useState([]);
+  const { loading, setLoading } = useContext(LoaderContext);
   useEffect(() => {
     const getList = async () => {
+      setLoading && setLoading((prev) => ({ ...prev, currentbet: true }));
       const { response } = await userServices.getCurrentBets(formData);
       if (response?.data?.totalPages) {
-        setCount(response?.data?.totalPages)
+        setCount(response?.data?.totalPages);
       }
       if (response?.data?.dataList) {
-        setAccountStatement(response.data.dataList)
+        setAccountStatement(response.data.dataList);
       }
+      setLoading && setLoading((prev) => ({ ...prev, currentbet: false }));
     };
     getList();
   }, [formData]);
 
-  function handleChange(event: { target: { name: any; value: any; }; }) {
-    setFormData(preState => {
+  function handleChange(event: { target: { name: any; value: any } }) {
+    setFormData((preState) => {
       return {
-        
         ...preState,
         [event.target.name]: event.target.value,
-      }
+      };
     });
   }
 
   const handleChangePage = (event: unknown, newPage: number) => {
-    setFormData(preState => {
-      return {...preState,
-      index: newPage,
-    }}
-    )
-  }
+    setFormData((preState) => {
+      return { ...preState, index: newPage };
+    });
+  };
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setFormData(preState => {
+    setFormData((preState) => {
       return {
         ...preState,
         noOfRecords: +event.target.value,
-        index: 0
-      }
+        index: 0,
+      };
     });
     // setPage(0);
   };
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
-       <BacktoMenuButton />
+      <BacktoMenuButton />
       <form style={{ display: "inline-flex", padding: "10px" }}>
         <input
           type="radio"
           id="all"
           checked={formData.betType === "1"}
-          
           name="betType"
           value="1"
           onChange={handleChange}
@@ -132,17 +139,17 @@ const CurrentBet = () => {
         <br />
       </form>
       <StickyTable
-        rows={accountStatement.map((value: any) => 
-          { value.color = (value.isback ? "#b3d9f5" : "#f5bad0");
-          value.border = (value.isback ? "5px solid #7dc7fc" : "5px solid #ff7bac");
-            return value 
-            
-          })}
+        rows={accountStatement.map((value: any) => {
+          value.color = value.isback ? "#b3d9f5" : "#f5bad0";
+          value.border = value.isback
+            ? "5px solid #7dc7fc"
+            : "5px solid #ff7bac";
+          return value;
+        })}
         columns={columns}
         title={"Current Bets"}
         noOfRecords={formData.noOfRecords}
         totalPage={countPage}
-        
       />
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
@@ -153,13 +160,12 @@ const CurrentBet = () => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
         labelRowsPerPage={<span>Rows: </span>}
-        labelDisplayedRows={({page}) =>{
-          return `Page : ${page + 1}`
+        labelDisplayedRows={({ page }) => {
+          return `Page : ${page + 1}`;
         }}
       />
     </Box>
   );
 };
-
 
 export default CurrentBet;

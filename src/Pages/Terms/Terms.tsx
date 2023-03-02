@@ -26,10 +26,10 @@ const TermsList = [
   "नोट : सर्वर या वेबसाईट में किसी तरह की खराबी आने या बंद हो जाने पर केवल किये गए सौदे ही मान्य होंगे। ऐसी स्थिति में किसी भी तरह का वाद-विवाद मान्य नहीं होगा।",
 ];
 const Terms = () => {
-    const navigate = useNavigate()
-    const handleClick = () => { 
-        navigate("/", { replace: true})
-    }
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/", { replace: true });
+  };
   return (
     <>
       <TermsContainer>
@@ -42,7 +42,11 @@ const Terms = () => {
           </ol>
         </TermsListContainer>
         <TermsFooter>
-          <TermsContinueButton onClick={handleClick} variant="contained">
+          <TermsContinueButton
+            onClick={handleClick}
+            variant="contained"
+            sx={{ bgcolor: "#FF471A" }}
+          >
             <b>CONTINUE</b>
           </TermsContinueButton>
         </TermsFooter>

@@ -6,25 +6,25 @@ import { SummaryCardContainer, SummaryCardTitle } from "./styledComponents";
 
 export interface SummaryCardProps {
   matchName: string;
-  matchId:number;
+  matchId: number;
   openDate: string;
   inPlay: string;
-  "team1Back": null
-  "team1Lay": null
-  "team2Back": null
-  "team2Lay": null
-  "drawBack": null
-  "drawLay": null
+  team1Back: null;
+  team1Lay: null;
+  team2Back: null;
+  team2Lay: null;
+  drawBack: null;
+  drawLay: null;
 }
 const SummaryCard: FC<SummaryCardProps> = (data) => {
   const { matchName, openDate, inPlay, matchId } = data;
   return (
     <SummaryCardContainer>
       <Link to={"/in-play-details/?event-id=" + matchId}>
-        <SummaryCardTitle bgcolor="secondary.main">
-          {matchName}
-        </SummaryCardTitle>
-        <Typography py={1}>{new Date(openDate).toLocaleString()}</Typography>
+        <SummaryCardTitle bgcolor="#FF0266">{matchName}</SummaryCardTitle>
+        <Typography color={"black"} py={1}>
+          {new Date(openDate).toLocaleString()}
+        </Typography>
       </Link>
       <Grid container py={2} bgcolor="rgba(0,0,0,0.1)">
         <Grid item xs={4} marginLeft="auto">

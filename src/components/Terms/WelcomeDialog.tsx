@@ -1,22 +1,20 @@
 import { Typography } from "@mui/material";
 import React, { useState } from "react";
 import Dialog from "../custom/Dialog";
-import { FooterStyle, HeaderStyle, WelcomeModalBodyP } from "./styledComponents";
+import {
+  FooterStyle,
+  HeaderStyle,
+  WelcomeModalBodyP,
+} from "./styledComponents";
 
 const titleComponent = (
   <>
-    <HeaderStyle>
-      Welcome to
-    </HeaderStyle>
-    <HeaderStyle>
-      Mybet
-    </HeaderStyle>
+    <HeaderStyle>Welcome to</HeaderStyle>
+    <HeaderStyle>Bet95</HeaderStyle>
   </>
 );
 
-const actionComponent = <FooterStyle>
-    Thanks for Visiting Us.
-</FooterStyle>
+const actionComponent = <FooterStyle>Thanks for Visiting Us.</FooterStyle>;
 const WelcomeDialog = () => {
   const [open, setOpen] = useState(true);
   const onClose = () => {
@@ -24,9 +22,14 @@ const WelcomeDialog = () => {
   };
   return (
     <Dialog
+      sx={{ mt: "-280px" }}
       titlSD={titleComponent}
       actions={actionComponent}
+      // sx={{ bgcolor:  }}
       open={open}
+      PaperProps={{ sx: { maxWidth: "80%" } }}
+      // maxWidth="sm"
+      // sx=
       onClose={onClose}
     >
       <WelcomeModalBodyP>

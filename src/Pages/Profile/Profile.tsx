@@ -1,6 +1,7 @@
 import { Box, Button, Grid, MenuItem, Select } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { isTemplateExpression } from "typescript";
+import { LoaderContext } from "../../App";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
 import { TitleStyled } from "../../components/custom/styledComponents";
 import { userServices } from "../../utils/api/user/services";
@@ -36,23 +37,23 @@ const gridData = [
   },
 ];
 
-
 const Profile = () => {
   const handleRatingChange = (e: any) => {};
 
   const [prolile, setProfile] = React.useState<any>([]);
-
+  const { loading, setLoading } = useContext(LoaderContext);
   useEffect(() => {
-   
     const getProfile = async () => {
-      if(!prolile?.userId){
-      const { response } = await userServices.profile();
-      if (response?.data) {
-        setProfile(response.data);
+      if (!prolile?.userId) {
+        setLoading && setLoading((prev) => ({ ...prev, getProfile: true }));
+        const { response } = await userServices.profile();
+        if (response?.data) {
+          setProfile(response.data);
+        }
       }
-    }
+      setLoading && setLoading((prev) => ({ ...prev, getProfile: false }));
     };
-  
+
     getProfile();
     return () => {};
   }, [prolile]);
@@ -78,7 +79,7 @@ const Profile = () => {
               ))}
           </Select>
         </Grid> */}
-        {/* <Grid {...gridItemProps}>
+      {/* <Grid {...gridItemProps}>
           <Button color="success" fullWidth variant="contained">
             Update
           </Button>

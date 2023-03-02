@@ -1,11 +1,13 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { border } from "@mui/system";
 import TablePagination from "@mui/material/TablePagination";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
 import StickyHeadTable from "../../components/custom/Table";
 import StickyTable from "../../components/custom/TableWithoutPagination";
 import { userServices } from "../../utils/api/user/services";
+import { LoaderContext } from "../../App";
+import moment from "moment";
 
 export interface Column {
   id: "matchName" | "wonBy" | "won" | "lost" | "balance" | string;
@@ -67,19 +69,22 @@ const Account = () => {
     maxWidth: "200px",
   };
   const [countPage, setCount] = React.useState();
+
   const lableStyle = { alignSelf: "center" };
   const date = new Date();
   const futureDate = date.getDate() - 60;
   date.setDate(futureDate);
-  const defaultValue = date.toLocaleDateString("en-CA");
+  const defaultValue = moment().subtract(1, "month").format("YYYY-MM-DD");
   const current = new Date();
-  const currentValue = current.toLocaleDateString("en-CA");
+  const currentValue = moment().format("YYYY-MM-DD");
+
   const [formData, setFormData] = React.useState({
     fromDate: defaultValue,
     toDate: currentValue,
     type: 1,
     index: 0,
-    noOfRecords: 10,
+    noOfRecords: 25,
+    totalPages: 1,
   });
 
   function handleChange(event: { target: { name: any; value: any } }) {
@@ -91,23 +96,34 @@ const Account = () => {
     });
   }
   const [accountStatement, setAccountStatement] = React.useState([]);
+  const { loading, setLoading } = useContext(LoaderContext);
+
+  // console.log(loading);
+  // console.log(setLoading);
+  // setLoading({ data: null });
+
   useEffect(() => {
     const getList = async () => {
+      setLoading && setLoading((prev) => ({ ...prev, getList: true }));
+
       const { response } = await userServices.getAccountStatement(formData);
       if (response?.data?.dataList) {
         setAccountStatement(response.data.dataList);
         // console.log(response.data)
       }
+      setLoading && setLoading((prev) => ({ ...prev, getList: false }));
     };
     getList();
   }, [formData]);
 
   const handleClick = () => {
     const getList = async () => {
+      setLoading && setLoading((prev) => ({ ...prev, getListdata: true }));
       const { response } = await userServices.getAccountStatement(formData);
       if (response?.data?.dataList) {
         setAccountStatement(response.data.dataList);
       }
+      setLoading && setLoading((prev) => ({ ...prev, getListdata: false }));
     };
     getList();
   };
@@ -115,23 +131,21 @@ const Account = () => {
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setFormData(preState => {
+    setFormData((preState) => {
       return {
         ...preState,
         noOfRecords: +event.target.value,
-        index: 0
-      }
+        index: 0,
+      };
     });
     // setPage(0);
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
-    setFormData(preState => {
-      return {...preState,
-      index: newPage,
-    }}
-    )
-  }
+    setFormData((preState) => {
+      return { ...preState, index: newPage };
+    });
+  };
 
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
@@ -183,7 +197,12 @@ const Account = () => {
         }}>Search</button>  */}
 
           <Grid item xs={6} md={3} style={style}>
-            <Button fullWidth type="button" variant="contained" onClick={handleClick}>
+            <Button
+              fullWidth
+              type="button"
+              variant="contained"
+              onClick={handleClick}
+            >
               search
             </Button>
           </Grid>
@@ -201,33 +220,33 @@ const Account = () => {
       <br />
 
       {accountStatement?.length > 0 ? (
-        <> <StickyTable
-        rows={accountStatement}
-        columns={columns}
-        title={"Account Summary"}
-        // noOfRecords={formData.noOfRecords}
-      />
-        <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={countPage ? countPage * formData.noOfRecords : -1}
-        rowsPerPage={formData.noOfRecords}
-        page={formData.index}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        labelRowsPerPage={<span>Rows: </span>}
-        labelDisplayedRows={({page}) =>{
-          return `Page : ${page + 1}`
-        }}
-      /></>
-        
-        
+        <>
+          {" "}
+          <StickyTable
+            rows={accountStatement}
+            columns={columns}
+            title={"Account Summary"}
+            // noOfRecords={formData.noOfRecords}
+          />
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={countPage ? countPage * formData.noOfRecords : -1}
+            rowsPerPage={formData.noOfRecords}
+            page={formData.index}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            labelRowsPerPage={<span>Rows: </span>}
+            labelDisplayedRows={({ page }) => {
+              return `Page : ${page + 1}`;
+            }}
+          />
+        </>
       ) : (
         <Typography mt="15vh" variant="h4" color="error">
           {"No Data Found"}
         </Typography>
-      )
-      }
+      )}
     </Box>
   );
 };

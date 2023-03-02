@@ -1,6 +1,4 @@
-import React from 'react'
+// import React from 'react'
 export default function ModalDialog() {
-  return (
-    <div>ModalDialog</div>
-  )
+  return <div>ModalDialog</div>;
 }

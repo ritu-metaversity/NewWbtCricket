@@ -14,13 +14,14 @@ import BetRecord from "../../components/InPlayDetails/BetRecord";
 import { ExpandCircleDown } from "@mui/icons-material";
 import { useSearchParams } from "react-router-dom";
 import { sportServices } from "../../utils/api/sport/services";
+import MyBet from "../../components/InPlayDetails/BetComponent";
 
-const InPlayDetails = () => { 
+const InPlayDetails = () => {
   const commentary = "MELDOURNE STARS WOMAN WON BY 4 WKTS ";
   const [eventId, setEventId] = useState(0);
   const [odds, setOdds] = useState<any>(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams.get("event-id"));
+  // console.log(searchParams.get("event-id"));
   useEffect(() => {
     const eventId = searchParams.get("event-id");
     if (eventId && Number(eventId)) setEventId(Number(eventId));
@@ -28,14 +29,14 @@ const InPlayDetails = () => {
       setEventId(0);
     };
   }, [searchParams]);
-  let intervalId:any;
+  let intervalId: any;
 
   const getOdds = useCallback(async () => {
     if (!eventId) return;
     const { response } = await sportServices.eventOdds(eventId);
     if (response) {
-      console.log(response);
-      setOdds(response?.data)
+      // console.log(response);
+      setOdds(response?.data);
     }
   }, [eventId]);
 
@@ -46,10 +47,10 @@ const InPlayDetails = () => {
     //   getOdds();
     // },500)
 
-    return ()=> clearInterval(intervalId)
+    return () => clearInterval(intervalId);
   }, [getOdds]);
 
-  if (!eventId  ) {
+  if (!eventId) {
     return <div>Invalid Url</div>;
   }
   if (!odds) {
@@ -60,10 +61,10 @@ const InPlayDetails = () => {
     <Box>
       <TitleStyled>{commentary}</TitleStyled>
       <ScoreCardGrid />
+      <Bet event={eventId} />
 
-      <Bet  event={eventId} />
-      
-      <BetRecord item={eventId}/>
+      {/* <MyBet bets={{}} /> */}
+      <BetRecord item={eventId} />
     </Box>
   );
 };
