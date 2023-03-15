@@ -17,7 +17,6 @@ import { sportServices } from "../../utils/api/sport/services";
 import MyBet from "../../components/InPlayDetails/BetComponent";
 
 const InPlayDetails = () => {
-  const commentary = "MELDOURNE STARS WOMAN WON BY 4 WKTS ";
   const [eventId, setEventId] = useState(0);
   const [odds, setOdds] = useState<any>(null);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -59,8 +58,7 @@ const InPlayDetails = () => {
 
   return (
     <Box>
-      <TitleStyled>{commentary}</TitleStyled>
-      <ScoreCardGrid />
+      {/* <ScoreCardGrid /> */}
       <Bet event={eventId} />
 
       {/* <MyBet bets={{}} /> */}

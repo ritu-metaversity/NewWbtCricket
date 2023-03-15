@@ -1,10 +1,16 @@
-import { HistoryPayload } from "../../../Pages/loginHistory/LoginHistoryDetails";
 import { apiWithSnackbar } from "../apiService";
 import { userResources } from "./resources";
 
 interface ChangePasswordPayload {
   newPassword: string;
   oldPassword: string;
+}
+
+interface OldChangePasswordPayload {
+  newPassword: string;
+  oldPassword: string;
+  userid: string;
+  token: string;
 }
 
 export const userServices = {
@@ -42,6 +48,10 @@ export const userServices = {
 
   changePassword: async (data: ChangePasswordPayload) => {
     const params = { resource: userResources.CHANGE_PASSWORD, data };
+    return await apiWithSnackbar(params);
+  },
+  oldChangePassword: async (data: OldChangePasswordPayload) => {
+    const params = { resource: userResources.OLD_CHANGE_PASSWORD, data };
     return await apiWithSnackbar(params);
   },
   addMoney: async (data: any) => {
