@@ -21,6 +21,7 @@ import snackBarUtil from "../Layout/snackBarUtil";
 import axios from "axios";
 import BookMakerOddsgrid from "./BookmakerOddsGrid";
 import { LoaderContext } from "../../App";
+import ButtonGroupComponent from "./ButtonGroupComponent";
 
 // const [open, setOpen] = React.useState(false);
 //   const handleOpen = () => setOpen(true);
@@ -384,7 +385,8 @@ const Bet: FC<any> = (props: { event: number }) => {
               value={amount}
               onChange={handleChange}
             />
-            <ButtonGroup sx={{ maxWidth: "100%" }}>
+            <ButtonGroupComponent setAmount={setAmount} />
+            {/* <ButtonGroup sx={{ maxWidth: "100%" }}>
               {Object.keys(buttonData)?.map((item: any) => (
                 <Button
                   style={{ paddingLeft: "10px", paddingRight: "10px" }}
@@ -393,7 +395,7 @@ const Bet: FC<any> = (props: { event: number }) => {
                   {buttonData[item]}
                 </Button>
               ))}
-            </ButtonGroup>
+            </ButtonGroup> */}
             <Button
               variant="contained"
               onClick={handleClick}
@@ -497,6 +499,7 @@ interface MatchOddsGridProps {
     };
   }[];
   maxBet: number;
+  Name: string;
   betDelay: number;
   inPlay: boolean;
   isActive: boolean;
@@ -526,7 +529,7 @@ const MatchOddsGrid: FC<{
   OddsPnl: Pnl[];
   buttonData: any;
 }> = ({ CurrentOdd, PrevOdds, matchId, OddsPnl, buttonData }) => {
-  const { runners, status, maxBet, betDelay, marketId } = CurrentOdd;
+  const { runners, status, maxBet, betDelay, marketId, Name } = CurrentOdd;
   const { runners: PrevRunner } = PrevOdds;
 
   const pnlsOdds = OddsPnl?.find((element) => element?.marketId == marketId);
@@ -657,7 +660,7 @@ const MatchOddsGrid: FC<{
 
         )
       })} */}
-      <p>jkj</p>
+      <p>{Name}</p>
 
       <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
         <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />

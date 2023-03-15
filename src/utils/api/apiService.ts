@@ -88,7 +88,11 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
     })
     .then((response) => {
       if (response) {
-        result = { response: response.data };
+        if (response.data.status === false) {
+          result = { error: response.data };
+        } else {
+          result = { response: response.data };
+        }
       }
     });
   return result;

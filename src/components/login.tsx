@@ -26,7 +26,7 @@ const Login = () => {
       appUrl: host === "localhost" ? "localhost" : host,
     };
     const { response } = await authServices.login(data);
-    console.log(response + " ");
+    // console.log(response + " ");
     if (response?.token) {
       localStorage.setItem("token", response?.token);
       localStorage.setItem("userid", response?.userId);
@@ -35,9 +35,10 @@ const Login = () => {
       } else {
         navigate("/terms", { replace: true });
       }
-    } else {
-      snackBarUtil.error("Some unknown error occurred !");
     }
+    // else {
+    //   snackBarUtil.error("Some unknown error occurred !");
+    // }
   };
 
   const handleChange = (e: any) => {
