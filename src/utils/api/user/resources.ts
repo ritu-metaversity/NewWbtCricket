@@ -1,5 +1,5 @@
 import { ApiResource } from "../apiService";
-type resourceKeys =  'LOGIN' | 'SIGN_UP';
+type resourceKeys = "LOGIN" | "SIGN_UP";
 export const userResources: {
   [x: string]: ApiResource;
 } = {
@@ -35,41 +35,45 @@ export const userResources: {
     URL: "enduser/change-password",
     METHOD: "POST",
   },
-  LOGIN_HISTORY_VALUES:{
-    URL:"/util/login-history-report",
-    METHOD:"POST"
+  OLD_CHANGE_PASSWORD: {
+    URL: "enduser/first-login-cp",
+    METHOD: "POST",
   },
-  CHANGE_PASSWORD_HISTORY:{
-    URL:"/util/password-change-history-report",
-    METHOD:"POST"
+  LOGIN_HISTORY_VALUES: {
+    URL: "/util/login-history-report",
+    METHOD: "POST",
   },
-  USER_PROFILE:{
-    URL:"/enduser/profile",
-    METHOD:"POST"
+  CHANGE_PASSWORD_HISTORY: {
+    URL: "/util/password-change-history-report",
+    METHOD: "POST",
+  },
+  USER_PROFILE: {
+    URL: "/enduser/profile",
+    METHOD: "POST",
   },
 
-  USER_STATEMENT:{
-    URL:"/enduser/account-statement",
-    METHOD:"POST"
+  USER_STATEMENT: {
+    URL: "/enduser/account-statement",
+    METHOD: "POST",
   },
-  CURRENT_BET:{
-    URL:"/enduser/unsettled-bet",
-    METHOD:"POST"
+  CURRENT_BET: {
+    URL: "/enduser/unsettled-bet",
+    METHOD: "POST",
   },
-  BET_HISTORY:{
-    URL:"/enduser/settled-bet",
-    METHOD:"POST"
+  BET_HISTORY: {
+    URL: "/enduser/settled-bet",
+    METHOD: "POST",
   },
-  BET_SPORTS_FOR_LIST:{
-    URL:"/sport/active-sport-list",
-    METHOD:"POST"
+  BET_SPORTS_FOR_LIST: {
+    URL: "/sport/active-sport-list",
+    METHOD: "POST",
   },
-  BET_MATCH_FOR_LIST:{
-    URL:"/sport/event-detail-sport-wise",
-    METHOD:"POST"
+  BET_MATCH_FOR_LIST: {
+    URL: "/sport/event-detail-sport-wise",
+    METHOD: "POST",
   },
-  TEST_API:{
-    URL:"http://89.39.105.69:9001/betfairodds/1.207796438",
-    METHOD:"GET"
-  }
+  TEST_API: {
+    URL: "http://89.39.105.69:9001/betfairodds/1.207796438",
+    METHOD: "GET",
+  },
 };

@@ -211,8 +211,19 @@ const Bet: FC<any> = (props: { event: number }) => {
     getButtondata();
   }, []);
 
+  console.log(matchOdd, "matchOdd");
   return (
     <>
+      {matchOdd[0]?.runners[0]?.name ? (
+        <TitleStyled>
+          {`${matchOdd[0]?.runners[0]?.name}
+    ${">"}
+      ${matchOdd[0]?.runners[1]?.name}`}
+        </TitleStyled>
+      ) : (
+        ""
+      )}
+
       {matchOdd.length > 0 && (
         <Accordion>
           {
@@ -222,14 +233,17 @@ const Bet: FC<any> = (props: { event: number }) => {
           }
           <AccordionDetails sx={{ p: 0 }}>
             {matchOdd?.map((match, index) => {
+              // console.log(match, "match");
               return (
-                <MatchOddsGrid
-                  buttonData={buttonData}
-                  CurrentOdd={match}
-                  PrevOdds={preMatchOdds[index]}
-                  matchId={props.event}
-                  OddsPnl={oddPnl}
-                />
+                <>
+                  <MatchOddsGrid
+                    buttonData={buttonData}
+                    CurrentOdd={match}
+                    PrevOdds={preMatchOdds[index]}
+                    matchId={props.event}
+                    OddsPnl={oddPnl}
+                  />
+                </>
               );
             })}
           </AccordionDetails>
@@ -631,100 +645,109 @@ const MatchOddsGrid: FC<{
       isFancy: isFancy,
     });
   };
-
+  console.log(CurrentOdd, "CurrentOdd");
   return (
     <>
       <Box display="flex" justifyContent={"space-evenly"}>
         <BetTextMedium>Max Bet:{maxBet}</BetTextMedium>
         <BetTextMedium>Bet Delay:{betDelay}</BetTextMedium>
       </Box>
+      {/* {CurrentOdd.map((res:any)=>{
+        return(
+
+        )
+      })} */}
+      <p>jkj</p>
 
       <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
         <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
         {runners.map((item, index) => {
           return (
-            <BetGridItem
-              suspended={
-                ["SUSPENDED", "CLOSED"].includes(status)
-                // status === "SUSPENDED" ||
-                // !isActive ||
-                // isPause ||
-                // !inPlay
-              }
-              values={[
-                <>
-                  {" "}
-                  {item.selectionId}
-                  {redGreenComponent(
-                    plnOddsArray.find(
-                      (pnl) => pnl.selectionId == item.selectionId
-                    )?.pnl || 0
-                  )}
-                </>,
-                <Box
-                  className={
-                    PrevRunner[index].ex.availableToBack[0].price <
-                    item.ex.availableToBack[0].price
-                      ? "odds-up"
-                      : PrevRunner[index].ex.availableToBack[0].price >
-                        item.ex.availableToBack[0].price
-                      ? "odds-down"
-                      : ""
-                  }
-                >
-                  <BetText
-                    onClick={() =>
-                      updateBet(
-                        true,
-                        +item.ex.availableToBack[0].price,
-                        amount,
-                        item.selectionId,
-                        marketId,
-                        matchId,
-                        date,
-                        +item.ex.availableToBack[0].price,
-                        false
-                      )
+            // Series
+            <>
+              <BetGridItem
+                suspended={
+                  ["SUSPENDED", "CLOSED"].includes(status)
+                  // status === "SUSPENDED" ||
+                  // !isActive ||
+                  // isPause ||
+                  // !inPlay
+                }
+                values={[
+                  <>
+                    {" "}
+                    {item.selectionId}
+                    {redGreenComponent(
+                      plnOddsArray.find(
+                        (pnl) => pnl.selectionId == item.selectionId
+                      )?.pnl || 0
+                    )}
+                  </>,
+                  <Box
+                    className={
+                      PrevRunner[index].ex.availableToBack[0].price <
+                      item.ex.availableToBack[0].price
+                        ? "odds-up"
+                        : PrevRunner[index].ex.availableToBack[0].price >
+                          item.ex.availableToBack[0].price
+                        ? "odds-down"
+                        : ""
                     }
-                    color="blue"
                   >
-                    {item.ex.availableToBack[0].price}
-                  </BetText>
-                  {item.ex.availableToBack[0].size}
-                </Box>,
-                <Box
-                  className={
-                    PrevRunner[index].ex.availableToLay[0].price <
-                    item.ex.availableToLay[0].price
-                      ? "odds-up"
-                      : PrevRunner[index].ex.availableToLay[0].price >
-                        item.ex.availableToLay[0].price
-                      ? "odds-down"
-                      : ""
-                  }
-                >
-                  <BetText
-                    onClick={() =>
-                      updateBet(
-                        false,
-                        +item.ex.availableToLay[0].price,
-                        amount,
-                        item.selectionId,
-                        marketId,
-                        matchId,
-                        date,
-                        +item.ex.availableToLay[0].price,
-                        false
-                      )
+                    <BetText
+                      onClick={() =>
+                        updateBet(
+                          true,
+                          +item.ex.availableToBack[0].price,
+                          amount,
+                          item.selectionId,
+                          marketId,
+                          matchId,
+                          date,
+                          +item.ex.availableToBack[0].price,
+                          false
+                        )
+                      }
+                      color="blue"
+                    >
+                      {item.ex.availableToBack[0].price}
+                    </BetText>
+                    {item.ex.availableToBack[0].size}
+                  </Box>,
+                  <Box
+                    className={
+                      PrevRunner[index].ex.availableToLay[0].price <
+                      item.ex.availableToLay[0].price
+                        ? "odds-up"
+                        : PrevRunner[index].ex.availableToLay[0].price >
+                          item.ex.availableToLay[0].price
+                        ? "odds-down"
+                        : ""
                     }
-                    color="red"
                   >
-                    {item.ex.availableToLay[0].price}
-                  </BetText>
-                  {item.ex.availableToLay[0].size}
-                </Box>,
-              ]}
-            />
+                    <BetText
+                      onClick={() =>
+                        updateBet(
+                          false,
+                          +item.ex.availableToLay[0].price,
+                          amount,
+                          item.selectionId,
+                          marketId,
+                          matchId,
+                          date,
+                          +item.ex.availableToLay[0].price,
+                          false
+                        )
+                      }
+                      color="red"
+                    >
+                      {item.ex.availableToLay[0].price}
+                    </BetText>
+                    {item.ex.availableToLay[0].size}
+                  </Box>,
+                ]}
+              />
+            </>
           );
         })}
         <Modal

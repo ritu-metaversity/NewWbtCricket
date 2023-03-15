@@ -8,7 +8,7 @@ import React, {
 import "./App.css";
 import Login from "./components/login";
 import Footer from "./components/Footer";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Terms from "./Pages/Terms";
 import { Inplay } from "./Pages/InPlay";
@@ -32,6 +32,7 @@ import Deposit from "./Pages/deposit/Deposit";
 import Withdraw from "./Pages/withdraw/withdraw";
 import loaderImg from "./assets/img/loder.svg";
 import { CircularProgress } from "@mui/material";
+import OldChangePassword from "./components/Terms/OldChangePassword";
 interface LoadingType {
   [x: string]: boolean;
 }
@@ -60,6 +61,11 @@ function App() {
           <main>
             <BrowserRouter>
               <Routes>
+                <Route
+                  path="OldChangePassword"
+                  element={<OldChangePassword />}
+                />
+
                 <Route path="/welcome" element={<LoginDashboard />} />
                 <Route path="/sign-in" element={<Login />} />
                 <Route path="/sign-up" element={<Register />} />

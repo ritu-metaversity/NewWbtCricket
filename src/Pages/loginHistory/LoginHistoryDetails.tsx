@@ -103,7 +103,7 @@ export const LoginhistoryData: FC<any> = () => {
     const { response } = await userServices.getLoginHistory(formDAta);
     if (response?.data) {
       if (response?.data?.length > 0) {
-        console.log(JSON.stringify(response.data.ip), " this is response");
+        // console.log(JSON.stringify(response.data.ip), " this is response");
         setLoginHistory([...response.data]);
       }
     } else {

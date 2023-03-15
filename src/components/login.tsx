@@ -16,20 +16,22 @@ const Login = () => {
   const navigate = useNavigate();
   const [userId, setLogin] = useState("");
   const [password, setPassword] = useState("");
-
+  const host = window.location.hostname;
   const handleClick = async () => {
     let res;
 
     const data = {
       userId,
       password,
+      appUrl: host === "localhost" ? "localhost" : host,
     };
     const { response } = await authServices.login(data);
     console.log(response + " ");
     if (response?.token) {
       localStorage.setItem("token", response?.token);
+      localStorage.setItem("userid", response?.userId);
       if (response.passwordtype === "old") {
-        navigate("/password-change", { replace: true });
+        navigate("/OldChangePassword", { replace: true });
       } else {
         navigate("/terms", { replace: true });
       }
