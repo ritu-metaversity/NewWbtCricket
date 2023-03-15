@@ -30,12 +30,13 @@ import LoginDashboard from "./components/loginDashboard";
 import Register from "./components/register";
 import Deposit from "./Pages/deposit/Deposit";
 import Withdraw from "./Pages/withdraw/withdraw";
-import loaderImg from "./assets/img/loder.svg";
 import { CircularProgress } from "@mui/material";
 import OldChangePassword from "./components/Terms/OldChangePassword";
+
 interface LoadingType {
   [x: string]: boolean;
 }
+
 interface LoaderContextINterface {
   loading: LoadingType;
   setLoading: Dispatch<SetStateAction<LoadingType>> | null;

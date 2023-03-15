@@ -3,6 +3,10 @@ type resourceKeys = "LOGIN" | "SIGN_UP";
 export const userResources: {
   [x: string]: ApiResource;
 } = {
+  GET_IP_ADDRESS: {
+    URL: "https://api.ipify.org/?format=json",
+    METHOD: "GET",
+  },
   USER_INFO: {
     URL: "user/full-user",
     METHOD: "GET",

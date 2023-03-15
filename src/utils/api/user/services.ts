@@ -1,4 +1,4 @@
-import { apiWithSnackbar } from "../apiService";
+import { apiHandler, apiWithSnackbar } from "../apiService";
 import { userResources } from "./resources";
 
 interface ChangePasswordPayload {
@@ -14,6 +14,13 @@ interface OldChangePasswordPayload {
 }
 
 export const userServices = {
+  getIpfy: async () => {
+    const params = {
+      resource: userResources.GET_IP_ADDRESS,
+      noAuth: true,
+    };
+    return await apiHandler(params);
+  },
   user: async (id: number) => {
     const params = {
       resource: userResources.USER,
