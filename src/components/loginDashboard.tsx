@@ -7,7 +7,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SummaryCardProps } from "./Inplay/SummaryCard";
 import { HeaderTextStyle } from "./Layout/styledComponents";
 import "./loginDashboard.css";
@@ -19,6 +19,9 @@ import HomeIcon from "@mui/icons-material/Home";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router-dom";
+import { LoaderContext } from "../App";
+import InPlayDetails from "../Pages/InPlayDetails";
+import { Inplay } from "../Pages/InPlay";
 
 const LoginDashboard = () => {
   const [activeSportList, setActiveSportList] = useState([]);
@@ -66,6 +69,7 @@ const LoginDashboard = () => {
       "aria-controls": `simple-tabpanel-${index}`,
     };
   }
+  const { appData } = useContext(LoaderContext);
 
   return (
     <>
@@ -94,24 +98,20 @@ const LoginDashboard = () => {
             >
               <Link to={"/sign-in"}>Login</Link>
             </Button>
-            <Button
-              sx={{ fontSize: "0.7rem" }}
-              style={{ marginLeft: "10px" }}
-              variant="contained"
-              color="secondary"
-            >
-              <Link to={"/sign-up"}>Sign Up</Link>
-            </Button>
+            {appData?.selfAllowed && (
+              <Button
+                sx={{ fontSize: "0.7rem" }}
+                style={{ marginLeft: "10px" }}
+                variant="contained"
+                color="secondary"
+              >
+                <Link to={"/sign-up"}>Sign Up</Link>
+              </Button>
+            )}
           </div>
-          {/* <Box>
-            <IconButton>
-              <LogoutIcon fontSize="large" htmlColor="white" />
-            </IconButton>
-            <Typography>Logout</Typography>
-          </Box> */}
         </Toolbar>
       </AppBar>
-      <Box
+      {/* <Box
         py={2}
         m="auto"
         boxSizing={"content-box"}
@@ -151,7 +151,9 @@ const LoginDashboard = () => {
                 </Typography>
               )}
         </Box>
-      </Box>
+      </Box> */}
+
+      <Inplay />
       <div className="appBottomMenu">
         <a>
           <Link to={"/sign-in"}>

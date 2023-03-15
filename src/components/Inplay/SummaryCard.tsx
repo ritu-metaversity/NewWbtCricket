@@ -15,12 +15,30 @@ export interface SummaryCardProps {
   team2Lay: null;
   drawBack: null;
   drawLay: null;
+  bm: boolean;
+  F: boolean;
+  GM: boolean;
+  SM: boolean;
 }
 const SummaryCard: FC<SummaryCardProps> = (data) => {
-  const { matchName, openDate, inPlay, matchId } = data;
+  const { matchName, openDate, inPlay, matchId, bm, F, GM, SM } = data;
   return (
     <SummaryCardContainer>
-      <Link to={"/in-play-details/?event-id=" + matchId}>
+      <Link
+        to={"/in-play-details/?event-id=" + matchId}
+        style={{ position: "relative" }}
+      >
+        <Typography
+          color={"white"}
+          sx={{ position: "absolute", right: 10 }}
+          py={1}
+          fontWeight={700}
+        >
+          {bm && "BM   "}
+          {GM && "GM   "}
+          {SM && "SM   "}
+          {F && "F   "}
+        </Typography>
         <SummaryCardTitle bgcolor="#FF0266">{matchName}</SummaryCardTitle>
         <Typography color={"black"} py={1}>
           {new Date(openDate).toLocaleString()}

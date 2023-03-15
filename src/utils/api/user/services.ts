@@ -1,9 +1,26 @@
-import { apiHandler, apiWithSnackbar } from "../apiService";
+import {
+  apiHandler,
+  ApiServiceInterface,
+  apiWithSnackbar,
+} from "../apiService";
 import { userResources } from "./resources";
 
 interface ChangePasswordPayload {
   newPassword: string;
   oldPassword: string;
+}
+
+interface SelfAllowedPayload {
+  appUrl: string;
+}
+
+interface SelfWithdrawPayload {
+  accountHolderName: string;
+  bankName: string;
+  accountType: string;
+  accountNumber: string;
+  ifsc: string;
+  amount: number;
 }
 
 interface OldChangePasswordPayload {
@@ -142,5 +159,44 @@ export const userServices = {
       resource: userResources.TEST_API,
     };
     return await apiWithSnackbar(params);
+  },
+  selfWithdraw: async (data: SelfWithdrawPayload) => {
+    const params = {
+      resource: userResources.SELF_WITHDRAW,
+      data,
+    };
+    return await apiWithSnackbar(params);
+  },
+  selfDeposit: async (data: FormData) => {
+    const params: ApiServiceInterface = {
+      resource: userResources.SELF_DEPOSIT,
+      data,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+    return await apiWithSnackbar(params);
+  },
+  getPaymentDetail: async () => {
+    const params = {
+      resource: userResources.PAYMENT_DETAILS,
+    };
+    return await apiHandler(params);
+  },
+  getWithdrawList: async () => {
+    const params = {
+      resource: userResources.WITHDRAW_LIST,
+    };
+    return await apiHandler(params);
+  },
+  getDepositList: async () => {
+    const params = {
+      resource: userResources.DEPOSIT_LIST,
+    };
+    return await apiHandler(params);
+  },
+  isSelfAllowed: async (data: SelfAllowedPayload) => {
+    const params = { resource: userResources.IS_SELF, data };
+    return await apiHandler(params);
   },
 };

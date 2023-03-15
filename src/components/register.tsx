@@ -35,6 +35,11 @@ const Register = () => {
   //   const [password, setPassword] = useState("");
 
   const handleClick = async () => {
+    console.log(register, "reg");
+    if (register.password !== register.confirmPassword) {
+      snackBarUtil.error("Password does not match!!");
+      return;
+    }
     const { response } = await authServices.registeration(register);
 
     if (response?.status) {
@@ -121,6 +126,17 @@ const Register = () => {
           label="Password"
           type="password"
           value={register?.password}
+          onChange={handleChange}
+          fullWidth
+        />
+      </Box>
+      <Box textAlign={"left"}>
+        <TextField
+          required
+          name="confirmPassword"
+          label="Confirm Password"
+          type="password"
+          value={register?.confirmPassword}
           onChange={handleChange}
           fullWidth
         />
