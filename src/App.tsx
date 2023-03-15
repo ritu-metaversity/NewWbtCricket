@@ -30,26 +30,53 @@ import LoginDashboard from "./components/loginDashboard";
 import Register from "./components/register";
 import Deposit from "./Pages/deposit/Deposit";
 import Withdraw from "./Pages/withdraw/withdraw";
-import loaderImg from "./assets/img/loder.svg";
 import { CircularProgress } from "@mui/material";
 import OldChangePassword from "./components/Terms/OldChangePassword";
+import { userServices } from "./utils/api/user/services";
+
 interface LoadingType {
   [x: string]: boolean;
 }
+
 interface LoaderContextINterface {
   loading: LoadingType;
+  appData: AppDataInterface | null;
   setLoading: Dispatch<SetStateAction<LoadingType>> | null;
 }
 const defaultValue: LoaderContextINterface = {
   loading: {},
+  appData: null,
   setLoading: null,
 };
 export const LoaderContext = createContext(defaultValue);
 
+interface AppDataInterface {
+  logo: string;
+  mobileLogo: string;
+  selfAllowed: boolean;
+}
+
 function App() {
   const [loading, setLoading] = useState<LoadingType>({});
+  const [appData, setAppData] = useState<AppDataInterface | null>(null);
+
+  const getSelfAllowed = async () => {
+    const { response } = await userServices.isSelfAllowed({
+      // appUrl: "11hub.atozscore1234.com",
+      appUrl: window.location.hostname,
+    });
+
+    if (response?.data) {
+      setAppData(response.data);
+    }
+  };
+
+  useEffect(() => {
+    getSelfAllowed();
+  }, []);
+
   return (
-    <LoaderContext.Provider value={{ loading, setLoading }}>
+    <LoaderContext.Provider value={{ loading, appData, setLoading }}>
       {!Object.keys(loading).every((key) => loading[key] === false) && (
         <div className="loader-container">
           <CircularProgress />

@@ -61,22 +61,8 @@ interface Data2 {
   session: string;
 }
 
-function createData2(
-  session: string,
-  mode: string,
-  rate: number,
-  amount: number,
-  run: number,
-  dec: number
-): Data2 {
-  const sr = 1;
-  return { sr, mode, session, dec, run, amount, rate };
-}
 
-const rows2 = [
-  createData2("ADELAIDE STRIKERS W", "NO", 0.04, 30, 32, 0),
-  createData2("ADELAIDE STRIKERS W", "NO", 0.04, 30, 32, 0),
-];
+
 
 const BetRecord = (props: { item: any }) => {
   const [betRecord, setBetRecord] = React.useState<any>();

@@ -10,7 +10,7 @@ import {
   Toolbar,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoneyTwoTone";
 import MoneyIcon from "@mui/icons-material/MoneyTwoTone";
@@ -22,6 +22,7 @@ import { authServices } from "../../utils/api/auth/services";
 import SummarizeIcon from "@mui/icons-material/Summarize";
 import Marquee from "react-fast-marquee";
 import axios from "axios";
+import { LoaderContext } from "../../App";
 
 const data = {
   balance: 0,
@@ -98,6 +99,7 @@ const Headers = () => {
     getMsg();
   }, []);
 
+  const { appData } = useContext(LoaderContext);
   return (
     <>
       <AppBar position="sticky" color="primary" enableColorOnDark>
@@ -162,32 +164,34 @@ const Headers = () => {
           transformOrigin={{ horizontal: "right", vertical: "top" }}
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
-          <Box style={{ display: "flex" }}>
-            <Link to="/deposit">
-              <MenuItem>
-                <Button
-                  variant="contained"
-                  style={{ borderRadius: "10px" }}
-                  color="success"
-                >
-                  Deposit
-                </Button>
-                {/* <Avatar  /> <a style={{color:"black"}}> Deposit </a> */}
-              </MenuItem>
-            </Link>
-            <Link to="/withdraw">
-              <MenuItem>
-                <Button
-                  variant="contained"
-                  style={{ borderRadius: "10px" }}
-                  color="error"
-                >
-                  Withdraw
-                </Button>
-                {/* <Avatar  /> <a style={{color:"black"}}> Profile </a> */}
-              </MenuItem>
-            </Link>
-          </Box>
+          {appData?.selfAllowed && (
+            <Box style={{ display: "flex" }}>
+              <Link to="/deposit">
+                <MenuItem>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: "10px" }}
+                    color="success"
+                  >
+                    Deposit
+                  </Button>
+                  {/* <Avatar  /> <a style={{color:"black"}}> Deposit </a> */}
+                </MenuItem>
+              </Link>
+              <Link to="/withdraw">
+                <MenuItem>
+                  <Button
+                    variant="contained"
+                    style={{ borderRadius: "10px" }}
+                    color="error"
+                  >
+                    Withdraw
+                  </Button>
+                  {/* <Avatar  /> <a style={{color:"black"}}> Profile </a> */}
+                </MenuItem>
+              </Link>
+            </Box>
+          )}
           <Link to="/profile">
             <MenuItem>
               <Avatar /> <a style={{ color: "black" }}> Profile </a>

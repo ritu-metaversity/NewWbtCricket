@@ -10,7 +10,7 @@ export interface Column {
   label: string;
   minWidth?: number;
   colorCoded?: boolean;
-  align?: "right" | "center";
+  align?: "right" | "center" | "left";
   format?: (value: number) => string;
 }
 

@@ -3,6 +3,10 @@ type resourceKeys = "LOGIN" | "SIGN_UP";
 export const userResources: {
   [x: string]: ApiResource;
 } = {
+  GET_IP_ADDRESS: {
+    URL: "https://api.ipify.org/?format=json",
+    METHOD: "GET",
+  },
   USER_INFO: {
     URL: "user/full-user",
     METHOD: "GET",
@@ -75,5 +79,29 @@ export const userResources: {
   TEST_API: {
     URL: "http://89.39.105.69:9001/betfairodds/1.207796438",
     METHOD: "GET",
+  },
+  SELF_WITHDRAW: {
+    URL: "enduser/self-withdraw-app",
+    METHOD: "POST",
+  },
+  SELF_DEPOSIT: {
+    URL: "enduser/self-deposit-app",
+    METHOD: "POST",
+  },
+  PAYMENT_DETAILS: {
+    URL: "enduser/get-paymnet-detail-app-id-wise",
+    METHOD: "POST",
+  },
+  WITHDRAW_LIST: {
+    URL: "enduser/withdraw-request-client",
+    METHOD: "POST",
+  },
+  DEPOSIT_LIST: {
+    URL: "enduser/depsosit-request-client",
+    METHOD: "POST",
+  },
+  IS_SELF: {
+    URL: "login/is-self-by-app-url",
+    METHOD: "POST",
   },
 };
