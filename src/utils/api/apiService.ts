@@ -78,14 +78,13 @@ const apiService: (arg: ApiServiceInterface) => Promise<any> = async ({
 const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
   args
 ) => {
-  // const navigate = useNavigate();
   let result: any;
   await apiService(args)
     .catch((error) => {
       result = { error: error.response?.data };
       if (error.response.status === 401) {
-        // localStorage.removeItem("token");
-        // window.location.replace("/welcome");
+        localStorage.removeItem("token");
+        window.location.replace("/welcome");
       }
     })
     .then((response) => {
@@ -135,6 +134,21 @@ const apiSnackbarNotifications: (
   return args;
 };
 
+const apiWithErrorSnackbar: (
+  arg: ApiServiceInterface
+) => Promise<ApiResponse> = async (args) => {
+  const result = await apiHandler(args);
+  if (result?.error) {
+    const { message } = result.error;
+    if (typeof message === "object") {
+      message?.forEach((message) => snackBarUtil.error(message));
+    } else {
+      snackBarUtil.error(message);
+    }
+  }
+  return result;
+};
+
 const apiWithSnackbar: (
   arg: ApiServiceInterface
 ) => Promise<ApiResponse> = async (args) => {
@@ -142,4 +156,4 @@ const apiWithSnackbar: (
   return apiSnackbarNotifications(result);
 };
 
-export { apiService, apiHandler, apiWithSnackbar };
+export { apiWithErrorSnackbar, apiService, apiHandler, apiWithSnackbar };

@@ -79,7 +79,8 @@ const SetButtonValue = () => {
 
   const handleChange = (e: any) => {
     const buttons = { ...buttonValue };
-    setButtonValue({ ...buttons, [e.target.name]: e.target.value });
+    if (e.target.value < 100000000)
+      setButtonValue({ ...buttons, [e.target.name]: e.target.value });
   };
   const { loading, setLoading } = useContext(LoaderContext);
   useEffect(() => {

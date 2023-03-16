@@ -83,7 +83,12 @@ const Inplay = () => {
       }
       setLoading && setLoading((prev) => ({ ...prev, getNewEvent: false }));
     };
+
     getNewEvent();
+
+    const timer = setInterval(() => getNewEvent(), 60000);
+    return () => clearInterval(timer);
+    
   }, [tabValue, activeSportList]);
   return (
     <Box maxWidth={900} mx="auto">

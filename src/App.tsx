@@ -19,7 +19,6 @@ import Ledger from "./Pages/Ledger";
 import Profile from "./Pages/Profile";
 import SetButtonValue from "./Pages/SetButtonValue";
 import InPlayDetails from "./Pages/InPlayDetails";
-import CompleteDetails from "./Pages/completeDetails";
 import Account from "./Pages/accountStatement";
 import { SnackbarProvider } from "notistack";
 import { SnackbarUtilsConfigurator } from "./components/Layout/snackBarUtil";
@@ -33,6 +32,8 @@ import Withdraw from "./Pages/withdraw/withdraw";
 import { CircularProgress } from "@mui/material";
 import OldChangePassword from "./components/Terms/OldChangePassword";
 import { userServices } from "./utils/api/user/services";
+import Casino from "./components/casino/Casino";
+import CasinoGame from "./components/casino/game/CasinoGame";
 
 interface LoadingType {
   [x: string]: boolean;
@@ -111,6 +112,8 @@ function App() {
                   <Route path="login-history" element={<LoginHistory />} />
                   <Route path="bet-history" element={<BetHistory />} />
                   <Route path="current-bet" element={<CurrentBet />} />
+                  <Route path="casino" element={<Casino />} />
+                  <Route path="casino/:id" element={<CasinoGame />} />
                 </Route>
                 <Route path="password-change" element={<ChangePassword />} />
                 <Route path="terms" element={<Terms />} />

@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   ButtonGroup,
+  Grid,
   Modal,
   TextField,
   Typography,
@@ -17,7 +18,7 @@ import React, {
 import { LoaderContext } from "../../App";
 import { sportServices } from "../../utils/api/sport/services";
 import { userServices } from "../../utils/api/user/services";
-import { BetDetailsInterface } from "./types";
+import { BetDetailsInterface, ProfitObjectInterface } from "./types";
 
 const getDeviceType = () => {
   const ua = navigator.userAgent;
@@ -38,6 +39,7 @@ interface Props {
   bet: BetDetailsInterface | null;
   setBet: Dispatch<SetStateAction<BetDetailsInterface | null>>;
   buttonData: { [x: string]: number };
+  profits: ProfitObjectInterface;
 }
 
 const style = {
@@ -51,7 +53,7 @@ const style = {
   p: 4,
 };
 
-const BetSlip: FC<Props> = ({ bet, setBet, buttonData }) => {
+const BetSlip: FC<Props> = ({ bet, setBet, profits, buttonData }) => {
   const [userIp, setUserIp] = useState("");
 
   useEffect(() => {
@@ -95,7 +97,9 @@ const BetSlip: FC<Props> = ({ bet, setBet, buttonData }) => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {bet?.marketName}
           </Typography>
-
+          <Typography id="modal-modal-title" py={1} fontWeight={700}>
+            {bet?.name || "dasf"}
+          </Typography>
           <Box
             display="flex"
             flexDirection={"column"}
@@ -103,24 +107,32 @@ const BetSlip: FC<Props> = ({ bet, setBet, buttonData }) => {
             my={3}
             alignItems="center"
           >
-            <div style={{ display: "flex" }}>
-              <TextField
-                size="small"
-                sx={{ width: "200px", margin: "auto" }}
-                value={bet.stake}
-                onChange={(e) =>
-                  setBet((o) =>
-                    o ? { ...o, stake: Number(e.target.value) } : null
-                  )
-                }
-              />
-              <p
-                style={{ marginLeft: "20px" }}
-                className="MuiTypography-root MuiTypography-body1 css-33qhfi"
-              >
-                Profit: {(bet.odds - 1) * bet.stake}
-              </p>
-            </div>
+            <Grid container>
+              <Grid item xs={6}>
+                <TextField
+                  size="small"
+                  sx={{
+                    width: "200px",
+                    margin: "auto",
+                    bgcolor: bet?.isBack ? "#7dc7fc" : "#ff7bac",
+                  }}
+                  value={bet.stake}
+                  onChange={(e) =>
+                    setBet((o) =>
+                      o ? { ...o, stake: Number(e.target.value) } : null
+                    )
+                  }
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <p
+                  style={{ marginLeft: "20px" }}
+                  className="MuiTypography-root MuiTypography-body1 css-33qhfi"
+                >
+                  Profit: {((bet.odds - 1) * bet.stake).toFixed(2)}
+                </p>
+              </Grid>
+            </Grid>
             <Box display={"flex"} gap={1} flexWrap="wrap">
               {Object.keys(buttonData)?.map((item: any) => (
                 <Button
@@ -145,6 +157,14 @@ const BetSlip: FC<Props> = ({ bet, setBet, buttonData }) => {
               Bet
             </Button>
           </Box>
+          {bet?.marketName === "Bookmaker"
+            ? profits.Bookmaker?.filter(
+                (item) => item?.mid === bet?.marketId
+              ).map((profit) => <BetResult {...profit} />)
+            : bet?.marketName &&
+              profits.Odds[bet?.marketId]?.map((profit) => (
+                <BetResult {...profit} />
+              ))}
         </Box>
       ) : (
         <h1>"No Bet Selected"</h1>
@@ -152,5 +172,16 @@ const BetSlip: FC<Props> = ({ bet, setBet, buttonData }) => {
     </Modal>
   );
 };
-
+function BetResult({ value, title }: { value: number; title: string }) {
+  return (
+    <Box display="flex" m={1} justifyContent={"space-between"}>
+      <Typography color="text.secondary" fontSize={"0.8rem"}>
+        {title}
+      </Typography>
+      <Typography color={value >= 0 ? "green" : "red"} fontSize={"0.8rem"}>
+        {Number(value?.toFixed(2))}
+      </Typography>
+    </Box>
+  );
+}
 export default BetSlip;

@@ -14,9 +14,10 @@ export const SummaryCardTitle = styled(Typography)({
 });
 
 export const SummaryCardContainer = styled(Box)({
-    backgroundColor: "#ddd",
-    textAlign: "center",
-    marginBlock: 10,
-    border: "1px dashed #000",
-    borderRadius: "10px",
-})
+  backgroundColor: "#ddd",
+  textAlign: "center",
+  position: "relative",
+  marginBlock: 10,
+  border: "1px dashed #000",
+  borderRadius: "10px",
+});

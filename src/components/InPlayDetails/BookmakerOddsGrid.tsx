@@ -3,7 +3,11 @@ import React, { Dispatch, FC, SetStateAction } from "react";
 import { BetText, BetTextMedium, BetTextSmall } from "./styledComponents";
 import "./custom.css";
 import { BetGridItem, redGreenComponent } from "./Bet";
-import { BetDetailsInterface, FancyOddsInterface } from "./types";
+import {
+  BetDetailsInterface,
+  FancyOddsInterface,
+  ProfitInterface,
+} from "./types";
 
 const BookMakerOddsgrid: FC<{
   CurrentOdd: FancyOddsInterface[];
@@ -13,18 +17,8 @@ const BookMakerOddsgrid: FC<{
   setBet: Dispatch<SetStateAction<BetDetailsInterface | null>>;
   OddsPnl: any;
   buttonData: any;
-}> = ({ CurrentOdd, matchId, OddsPnl, buttonData, bet, setBet }) => {
-  const pnlsOdds = OddsPnl?.find(
-    (element: { marketId: any }) => element?.marketId == CurrentOdd[0].mid
-  );
-  const plnOddsArray = pnlsOdds
-    ? [
-        { pnl: pnlsOdds.pnl1, selectionId: pnlsOdds.selection1 },
-        { pnl: pnlsOdds.pnl2, selectionId: pnlsOdds.selection2 },
-        { pnl: pnlsOdds.pnl3, selectionId: pnlsOdds.selection3 },
-      ]
-    : [];
-
+  profits: ProfitInterface[];
+}> = ({ CurrentOdd, matchId, OddsPnl, buttonData, bet, setBet, profits }) => {
   const date = new Date();
 
   const updateBet = (
@@ -36,15 +30,17 @@ const BookMakerOddsgrid: FC<{
     placeTime: Date,
     priceValue: number,
     isFancy: boolean,
-    marketName: string
+    marketName: string,
+    name: string
   ) => {
-    if (odds > 0) {
+    if (odds <= 0) {
       setBet(null);
+      return;
     }
     setBet({
       ...bet,
       isBack: isBack,
-      marketName,
+      marketName: "Bookmaker",
       odds: odds,
       stake: 0,
       selectionId: selectionId,
@@ -53,6 +49,7 @@ const BookMakerOddsgrid: FC<{
       placeTime: placeTime,
       priceValue: priceValue,
       isFancy: isFancy,
+      name,
     });
   };
 
@@ -62,14 +59,15 @@ const BookMakerOddsgrid: FC<{
         <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
         {CurrentOdd.map((item) => (
           <BetGridItem
+            suspended={["suspended", "ball running"].includes(
+              item.gstatus.toLowerCase()
+            )}
             values={[
               <>
                 <BetTextMedium>{item?.nation}</BetTextMedium>
                 <BetTextSmall>Session Limit: 50k</BetTextSmall>
-                {item.sid}
                 {redGreenComponent(
-                  plnOddsArray.find((pnl) => pnl.selectionId == item.sid)
-                    ?.pnl || 0
+                  profits?.find((profit) => profit?.sid === item.sid)?.value
                 )}
               </>,
               <BetText
@@ -84,7 +82,8 @@ const BookMakerOddsgrid: FC<{
                     date,
                     +item.b1,
                     false,
-                    item.t
+                    item.t,
+                    item.nation
                   )
                 }
                 color="red"
@@ -104,7 +103,8 @@ const BookMakerOddsgrid: FC<{
                     date,
                     +item.l1,
                     false,
-                    item.t
+                    item.t,
+                    item.nation
                   )
                 }
                 color="blue"
