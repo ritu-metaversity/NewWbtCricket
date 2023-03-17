@@ -10,7 +10,7 @@ import {
 const titleComponent = (
   <>
     <HeaderStyle>Welcome to</HeaderStyle>
-    <HeaderStyle>Bet95</HeaderStyle>
+    <HeaderStyle>{window.location.hostname}</HeaderStyle>
   </>
 );
 

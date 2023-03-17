@@ -54,7 +54,7 @@ const Login = () => {
       mt="40px"
     >
       <Typography variant="h1" fontWeight={"700"} color="#e91e63">
-        Bet95
+        {window.location.hostname}
       </Typography>
       <Typography
         textAlign={"center"}

@@ -24,9 +24,14 @@ import ButtonGroupComponent from "./ButtonGroupComponent";
 import { MatchOddsGrid } from "./MatchOddsGrid";
 import { SessionOddsGrid } from "./SessionOddsGrid";
 import BetSlip from "./BetSlip";
-import { BetDetailsInterface, ProfitObjectInterface } from "./types";
+import {
+  BetDetailsInterface,
+  FancyOddsInterface,
+  ProfitObjectInterface,
+} from "./types";
 import { createProfits } from "./eventUtil";
 import PnlModal from "./pnlModal";
+import moment from "moment";
 
 // const [open, setOpen] = React.useState(false);
 //   const handleOpen = () => setOpen(true);
@@ -55,6 +60,10 @@ const Bet: FC<any> = (props: { event: number }) => {
   const { setLoading } = useContext(LoaderContext);
   const [bet, setBet] = useState<BetDetailsInterface | null>(null);
 
+  const [activeFancySlower, setActiveFancySlower] = useState<{
+    [x: string]: any[];
+  }>({});
+
   const [profits, setProfits] = useState<ProfitObjectInterface>({
     Odds: {},
     Bookmaker: [],
@@ -78,10 +87,30 @@ const Bet: FC<any> = (props: { event: number }) => {
 
   useEffect(() => {
     const getActiveFancyOdds = async () => {
+      const { response } = await sportServices.newFancySlower(
+        props.event.toString()
+      );
+      if (response) {
+        setActiveFancySlower(response);
+      }
+    };
+    getActiveFancyOdds();
+  }, [props.event]);
+
+  useEffect(() => {
+    const getActiveFancyOdds = async () => {
       const { response } = await sportServices.newFancy(props.event.toString());
       if (response) {
+        console.log(moment().valueOf());
         setBookMakerOdds(response.Bookmaker);
-        let newBookmakerOdd: any[] = response.Bookmaker;
+        let newBookmakerOdd: FancyOddsInterface[] = response.Bookmaker.map(
+          (item: any, index: number) => ({
+            ...(activeFancySlower?.Bookmaker
+              ? activeFancySlower?.Bookmaker[index] || {}
+              : {}),
+            ...item,
+          })
+        );
         if (newBookmakerOdd) {
           setBookMakerToss(() =>
             newBookmakerOdd
@@ -113,7 +142,15 @@ const Bet: FC<any> = (props: { event: number }) => {
             );
           }
         }
-        setMatchOdds(response.Odds);
+        setMatchOdds(
+          response.Odds.map((item: any, index: number) => ({
+            ...(activeFancySlower?.Odds
+              ? activeFancySlower?.Odds[index] || {}
+              : {}),
+            ...item,
+          }))
+        );
+        console.log(moment().valueOf());
         if (matchOdd.length) {
           setPreMetchOdds([...matchOdd]);
         } else {
@@ -126,11 +163,22 @@ const Bet: FC<any> = (props: { event: number }) => {
           newResponse.Odds = undefined;
           setPreFancyOdds(newResponse);
         }
+
         const newResponse = { ...response };
+        for (let i in response) {
+          if (["Odds"].includes(i)) {
+            continue;
+          }
+          newResponse[i] = response[i].map((single: any, index: number) => ({
+            ...activeFancySlower[i][index],
+            ...single,
+          }));
+        }
         // newResponse.Odds = undefined;
         setActiveFancy(newResponse);
       }
     };
+
     setTimeout(() => getActiveFancyOdds(), 500);
   }, [activeFancy, matchOdd]);
 
@@ -214,10 +262,10 @@ const Bet: FC<any> = (props: { event: number }) => {
           />
         </DialogContent>
       </Dialog>
-      {matchOdd[0] && (
+      {matchOdd && matchOdd[0] && (
         <TitleStyled>
           {matchOdd[0]
-            ? `${matchOdd[0]?.Series}  > ${matchOdd[0]?.Event} `
+            ? `${matchOdd[0]?.Series}  > ${matchOdd[0]?.matchname} `
             : " "}
 
           <Typography component={"span"}>{matchOdd[0]?.eventTime}</Typography>

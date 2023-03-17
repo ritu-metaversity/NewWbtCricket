@@ -58,91 +58,96 @@ export const SessionOddsGrid: FC<Props> = ({
     });
   };
   return (
-    <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
-      <BetGridItem title values={["SESSION", "NOT", "YES"]} />
-      {CurrentOdd.map((item, index) => (
-        <BetGridItem
-          suspended={["suspended", "ball running"].includes(
-            item.gstatus.toLowerCase()
-          )}
-          values={[
-            <>
-              <BetTextMedium>{item?.nation}</BetTextMedium>
-              <BetTextSmall>Session Limit: 50k</BetTextSmall>
+    <>
+      <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
+        <BetGridItem title values={["SESSION", "NOT", "YES"]} />
+        {CurrentOdd.map((item, index) => (
+          <BetGridItem
+            suspended={["suspended", "ball running"].includes(
+              item.gstatus.toLowerCase()
+            )}
+            values={[
+              <>
+                <BetTextMedium>{item?.nation}</BetTextMedium>
+                <BetTextSmall>
+                  Max Bet:{item?.maxBet} | Bet Delay:
+                  {item?.minBet}
+                </BetTextSmall>
+                <Box
+                  onClick={() =>
+                    (FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl ||
+                      0) &&
+                    setMarketId(item.sid)
+                  }
+                >
+                  {redGreenComponent(
+                    FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl || 0
+                  )}
+                </Box>
+              </>,
               <Box
-                onClick={() =>
-                  (FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl ||
-                    0) &&
-                  setMarketId(item.sid)
+                className={
+                  PrevOdds[index].b1 < item.b1
+                    ? "odds-up"
+                    : PrevOdds[index].b1 > item.b1
+                    ? "odds-down"
+                    : ""
                 }
               >
-                {redGreenComponent(
-                  FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl || 0
-                )}
-              </Box>
-            </>,
-            <Box
-              className={
-                PrevOdds[index].b1 < item.b1
-                  ? "odds-up"
-                  : PrevOdds[index].b1 > item.b1
-                  ? "odds-down"
-                  : ""
-              }
-            >
-              <BetText
-                onClick={() =>
-                  updateBet(
-                    true,
-                    +item.b1,
-                    0,
-                    0,
-                    item.sid,
-                    matchId.toString(),
-                    date,
-                    +item.bs1,
-                    true,
-                    item.nation
-                  )
+                <BetText
+                  onClick={() =>
+                    updateBet(
+                      true,
+                      +item.b1,
+                      0,
+                      0,
+                      item.sid,
+                      matchId.toString(),
+                      date,
+                      +item.bs1,
+                      true,
+                      item.nation
+                    )
+                  }
+                  color="red"
+                >
+                  {item.b1}
+                  <BetTextSmall>{item.bs1}</BetTextSmall>
+                </BetText>
+              </Box>,
+              <Box
+                className={
+                  PrevOdds[index].l1 < item.l1
+                    ? "odds-up"
+                    : PrevOdds[index].l1 > item.l1
+                    ? "odds-down"
+                    : ""
                 }
-                color="red"
               >
-                {item.b1}
-                <BetTextSmall>{item.bs1}</BetTextSmall>
-              </BetText>
-            </Box>,
-            <Box
-              className={
-                PrevOdds[index].l1 < item.l1
-                  ? "odds-up"
-                  : PrevOdds[index].l1 > item.l1
-                  ? "odds-down"
-                  : ""
-              }
-            >
-              <BetText
-                onClick={() =>
-                  updateBet(
-                    false,
-                    +item.l1,
-                    0,
-                    0,
-                    item.sid,
-                    matchId.toString(),
-                    date,
-                    +item.ls1,
-                    true,
-                    item.nation
-                  )
-                }
-                color="blue"
-              >
-                {item.l1} <BetTextSmall>{item.ls1}</BetTextSmall>
-              </BetText>
-            </Box>,
-          ]}
-        />
-      ))}
-    </Grid>
+                <BetText
+                  onClick={() =>
+                    updateBet(
+                      false,
+                      +item.l1,
+                      0,
+                      0,
+                      item.sid,
+                      matchId.toString(),
+                      date,
+                      +item.ls1,
+                      true,
+                      item.nation
+                    )
+                  }
+                  color="blue"
+                >
+                  {item.l1} <BetTextSmall>{item.ls1}</BetTextSmall>
+                </BetText>
+              </Box>,
+            ]}
+          />
+        ))}
+      </Grid>
+    </>
   );
 };

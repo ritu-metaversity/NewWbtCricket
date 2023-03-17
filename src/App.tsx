@@ -98,7 +98,8 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      if (pathname !== "OldChangePassword") validateJwt();
+      if (["welcome", "sign-in", "sign-up"].every((i) => !pathname.includes(i)))
+        validateJwt();
     } else {
       setIsSignedIn(false);
     }
@@ -130,7 +131,8 @@ function App() {
               <Route path="/welcome" element={<LoginDashboard />} />
               <Route path="/sign-in" element={<Login />} />
               <Route path="/sign-up" element={<Register />} />
-              <Route path="/" element={<Layout />}>
+
+              <Route path="/" element={<Layout isSignedIn={isSignedIn} />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/deposit" element={<Deposit />} />
                 <Route path="/withdraw" element={<Withdraw />} />

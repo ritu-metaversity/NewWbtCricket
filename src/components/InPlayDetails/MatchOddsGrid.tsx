@@ -25,6 +25,7 @@ interface MatchOddsGridProps {
   }[];
 
   maxBet: number;
+  minBet: number;
   Name: string;
   betDelay: number;
   inPlay: boolean;
@@ -51,7 +52,7 @@ export const MatchOddsGrid: FC<Props> = ({
   matchId,
   OddsPnl,
 }) => {
-  const { runners, status, maxBet, betDelay, marketId, Name } = CurrentOdd;
+  const { runners, status, maxBet, minBet, marketId, Name } = CurrentOdd;
   const { runners: PrevRunner } = PrevOdds;
 
   const date = new Date();
@@ -90,7 +91,7 @@ export const MatchOddsGrid: FC<Props> = ({
     <>
       <Box display="flex" justifyContent={"space-evenly"}>
         <BetTextMedium>Max Bet:{maxBet}</BetTextMedium>
-        <BetTextMedium>Bet Delay:{betDelay}</BetTextMedium>
+        <BetTextMedium>Min Bet:{minBet}</BetTextMedium>
       </Box>
       <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
         <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />

@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import React, { Dispatch, FC, SetStateAction } from "react";
 import { BetText, BetTextMedium, BetTextSmall } from "./styledComponents";
 import "./custom.css";
@@ -65,7 +65,10 @@ const BookMakerOddsgrid: FC<{
             values={[
               <>
                 <BetTextMedium>{item?.nation}</BetTextMedium>
-                <BetTextSmall>Session Limit: 50k</BetTextSmall>
+                <BetTextSmall>
+                  Max Bet:{item?.maxBet} | Bet Delay:
+                  {item?.minBet}
+                </BetTextSmall>
                 {redGreenComponent(
                   profits?.find((profit) => profit?.sid === item.sid)?.value
                 )}
