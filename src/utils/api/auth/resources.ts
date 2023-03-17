@@ -47,4 +47,8 @@ export const authResourcs: {
     URL: "/user/self-register",
     METHOD: "POST",
   },
+  VALIDATE_JWT: {
+    URL: "util/validate-jwt-token",
+    METHOD: "POST",
+  },
 };

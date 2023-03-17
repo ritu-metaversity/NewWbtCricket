@@ -76,7 +76,12 @@ export const authServices = {
     const params: ApiServiceInterface = {
       resource: authResources.LOGOUT,
     };
-    //
     return apiHandler(params);
+  },
+  validateToken: async () => {
+    const params = {
+      resource: authResources.VALIDATE_JWT,
+    };
+    return await apiHandler(params);
   },
 };
