@@ -104,4 +104,12 @@ export const userResources: {
     URL: "login/is-self-by-app-url",
     METHOD: "POST",
   },
+  PROFIT_LOSS: {
+    URL: "report/profit-loss-match-wise",
+    METHOD: "POST",
+  },
+  PNL_BOOK: {
+    URL: "enduser/user-fancy-book",
+    METHOD: "POST",
+  },
 };

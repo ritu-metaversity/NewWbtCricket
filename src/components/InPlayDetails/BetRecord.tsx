@@ -11,10 +11,10 @@ export interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: "sr", label: "Sr.", align: "right" },
-  { id: "rate", label: "Rate", align: "right" },
-  { id: "amount", label: "Amount", align: "right" },
-  { id: "back", label: "Mode", align: "right" },
+  { id: "sr", label: "Sr.", align: "center" },
+  { id: "rate", label: "Rate", align: "center" },
+  { id: "amount", label: "Amount", align: "center" },
+  { id: "back", label: "Mode", align: "center" },
   { id: "nation", label: "Team", align: "center" },
 ];
 
@@ -61,9 +61,6 @@ interface Data2 {
   session: string;
 }
 
-
-
-
 const BetRecord = (props: { item: any }) => {
   const [betRecord, setBetRecord] = React.useState<any>();
   useEffect(() => {
@@ -83,7 +80,7 @@ const BetRecord = (props: { item: any }) => {
         Object.keys(betRecord).map((key) => (
           <StickyTable
             rows={betRecord[key].map((value: any, index: string) => {
-              value.color = value.back ? "#72BBEF" : "#F994BA";
+              value.color = value.back ? "#b3d9f5" : "#f5bad0";
               value.back = value.back ? "Lagai" : "Khayi";
               value.sr = index + 1;
 

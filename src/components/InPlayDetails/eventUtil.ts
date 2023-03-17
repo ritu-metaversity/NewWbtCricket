@@ -39,7 +39,9 @@ export const createProfits = ({
   profits,
   setProfits,
 }: CreateProfitProps) => {
-  if (!fancyOdds) return;
+  if (!fancyOdds || !betDetails) return;
+  console.log("hihihi");
+
   const pnlsOdds = pnl?.find(
     (element) => element?.marketId == betDetails?.marketId
   );
@@ -54,7 +56,6 @@ export const createProfits = ({
     const isBack = betDetails?.isBack || false,
       odds = betDetails?.odds || 0,
       stake = betDetails?.stake || 0;
-
     if (betDetails?.marketName === "Bookmaker") {
       const Bookmaker: ProfitInterface[] = [];
       const pnlsBookmaker = pnl?.find(
@@ -67,9 +68,9 @@ export const createProfits = ({
             { pnl: pnlsBookmaker.pnl3, selectionId: pnlsBookmaker.selection3 },
           ]
         : [];
-      fancyOdds?.Bookmaker.forEach((odd: FancyOddsInterface) => {
+      fancyOdds?.Bookmaker?.forEach((odd: FancyOddsInterface) => {
         if (odd.mid !== betDetails.marketId) return;
-        const current = plnBookmakerArray.find(
+        const current = plnBookmakerArray?.find(
           (item: any) => item.selectionId === odd.sid
         );
         if (odd.sid === betDetails?.selectionId) {
@@ -95,7 +96,7 @@ export const createProfits = ({
         Odds: {
           ...profits.Odds,
           [betDetails?.marketId || "really"]: [
-            ...fancyOdds.Odds.find(
+            ...(fancyOdds.Odds?.find(
               (i: any) => i.marketId === betDetails?.marketId
             )?.runners?.map((element: any) => {
               const currentProfit: ProfitInterface = {
@@ -106,7 +107,6 @@ export const createProfits = ({
                     (item) => item.selectionId == element.selectionId
                   )?.pnl || 0,
               };
-
               if (element.selectionId === betDetails?.selectionId) {
                 currentProfit.value =
                   currentProfit.value + (isBack ? 1 : -1) * (odds - 1) * stake;
@@ -115,12 +115,13 @@ export const createProfits = ({
                   currentProfit.value + (isBack ? -1 : 1) * stake;
               }
               return currentProfit;
-            }),
+            }) || []),
           ],
         },
       });
     }
   } else {
+    console.log("hihihi");
     setProfits({
       Odds: {
         ...(fancyOdds?.Odds?.reduce((accu: any, current: any) => {
@@ -160,36 +161,35 @@ export const createProfits = ({
         }, {}) || {}),
       },
       Bookmaker: [
-        ...fancyOdds?.Bookmaker?.map((element: FancyOddsInterface) => {
-          const pnlsBookmaker = pnl?.find(
-            (pnl) => pnl?.marketId === element.mid
-          );
-          if (!pnlsBookmaker) return;
-
-          const plnBookmakerArray = [
-            {
-              pnl: pnlsBookmaker.pnl1,
-              selectionId: pnlsBookmaker.selection1,
-            },
-            {
-              pnl: pnlsBookmaker.pnl2,
-              selectionId: pnlsBookmaker.selection2,
-            },
-            {
-              pnl: pnlsBookmaker.pnl3,
-              selectionId: pnlsBookmaker.selection3,
-            },
-          ];
-          const currentProfit: ProfitInterface = {
-            title: element.nation,
-            sid: element.sid,
-            mid: element.mid,
-            value:
-              plnBookmakerArray.find((item) => item.selectionId == element.sid)
-                ?.pnl || 0,
-          };
-          return currentProfit;
-        }),
+        // ...(fancyOdds?.Bookmaker?.map((element: FancyOddsInterface) => {
+        //   const pnlsBookmaker = pnl?.find(
+        //     (pnl) => pnl?.marketId === element.mid
+        //   );
+        //   if (!pnlsBookmaker) return null;
+        //   const plnBookmakerArray = [
+        //     {
+        //       pnl: pnlsBookmaker.pnl1,
+        //       selectionId: pnlsBookmaker.selection1,
+        //     },
+        //     {
+        //       pnl: pnlsBookmaker.pnl2,
+        //       selectionId: pnlsBookmaker.selection2,
+        //     },
+        //     {
+        //       pnl: pnlsBookmaker.pnl3,
+        //       selectionId: pnlsBookmaker.selection3,
+        //     },
+        //   ];
+        //   const currentProfit: ProfitInterface = {
+        //     title: element.nation,
+        //     sid: element.sid,
+        //     mid: element.mid,
+        //     value:
+        //       plnBookmakerArray.find((item) => item.selectionId == element.sid)
+        //         ?.pnl || 0,
+        //   };
+        //   return currentProfit;
+        // }) || []),
       ],
       Fancy:
         fancyPnl?.map((element: FancyPnl) => {

@@ -1,6 +1,6 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
 import { SummaryCardContainer, SummaryCardTitle } from "./styledComponents";
 
@@ -25,7 +25,11 @@ const SummaryCard: FC<SummaryCardProps> = (data) => {
   return (
     <SummaryCardContainer>
       <Link
-        to={"/in-play-details/?event-id=" + matchId}
+        to={
+          localStorage.getItem("token")
+            ? "/in-play-details/?event-id=" + matchId
+            : "/sign-in"
+        }
         style={{ position: "relative" }}
       >
         <Typography
@@ -44,29 +48,22 @@ const SummaryCard: FC<SummaryCardProps> = (data) => {
           {new Date(openDate).toLocaleString()}
         </Typography>
       </Link>
-      <Grid container py={2} bgcolor="rgba(0,0,0,0.1)">
-        <Grid item xs={4} marginLeft="auto">
-          Total bet count:
-        </Grid>
-        <Grid item xs={4}>
-          0
-        </Grid>
-        <Grid item xs={4}>
-          {inPlay && (
-            <Typography
-              component={"div"}
-              maxWidth={"min-content"}
-              overflow="hidden"
-              marginLeft={"auto"}
-              marginRight={2}
-            >
-              InPlay
-              <Box className="live-under">
-                <Box className="live-under-under"></Box>
-              </Box>
-            </Typography>
-          )}
-        </Grid>
+
+      <Grid item xs={12} position="absolute" right={0} top={50}>
+        {inPlay && (
+          <Typography
+            component={"div"}
+            maxWidth={"min-content"}
+            overflow="hidden"
+            marginLeft={"auto"}
+            marginRight={2}
+          >
+            InPlay
+            <Box className="live-under">
+              <Box className="live-under-under"></Box>
+            </Box>
+          </Typography>
+        )}
       </Grid>
 
       <Grid container py={1}>

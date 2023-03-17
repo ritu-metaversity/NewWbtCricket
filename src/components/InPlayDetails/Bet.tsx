@@ -4,6 +4,8 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
+  Dialog,
+  DialogContent,
   Grid,
   Modal,
   TextField,
@@ -11,7 +13,7 @@ import {
 } from "@mui/material";
 // import { blue } from "@mui/material/colors";
 import { Box } from "@mui/system";
-import React, { FC, useContext, useEffect, useState } from "react";
+import React, { FC, useCallback, useContext, useEffect, useState } from "react";
 import { TitleStyled } from "../custom/styledComponents";
 import { sportServices } from "../../utils/api/sport/services";
 import "./custom.css";
@@ -22,7 +24,9 @@ import ButtonGroupComponent from "./ButtonGroupComponent";
 import { MatchOddsGrid } from "./MatchOddsGrid";
 import { SessionOddsGrid } from "./SessionOddsGrid";
 import BetSlip from "./BetSlip";
-import { BetDetailsInterface } from "./types";
+import { BetDetailsInterface, ProfitObjectInterface } from "./types";
+import { createProfits } from "./eventUtil";
+import PnlModal from "./pnlModal";
 
 // const [open, setOpen] = React.useState(false);
 //   const handleOpen = () => setOpen(true);
@@ -35,6 +39,8 @@ const Bet: FC<any> = (props: { event: number }) => {
     setAmount(e.target.value);
   };
 
+  const [selectedPnlMarketId, setSelectedPnlMarketId] = useState("");
+
   const [activeFancy, setActiveFancy] = useState<any[]>([]);
   const [matchOdd, setMatchOdds] = useState<any[]>([]);
   const [preMatchOdds, setPreMetchOdds] = useState<any[]>([]);
@@ -46,9 +52,14 @@ const Bet: FC<any> = (props: { event: number }) => {
   const [preBookmakerToss, setPreBookMakerToss] = useState<any[]>([]);
   const [fancyPnl, setFancyPnl] = useState<FancyPnl[]>([]);
   const [oddPnl, setOddsPnl] = useState<Pnl[]>([]);
-
-  const { loading, setLoading } = useContext(LoaderContext);
+  const { setLoading } = useContext(LoaderContext);
   const [bet, setBet] = useState<BetDetailsInterface | null>(null);
+
+  const [profits, setProfits] = useState<ProfitObjectInterface>({
+    Odds: {},
+    Bookmaker: [],
+    Fancy: [],
+  });
 
   const style = {
     position: "absolute" as "absolute",
@@ -63,7 +74,6 @@ const Bet: FC<any> = (props: { event: number }) => {
 
   const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
@@ -89,11 +99,7 @@ const Bet: FC<any> = (props: { event: number }) => {
           } else {
             setPrvBookMakerOdds(() =>
               bookmakerOdd
-                .map((item) => {
-                  if (item.t !== "TOSS") {
-                    return item;
-                  }
-                })
+                .filter((item) => item.t !== "TOSS")
                 .filter((item) => item != null)
             );
           }
@@ -102,11 +108,7 @@ const Bet: FC<any> = (props: { event: number }) => {
           } else {
             setPreBookMakerToss(() =>
               bookmakerOdd
-                .map((item) => {
-                  if (item.t === "TOSS") {
-                    return item;
-                  }
-                })
+                .filter((item) => item.t === "TOSS")
                 .filter((item) => item != null)
             );
           }
@@ -125,34 +127,36 @@ const Bet: FC<any> = (props: { event: number }) => {
           setPreFancyOdds(newResponse);
         }
         const newResponse = { ...response };
-        newResponse.Odds = undefined;
+        // newResponse.Odds = undefined;
         setActiveFancy(newResponse);
       }
     };
     setTimeout(() => getActiveFancyOdds(), 500);
   }, [activeFancy, matchOdd]);
 
-  const getFancyPnl = async () => {
+  const getFancyPnl = useCallback(async () => {
     const { response } = await sportServices.getuserFancyPnl(props.event);
     if (response) {
       setFancyPnl(response.data);
     }
-  };
+  }, [props.event]);
 
-  const getOddsPnl = async () => {
+  const getOddsPnl = useCallback(async () => {
     const { response } = await sportServices.getuserOddsPnl(props.event);
     if (response) {
       setOddsPnl(response.data);
     }
-  };
+  }, [props.event]);
 
   useEffect(() => {
     getFancyPnl();
-  }, []);
-
-  useEffect(() => {
     getOddsPnl();
-  }, []);
+    const timer = setInterval(() => {
+      getOddsPnl();
+      getFancyPnl();
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [getOddsPnl, getFancyPnl]);
 
   const handleClick = async () => {
     console.log("handle");
@@ -184,9 +188,32 @@ const Bet: FC<any> = (props: { event: number }) => {
     getButtondata();
   }, []);
 
+  useEffect(() => {
+    createProfits({
+      fancyOdds: activeFancy,
+      fancyPnl,
+      pnl: oddPnl,
+      betDetails: bet,
+      profits,
+      setProfits,
+    });
+  }, [bet?.stake]);
+
   console.log(matchOdd, "matchOdd");
   return (
     <>
+      <Dialog
+        title="Run Amount"
+        open={Boolean(selectedPnlMarketId)}
+        onClose={() => setSelectedPnlMarketId("")}
+      >
+        <DialogContent>
+          <PnlModal
+            fancyId={selectedPnlMarketId}
+            matchId={props.event.toString()}
+          />
+        </DialogContent>
+      </Dialog>
       {matchOdd[0]?.runners[0]?.name ? (
         <TitleStyled>
           {`${matchOdd[0]?.runners[0]?.name}
@@ -196,7 +223,12 @@ const Bet: FC<any> = (props: { event: number }) => {
       ) : (
         ""
       )}
-      <BetSlip setBet={setBet} bet={bet} buttonData={buttonData} />
+      <BetSlip
+        profits={profits}
+        setBet={setBet}
+        bet={bet}
+        buttonData={buttonData}
+      />
 
       {matchOdd?.map((match, index) => (
         <Accordion key={"matchodd" + index}>
@@ -207,11 +239,10 @@ const Bet: FC<any> = (props: { event: number }) => {
             <MatchOddsGrid
               bet={bet}
               setBet={setBet}
-              buttonData={buttonData}
               CurrentOdd={match}
               PrevOdds={preMatchOdds[index]}
               matchId={props.event}
-              OddsPnl={oddPnl}
+              OddsPnl={profits.Odds[match?.marketId]}
             />
           </AccordionDetails>
         </Accordion>
@@ -226,6 +257,7 @@ const Bet: FC<any> = (props: { event: number }) => {
             <BookMakerOddsgrid
               setBet={setBet}
               bet={bet}
+              profits={profits.Bookmaker}
               buttonData={buttonData}
               CurrentOdd={originBookMaker}
               PrevOdds={prvbookmakerOdd}
@@ -245,6 +277,7 @@ const Bet: FC<any> = (props: { event: number }) => {
             <BookMakerOddsgrid
               setBet={setBet}
               bet={bet}
+              profits={profits.Bookmaker}
               buttonData={buttonData}
               CurrentOdd={bookmakerToss}
               PrevOdds={preBookmakerToss}
@@ -258,7 +291,10 @@ const Bet: FC<any> = (props: { event: number }) => {
       {Object.keys(activeFancy)?.length > 0 &&
         activeFancy &&
         Object.keys(activeFancy).map((keys: any) => {
-          if (["Fancy2", "Fancy3", "OddEven"].includes(keys)) {
+          if (
+            ["Fancy2", "Fancy3", "OddEven"].includes(keys) &&
+            activeFancy[keys]?.length
+          ) {
             return (
               <Accordion>
                 <AccordionSummary expandIcon={<ExpandCircleDown />}>
@@ -267,6 +303,7 @@ const Bet: FC<any> = (props: { event: number }) => {
                 <AccordionDetails sx={{ p: 0 }}>
                   <SessionOddsGrid
                     bet={bet}
+                    setMarketId={setSelectedPnlMarketId}
                     setBet={setBet}
                     buttonData={buttonData}
                     CurrentOdd={activeFancy[keys]}
@@ -372,7 +409,7 @@ export const BetGridItem = ({
       </Grid>
       {!title && suspended ? (
         <Grid item xs={6.2} lg={6}>
-          <Grid display="grid">
+          <Grid display="grid" height={"100%"}>
             <Box
               sx={{
                 gridArea: "1/1",
@@ -417,11 +454,11 @@ export const redGreenComponent = (value: any) => {
   return (
     <>
       <Typography
-        color={value >= 0 ? "green" : "red"}
+        color={(Number(value) || 0) >= 0 ? "green" : "red"}
         fontSize={"0.8rem"}
         mr={0.5}
       >
-        {Number(value?.toFixed(2))}
+        {Number(value?.toFixed(2)) || 0}
       </Typography>
     </>
   );

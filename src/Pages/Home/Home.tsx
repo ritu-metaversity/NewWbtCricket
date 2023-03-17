@@ -72,7 +72,7 @@ const ActionCardPropsList: ActionCardProps[] = [
     cardTitle: "My Ledger",
     cardDesc: "check your history, wins and rewards",
     cardImageSrc: "/ledger.png",
-    cardForwardHref: "/my-ledger",
+    cardForwardHref: "/account-summary",
   },
 
   {
@@ -82,6 +82,12 @@ const ActionCardPropsList: ActionCardProps[] = [
     cardForwardHref: "/profile",
   },
 
+  {
+    cardTitle: "Casino",
+    cardDesc: "Play online live casino",
+    cardImageSrc: "/casino.png",
+    cardForwardHref: "/casino",
+  },
   {
     cardTitle: "Change Password",
     cardDesc: "change your mybet password",
@@ -106,24 +112,8 @@ const Home = () => {
             <ActionAreaCard {...cardProps} />
           </Grid>
         ))}
-
-        {/* <Grid {...gridItemProps}>
-          <ActionAreaCard />
-        </Grid>
-        <Grid {...gridItemProps}>
-          <ActionAreaCard />
-        </Grid>
-        <Grid {...gridItemProps}>
-          <ActionAreaCard />
-        </Grid>
-        <Grid {...gridItemProps}>
-          <ActionAreaCard />
-        </Grid>
-        <Grid {...gridItemProps}>
-          <ActionAreaCard />
-        </Grid> */}
       </Grid>
-        <Outlet />
+      <Outlet />
     </div>
   );
 };

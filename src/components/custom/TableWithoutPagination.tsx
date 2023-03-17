@@ -55,12 +55,9 @@ const StickyTable: React.FC<StickyHeadTableProps> = ({
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       {accordion ? (
-        <Accordion>
-          <AccordionSummary
-            sx={{ bgcolor: "gray" }}
-            expandIcon={<ExpandCircleDown />}
-          >
-            <TitleStyled>{title}</TitleStyled>
+        <Accordion title={title}>
+          <AccordionSummary expandIcon={<ExpandCircleDown />}>
+            {title}
           </AccordionSummary>
           <AccordionDetails>
             <TableContainer sx={{ maxHeight: "70vh", width: "100%" }}>
@@ -88,7 +85,6 @@ const StickyTable: React.FC<StickyHeadTableProps> = ({
               rows={rows}
               page={page}
               rowsPerPage={rowsPerPage}
-              
             />
             {result && (
               <TableResultContainer textAlign={"center"}>

@@ -40,11 +40,11 @@ export const authResourcs: {
     METHOD: "POST",
   },
   GET_EVENT_FROM_SPORTS: {
-    URL: "/enduser/active-match-sport-wise-open",
-    METHOD: "POST",
+    URL: "http://43.205.50.127:9000/active_match/:sportId",
+    METHOD: "GET",
   },
-  SELF_REGISTER:{
+  SELF_REGISTER: {
     URL: "/user/self-register",
     METHOD: "POST",
-  }
+  },
 };

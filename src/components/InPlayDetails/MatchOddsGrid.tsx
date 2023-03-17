@@ -1,9 +1,9 @@
 import { Box, Grid } from "@mui/material";
 
 import React, { Dispatch, FC, SetStateAction } from "react";
-import { BetGridItem, Pnl, redGreenComponent } from "./Bet";
+import { BetGridItem, redGreenComponent } from "./Bet";
 import { BetText, BetTextMedium } from "./styledComponents";
-import { BetDetailsInterface } from "./types";
+import { BetDetailsInterface, ProfitInterface } from "./types";
 
 interface MatchOddsGridProps {
   runners: {
@@ -38,8 +38,7 @@ interface Props {
   CurrentOdd: MatchOddsGridProps;
   PrevOdds: MatchOddsGridProps;
   matchId: number;
-  OddsPnl: Pnl[];
-  buttonData: any;
+  OddsPnl: ProfitInterface[];
   bet: BetDetailsInterface | null;
   setBet: Dispatch<SetStateAction<BetDetailsInterface | null>>;
 }
@@ -51,19 +50,9 @@ export const MatchOddsGrid: FC<Props> = ({
   PrevOdds,
   matchId,
   OddsPnl,
-  buttonData,
 }) => {
   const { runners, status, maxBet, betDelay, marketId, Name } = CurrentOdd;
   const { runners: PrevRunner } = PrevOdds;
-
-  const pnlsOdds = OddsPnl?.find((element) => element?.marketId == marketId);
-  const plnOddsArray = pnlsOdds
-    ? [
-        { pnl: pnlsOdds.pnl1, selectionId: pnlsOdds.selection1 },
-        { pnl: pnlsOdds.pnl2, selectionId: pnlsOdds.selection2 },
-        { pnl: pnlsOdds.pnl3, selectionId: pnlsOdds.selection3 },
-      ]
-    : [];
 
   const date = new Date();
 
@@ -76,7 +65,8 @@ export const MatchOddsGrid: FC<Props> = ({
     matchId: number,
     placeTime: Date,
     priceValue: number,
-    isFancy: boolean
+    isFancy: boolean,
+    name: string
   ) => {
     if (odds > 0) {
       setBet(null);
@@ -93,6 +83,7 @@ export const MatchOddsGrid: FC<Props> = ({
       placeTime: placeTime,
       priceValue: priceValue,
       isFancy: isFancy,
+      name,
     });
   };
   return (
@@ -113,9 +104,8 @@ export const MatchOddsGrid: FC<Props> = ({
                     {" "}
                     {item.name}
                     {redGreenComponent(
-                      plnOddsArray.find(
-                        (pnl) => pnl.selectionId == item.selectionId
-                      )?.pnl || 0
+                      OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
+                        ?.value || 0
                     )}
                   </>,
                   <Box
@@ -140,7 +130,8 @@ export const MatchOddsGrid: FC<Props> = ({
                           matchId,
                           date,
                           +item.ex.availableToBack[0].price,
-                          false
+                          false,
+                          item.name
                         )
                       }
                       color="blue"
@@ -171,7 +162,8 @@ export const MatchOddsGrid: FC<Props> = ({
                           matchId,
                           date,
                           +item.ex.availableToLay[0].price,
-                          false
+                          false,
+                          item.name
                         )
                       }
                       color="red"

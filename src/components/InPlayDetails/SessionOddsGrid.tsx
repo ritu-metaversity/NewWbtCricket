@@ -11,6 +11,7 @@ interface Props {
   matchId: number;
   title: any;
   FancyPnl: FancyPnl[];
+  setMarketId: Dispatch<SetStateAction<string>>;
   buttonData: any;
   bet: BetDetailsInterface | null;
   setBet: Dispatch<SetStateAction<BetDetailsInterface | null>>;
@@ -20,6 +21,7 @@ export const SessionOddsGrid: FC<Props> = ({
   PrevOdds,
   matchId,
   title,
+  setMarketId,
   FancyPnl,
   bet,
   setBet,
@@ -60,13 +62,24 @@ export const SessionOddsGrid: FC<Props> = ({
       <BetGridItem title values={["SESSION", "NOT", "YES"]} />
       {CurrentOdd.map((item, index) => (
         <BetGridItem
+          suspended={["suspended", "ball running"].includes(
+            item.gstatus.toLowerCase()
+          )}
           values={[
             <>
               <BetTextMedium>{item?.nation}</BetTextMedium>
               <BetTextSmall>Session Limit: 50k</BetTextSmall>
-              {redGreenComponent(
-                FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl || 0
-              )}
+              <Box
+                onClick={() =>
+                  (FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl ||
+                    0) &&
+                  setMarketId(item.sid)
+                }
+              >
+                {redGreenComponent(
+                  FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl || 0
+                )}
+              </Box>
             </>,
             <Box
               className={

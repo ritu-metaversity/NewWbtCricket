@@ -1,6 +1,7 @@
 import {
   apiHandler,
   ApiServiceInterface,
+  apiWithErrorSnackbar,
   apiWithSnackbar,
 } from "../apiService";
 import { userResources } from "./resources";
@@ -8,6 +9,17 @@ import { userResources } from "./resources";
 interface ChangePasswordPayload {
   newPassword: string;
   oldPassword: string;
+}
+
+export interface ProfitLossPayload {
+  sportId: string | number;
+  matchId: string | number;
+  fromDate: string;
+  toDate: string;
+  userId: "";
+  index: number;
+  noOfRecords: number;
+  totalPages: number;
 }
 
 interface SelfAllowedPayload {
@@ -197,6 +209,20 @@ export const userServices = {
   },
   isSelfAllowed: async (data: SelfAllowedPayload) => {
     const params = { resource: userResources.IS_SELF, data };
+    return await apiHandler(params);
+  },
+  profitLoss: async (data: ProfitLossPayload) => {
+    const params = {
+      resource: userResources.PROFIT_LOSS,
+      data,
+    };
+    return await apiWithErrorSnackbar(params);
+  },
+  fancyPnlBook: async (data: any) => {
+    const params = {
+      resource: userResources.PNL_BOOK,
+      data,
+    };
     return await apiHandler(params);
   },
 };
