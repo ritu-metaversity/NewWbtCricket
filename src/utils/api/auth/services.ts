@@ -1,6 +1,7 @@
 import {
   apiHandler,
   ApiServiceInterface,
+  apiWithErrorSnackbar,
   apiWithSnackbar,
 } from "../apiService";
 import { authResourcs as authResources } from "./resources";
@@ -68,7 +69,7 @@ export const authServices = {
       resource: authResources.SELF_REGISTER,
       data,
     };
-    return apiHandler(params);
+    return apiWithSnackbar(params);
   },
 
   logout: () => {

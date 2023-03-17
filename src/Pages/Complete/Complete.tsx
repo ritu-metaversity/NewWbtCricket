@@ -6,6 +6,7 @@ import { ProfitLossPayload, userServices } from "../../utils/api/user/services";
 import { LoaderContext } from "../../App";
 import moment from "moment";
 import Filter from "./Filter";
+import BacktoMenuButton from "../../components/BacktoMenuButton";
 
 interface ProfitLossData {
   pnl: string;
@@ -95,7 +96,7 @@ const Complete = () => {
   const [accountStatement, setAccountStatement] = React.useState<
     ProfitLossData[]
   >([]);
-  const { loading, setLoading } = useContext(LoaderContext);
+  const { setLoading } = useContext(LoaderContext);
 
   const handleClick = () => {
     const getList = async () => {
@@ -119,7 +120,6 @@ const Complete = () => {
         index: 0,
       };
     });
-    // setPage(0);
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -130,6 +130,8 @@ const Complete = () => {
 
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
+      <BacktoMenuButton />
+
       <Filter
         setFormData={setFormData}
         formData={formData}

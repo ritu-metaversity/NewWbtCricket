@@ -78,7 +78,7 @@ const Bet: FC<any> = (props: { event: number }) => {
 
   useEffect(() => {
     const getActiveFancyOdds = async () => {
-      const { response } = await sportServices.getActiveFancyOdds(props.event);
+      const { response } = await sportServices.newFancy(props.event.toString());
       if (response) {
         setBookMakerOdds(response.Bookmaker);
         let newBookmakerOdd: any[] = response.Bookmaker;
@@ -214,14 +214,14 @@ const Bet: FC<any> = (props: { event: number }) => {
           />
         </DialogContent>
       </Dialog>
-      {matchOdd[0]?.runners[0]?.name ? (
+      {matchOdd[0] && (
         <TitleStyled>
-          {`${matchOdd[0]?.runners[0]?.name}
-    ${">"}
-      ${matchOdd[0]?.runners[1]?.name}`}
+          {matchOdd[0]
+            ? `${matchOdd[0]?.Series}  > ${matchOdd[0]?.Event} `
+            : " "}
+
+          <Typography component={"span"}>{matchOdd[0]?.eventTime}</Typography>
         </TitleStyled>
-      ) : (
-        ""
       )}
       <BetSlip
         profits={profits}
@@ -231,7 +231,7 @@ const Bet: FC<any> = (props: { event: number }) => {
       />
 
       {matchOdd?.map((match, index) => (
-        <Accordion key={"matchodd" + index}>
+        <Accordion key={"matchodd" + index} defaultExpanded>
           <AccordionSummary expandIcon={<ExpandCircleDown />}>
             {match.Name}
           </AccordionSummary>
@@ -249,7 +249,7 @@ const Bet: FC<any> = (props: { event: number }) => {
       ))}
 
       {originBookMaker?.length > 0 && (
-        <Accordion>
+        <Accordion defaultExpanded>
           <AccordionSummary expandIcon={<ExpandCircleDown />}>
             Bookmaker Odds
           </AccordionSummary>
@@ -269,7 +269,7 @@ const Bet: FC<any> = (props: { event: number }) => {
       )}
 
       {bookmakerToss?.length > 0 && (
-        <Accordion>
+        <Accordion defaultExpanded>
           <AccordionSummary expandIcon={<ExpandCircleDown />}>
             Bookmaker Toss
           </AccordionSummary>
@@ -296,7 +296,7 @@ const Bet: FC<any> = (props: { event: number }) => {
             activeFancy[keys]?.length
           ) {
             return (
-              <Accordion>
+              <Accordion defaultExpanded>
                 <AccordionSummary expandIcon={<ExpandCircleDown />}>
                   {keys}
                 </AccordionSummary>

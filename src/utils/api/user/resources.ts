@@ -40,7 +40,7 @@ export const userResources: {
     METHOD: "POST",
   },
   OLD_CHANGE_PASSWORD: {
-    URL: "enduser/first-login-cp",
+    URL: "user/first-login-cp",
     METHOD: "POST",
   },
   LOGIN_HISTORY_VALUES: {

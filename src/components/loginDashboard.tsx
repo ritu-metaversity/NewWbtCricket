@@ -155,39 +155,33 @@ const LoginDashboard = () => {
 
       <Inplay />
       <div className="appBottomMenu">
-        <a>
-          <Link to={"/sign-in"}>
-            <EmojiEventsIcon />
-            <br />
-            <strong>Sports</strong>
-          </Link>
-        </a>
-        <a>
-          <Link to={"/sign-in"}>
-            <AccessAlarmIcon />
-            <br /> <strong>In-Play</strong>
-          </Link>
-        </a>
-        <a>
-          <Link to={"/sign-in"}>
-            <HomeIcon />
-            <br /> <strong>Home</strong>
-          </Link>
-        </a>
-        <a>
-          <Link to={"/sign-in"}>
-            <PushPinIcon />
-            <br />
-            <strong>Market</strong>
-          </Link>
-        </a>
-        <a>
-          <Link to={"/sign-in"}>
-            <AccountCircleIcon />
-            <br />
-            <strong>Account</strong>
-          </Link>
-        </a>
+        <Link to={"/sign-in"}>
+          <EmojiEventsIcon />
+          <br />
+          <strong>Sports</strong>
+        </Link>
+
+        <Link to={"/sign-in"}>
+          <AccessAlarmIcon />
+          <br /> <strong>In-Play</strong>
+        </Link>
+
+        <Link to={"/sign-in"}>
+          <HomeIcon />
+          <br /> <strong>Home</strong>
+        </Link>
+
+        <Link to={"/sign-in"}>
+          <PushPinIcon />
+          <br />
+          <strong>Market</strong>
+        </Link>
+
+        <Link to={"/sign-in"}>
+          <AccountCircleIcon />
+          <br />
+          <strong>Account</strong>
+        </Link>
       </div>
       {/* </footer> */}
     </>

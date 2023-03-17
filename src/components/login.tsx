@@ -18,15 +18,12 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const host = window.location.hostname;
   const handleClick = async () => {
-    let res;
-
     const data = {
       userId,
       password,
       appUrl: host === "localhost" ? "localhost" : host,
     };
     const { response } = await authServices.login(data);
-    // console.log(response + " ");
     if (response?.token) {
       localStorage.setItem("token", response?.token);
       localStorage.setItem("userid", response?.userId);
@@ -36,9 +33,6 @@ const Login = () => {
         navigate("/terms", { replace: true });
       }
     }
-    // else {
-    //   snackBarUtil.error("Some unknown error occurred !");
-    // }
   };
 
   const handleChange = (e: any) => {
@@ -72,9 +66,6 @@ const Login = () => {
         Sign In
       </Typography>
       <TextField
-        InputProps={{
-          startAdornment: <b>C</b>,
-        }}
         required
         label="Client Code"
         name="login"

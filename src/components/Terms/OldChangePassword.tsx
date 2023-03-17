@@ -5,24 +5,31 @@ import { Box } from "@mui/system";
 import { userServices } from "../../utils/api/user/services";
 import { useNavigate } from "react-router-dom";
 import { LoaderContext } from "../../App";
+import snackBarUtil from "../Layout/snackBarUtil";
 
 const OldChangePassword = () => {
   const navigate = useNavigate();
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { setLoading } = useContext(LoaderContext);
-  const userid = localStorage.getItem("userid") || "";
-  const token = localStorage.getItem("token") || "";
 
   const handleClick = async (e: any) => {
+    if (confirmPassword !== newPassword) {
+      return snackBarUtil.error("Password does not match!");
+    }
+    const userid = localStorage.getItem("userid") || "";
+    const token = localStorage.getItem("token") || "";
     setLoading && setLoading((prev) => ({ ...prev, handleClick: true }));
     const { response } = await userServices.oldChangePassword({
       oldPassword,
+      currentPassword: oldPassword,
       newPassword,
+      confirmPassword,
       userid,
       token,
     });
-    if (response?.type === "success") {
+    if (response) {
       navigate("/sign-in");
       localStorage.clear();
     }
@@ -34,6 +41,8 @@ const OldChangePassword = () => {
       setOldPassword(e.target.value);
     } else if (e.target.name === "newPassword") {
       setNewPassword(e.target.value);
+    } else if (e.target.name === "confirmPassword") {
+      setConfirmPassword(e.target.value);
     }
   };
   return (
@@ -78,6 +87,15 @@ const OldChangePassword = () => {
           fullWidth
           name="newPassword"
           value={newPassword}
+          onChange={handleChange}
+        />
+        <TextField
+          size="small"
+          margin="dense"
+          label="Enter New Password"
+          fullWidth
+          name="confirmPassword"
+          value={confirmPassword}
           onChange={handleChange}
         />
         <Typography variant="subtitle2" textAlign="start">

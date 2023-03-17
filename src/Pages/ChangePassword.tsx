@@ -5,19 +5,25 @@ import { Box } from "@mui/system";
 import { userServices } from "../utils/api/user/services";
 import { useNavigate } from "react-router-dom";
 import { LoaderContext } from "../App";
+import snackBarUtil from "../components/Layout/snackBarUtil";
 
 const ChangePassword = () => {
   const navigate = useNavigate();
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const { loading, setLoading } = useContext(LoaderContext);
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const { setLoading } = useContext(LoaderContext);
   const handleClick = async (e: any) => {
+    if (confirmPassword !== newPassword) {
+      return snackBarUtil.error("Password does not match!");
+    }
     setLoading && setLoading((prev) => ({ ...prev, handleClick: true }));
     const { response } = await userServices.changePassword({
       oldPassword,
       newPassword,
     });
-    if (response?.type === "success") {
+    if (response) {
       navigate("/sign-in");
       localStorage.clear();
     }
@@ -29,6 +35,8 @@ const ChangePassword = () => {
       setOldPassword(e.target.value);
     } else if (e.target.name === "newPassword") {
       setNewPassword(e.target.value);
+    } else if (e.target.name === "confirmPassword") {
+      setConfirmPassword(e.target.value);
     }
   };
   return (
@@ -73,6 +81,16 @@ const ChangePassword = () => {
           fullWidth
           name="newPassword"
           value={newPassword}
+          onChange={handleChange}
+        />
+
+        <TextField
+          size="small"
+          margin="dense"
+          label="Enter New Password"
+          fullWidth
+          name="confirmPassword"
+          value={confirmPassword}
           onChange={handleChange}
         />
         <Typography variant="subtitle2" textAlign="start">
