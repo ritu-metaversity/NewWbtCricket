@@ -35,8 +35,6 @@ const Headers = () => {
   const navigation = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mouseOverButton, setMouseOverButton] = React.useState<Boolean>(false);
-  const [mouseOverMenu, setMouseOverMenu] = React.useState<Boolean>(false);
   const [message, setmessage] = useState("");
   useEffect(() => {
     const getWallet = async () => {
@@ -46,7 +44,9 @@ const Headers = () => {
       }
     };
     getWallet();
-    return () => {};
+    const timer = setInterval(() => getWallet(), 5000);
+
+    return () => clearInterval(timer);
   }, []);
 
   // const handleClick = async (e: any) =>  await authServices.logout();
@@ -59,26 +59,28 @@ const Headers = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+    // setMouseOverButton(false);
+    // setMouseOverMenu(false);
   };
-  const enterButton = (event: any) => {
-    setAnchorEl(event.currentTarget);
-    setMouseOverButton(true);
-  };
+  // const enterButton = (event: any) => {
+  //   setAnchorEl(event.currentTarget);
+  //   setMouseOverButton(true);
+  // };
 
-  const leaveButton = () => {
-    setTimeout(() => {
-      setMouseOverButton(false);
-    }, 200);
-  };
+  // const leaveButton = () => {
+  //   setTimeout(() => {
+  //     setMouseOverButton(false);
+  //   }, 200);
+  // };
 
-  const enterMenu = () => {
-    setMouseOverMenu(true);
-  };
+  // const enterMenu = () => {
+  //   setMouseOverMenu(true);
+  // };
 
-  const leaveMenu = () => {
-    setMouseOverMenu(false);
-  };
-  const open = Boolean(mouseOverButton || mouseOverMenu);
+  // const leaveMenu = () => {
+  //   setMouseOverMenu(false);
+  // };
+  const open = Boolean(anchorEl);
 
   const getMsg = async () => {
     await axios
@@ -112,35 +114,24 @@ const Headers = () => {
             <HeaderTextStyle>Coins: {wallet.balance}</HeaderTextStyle>
             <HeaderTextStyle>Liability: {wallet.libality}</HeaderTextStyle>
           </Box>
-          <IconButton
-            // onClick={handleClick}
-            onMouseOver={enterButton}
-            onMouseLeave={leaveButton}
-          >
+          <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
             <UserIconImage src="/user.png" alt="" />
           </IconButton>
-          {/* <Box>
-          <IconButton>
-            <LogoutIcon fontSize="large" htmlColor="white" />
-          </IconButton>
-          <Typography>Logout</Typography>
-        </Box> */}
         </Toolbar>
         <Menu
           anchorEl={anchorEl}
+          onClick={handleClose}
           id="account-menu"
           open={open}
           onClose={handleClose}
           sx={{ zIndex: 10 }}
-          // onClick={handleClose}
           PaperProps={{
             elevation: 0,
-            onMouseOver: enterMenu,
-            onMouseLeave: leaveMenu,
             sx: {
               overflow: "visible",
               filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
               mt: 1.5,
+              color: "black",
               "& .MuiAvatar-root": {
                 width: 32,
                 height: 32,
@@ -194,53 +185,37 @@ const Headers = () => {
           )}
           <Link to="/profile">
             <MenuItem>
-              <Avatar /> <a style={{ color: "black" }}> Profile </a>
+              <Avatar /> <a> Profile </a>
             </MenuItem>
           </Link>
           <Link to="/account-summary">
             <MenuItem>
-              <AttachMoneyIcon style={{ color: "black" }} />{" "}
-              <a style={{ color: "black" }}>Account Statement</a>
+              <AttachMoneyIcon /> <a>Account Statement</a>
             </MenuItem>
           </Link>
           <Link to="/login-history">
             <MenuItem>
-              <SummarizeIcon style={{ color: "black" }} />{" "}
-              <a style={{ color: "black" }}> Login History </a>
+              <SummarizeIcon /> <a> Login History </a>
             </MenuItem>
           </Link>
           <Link to="/current-bet">
             <MenuItem>
-              <AttachMoneyIcon style={{ color: "black" }} />{" "}
-              <a style={{ color: "black" }}> Current Bet</a>
+              <AttachMoneyIcon /> <a> Current Bet</a>
             </MenuItem>
           </Link>
           <Link to="/bet-history">
             <MenuItem>
-              <AttachMoneyIcon style={{ color: "black" }} />{" "}
-              <a style={{ color: "black" }}> Bet History</a>
+              <AttachMoneyIcon /> <a> Bet History</a>
             </MenuItem>
           </Link>
 
           <Link to="/set-button-value">
             <MenuItem>
-              <MoneyIcon style={{ color: "black" }} />{" "}
-              <a style={{ color: "black" }}> Set button value </a>
+              <MoneyIcon /> <a> Set button value </a>
             </MenuItem>
           </Link>
           <Divider />
-          {/* <MenuItem onClick={handlePasswordChangeClick}>
-          <ListItemIcon>
-            <LockResetIcon fontSize="small" />
-          </ListItemIcon>
-          Change Password
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem> */}
+
           <MenuItem onClick={clickHandler}>
             <ListItemIcon>
               <Logout fontSize="small" />
@@ -249,47 +224,11 @@ const Headers = () => {
           </MenuItem>
         </Menu>
       </AppBar>
-      <Marquee gradient={false}>{message}</Marquee>
+      <Marquee speed={100} gradient={false}>
+        {message}
+      </Marquee>
     </>
   );
 };
 
-// export default function ProminentAppBar() {
-//   return (
-//     <Box sx={{ flexGrow: 1 }}>
-//       <AppBar position="static">
-//         <StyledToolbar>
-//           <IconButton
-//             size="large"
-//             edge="start"
-//             color="inherit"
-//             aria-label="open drawer"
-//             sx={{ mr: 2 }}
-//           >
-//             <MenuIcon />
-//           </IconButton>
-//           <Typography
-//             variant="h5"
-//             noWrap
-//             component="div"
-//             sx={{ flexGrow: 1, alignSelf: "flex-end" }}
-//           >
-//             MUI
-//           </Typography>
-//           <IconButton size="large" aria-label="search" color="inherit">
-//             <SearchIcon />
-//           </IconButton>
-//           <IconButton
-//             size="large"
-//             aria-label="display more actions"
-//             edge="end"
-//             color="inherit"
-//           >
-//             <MoreIcon />
-//           </IconButton>
-//         </StyledToolbar>
-//       </AppBar>
-//     </Box>
-//   );
-// }
 export default Headers;

@@ -15,18 +15,15 @@ import { SummaryCardProps } from "../../components/Inplay/SummaryCard";
 import { LoaderContext } from "../../App";
 import { sportServices } from "../../utils/api/sport/services";
 const style = {
-  //   display: "flex",
-  //   alignItems: "center",
-  //   justifyContent: "space-between",
   padding: "10px",
 };
+
 const inputStyle = {
   padding: "10px",
   borderRadius: "5px",
-  //   marginRight: " 8px",
   width: "calc(100% - 20px)",
-  //   maxWidth: "200px",
 };
+
 interface Props {
   formData: ProfitLossPayload;
   handleChange: (e: any) => void;
@@ -68,11 +65,11 @@ const Filter: FC<Props> = ({
       Number(formData.sportId)
     );
 
-    if (response.data) {
+    if (response?.data) {
       setCasinoList(response.data || []);
-      if (response.data[0]) {
-        setFormData((o) => ({ ...o, matchId: response.data[0].gameId }));
-      }
+      // if (response.data[0]) {
+      // setFormData((o) => ({ ...o, matchId: response.data[0].gameId }));
+      // }
     } else {
       setCasinoList([]);
     }
@@ -119,7 +116,7 @@ const Filter: FC<Props> = ({
   const [activeEventList, setActiveEventList] = useState<SummaryCardProps[]>(
     []
   );
-  const { loading, setLoading } = useContext(LoaderContext);
+  const { setLoading } = useContext(LoaderContext);
 
   useEffect(() => {
     const getList = async () => {
@@ -128,14 +125,14 @@ const Filter: FC<Props> = ({
       console.log(JSON.stringify(response));
       if (response?.data) {
         setActiveSportList(response.data);
-        if (response.data[0]) {
-          setFormData((o) => ({ ...o, sportId: response.data[0].sportId }));
-        }
+        // if (response.data[0]) {
+        // setFormData((o) => ({ ...o, sportId: response.data[0].sportId }));
+        // }
       }
       setLoading && setLoading((prev) => ({ ...prev, Inplay: false }));
     };
     getList();
-  }, []);
+  }, [setFormData, setLoading]);
 
   useEffect(() => {
     const getNewEvent = async () => {
@@ -149,7 +146,7 @@ const Filter: FC<Props> = ({
       if (response?.data) {
         if (response?.data?.length > 0) {
           setActiveEventList(response.data);
-          setFormData((o) => ({ ...o, matchId: response.data[0].matchId }));
+          // setFormData((o) => ({ ...o, matchId: response.data[0].matchId }));
         }
       } else {
         setActiveEventList([]);
@@ -159,8 +156,15 @@ const Filter: FC<Props> = ({
     if (tab === 0) {
       getNewEvent();
     }
-  }, [formData.sportId]);
+  }, [formData.sportId, setFormData, setLoading]);
 
+  useEffect(() => {
+    if (tab === 0) {
+      setFormData((o) => ({ ...o, sportId: 4 }));
+    } else if (tab === 1) {
+      setFormData((o) => ({ ...o, sportId: 323334 }));
+    }
+  }, [tab, setFormData]);
   return (
     <>
       <Tabs value={tab} sx={{ m: 2 }} onChange={(e, value) => setTab(value)}>
@@ -200,7 +204,14 @@ const Filter: FC<Props> = ({
             <label style={lableStyle} htmlFor="type">
               {tab === 1 ? "Select Casino Type" : "Select Sport"}
             </label>
-            <select style={inputStyle} onChange={handleChange} name="sportId">
+            <select
+              value={formData.sportId}
+              style={inputStyle}
+              onChange={handleChange}
+              name="sportId"
+            >
+              <option value={""}>ALL</option>
+
               {tab === 1
                 ? casinoTypes.map((casino) => (
                     <option value={casino.id}>{casino.name}</option>
@@ -215,13 +226,26 @@ const Filter: FC<Props> = ({
             <label style={lableStyle} htmlFor="type">
               {tab === 1 ? "Select Casino" : "Select Match"}
             </label>
-            <select style={inputStyle} onChange={handleChange} name="matchId">
+            <select
+              value={formData.matchId}
+              style={inputStyle}
+              onChange={handleChange}
+              name="matchId"
+            >
+              <option value={""}>ALL</option>
               {tab === 1
                 ? casinoList.map((casino) => (
-                    <option value={casino.gameId}>{casino.gameName}</option>
+                    <option
+                      key={casino.gameId + casino.gameCode}
+                      value={casino.gameId}
+                    >
+                      {casino.gameName}
+                    </option>
                   ))
                 : activeEventList.map((event) => (
-                    <option value={event.matchId}>{event.matchName}</option>
+                    <option key={event.matchId} value={event.matchId}>
+                      {event.matchName}
+                    </option>
                   ))}
             </select>
           </Grid>

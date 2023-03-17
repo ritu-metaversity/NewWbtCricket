@@ -48,7 +48,6 @@ const Register = () => {
       setNewCredAfterRegister(response);
       // navigate("/sign-in", { replace: true });
     } else {
-      snackBarUtil.error("Some unknown error occurred !");
     }
   };
   const handleChange = (e: any) => {

@@ -37,6 +37,8 @@ interface SelfWithdrawPayload {
 
 interface OldChangePasswordPayload {
   newPassword: string;
+  currentPassword: string;
+  confirmPassword: string;
   oldPassword: string;
   userid: string;
   token: string;

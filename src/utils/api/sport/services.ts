@@ -93,4 +93,16 @@ export const sportServices = {
     };
     return apiHandler(params);
   },
+  newFancy: async (id: string) => {
+    const params: ApiServiceInterface = {
+      resource: {
+        URL: "http://89.39.105.69:9001/fancy/:id",
+        // URL: "http://43.205.50.127:9000/fancy/:id",
+        METHOD: "GET",
+      },
+      noAuth: true,
+      pathVars: { id: id },
+    };
+    return await apiHandler(params);
+  },
 };

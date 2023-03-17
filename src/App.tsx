@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import "./App.css";
 import Login from "./components/login";
-import Footer from "./components/Footer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Terms from "./Pages/Terms";
@@ -120,9 +119,6 @@ function App() {
               </Routes>
             </BrowserRouter>
           </main>
-          <footer>
-            <Footer />
-          </footer>
 
           <SnackbarUtilsConfigurator />
         </SnackbarProvider>

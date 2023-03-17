@@ -5,6 +5,8 @@ export const TitleStyled = styled(Typography)({
   backgroundColor: "#00FFFF",
   fontWeight: 700,
   padding: 8,
+  display: "flex",
+  justifyContent: "space-between",
   textTransform: "uppercase",
   color: "#00F",
 });

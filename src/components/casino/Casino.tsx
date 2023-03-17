@@ -10,11 +10,11 @@ import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { casinoService } from "../../utils/api/casino/service";
+import BacktoMenuButton from "../BacktoMenuButton";
 import { CasinoIcon, StyledGameThumb } from "./StyledComponent";
 
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: "20px",
-  // marginTop: "5px",
   marginRight: "10px",
   paddingTop: "2px",
   paddingBottom: "2px",
@@ -22,7 +22,6 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   border: "2px solid #3c444b",
   [`&.${tabClasses.selected}`]: {
     borderColor: theme.palette.primary.main,
-    color: "#AAAFB5",
   },
 }));
 
@@ -89,6 +88,7 @@ const Casino = () => {
   const matches = useMediaQuery("(max-width: 1279px)");
   return (
     <>
+      <BacktoMenuButton />
       {casinoTypes?.length > 0 && (
         <Tabs
           variant="scrollable"
@@ -96,7 +96,6 @@ const Casino = () => {
           TabScrollButtonProps={{
             sx: {
               opacity: "1 !important",
-              // bgcolor: colorHex.bg2,
               borderRadius: "50%",
               width: "40px",
               margin: "auto",
@@ -106,15 +105,11 @@ const Casino = () => {
           }}
           TabIndicatorProps={{ sx: { display: "none" } }}
           sx={{
-            position: "sticky",
-            top: matches ? 50 : 80,
             paddingY: "0.8rem",
-            // backgroundColor: colorHex.bg6,
           }}
           value={value}
           onChange={(e, value) => {
             setValue(value);
-            // if (setCasinoId) setCasinoId(value);
           }}
         >
           {casinoTypes.map((item) => (
@@ -125,18 +120,6 @@ const Casino = () => {
               label={item.name}
             />
           ))}
-          {/* <StyledTab
-          icon={<CasinoIcon src="/assets/images/casino.png" />}
-          iconPosition="start"
-          value="2"
-          label="Indian Casino"
-        />
-        <StyledTab
-          icon={<CasinoIcon src="/assets/images/casino.png" />}
-          iconPosition="start"
-          value="3"
-          label="Our Virtual"
-        /> */}
         </Tabs>
       )}
       <Box
