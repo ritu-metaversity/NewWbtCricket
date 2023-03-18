@@ -1,4 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 import { Button, Paper, TextField, Typography } from "@mui/material";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import { Box } from "@mui/system";
@@ -7,7 +13,10 @@ import { useNavigate } from "react-router-dom";
 import { LoaderContext } from "../App";
 import snackBarUtil from "../components/Layout/snackBarUtil";
 
-const ChangePassword = () => {
+interface Props {
+  setIsSignedIn: Dispatch<SetStateAction<boolean>>;
+}
+const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
   const navigate = useNavigate();
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -26,6 +35,7 @@ const ChangePassword = () => {
     if (response) {
       navigate("/sign-in");
       localStorage.clear();
+      setIsSignedIn(false);
     }
     setLoading && setLoading((prev) => ({ ...prev, handleClick: false }));
   };

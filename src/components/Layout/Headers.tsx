@@ -10,7 +10,14 @@ import {
   Toolbar,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoneyTwoTone";
 import MoneyIcon from "@mui/icons-material/MoneyTwoTone";
@@ -30,7 +37,11 @@ const data = {
   uplineAmount: 0,
 };
 
-const Headers = () => {
+interface Props {
+  setIsSignedIn: Dispatch<SetStateAction<boolean>>;
+}
+
+const Headers: FC<Props> = ({ setIsSignedIn }) => {
   const [wallet, setWallet] = useState(data);
   const navigation = useNavigate();
 
@@ -55,6 +66,7 @@ const Headers = () => {
     const { response } = await authServices.logout();
     localStorage.removeItem("token");
     navigation("/welcome");
+    setIsSignedIn(false);
   }
 
   const handleClose = () => {

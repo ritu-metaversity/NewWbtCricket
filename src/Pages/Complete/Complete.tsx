@@ -96,7 +96,7 @@ const Complete = () => {
   const [accountStatement, setAccountStatement] = React.useState<
     ProfitLossData[]
   >([]);
-  const { setLoading } = useContext(LoaderContext);
+  const { loading, setLoading } = useContext(LoaderContext);
 
   const handleClick = () => {
     const getList = async () => {
@@ -165,9 +165,11 @@ const Complete = () => {
           />
         </>
       ) : (
-        <Typography mt="15vh" variant="h4" color="error">
-          {"No Data Found"}
-        </Typography>
+        !loading.getListdata && (
+          <Typography mt="15vh" variant="h4" color="error">
+            {"No Data Found"}
+          </Typography>
+        )
       )}
     </Box>
   );

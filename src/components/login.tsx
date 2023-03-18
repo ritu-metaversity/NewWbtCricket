@@ -7,12 +7,16 @@ import {
   Typography,
 } from "@mui/material";
 // import axios from "axios";
-import React, { ChangeEvent, useState } from "react";
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authServices } from "../utils/api/auth/services";
-import snackBarUtil from "./Layout/snackBarUtil";
 
-const Login = () => {
+
+interface Props {
+  setIsSignedIn: Dispatch<SetStateAction<boolean>>;
+}
+
+const Login: FC<Props> = ({ setIsSignedIn }) => {
   const navigate = useNavigate();
   const [userId, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +31,7 @@ const Login = () => {
     if (response?.token) {
       localStorage.setItem("token", response?.token);
       localStorage.setItem("userid", response?.userId);
+      setIsSignedIn(true);
       if (response.passwordtype === "old") {
         navigate("/OldChangePassword", { replace: true });
       } else {

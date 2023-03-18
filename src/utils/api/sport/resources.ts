@@ -9,6 +9,10 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     URL: "http://43.205.50.127:9000/active_match/:sportId",
     METHOD: "GET",
   },
+  GET_IN_PLAY: {
+    URL: "http://43.205.50.127:9000/active_match/",
+    METHOD: "GET",
+  },
   GET_EVENT_MARKET: {
     URL: "https://odds-api.kalyanexch.com/event-odds/match-odds",
     METHOD: "GET",

@@ -1,12 +1,14 @@
 import { Box } from "@mui/material";
-import React, { FC, useEffect } from "react";
+import React, { Dispatch, FC, SetStateAction, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 import Headers from "./Headers";
 
 interface Props {
   isSignedIn: boolean;
+  setIsSignedIn: Dispatch<SetStateAction<boolean>>;
 }
-const Layout: FC<Props> = ({ isSignedIn }) => {
+const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -15,19 +17,27 @@ const Layout: FC<Props> = ({ isSignedIn }) => {
     }
   }, []);
   return (
-    <div>
+    <Box
+      height={"100vh"}
+      width={"100vw"}
+      display="flex"
+      flexDirection={"column"}
+    >
       <header>
-        <Headers />
+        <Headers setIsSignedIn={setIsSignedIn} />
       </header>
       <Box
         py={2}
+        flex={1}
         m="auto"
         boxSizing={"content-box"}
+        width="100%"
         maxWidth={{ xs: "100vw", sm: "lg" }}
       >
         {isSignedIn && <Outlet />}
       </Box>
-    </div>
+      <Footer isSignedIn={isSignedIn} />
+    </Box>
   );
 };
 

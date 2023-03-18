@@ -209,14 +209,11 @@ export const LoginhistoryData: FC<any> = () => {
           />
         </>
       ) : (
-        <Typography mt="15vh" variant="h4" color="error">
-          {"No Data Found"}
-        </Typography>
-        // <StickyHeadTable
-        //   rows={loginHistory}
-        //   columns={columns}
-        //   title={"Login History"}
-        // />
+        !loading.loginHistory && (
+          <Typography mt="15vh" variant="h4" color="error">
+            {"No Data Found"}
+          </Typography>
+        )
       )}
     </Box>
   );

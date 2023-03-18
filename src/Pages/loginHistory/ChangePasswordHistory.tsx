@@ -209,9 +209,11 @@ export const ChnagePasswordHistory: FC<any> = () => {
           />
         </>
       ) : (
-        <Typography mt="15vh" variant="h4" color="error">
-          {"No Data Found"}
-        </Typography>
+        !loading.getNewEventChangePassword && (
+          <Typography mt="15vh" variant="h4" color="error">
+            {"No Data Found"}
+          </Typography>
+        )
       )}
     </Box>
   );

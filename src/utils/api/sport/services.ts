@@ -23,6 +23,12 @@ export const sportServices = {
     };
     return apiHandler(params);
   },
+  inplay: () => {
+    const params: ApiServiceInterface = {
+      resource: sportsResourses.GET_IN_PLAY,
+    };
+    return apiHandler(params);
+  },
   matchOdds: (eventIds: number[]) => {
     const params: ApiServiceInterface = {
       resource: sportsResourses.GET_EVENT_MARKET,

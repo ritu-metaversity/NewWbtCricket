@@ -8,16 +8,9 @@ import React, {
 } from "react";
 import "./App.css";
 import Login from "./components/login";
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Home from "./Pages/Home";
 import Terms from "./Pages/Terms";
-import { Inplay } from "./Pages/InPlay";
 import Complete from "./Pages/Complete/Complete";
 import ChangePassword from "./Pages/ChangePassword";
 import Layout from "./components/Layout";
@@ -41,6 +34,8 @@ import { userServices } from "./utils/api/user/services";
 import Casino from "./components/casino/Casino";
 import CasinoGame from "./components/casino/game/CasinoGame";
 import { authServices } from "./utils/api/auth/services";
+import Inplay from "./Pages/InPlay/Inplay";
+import { Sports } from "./Pages/Sports";
 
 interface LoadingType {
   [x: string]: boolean;
@@ -58,6 +53,7 @@ const defaultValue: LoaderContextINterface = {
   appData: null,
   setLoading: null,
 };
+
 export const LoaderContext = createContext(defaultValue);
 
 interface AppDataInterface {
@@ -110,7 +106,7 @@ function App() {
 
   useEffect(() => {
     getSelfAllowed();
-  }, []);
+  }, [isSignedIn]);
 
   return (
     <LoaderContext.Provider
@@ -126,23 +122,40 @@ function App() {
         <SnackbarProvider maxSnack={5} autoHideDuration={1000}>
           <main>
             <Routes>
-              <Route path="OldChangePassword" element={<OldChangePassword />} />
+              <Route
+                path="OldChangePassword"
+                element={<OldChangePassword setIsSignedIn={setIsSignedIn} />}
+              />
 
-              <Route path="/welcome" element={<LoginDashboard />} />
-              <Route path="/sign-in" element={<Login />} />
+              <Route
+                path="/welcome"
+                element={<LoginDashboard isSignedIn={isSignedIn} />}
+              />
+              <Route
+                path="/sign-in"
+                element={<Login setIsSignedIn={setIsSignedIn} />}
+              />
               <Route path="/sign-up" element={<Register />} />
 
-              <Route path="/" element={<Layout isSignedIn={isSignedIn} />}>
+              <Route
+                path="/"
+                element={
+                  <Layout
+                    setIsSignedIn={setIsSignedIn}
+                    isSignedIn={isSignedIn}
+                  />
+                }
+              >
                 <Route path="/" element={<Home />} />
                 <Route path="/deposit" element={<Deposit />} />
                 <Route path="/withdraw" element={<Withdraw />} />
                 <Route path="in-play" element={<Inplay />} />
+                <Route path="sports" element={<Sports />} />
                 <Route path="in-play-details" element={<InPlayDetails />} />
                 <Route path="complete-games" element={<Complete />} />
                 <Route path="my-ledger" element={<Ledger />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="set-button-value" element={<SetButtonValue />} />
-                {/* <Route path="in-play-details" element={<InPlayDetails />} /> */}
                 <Route path="account-summary" element={<Account />} />
                 <Route path="login-history" element={<LoginHistory />} />
                 <Route path="bet-history" element={<BetHistory />} />
@@ -150,7 +163,10 @@ function App() {
                 <Route path="casino" element={<Casino />} />
                 <Route path="casino/:id" element={<CasinoGame />} />
               </Route>
-              <Route path="password-change" element={<ChangePassword />} />
+              <Route
+                path="password-change"
+                element={<ChangePassword setIsSignedIn={setIsSignedIn} />}
+              />
               <Route path="terms" element={<Terms />} />
             </Routes>
           </main>

@@ -1,16 +1,12 @@
 import { Grid, GridProps } from "@mui/material";
 import React, { FC } from "react";
-import WelcomeDialog from "../../components/Terms/WelcomeDialog";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { Link, Outlet, Route, Routes, useRoutes } from "react-router-dom";
-import { Inplay } from "../InPlay";
-import Complete from "../Complete/Complete";
-import { ChildCare } from "@mui/icons-material";
+import { Link, Outlet } from "react-router-dom";
 
 interface ActionCardProps {
   cardTitle: string;
