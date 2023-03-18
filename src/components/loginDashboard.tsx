@@ -6,7 +6,7 @@ import "./loginDashboard.css";
 import { Link } from "react-router-dom";
 import { LoaderContext } from "../App";
 import Footer from "./Layout/Footer";
-import Inplay from "../Pages/InPlay/Inplay";
+import { Sports } from "../Pages/Sports";
 
 interface Props {
   isSignedIn: boolean;
@@ -23,16 +23,11 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
         enableColorOnDark
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          {/* <IconButton title="Go back" onClick={() => navigation(-1)}>
-            <KeyboardBackspaceIcon fontSize="large" htmlColor="white" />
-          </IconButton> */}
           <h3>Exchange</h3>
           <Box>
             <HeaderTextStyle></HeaderTextStyle>
             <HeaderTextStyle></HeaderTextStyle>
-            <HeaderTextStyle>
-              {/* Liability: { wallet.libality} */}
-            </HeaderTextStyle>
+            <HeaderTextStyle></HeaderTextStyle>
           </Box>
           <div style={{ display: "flex" }}>
             <Button
@@ -56,7 +51,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
         </Toolbar>
       </AppBar>
       <Box flex={1} height={"max-content"}>
-        <Inplay />
+        <Sports />
       </Box>
       <Footer isSignedIn={isSignedIn} />
     </Box>

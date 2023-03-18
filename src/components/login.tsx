@@ -48,57 +48,59 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
     }
   };
   return (
-    <Box
-      maxWidth={"450px"}
-      mx="auto"
-      mb="2em"
-      p="2em"
-      display={"flex"}
-      flexDirection="column"
-      gap={"1.5em"}
-      mt="40px"
-    >
-      <Typography variant="h1" fontWeight={"700"} color="#e91e63">
+    <>
+      <Typography mt="64px" variant="h1" fontWeight={"700"} color="#e91e63">
         {window.location.hostname}
       </Typography>
-      <Typography
-        textAlign={"center"}
-        fontWeight="bold"
-        variant="h5"
-        color="#3f51b5"
-        marginTop="-24px"
+      <Box
+        maxWidth={"450px"}
+        mx="auto"
+        mb="2em"
+        p="2em"
+        display={"flex"}
+        flexDirection="column"
+        gap={"1.5em"}
       >
-        Sign In
-      </Typography>
-      <TextField
-        required
-        label="Client Code"
-        name="login"
-        fullWidth
-        value={userId}
-        onChange={handleChange}
-      />
-      <Box textAlign={"left"}>
+        <Typography
+          textAlign={"center"}
+          fontWeight="bold"
+          variant="h5"
+          color="#3f51b5"
+          marginTop="-24px"
+        >
+          Sign In
+        </Typography>
         <TextField
           required
-          name="password"
-          label="Password"
-          value={password}
-          onChange={handleChange}
+          label="Client Code"
+          name="login"
           fullWidth
+          value={userId}
+          onChange={handleChange}
         />
-        <FormControlLabel control={<Checkbox />} label="Remember me" />
+        <Box textAlign={"left"}>
+          <TextField
+            required
+            name="password"
+            label="Password"
+            type="password"
+            value={password}
+            onChange={handleChange}
+            fullWidth
+          />
+          <FormControlLabel control={<Checkbox />} label="Remember me" />
+        </Box>
+        <Button
+          variant="contained"
+          size="large"
+          onClick={handleClick}
+          fullWidth
+          sx={{ bgcolor: "#e91e63" }}
+        >
+          Sign in
+        </Button>
       </Box>
-      <Button
-        variant="contained"
-        size="large"
-        onClick={handleClick}
-        fullWidth
-        sx={{ bgcolor: "#e91e63" }}
-      >
-        Sign in
-      </Button>
-    </Box>
+    </>
   );
 };
 

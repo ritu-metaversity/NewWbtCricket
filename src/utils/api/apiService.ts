@@ -85,6 +85,7 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
       if (error.response.status === 401) {
         localStorage.removeItem("token");
         window.location.replace("/welcome");
+        result.error = {};
       }
     })
     .then((response) => {
@@ -125,7 +126,7 @@ const apiSnackbarNotifications: (
     const { message } = args.error;
     if (typeof message === "object") {
       message?.forEach((message) => snackBarUtil.error(message));
-    } else {
+    } else if (typeof message === "string") {
       snackBarUtil.error(message);
     }
   } else if (typeof args?.response?.message === "string") {
