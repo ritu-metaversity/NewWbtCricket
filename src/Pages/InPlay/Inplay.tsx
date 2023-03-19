@@ -36,7 +36,12 @@ const Inplay = () => {
       }
       setLoading && setLoading((prev) => ({ ...prev, Inplay: false }));
     };
+
     getList();
+    const timer = setInterval(() => {
+      getList();
+    }, 60000);
+    return () => clearInterval(timer);
   }, [setLoading]);
 
   return (

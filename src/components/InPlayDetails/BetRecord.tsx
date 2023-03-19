@@ -1,7 +1,8 @@
 import { Box } from "@mui/system";
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import StickyTable from "../custom/TableWithoutPagination";
-import { sportServices } from "../../utils/api/sport/services";
+import { inPlayDetailServices } from "../../utils/api/inplayDetails/services";
+
 export interface Column {
   id: "matchName" | "wonBy" | "won" | "lost" | "balance" | string;
   label: string;
@@ -18,61 +19,20 @@ const columns: readonly Column[] = [
   { id: "nation", label: "Team", align: "center" },
 ];
 
-interface Data {
-  sr: number;
-  team: string;
-  amount: number;
-  rate: number;
-  mode: string;
-}
-
-function createData(
-  team: string,
-  mode: string,
-  rate: number,
-  amount: number
-): Data {
-  const sr = 1;
-  return { sr, mode, team, amount, rate };
-}
-
-const rows = [
-  createData("ADELAIDE STRIKERS W", "L", 0.04, 30),
-  createData("ADELAIDE STRIKERS W", "L", 44, 30),
-];
-
-const columns2: readonly Column[] = [
-  { id: "sr", label: "Sr.", align: "center" },
-  { id: "nation", label: "Rate", align: "center" },
-  { id: "rate", label: "Session", align: "center" },
-  { id: "amount", label: "Amount", align: "right" },
-  { id: "run", label: "Run", align: "right" },
-  { id: "mode", label: "Mode", align: "center" },
-  { id: "dec", label: "Dec", align: "center" },
-];
-
-interface Data2 {
-  sr: number;
-  amount: number;
-  rate: number;
-  mode: string;
-  run: number;
-  dec: number;
-  session: string;
-}
-
 const BetRecord = (props: { item: any }) => {
   const [betRecord, setBetRecord] = React.useState<any>();
   useEffect(() => {
     const getList = async () => {
-      const { response } = await sportServices.betListByMatchId(props.item);
+      const { response } = await inPlayDetailServices.betListByMatchId(
+        props.item
+      );
       if (response?.data) {
         setBetRecord(response.data);
         console.log(response.data);
       }
     };
     getList();
-  }, []);
+  }, [props.item]);
 
   return (
     <Box display="flex" flexDirection="column" gap={2}>
@@ -95,4 +55,4 @@ const BetRecord = (props: { item: any }) => {
   );
 };
 
-export default BetRecord;
+export default memo(BetRecord);

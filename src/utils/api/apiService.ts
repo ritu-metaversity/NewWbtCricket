@@ -98,25 +98,6 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
       }
     });
   return result;
-  // if (result?.responseCode === 403) {
-  //   localStorage.clear();
-  //   snackBarUtil.error("Session changed. Please login again!");
-  //   alert("Session changed. Please login again!");
-  //   window.location.replace("/sign-in");
-
-  //   // Navigate({ to: "/sign-in", replace: true });
-  // }
-  // if (result?.type === "success") {
-  //   return {
-  //     response: { ...result },
-  //     error: null,
-  //   };
-  // } else {
-  //   return {
-  //     error: { message: result?.message },
-  //     response: null,
-  //   };
-  // }
 };
 
 const apiSnackbarNotifications: (

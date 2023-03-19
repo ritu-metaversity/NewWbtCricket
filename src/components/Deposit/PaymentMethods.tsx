@@ -4,9 +4,9 @@ import { CardContainerContainer } from "./styledComponents";
 import BankInfoComponent from "./BankInfoComponent";
 import UPIDetails from "./UPIDetails";
 import QRcodeComponent from "./QRcodeComponent";
-import { userServices } from "../../utils/api/user/services";
 import Card from "./card";
 import snackBarUtil from "../Layout/snackBarUtil";
+import { selfServices } from "../../utils/api/selfWithrawDeposit/service";
 
 export interface BankDetailInterface {
   bankName: string;
@@ -41,7 +41,7 @@ export function PaymentMethods() {
   };
   useEffect(() => {
     const getPaymentData = async () => {
-      const { response } = await userServices.getPaymentDetail();
+      const { response } = await selfServices.getPaymentDetail();
       if (response) {
         setPaymentData(response.data);
         try {

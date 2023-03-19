@@ -8,9 +8,9 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { userServices } from "../../utils/api/user/services";
 // import { colorHex } from "../../utils/constants";
 import { LabelText, WithdrawInput } from "./styledComponent";
+import { selfServices } from "../../utils/api/selfWithrawDeposit/service";
 
 const err = {
   invalidName:
@@ -75,7 +75,7 @@ export function WithdrawForm({
 
       onSubmit: async (values) => {
         setLoading(true);
-        const { response } = await userServices.selfWithdraw(values);
+        const { response } = await selfServices.selfWithdraw(values);
         if (response) {
           resetForm();
           getWithdrawList();

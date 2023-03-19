@@ -5,7 +5,6 @@ import BacktoMenuButton from "../../components/BacktoMenuButton";
 import SummaryCard, {
   SummaryCardProps,
 } from "../../components/Inplay/SummaryCard";
-import { sportsResourses } from "../../utils/api/sport/resources";
 import { sportServices } from "../../utils/api/sport/services";
 
 function a11yProps(index: number) {

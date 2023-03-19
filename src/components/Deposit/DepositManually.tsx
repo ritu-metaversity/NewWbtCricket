@@ -4,11 +4,8 @@ import React, { FC, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { ImageUploadContainer } from "./styledComponents";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-
-import { userServices } from "../../utils/api/user/services";
+import { selfServices } from "../../utils/api/selfWithrawDeposit/service";
 import snackBarUtil from "../Layout/snackBarUtil";
-// import Loading from "../layout/loading";
-// import snackBarUtil from "../layout/snackBarUtil";
 
 interface Props {
   getDepositList: () => Promise<void>;
@@ -27,7 +24,7 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
 
     data.append("image", files || "");
     setLoading(true);
-    const { response } = await userServices.selfDeposit(data);
+    const { response } = await selfServices.selfDeposit(data);
     if (response) {
       setAmount(0);
       setFiles(null);

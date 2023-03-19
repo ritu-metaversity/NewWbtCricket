@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
-import { userServices } from "../../utils/api/user/services";
+import { inPlayDetailServices } from "../../utils/api/inplayDetails/services";
 import StickyHeadTable from "../custom/Table";
 
 interface Props {
@@ -11,7 +11,10 @@ const PnlModal: FC<Props> = ({ fancyId, matchId }) => {
   const [pnlBook, setPnlBook] = useState<{ odds: number; pnl: any }[]>([]);
   const getPnlBook = async () => {
     if (!fancyId) return;
-    const { response } = await userServices.fancyPnlBook({ fancyId, matchId });
+    const { response } = await inPlayDetailServices.fancyPnlBook({
+      fancyId,
+      matchId,
+    });
     if (response?.data) {
       setPnlBook(response.data);
     }

@@ -30,12 +30,12 @@ import Deposit from "./Pages/deposit/Deposit";
 import Withdraw from "./Pages/withdraw/withdraw";
 import { CircularProgress } from "@mui/material";
 import OldChangePassword from "./components/Terms/OldChangePassword";
-import { userServices } from "./utils/api/user/services";
 import Casino from "./components/casino/Casino";
 import CasinoGame from "./components/casino/game/CasinoGame";
 import { authServices } from "./utils/api/auth/services";
 import Inplay from "./Pages/InPlay/Inplay";
 import { Sports } from "./Pages/Sports";
+import { selfServices } from "./utils/api/selfWithrawDeposit/service";
 
 interface LoadingType {
   [x: string]: boolean;
@@ -70,7 +70,7 @@ function App() {
 
   const { pathname } = useLocation();
   const getSelfAllowed = async () => {
-    const { response } = await userServices.isSelfAllowed({
+    const { response } = await selfServices.isSelfAllowed({
       // appUrl: "11hub.atozscore1234.com",
       appUrl: window.location.hostname,
     });

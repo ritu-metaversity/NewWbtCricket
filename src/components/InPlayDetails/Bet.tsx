@@ -11,13 +11,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-// import { blue } from "@mui/material/colors";
 import { Box } from "@mui/system";
 import React, { FC, useCallback, useContext, useEffect, useState } from "react";
 import { TitleStyled } from "../custom/styledComponents";
-import { sportServices } from "../../utils/api/sport/services";
 import "./custom.css";
-import axios from "axios";
 import BookMakerOddsgrid from "./BookmakerOddsGrid";
 import { LoaderContext } from "../../App";
 import ButtonGroupComponent from "./ButtonGroupComponent";
@@ -32,10 +29,8 @@ import {
 import { createProfits } from "./eventUtil";
 import PnlModal from "./pnlModal";
 import moment from "moment";
-
-// const [open, setOpen] = React.useState(false);
-//   const handleOpen = () => setOpen(true);
-//   const handleClose = () => setOpen(false);
+import { inPlayDetailServices } from "../../utils/api/inplayDetails/services";
+import { userServices } from "../../utils/api/user/services";
 
 const Bet: FC<any> = (props: { event: number }) => {
   const [amount, setAmount] = useState(10);
@@ -86,20 +81,22 @@ const Bet: FC<any> = (props: { event: number }) => {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    const getActiveFancyOdds = async () => {
-      const { response } = await sportServices.newFancySlower(
+    const getFancyOdds = async () => {
+      const { response } = await inPlayDetailServices.newFancySlower(
         props.event.toString()
       );
       if (response) {
         setActiveFancySlower(response);
       }
     };
-    getActiveFancyOdds();
+    getFancyOdds();
   }, [props.event]);
 
   useEffect(() => {
-    const getActiveFancyOdds = async () => {
-      const { response } = await sportServices.newFancy(props.event.toString());
+    const getFancyOdds = async () => {
+      const { response } = await inPlayDetailServices.newFancy(
+        props.event.toString()
+      );
       if (response) {
         console.log(moment().valueOf());
         setBookMakerOdds(response.Bookmaker);
@@ -179,18 +176,20 @@ const Bet: FC<any> = (props: { event: number }) => {
       }
     };
 
-    setTimeout(() => getActiveFancyOdds(), 500);
+    setTimeout(() => getFancyOdds(), 500);
   }, [activeFancy, matchOdd]);
 
   const getFancyPnl = useCallback(async () => {
-    const { response } = await sportServices.getuserFancyPnl(props.event);
+    const { response } = await inPlayDetailServices.getuserFancyPnl(
+      props.event
+    );
     if (response) {
       setFancyPnl(response.data);
     }
   }, [props.event]);
 
   const getOddsPnl = useCallback(async () => {
-    const { response } = await sportServices.getuserOddsPnl(props.event);
+    const { response } = await inPlayDetailServices.getuserOddsPnl(props.event);
     if (response) {
       setOddsPnl(response.data);
     }
@@ -210,26 +209,16 @@ const Bet: FC<any> = (props: { event: number }) => {
     console.log("handle");
     setLoading &&
       setLoading((prev) => ({ ...prev, SubmitButtonValueData: true }));
-    await sportServices.updateBetPlace({ ...bet, stake: amount });
+    await inPlayDetailServices.updateBetPlace({ ...bet, stake: amount });
     setLoading &&
       setLoading((prev) => ({ ...prev, SubmitButtonValueData: false }));
   };
 
   const getButtondata = async () => {
-    await axios
-      .post(
-        "http://api.a2zscore.com/admin-new-apis/enduser/get-stake-button",
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then((res) => {
-        setButtonData(res?.data?.data);
-        console.log(res.data);
-      });
+    const { response } = await userServices.getButtonValue();
+    if (response) {
+      setButtonData(response.data);
+    }
   };
 
   useEffect(() => {

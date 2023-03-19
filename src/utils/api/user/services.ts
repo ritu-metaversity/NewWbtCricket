@@ -1,6 +1,5 @@
 import {
   apiHandler,
-  ApiServiceInterface,
   apiWithErrorSnackbar,
   apiWithSnackbar,
 } from "../apiService";
@@ -22,19 +21,6 @@ export interface ProfitLossPayload {
   totalPages: number;
 }
 
-interface SelfAllowedPayload {
-  appUrl: string;
-}
-
-interface SelfWithdrawPayload {
-  accountHolderName: string;
-  bankName: string;
-  accountType: string;
-  accountNumber: string;
-  ifsc: string;
-  amount: number;
-}
-
 interface OldChangePasswordPayload {
   newPassword: string;
   currentPassword: string;
@@ -51,24 +37,6 @@ export const userServices = {
       noAuth: true,
     };
     return await apiHandler(params);
-  },
-  user: async (id: number) => {
-    const params = {
-      resource: userResources.USER,
-      pathVars: { id },
-    };
-    return await apiWithSnackbar(params);
-  },
-  fullUser: async () => {
-    const params = { resource: userResources.USER_INFO };
-    return await apiWithSnackbar(params);
-  },
-  update: async (data: any) => {
-    const params = {
-      resource: userResources.USER_UPDATE,
-      data,
-    };
-    return await apiWithSnackbar(params);
   },
   wallet: async () => {
     const params = {
@@ -90,13 +58,6 @@ export const userServices = {
   },
   oldChangePassword: async (data: OldChangePasswordPayload) => {
     const params = { resource: userResources.OLD_CHANGE_PASSWORD, data };
-    return await apiWithSnackbar(params);
-  },
-  addMoney: async (data: any) => {
-    const params = {
-      resource: userResources.MAKE_TRANSACTION,
-      data,
-    };
     return await apiWithSnackbar(params);
   },
   updateButtonValue: async (data: any) => {
@@ -153,78 +114,11 @@ export const userServices = {
     return await apiWithSnackbar(params);
   },
 
-  getSportsForList: async () => {
-    const params = {
-      resource: userResources.BET_SPORTS_FOR_LIST,
-    };
-    return await apiWithSnackbar(params);
-  },
-
-  getMatchForList: async (sportId: number) => {
-    const params = {
-      resource: userResources.BET_MATCH_FOR_LIST,
-      data: { sportId },
-    };
-    return await apiWithSnackbar(params);
-  },
-
-  getTestApi: async () => {
-    const params = {
-      resource: userResources.TEST_API,
-    };
-    return await apiWithSnackbar(params);
-  },
-  selfWithdraw: async (data: SelfWithdrawPayload) => {
-    const params = {
-      resource: userResources.SELF_WITHDRAW,
-      data,
-    };
-    return await apiWithSnackbar(params);
-  },
-  selfDeposit: async (data: FormData) => {
-    const params: ApiServiceInterface = {
-      resource: userResources.SELF_DEPOSIT,
-      data,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    };
-    return await apiWithSnackbar(params);
-  },
-  getPaymentDetail: async () => {
-    const params = {
-      resource: userResources.PAYMENT_DETAILS,
-    };
-    return await apiHandler(params);
-  },
-  getWithdrawList: async () => {
-    const params = {
-      resource: userResources.WITHDRAW_LIST,
-    };
-    return await apiHandler(params);
-  },
-  getDepositList: async () => {
-    const params = {
-      resource: userResources.DEPOSIT_LIST,
-    };
-    return await apiHandler(params);
-  },
-  isSelfAllowed: async (data: SelfAllowedPayload) => {
-    const params = { resource: userResources.IS_SELF, data };
-    return await apiHandler(params);
-  },
   profitLoss: async (data: ProfitLossPayload) => {
     const params = {
       resource: userResources.PROFIT_LOSS,
       data,
     };
     return await apiWithErrorSnackbar(params);
-  },
-  fancyPnlBook: async (data: any) => {
-    const params = {
-      resource: userResources.PNL_BOOK,
-      data,
-    };
-    return await apiHandler(params);
   },
 };

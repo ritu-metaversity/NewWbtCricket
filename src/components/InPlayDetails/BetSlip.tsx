@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Grid,
-  Modal,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import React, {
   Dispatch,
   FC,
@@ -16,7 +8,7 @@ import React, {
   useState,
 } from "react";
 import { LoaderContext } from "../../App";
-import { sportServices } from "../../utils/api/sport/services";
+import { inPlayDetailServices } from "../../utils/api/inplayDetails/services";
 import { userServices } from "../../utils/api/user/services";
 import { BetDetailsInterface, ProfitObjectInterface } from "./types";
 
@@ -66,7 +58,7 @@ const BetSlip: FC<Props> = ({ bet, setBet, profits, buttonData }) => {
   const { setLoading, loading } = useContext(LoaderContext);
   async function clickHandler() {
     setLoading && setLoading((prev) => ({ ...prev, ClickButtonValue: true }));
-    const { response } = await sportServices.updateBetPlace({
+    const { response } = await inPlayDetailServices.updateBetPlace({
       ...bet,
       userIp,
       deviceInfo: {

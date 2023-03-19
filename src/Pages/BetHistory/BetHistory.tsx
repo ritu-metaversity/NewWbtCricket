@@ -1,9 +1,8 @@
 import { Box } from "@mui/system";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { userServices } from "../../utils/api/user/services";
 import StickyTable from "../../components/custom/TableWithoutPagination";
 import TablePagination from "@mui/material/TablePagination";
-import { getValue } from "@testing-library/user-event/dist/utils";
 import { LoaderContext } from "../../App";
 
 export interface Column {
@@ -59,9 +58,7 @@ const columns: readonly Column[] = [
 ];
 
 const BetHistory = () => {
-  const [index, setPage] = React.useState(0);
   const [countPage, setCount] = React.useState();
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const [formData, setFormData] = React.useState({
     sportType: 1,
@@ -77,7 +74,7 @@ const BetHistory = () => {
   // const [matchList, setMatchList]= React.useState<MatchListResponse[]>([]);
 
   const [accountStatement, setAccountStatement] = React.useState([]);
-  const { loading, setLoading } = useContext(LoaderContext);
+  const { setLoading } = useContext(LoaderContext);
 
   useEffect(() => {
     const getList = async () => {
@@ -93,27 +90,6 @@ const BetHistory = () => {
     };
     getList();
   }, [formData]);
-
-  // useEffect(() => {
-  //   const getSportList = async () => {
-  //     const { response } = await userServices.getSportsForList();
-  //     if (response?.data) {
-  //       setSportsList(response.data)
-  //     }
-  //   };
-  //   getSportList();
-  // }, []);
-
-  // useEffect(() => {
-  //   if(!sportsId) return;
-  //   const getMatchList = async () => {
-  //     const { response } = await userServices.getMatchForList(sportsId!);
-  //     if (response?.data) {
-  //       setMatchList(response.data)
-  //     }
-  //   };
-  //   getMatchList();
-  // }, [sportsId]);
 
   function handleChange(event: { target: { name: any; value: any } }) {
     setFormData((preState) => {

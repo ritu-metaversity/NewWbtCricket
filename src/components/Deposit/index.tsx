@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
-// import HomeLayout from "../layout/homeLayout";
 import DepositManually from "./DepositManually";
-import { userServices } from "../../utils/api/user/services";
-// import ActivityTable from "../activityLog/activityLogTable";
 import { columns } from "./columns";
-// import { colorHex } from "../../utils/constants";
 import ImageModal from "./ImageModal";
 import StickyHeaderTable from "../custom/Table";
+import { selfServices } from "../../utils/api/selfWithrawDeposit/service";
 
 interface DepositListInterface {
   image: string;
@@ -26,7 +23,7 @@ const Deposit = () => {
   const [depositList, setDepositList] = useState<DepositListInterface[]>([]);
 
   const getDepositList = async () => {
-    const { response } = await userServices.getDepositList();
+    const { response } = await selfServices.getDepositList();
     console.log(response, "deposit data");
     if (response.data) {
       setDepositList(response.data);
