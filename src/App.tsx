@@ -93,13 +93,18 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    let timer: ReturnType<typeof setInterval>;
     if (token) {
-      if (["welcome", "sign-in", "sign-up"].every((i) => !pathname.includes(i)))
+      if (
+        ["welcome", "sign-in", "sign-up"].every((i) => !pathname.includes(i))
+      ) {
         validateJwt();
+        timer = setInterval(() => validateJwt(), 1000);
+      }
     } else {
       setIsSignedIn(false);
     }
-    return () => {};
+    return () => clearInterval(timer);
   }, [pathname, validateJwt]);
 
   const nav = useNavigate();
