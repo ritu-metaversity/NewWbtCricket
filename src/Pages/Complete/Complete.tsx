@@ -35,7 +35,7 @@ export interface Column {
 
 const columns: readonly Column[] = [
   { id: "matchId", label: "Id", align: "center", minWidth: 120 },
-  { id: "pnl", label: "Pnl.", minWidth: 30, align: "right", colorCoded: true },
+  { id: "pnl", label: "Pnl.", minWidth: 30, align: "center", colorCoded: true },
   // { id: "uplineAmount", label: "uplineAmount", align: "center", minWidth: 120 },
   // {
   //   id: "downLineAmount",
@@ -48,7 +48,7 @@ const columns: readonly Column[] = [
     id: "commssionMila",
     label: "commssionMila",
     minWidth: 20,
-    align: "right",
+    align: "center",
     colorCoded: true,
   },
   // {
@@ -65,7 +65,7 @@ const columns: readonly Column[] = [
   },
 ];
 const Complete = () => {
-  const [countPage, setCount] = React.useState();
+  const [countPage, setCount] = React.useState(1);
 
   const date = new Date();
   const futureDate = date.getDate() - 60;
@@ -103,7 +103,8 @@ const Complete = () => {
       setLoading && setLoading((prev) => ({ ...prev, getListdata: true }));
       const { response } = await userServices.profitLoss(formData);
       if (response?.data) {
-        setAccountStatement(response.data);
+        setAccountStatement(response.data.market);
+        setCount(response.data.totalRecord);
       }
       setLoading && setLoading((prev) => ({ ...prev, getListdata: false }));
     };
@@ -123,9 +124,10 @@ const Complete = () => {
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
-    setFormData((preState) => {
-      return { ...preState, index: newPage };
-    });
+    if (formData.index < countPage)
+      setFormData((preState) => {
+        return { ...preState, index: newPage };
+      });
   };
 
   return (

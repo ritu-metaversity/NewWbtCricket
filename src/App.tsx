@@ -81,7 +81,6 @@ function App() {
   };
 
   const validateJwt = useCallback(async () => {
-    setIsSignedIn(false);
     const { response } = await authServices.validateToken();
     if (response?.status) {
       setIsSignedIn(true);
