@@ -76,7 +76,7 @@ const Complete = () => {
   const [formData, setFormData] = React.useState<ProfitLossPayload>({
     fromDate: defaultValue,
     toDate: currentValue,
-    sportId: 1,
+    sportId: "1",
     matchId: "",
     index: 0,
     noOfRecords: 25,

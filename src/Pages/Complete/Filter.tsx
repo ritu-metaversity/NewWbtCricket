@@ -82,11 +82,14 @@ const Filter: FC<Props> = ({
   useEffect(() => {
     if (tab === 0) {
       if (activeSportList[0]) {
-        setFormData((i) => ({ ...i, sportId: activeSportList[0].sportId }));
+        setFormData((i) => ({
+          ...i,
+          sportId: activeSportList[0].sportId.toString(),
+        }));
       }
     } else {
       if (casinoTypes[0]) {
-        setFormData((i) => ({ ...i, sportId: casinoTypes[0].id }));
+        setFormData((i) => ({ ...i, sportId: casinoTypes[0].id.toString() }));
       }
     }
   }, [tab]);
@@ -160,9 +163,9 @@ const Filter: FC<Props> = ({
 
   useEffect(() => {
     if (tab === 0) {
-      setFormData((o) => ({ ...o, sportId: 4 }));
+      setFormData((o) => ({ ...o, sportId: "4" }));
     } else if (tab === 1) {
-      setFormData((o) => ({ ...o, sportId: 323334 }));
+      setFormData((o) => ({ ...o, sportId: "323334" }));
     }
   }, [tab, setFormData]);
   return (

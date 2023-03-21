@@ -11,8 +11,8 @@ interface ChangePasswordPayload {
 }
 
 export interface ProfitLossPayload {
-  sportId: string | number;
-  matchId: string | number;
+  sportId: string;
+  matchId: string;
   fromDate: string;
   toDate: string;
   userId: "";
