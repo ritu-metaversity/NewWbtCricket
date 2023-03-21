@@ -1,11 +1,4 @@
-import {
-  styled,
-  Tab,
-  Tabs,
-  tabClasses,
-  useMediaQuery,
-  Typography,
-} from "@mui/material";
+import { styled, Tab, Tabs, tabClasses, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -45,9 +38,7 @@ const Casino = () => {
   const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
 
   const nav = useNavigate();
-  // const { isSignedIn, setCasinoId } = useContext(UserContext);
   const getCasinoList = async () => {
-    console.log("in min");
     const isSignedIn = localStorage.getItem("token");
     if (!isSignedIn) {
       nav("/");
@@ -85,7 +76,6 @@ const Casino = () => {
     return () => {};
   }, []);
 
-  const matches = useMediaQuery("(max-width: 1279px)");
   return (
     <>
       <BacktoMenuButton />

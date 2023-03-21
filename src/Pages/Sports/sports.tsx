@@ -21,7 +21,7 @@ const Sports = () => {
   );
   const [tabValue, setTab] = useState(0);
   const [show, setShow] = useState(false);
-  const { loading, setLoading } = useContext(LoaderContext);
+  const { setLoading } = useContext(LoaderContext);
   useEffect(() => {
     const getList = async () => {
       setLoading && setLoading((prev) => ({ ...prev, Inplay: true }));
@@ -33,7 +33,7 @@ const Sports = () => {
       setLoading && setLoading((prev) => ({ ...prev, Inplay: false }));
     };
     getList();
-  }, []);
+  }, [setLoading]);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTab(newValue);
   };
@@ -62,7 +62,7 @@ const Sports = () => {
 
     const timer = setInterval(() => getNewEvent(), 60000);
     return () => clearInterval(timer);
-  }, [tabValue, activeSportList]);
+  }, [tabValue, activeSportList, setLoading]);
   return (
     <Box maxWidth={900} mx="auto">
       <BacktoMenuButton />

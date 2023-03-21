@@ -1,9 +1,7 @@
-import { Typography } from '@mui/material'
-import { Box } from '@mui/system'
-import React from 'react'
-import BacktoMenuButton from '../../components/BacktoMenuButton'
-import StickyHeadTable from '../../components/custom/Table'
-
+import { Box } from "@mui/system";
+import React from "react";
+import BacktoMenuButton from "../../components/BacktoMenuButton";
+import StickyHeadTable from "../../components/custom/Table";
 
 export interface Column {
   id: "matchName" | "wonBy" | "won" | "lost" | "balance" | string;
@@ -91,7 +89,6 @@ const rows = [
   ),
 ];
 
-
 const Ledger = () => {
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
@@ -99,6 +96,6 @@ const Ledger = () => {
       <StickyHeadTable rows={rows} columns={columns} title={"MY LEDGER"} />
     </Box>
   );
-}
+};
 
-export default Ledger
+export default Ledger;

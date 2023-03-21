@@ -9,22 +9,23 @@ interface Props {
 }
 const PnlModal: FC<Props> = ({ fancyId, matchId }) => {
   const [pnlBook, setPnlBook] = useState<{ odds: number; pnl: any }[]>([]);
-  const getPnlBook = async () => {
-    if (!fancyId) return;
-    const { response } = await inPlayDetailServices.fancyPnlBook({
-      fancyId,
-      matchId,
-    });
-    if (response?.data) {
-      setPnlBook(response.data);
-    }
-  };
+
   useEffect(() => {
+    const getPnlBook = async () => {
+      if (!fancyId) return;
+      const { response } = await inPlayDetailServices.fancyPnlBook({
+        fancyId,
+        matchId,
+      });
+      if (response?.data) {
+        setPnlBook(response.data);
+      }
+    };
     getPnlBook();
     return () => {
       setPnlBook([]);
     };
-  }, [fancyId]);
+  }, [fancyId, matchId]);
 
   return (
     <StickyHeadTable

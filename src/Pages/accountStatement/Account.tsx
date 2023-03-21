@@ -1,9 +1,7 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import { border } from "@mui/system";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import TablePagination from "@mui/material/TablePagination";
 import React, { useContext, useEffect } from "react";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
-import StickyHeadTable from "../../components/custom/Table";
 import StickyTable from "../../components/custom/TableWithoutPagination";
 import { userServices } from "../../utils/api/user/services";
 import { LoaderContext } from "../../App";
@@ -45,15 +43,6 @@ const columns: readonly Column[] = [
   { id: "remark", label: "Remark", align: "center", minWidth: 120 },
 ];
 
-interface Data {
-  sr: number;
-  date: string;
-  won: number;
-  remark: string;
-  lost: number;
-  balance: number;
-}
-
 const Account = () => {
   const style = {
     display: "flex",
@@ -68,14 +57,13 @@ const Account = () => {
     width: "100%",
     maxWidth: "200px",
   };
-  const [countPage, setCount] = React.useState();
+  const [countPage] = React.useState();
 
   const lableStyle = { alignSelf: "center" };
   const date = new Date();
   const futureDate = date.getDate() - 60;
   date.setDate(futureDate);
   const defaultValue = moment().subtract(1, "month").format("YYYY-MM-DD");
-  const current = new Date();
   const currentValue = moment().format("YYYY-MM-DD");
 
   const [formData, setFormData] = React.useState({
@@ -114,7 +102,7 @@ const Account = () => {
       setLoading && setLoading((prev) => ({ ...prev, getList: false }));
     };
     getList();
-  }, [formData]);
+  }, [formData, setLoading]);
 
   const handleClick = () => {
     const getList = async () => {

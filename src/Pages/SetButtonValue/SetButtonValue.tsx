@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { TitleStyled } from "../../components/custom/styledComponents";
 import { userServices } from "../../utils/api/user/services";
-import { isTemplateMiddleOrTemplateTail } from "typescript";
 import { LoaderContext } from "../../App";
 
 const GridItemProps = {
@@ -11,58 +10,6 @@ const GridItemProps = {
   md: 3,
   sx: { textAlign: "center" },
 };
-const GridValue = [
-  {
-    title: "Button Value 1",
-    key: "stack1",
-    value: 10,
-  },
-  {
-    title: "Button Value 2",
-    key: "stack2",
-    value: 10,
-  },
-  {
-    title: "Button Value 3",
-    key: "stack3",
-    value: 10,
-  },
-  {
-    title: "Button Value 4",
-    key: "stack4",
-    value: 10,
-  },
-  {
-    title: "Button Value 5",
-    key: "stack5",
-    value: 10,
-  },
-  {
-    title: "Button Value 6",
-    key: "stack6",
-    value: 10,
-  },
-  {
-    title: "Button Value 7",
-    key: "stack7",
-    value: 10,
-  },
-  {
-    title: "Button Value 8",
-    key: "stack8",
-    value: 10,
-  },
-  {
-    title: "Button Value 9",
-    key: "stack9",
-    value: 10,
-  },
-  {
-    title: "Button Value 10",
-    key: "stack10",
-    value: 10,
-  },
-];
 const SetButtonValue = () => {
   const [buttonValue, setButtonValue] = useState<{ [x: string]: number }>({
     stack1: 0,
@@ -82,7 +29,7 @@ const SetButtonValue = () => {
     if (e.target.value < 100000000)
       setButtonValue({ ...buttons, [e.target.name]: e.target.value });
   };
-  const { loading, setLoading } = useContext(LoaderContext);
+  const { setLoading } = useContext(LoaderContext);
   useEffect(() => {
     const getButtonValue = async () => {
       setLoading && setLoading((prev) => ({ ...prev, getButtonValue: true }));
@@ -94,7 +41,7 @@ const SetButtonValue = () => {
     };
     getButtonValue();
     return () => {};
-  }, []);
+  }, [setLoading]);
 
   const handleClick = async (e: any) => {
     setLoading && setLoading((prev) => ({ ...prev, SubmitButtonValue: true }));

@@ -1,5 +1,4 @@
 import { Button, ButtonGroup } from "@mui/material";
-import userEvent from "@testing-library/user-event";
 import React, {
   Dispatch,
   FC,

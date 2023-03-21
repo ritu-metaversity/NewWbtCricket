@@ -2,19 +2,8 @@ import * as React from "react";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import { Column } from "../../Pages/Ledger/Ledger";
-import {
-  TableCellText,
-  TableHeadText,
-  TableResultContainer,
-  TitleStyled,
-} from "./styledComponents";
-import { blue } from "@mui/material/colors";
-import {
-  Box,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-} from "@mui/material";
+import { TableResultContainer, TitleStyled } from "./styledComponents";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { Tables } from "./Table";
 import { ExpandCircleDown } from "@mui/icons-material";
 
@@ -24,8 +13,8 @@ interface StickyHeadTableProps {
   accordion?: boolean;
   columns: readonly Column[];
   result?: string | React.ReactElement;
-  noOfRecords?:number;
-  totalPage?:number
+  noOfRecords?: number;
+  totalPage?: number;
 }
 const StickyTable: React.FC<StickyHeadTableProps> = ({
   title,
@@ -34,23 +23,11 @@ const StickyTable: React.FC<StickyHeadTableProps> = ({
   columns,
   result,
   noOfRecords,
-  
+
   totalPage,
 }) => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(noOfRecords ? noOfRecords : 10);
-
-  
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  const [page] = React.useState(0);
+  const [rowsPerPage] = React.useState(noOfRecords ? noOfRecords : 10);
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>

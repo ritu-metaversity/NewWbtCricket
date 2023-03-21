@@ -63,7 +63,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   // const handleClick = async (e: any) =>  await authServices.logout();
 
   async function clickHandler() {
-    const { response } = await authServices.logout();
+    await authServices.logout();
     localStorage.removeItem("token");
     navigation("/welcome");
     setIsSignedIn(false);
@@ -178,7 +178,6 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
                   >
                     Deposit
                   </Button>
-                  {/* <Avatar  /> <a style={{color:"black"}}> Deposit </a> */}
                 </MenuItem>
               </Link>
               <Link to="/withdraw">
@@ -190,40 +189,39 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
                   >
                     Withdraw
                   </Button>
-                  {/* <Avatar  /> <a style={{color:"black"}}> Profile </a> */}
                 </MenuItem>
               </Link>
             </Box>
           )}
           <Link to="/profile">
             <MenuItem>
-              <Avatar /> <a> Profile </a>
+              <Avatar /> Profile
             </MenuItem>
           </Link>
           <Link to="/account-summary">
             <MenuItem>
-              <AttachMoneyIcon /> <a>Account Statement</a>
+              <AttachMoneyIcon /> Account Statement
             </MenuItem>
           </Link>
           <Link to="/login-history">
             <MenuItem>
-              <SummarizeIcon /> <a> Login History </a>
+              <SummarizeIcon /> Login History
             </MenuItem>
           </Link>
           <Link to="/current-bet">
             <MenuItem>
-              <AttachMoneyIcon /> <a> Current Bet</a>
+              <AttachMoneyIcon /> Current Bet
             </MenuItem>
           </Link>
           <Link to="/bet-history">
             <MenuItem>
-              <AttachMoneyIcon /> <a> Bet History</a>
+              <AttachMoneyIcon /> Bet History
             </MenuItem>
           </Link>
 
           <Link to="/set-button-value">
             <MenuItem>
-              <MoneyIcon /> <a> Set button value </a>
+              <MoneyIcon /> Set button value
             </MenuItem>
           </Link>
           <Divider />

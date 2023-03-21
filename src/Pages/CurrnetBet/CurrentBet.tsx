@@ -49,9 +49,7 @@ const columns: readonly Column[] = [
 ];
 
 const CurrentBet = () => {
-  const [index, setPage] = React.useState(0);
   const [countPage, setCount] = React.useState();
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const [formData, setFormData] = React.useState({
     sportType: 1,
@@ -60,7 +58,7 @@ const CurrentBet = () => {
     index: 0,
   });
   const [accountStatement, setAccountStatement] = React.useState([]);
-  const { loading, setLoading } = useContext(LoaderContext);
+  const { setLoading } = useContext(LoaderContext);
   useEffect(() => {
     const getList = async () => {
       setLoading && setLoading((prev) => ({ ...prev, currentbet: true }));
@@ -74,7 +72,7 @@ const CurrentBet = () => {
       setLoading && setLoading((prev) => ({ ...prev, currentbet: false }));
     };
     getList();
-  }, [formData]);
+  }, [formData, setLoading]);
 
   function handleChange(event: { target: { name: any; value: any } }) {
     setFormData((preState) => {

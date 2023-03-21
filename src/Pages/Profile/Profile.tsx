@@ -1,6 +1,5 @@
-import { Box, Button, Grid, MenuItem, Select } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
-import { isTemplateExpression } from "typescript";
+import { Box, Grid } from "@mui/material";
+import React, { useContext, useEffect } from "react";
 import { LoaderContext } from "../../App";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
 import { TitleStyled } from "../../components/custom/styledComponents";
@@ -14,34 +13,10 @@ const gridItemProps = {
   display: "flex",
   alignItems: "center",
 };
-const gridData = [
-  {
-    title: "Client Code:",
-    value: "C4545",
-  },
-  {
-    title: "Client Name:",
-    value: "Sabka Client",
-  },
-  {
-    title: "Contact No:",
-    value: "048320593490",
-  },
-  {
-    title: "Date of Joining:",
-    value: "2021-04-11 23:30:18.00",
-  },
-  {
-    title: "Address:",
-    value: "India",
-  },
-];
 
 const Profile = () => {
-  const handleRatingChange = (e: any) => {};
-
   const [prolile, setProfile] = React.useState<any>([]);
-  const { loading, setLoading } = useContext(LoaderContext);
+  const { setLoading } = useContext(LoaderContext);
   useEffect(() => {
     const getProfile = async () => {
       if (!prolile?.userId) {
@@ -56,7 +31,8 @@ const Profile = () => {
 
     getProfile();
     return () => {};
-  }, [prolile]);
+  }, [prolile, setLoading]);
+
   return (
     <Box p={0.5} fontWeight={700} mx="auto">
       <BacktoMenuButton />

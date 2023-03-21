@@ -4,8 +4,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Tab,
-  Tabs,
   Typography,
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";

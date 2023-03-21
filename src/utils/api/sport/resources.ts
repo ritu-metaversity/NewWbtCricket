@@ -6,11 +6,11 @@ export const sportsResourses: { [x: string]: ApiResource } = {
     METHOD: "POST",
   },
   GET_EVENT_FROM_SPORTS: {
-    URL: "http://43.205.50.127:9000/betfair_api/active_match/:sportId",
+    URL: `/active_match/:sportId`,
     METHOD: "GET",
   },
   GET_IN_PLAY: {
-    URL: "http://43.205.50.127:9000/betfair_api/active_match/",
+    URL: `/active_match/`,
     METHOD: "GET",
   },
 };

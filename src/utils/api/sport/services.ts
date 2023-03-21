@@ -12,12 +12,14 @@ export const sportServices = {
     const params: ApiServiceInterface = {
       resource: sportsResourses.GET_EVENT_FROM_SPORTS,
       pathVars: { sportId },
+      betfair: true,
     };
     return apiHandler(params);
   },
   inplay: () => {
     const params: ApiServiceInterface = {
       resource: sportsResourses.GET_IN_PLAY,
+      betfair: true,
     };
     return apiHandler(params);
   },

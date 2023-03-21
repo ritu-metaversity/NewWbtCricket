@@ -1,7 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { FC, useContext, useEffect } from "react";
-import BacktoMenuButton from "../../components/BacktoMenuButton";
+import React, { FC, useCallback, useContext, useEffect } from "react";
 import StickyHeadTable from "../../components/custom/Table";
 import { LoginHistoryResponse } from "./LoginHistory";
 import { userServices } from "../../utils/api/user/services";
@@ -35,23 +34,6 @@ const columns: readonly Column[] = [
   },
 ];
 
-interface Data {
-  ip: string;
-  lastLogin: Date;
-  userid: string;
-  deviceInfo: string;
-}
-
-function createData(
-  ip: string,
-  lastLogin1: string,
-  userid: string,
-  deviceInfo: string
-): Data {
-  var lastLogin = new Date(lastLogin1);
-  return { ip, lastLogin, userid, deviceInfo };
-}
-
 export interface HistoryPayload {
   fromDate: string;
   pageSize: number;
@@ -84,7 +66,6 @@ export const LoginhistoryData: FC<any> = () => {
   const futureDate = date.getDate() - 60;
   date.setDate(futureDate);
   const defaultValue = moment().subtract(7, "days").format("YYYY-MM-DD");
-  const current = new Date();
   const currentValue = moment().format("YYYY-MM-DD");
 
   const [formData, setFormData] = React.useState({
@@ -95,7 +76,7 @@ export const LoginhistoryData: FC<any> = () => {
     userId: "",
   });
 
-  const getNewEvent = async () => {
+  const getNewEvent = useCallback(async () => {
     setLoading && setLoading((prev) => ({ ...prev, loginHistory: true }));
     const formDAta: any = { ...formData };
     formDAta.fromDate = moment(formData.fromDate).format("DD-MM-YYYY");
@@ -110,19 +91,12 @@ export const LoginhistoryData: FC<any> = () => {
       setLoginHistory([]);
     }
     setLoading && setLoading((prev) => ({ ...prev, loginHistory: false }));
-  };
+  }, [formData, setLoading]);
 
   useEffect(() => {
     getNewEvent();
-  }, [formData]);
+  }, [getNewEvent]);
 
-  // const dateChange = loginHistory.filter((c) =>{
-  //   c.lastLogin === new Date(c.lastLogin);
-  //   return {
-  //     ...loginHistory,
-  //     loginHistory.lastLogin=dateChange
-  //   }
-  // }
   function handleChange(event: { target: { name: any; value: any } }) {
     setFormData((preState) => {
       return {

@@ -89,7 +89,7 @@ const BetHistory = () => {
       setLoading && setLoading((prev) => ({ ...prev, bethistory: false }));
     };
     getList();
-  }, [formData]);
+  }, [formData, setLoading]);
 
   function handleChange(event: { target: { name: any; value: any } }) {
     setFormData((preState) => {
@@ -118,14 +118,6 @@ const BetHistory = () => {
     });
   };
 
-  const inputStyle = {
-    padding: "10px",
-    borderRadius: "5px",
-    marginRight: " 8px",
-    width: "100%",
-    maxWidth: "200px",
-    minWidth: "100px",
-  };
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
       <form style={{ display: "inline-flex", padding: "10px" }}>

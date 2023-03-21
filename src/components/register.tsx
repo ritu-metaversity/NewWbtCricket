@@ -1,17 +1,13 @@
 import {
   Box,
   Button,
-  Checkbox,
   Dialog,
   DialogContent,
-  FormControlLabel,
   Grid,
-  Modal,
   TextField,
   Typography,
 } from "@mui/material";
-import axios from "axios";
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authServices } from "../utils/api/auth/services";
 import snackBarUtil from "./Layout/snackBarUtil";

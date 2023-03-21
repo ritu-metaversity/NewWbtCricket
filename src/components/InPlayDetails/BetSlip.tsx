@@ -1,4 +1,5 @@
 import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
+import moment from "moment";
 import React, {
   Dispatch,
   FC,
@@ -60,6 +61,7 @@ const BetSlip: FC<Props> = ({ bet, setBet, profits, buttonData }) => {
     setLoading && setLoading((prev) => ({ ...prev, ClickButtonValue: true }));
     const { response } = await inPlayDetailServices.updateBetPlace({
       ...bet,
+      placeTime: moment(bet?.placeTime).format("YYYY-MM-DD hh:mm:ss.SSS"),
       userIp,
       deviceInfo: {
         userAgent: window.navigator.userAgent,

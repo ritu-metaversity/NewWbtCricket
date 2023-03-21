@@ -1,10 +1,9 @@
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import moment from "moment";
-import React, { FC, useContext, useEffect } from "react";
+import React, { FC, useCallback, useContext, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { LoaderContext } from "../../App";
-import BacktoMenuButton from "../../components/BacktoMenuButton";
 import StickyHeadTable from "../../components/custom/Table";
 import { userServices } from "../../utils/api/user/services";
 
@@ -53,25 +52,6 @@ const columns: readonly Column[] = [
   },
 ];
 
-interface Data {
-  ipAddress: string;
-  byUser: string;
-  userId: string;
-  deviceInfo: string;
-  action: string;
-  createdOn: string;
-}
-
-// function createData(
-//     ipAddress: string,
-//   lastLogin: string,
-//   userid: string,
-//   deviceInfo: string,
-// ): Data {
-
-//   return { ipAddress, lastLogin, userid, deviceInfo};
-// }
-
 const style = {
   display: "flex",
   alignItems: "center",
@@ -86,15 +66,12 @@ const inputStyle = {
   maxWidth: "200px",
 };
 export const ChnagePasswordHistory: FC<any> = () => {
-  //    let data:LoginHistoryResponse[]=logindata.logindata;
-
   const [changePasswordData, setChangePasswordData] = React.useState([]);
   const { loading, setLoading } = useContext(LoaderContext);
   const date = new Date();
   const futureDate = date.getDate() - 60;
   date.setDate(futureDate);
   const defaultValue = moment().subtract(7, "days").format("YYYY-MM-DD");
-  const current = new Date();
   const currentValue = moment().format("YYYY-MM-DD");
   const lableStyle = { alignSelf: "center" };
   const [formData, setFormData] = React.useState({
@@ -105,7 +82,7 @@ export const ChnagePasswordHistory: FC<any> = () => {
     userId: "",
   });
 
-  const getNewEvent = async () => {
+  const getNewEvent = useCallback(async () => {
     // if (changePasswordData.length) return;
     setLoading &&
       setLoading((prev) => ({ ...prev, getNewEventChangePassword: true }));
@@ -119,11 +96,11 @@ export const ChnagePasswordHistory: FC<any> = () => {
     } else {
       return;
     }
-  };
+  }, [formData, setLoading]);
 
   useEffect(() => {
     getNewEvent();
-  }, [formData]);
+  }, [getNewEvent]);
   function handleChange(event: { target: { name: any; value: any } }) {
     setFormData((preState) => {
       return {

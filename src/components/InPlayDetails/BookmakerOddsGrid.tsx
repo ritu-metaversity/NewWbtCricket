@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import React, { Dispatch, FC, SetStateAction } from "react";
 import { BetText, BetTextMedium, BetTextSmall } from "./styledComponents";
 import "./custom.css";

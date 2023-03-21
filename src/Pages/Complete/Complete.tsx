@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import TablePagination from "@mui/material/TablePagination";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import StickyTable from "../../components/custom/TableWithoutPagination";
 import { ProfitLossPayload, userServices } from "../../utils/api/user/services";
 import { LoaderContext } from "../../App";
