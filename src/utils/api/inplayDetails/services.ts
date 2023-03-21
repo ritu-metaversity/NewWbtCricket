@@ -54,7 +54,6 @@ export const inPlayDetailServices = {
         URL: "/fancy/:id",
         METHOD: "GET",
       },
-      noAuth: true,
       betfair: true,
       pathVars: { id: id },
     };
