@@ -31,6 +31,7 @@ import PnlModal from "./pnlModal";
 import moment from "moment";
 import { inPlayDetailServices } from "../../utils/api/inplayDetails/services";
 import { userServices } from "../../utils/api/user/services";
+import Marquee from "react-fast-marquee";
 
 const Bet: FC<any> = (props: { event: number }) => {
   const [amount, setAmount] = useState(10);
@@ -98,7 +99,6 @@ const Bet: FC<any> = (props: { event: number }) => {
         props.event.toString()
       );
       if (response) {
-        console.log(moment().valueOf());
         setBookMakerOdds(response.Bookmaker);
         let newBookmakerOdd: FancyOddsInterface[] = response.Bookmaker.map(
           (item: any, index: number) => ({
@@ -147,7 +147,6 @@ const Bet: FC<any> = (props: { event: number }) => {
             ...item,
           }))
         );
-        console.log(moment().valueOf());
         if (matchOdd.length) {
           setPreMetchOdds([...matchOdd]);
         } else {
@@ -206,7 +205,6 @@ const Bet: FC<any> = (props: { event: number }) => {
   }, [getOddsPnl, getFancyPnl]);
 
   const handleClick = async () => {
-    console.log("handle");
     setLoading &&
       setLoading((prev) => ({ ...prev, SubmitButtonValueData: true }));
     await inPlayDetailServices.updateBetPlace({ ...bet, stake: amount });
@@ -236,7 +234,6 @@ const Bet: FC<any> = (props: { event: number }) => {
     });
   }, [bet?.stake]);
 
-  console.log(matchOdd, "matchOdd");
   return (
     <>
       <Dialog
@@ -266,65 +263,119 @@ const Bet: FC<any> = (props: { event: number }) => {
         bet={bet}
         buttonData={buttonData}
       />
-
-      {matchOdd?.map((match, index) => (
-        <Accordion key={"matchodd" + index} defaultExpanded>
-          <AccordionSummary expandIcon={<ExpandCircleDown />}>
-            {match.Name}
-          </AccordionSummary>
-          <AccordionDetails sx={{ p: 0 }}>
-            <MatchOddsGrid
-              bet={bet}
-              setBet={setBet}
-              CurrentOdd={match}
-              PrevOdds={preMatchOdds[index]}
-              matchId={props.event}
-              OddsPnl={profits.Odds[match?.marketId]}
-            />
-          </AccordionDetails>
-        </Accordion>
-      ))}
-
+      {matchOdd
+        ?.filter((i) => i.Name === "Match Odds")
+        .map((match, index) => (
+          <>
+            {" "}
+            <Accordion key={"matchodd" + index} defaultExpanded>
+              <AccordionSummary expandIcon={<ExpandCircleDown />}>
+                {match.Name}
+              </AccordionSummary>
+              <AccordionDetails sx={{ p: 0 }}>
+                <MatchOddsGrid
+                  bet={bet}
+                  setBet={setBet}
+                  CurrentOdd={match}
+                  PrevOdds={preMatchOdds[index]}
+                  matchId={props.event}
+                  OddsPnl={profits.Odds[match?.marketId]}
+                />
+              </AccordionDetails>
+            </Accordion>
+            <Marquee gradient={false}>
+              <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
+                {match.display_message}
+              </Typography>
+            </Marquee>
+          </>
+        ))}{" "}
       {originBookMaker?.length > 0 && (
-        <Accordion defaultExpanded>
-          <AccordionSummary expandIcon={<ExpandCircleDown />}>
-            Bookmaker Odds
-          </AccordionSummary>
-          <AccordionDetails sx={{ p: 0 }}>
-            <BookMakerOddsgrid
-              setBet={setBet}
-              bet={bet}
-              profits={profits.Bookmaker}
-              buttonData={buttonData}
-              CurrentOdd={originBookMaker}
-              PrevOdds={prvbookmakerOdd}
-              matchId={props.event}
-              OddsPnl={oddPnl}
-            />
-          </AccordionDetails>
-        </Accordion>
+        <>
+          {" "}
+          <Accordion defaultExpanded>
+            <AccordionSummary expandIcon={<ExpandCircleDown />}>
+              Bookmaker Odds
+            </AccordionSummary>
+            <AccordionDetails sx={{ p: 0 }}>
+              <BookMakerOddsgrid
+                setBet={setBet}
+                bet={bet}
+                profits={profits.Bookmaker}
+                buttonData={buttonData}
+                CurrentOdd={originBookMaker}
+                PrevOdds={prvbookmakerOdd}
+                matchId={props.event}
+                OddsPnl={oddPnl}
+              />
+            </AccordionDetails>
+          </Accordion>
+          <Marquee gradient={false}>
+            <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
+              {
+                originBookMaker?.find((i: FancyOddsInterface) => i.t !== "TOSS")
+                  ?.display_message
+              }
+            </Typography>
+          </Marquee>
+        </>
       )}
-
+      {matchOdd
+        ?.filter((i) => i.Name !== "Match Odds")
+        .map((match, index) => (
+          <>
+            <Accordion key={"matchodd" + index} defaultExpanded>
+              <AccordionSummary expandIcon={<ExpandCircleDown />}>
+                {match.Name}
+              </AccordionSummary>
+              <AccordionDetails sx={{ p: 0 }}>
+                <MatchOddsGrid
+                  bet={bet}
+                  setBet={setBet}
+                  CurrentOdd={match}
+                  PrevOdds={preMatchOdds[index]}
+                  matchId={props.event}
+                  OddsPnl={profits.Odds[match?.marketId]}
+                />
+              </AccordionDetails>
+            </Accordion>
+            <Marquee gradient={false}>
+              <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
+                {match.display_message}
+              </Typography>
+            </Marquee>
+          </>
+        ))}
       {bookmakerToss?.length > 0 && (
-        <Accordion defaultExpanded>
-          <AccordionSummary expandIcon={<ExpandCircleDown />}>
-            Bookmaker Toss
-          </AccordionSummary>
-          <AccordionDetails sx={{ p: 0 }}>
-            <BookMakerOddsgrid
-              setBet={setBet}
-              bet={bet}
-              profits={profits.Bookmaker}
-              buttonData={buttonData}
-              CurrentOdd={bookmakerToss}
-              PrevOdds={preBookmakerToss}
-              matchId={props.event}
-              OddsPnl={oddPnl}
-            />
-          </AccordionDetails>
-        </Accordion>
+        <>
+          {" "}
+          <Accordion defaultExpanded>
+            <AccordionSummary expandIcon={<ExpandCircleDown />}>
+              Bookmaker Toss
+            </AccordionSummary>
+            <AccordionDetails sx={{ p: 0 }}>
+              <BookMakerOddsgrid
+                setBet={setBet}
+                bet={bet}
+                profits={profits.Bookmaker}
+                buttonData={buttonData}
+                CurrentOdd={bookmakerToss}
+                PrevOdds={preBookmakerToss}
+                matchId={props.event}
+                OddsPnl={oddPnl}
+              />
+            </AccordionDetails>
+          </Accordion>
+          <Marquee gradient={false}>
+            <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
+              {
+                bookmakerToss?.find((i: FancyOddsInterface) => i.t !== "TOSS")
+                  ?.display_message
+              }
+            </Typography>
+          </Marquee>
+        </>
       )}
-
       {Object.keys(activeFancy)?.length > 0 &&
         activeFancy &&
         Object.keys(activeFancy).map((keys: any) => {
@@ -354,7 +405,6 @@ const Bet: FC<any> = (props: { event: number }) => {
             );
           } else return "";
         })}
-
       <Box
         display="flex"
         flexDirection={"column"}

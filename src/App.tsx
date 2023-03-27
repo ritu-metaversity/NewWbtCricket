@@ -86,6 +86,8 @@ function App() {
       setIsSignedIn(true);
     } else {
       setIsSignedIn(false);
+      await authServices.logout();
+      localStorage.clear();
       nav("/welcome");
     }
   }, []);

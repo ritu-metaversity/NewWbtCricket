@@ -28,7 +28,6 @@ const BetRecord = (props: { item: any }) => {
       );
       if (response?.data) {
         setBetRecord(response.data);
-        console.log(response.data);
       }
     };
     getList();

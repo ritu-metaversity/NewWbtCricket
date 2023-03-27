@@ -123,7 +123,15 @@ const BetSlip: FC<Props> = ({ bet, setBet, profits, buttonData }) => {
                   style={{ marginLeft: "20px" }}
                   className="MuiTypography-root MuiTypography-body1 css-33qhfi"
                 >
-                  Profit: {((bet.odds - 1) * bet.stake).toFixed(2)}
+                  Profit:
+                  {bet.isBack
+                    ? bet.isFancy
+                      ? (bet.stake * bet.priceValue) / 100
+                      : (bet.marketName === "Bookmaker"
+                          ? (bet.odds * bet.stake) / 100
+                          : (bet.odds - 1) * bet.stake
+                        ).toFixed(2)
+                    : bet.stake}
                 </p>
               </Grid>
             </Grid>
