@@ -25,19 +25,23 @@ const Inplay = () => {
 
   const { loading, setLoading } = useContext(LoaderContext);
   useEffect(() => {
-    const getList = async () => {
-      setLoading && setLoading((prev) => ({ ...prev, Inplay: true }));
+    const getList = async (withLoading: boolean) => {
+      withLoading &&
+        setLoading &&
+        setLoading((prev) => ({ ...prev, Inplay: true }));
       const { response } = await sportServices.inplay();
       console.log(JSON.stringify(response));
       if (response?.data) {
         setActiveEventList(response.data);
       }
-      setLoading && setLoading((prev) => ({ ...prev, Inplay: false }));
+      withLoading &&
+        setLoading &&
+        setLoading((prev) => ({ ...prev, Inplay: false }));
     };
 
-    getList();
+    getList(true);
     const timer = setInterval(() => {
-      getList();
+      getList(false);
     }, 60000);
     return () => clearInterval(timer);
   }, [setLoading]);

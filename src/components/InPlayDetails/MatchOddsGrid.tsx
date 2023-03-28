@@ -69,8 +69,9 @@ export const MatchOddsGrid: FC<Props> = ({
     isFancy: boolean,
     name: string
   ) => {
-    if (odds > 0) {
+    if (odds <= 0) {
       setBet(null);
+      return;
     }
     setBet({
       ...bet,

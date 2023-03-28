@@ -38,8 +38,10 @@ const Sports = () => {
     setTab(newValue);
   };
   useEffect(() => {
-    const getNewEvent = async () => {
-      setLoading && setLoading((prev) => ({ ...prev, getNewEvent: true }));
+    const getNewEvent = async (withLoading: boolean) => {
+      withLoading &&
+        setLoading &&
+        setLoading((prev) => ({ ...prev, getNewEvent: true }));
       console.log(activeSportList);
       if (!activeSportList.length) return;
       const { sportId } = activeSportList[tabValue];
@@ -55,14 +57,17 @@ const Sports = () => {
         setActiveEventList([]);
         setShow(true);
       }
-      setLoading && setLoading((prev) => ({ ...prev, getNewEvent: false }));
+      withLoading &&
+        setLoading &&
+        setLoading((prev) => ({ ...prev, getNewEvent: false }));
     };
 
-    getNewEvent();
+    getNewEvent(true);
 
-    const timer = setInterval(() => getNewEvent(), 60000);
+    const timer = setInterval(() => getNewEvent(false), 60000);
     return () => clearInterval(timer);
   }, [tabValue, activeSportList, setLoading]);
+
   return (
     <Box maxWidth={900} mx="auto">
       <BacktoMenuButton />
