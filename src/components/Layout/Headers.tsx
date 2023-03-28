@@ -234,7 +234,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
           </MenuItem>
         </Menu>
       </AppBar>
-      <Marquee speed={100} gradient={false}>
+      <Marquee speed={50} gradient={false}>
         {message}
       </Marquee>
     </>

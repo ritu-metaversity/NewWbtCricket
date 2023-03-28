@@ -283,7 +283,7 @@ const Bet: FC<any> = (props: { event: number }) => {
                 />
               </AccordionDetails>
             </Accordion>
-            <Marquee gradient={false}>
+            <Marquee speed={50} gradient={false}>
               <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
                 {match.display_message}
               </Typography>
@@ -310,7 +310,7 @@ const Bet: FC<any> = (props: { event: number }) => {
               />
             </AccordionDetails>
           </Accordion>
-          <Marquee gradient={false}>
+          <Marquee speed={50} gradient={false}>
             <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
               {
                 originBookMaker?.find((i: FancyOddsInterface) => i.t !== "TOSS")
@@ -339,7 +339,7 @@ const Bet: FC<any> = (props: { event: number }) => {
                 />
               </AccordionDetails>
             </Accordion>
-            <Marquee gradient={false}>
+            <Marquee speed={50} gradient={false}>
               <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
                 {match.display_message}
               </Typography>
@@ -366,7 +366,7 @@ const Bet: FC<any> = (props: { event: number }) => {
               />
             </AccordionDetails>
           </Accordion>
-          <Marquee gradient={false}>
+          <Marquee speed={50} gradient={false}>
             <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
               {
                 bookmakerToss?.find((i: FancyOddsInterface) => i.t !== "TOSS")
