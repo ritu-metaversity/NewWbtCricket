@@ -295,7 +295,7 @@ const Bet: FC<any> = (props: { event: number }) => {
           {" "}
           <Accordion defaultExpanded>
             <AccordionSummary expandIcon={<ExpandCircleDown />}>
-              Bookmaker Odds
+              Bookmaker
             </AccordionSummary>
             <AccordionDetails sx={{ p: 0 }}>
               <BookMakerOddsgrid
@@ -351,7 +351,7 @@ const Bet: FC<any> = (props: { event: number }) => {
           {" "}
           <Accordion defaultExpanded>
             <AccordionSummary expandIcon={<ExpandCircleDown />}>
-              Bookmaker Toss
+              Toss
             </AccordionSummary>
             <AccordionDetails sx={{ p: 0 }}>
               <BookMakerOddsgrid
