@@ -28,7 +28,6 @@ import {
 } from "./types";
 import { createProfits } from "./eventUtil";
 import PnlModal from "./pnlModal";
-import moment from "moment";
 import { inPlayDetailServices } from "../../utils/api/inplayDetails/services";
 import { userServices } from "../../utils/api/user/services";
 import Marquee from "react-fast-marquee";
@@ -166,7 +165,11 @@ const Bet: FC<any> = (props: { event: number }) => {
             continue;
           }
           newResponse[i] = response[i].map((single: any, index: number) => ({
-            ...activeFancySlower[i][index],
+            ...(activeFancySlower[i]
+              ? activeFancySlower[i].find(
+                  (odd: FancyOddsInterface) => odd.sid === single.sid
+                ) || {}
+              : {}),
             ...single,
           }));
         }
