@@ -74,6 +74,12 @@ const Profile = () => {
         <Grid {...gridItemProps}>{prolile?.doj}</Grid>
         <Grid {...gridItemProps}>Address:</Grid>
         <Grid {...gridItemProps}>{prolile?.city}</Grid>
+        <Grid {...gridItemProps}>Available Balance:</Grid>
+        <Grid {...gridItemProps}>{prolile?.balance}</Grid>{" "}
+        <Grid {...gridItemProps}>Win:</Grid>
+        <Grid {...gridItemProps}>{prolile?.win}</Grid>{" "}
+        <Grid {...gridItemProps}>Exposure:</Grid>
+        <Grid {...gridItemProps}>{prolile?.exposure}</Grid>
         {/* {gridData.map((item: any) => (
           <>
             <Grid {...gridItemProps} color={item?.color}>
