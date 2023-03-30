@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import "./App.css";
 import Login from "./components/login";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./Pages/Home";
 import Terms from "./Pages/Terms";
 import Complete from "./Pages/Complete/Complete";
@@ -84,11 +84,6 @@ function App() {
     const { response } = await authServices.validateToken();
     if (response?.status) {
       setIsSignedIn(true);
-    } else {
-      setIsSignedIn(false);
-      await authServices.logout();
-      localStorage.clear();
-      nav("/welcome");
     }
   }, []);
 
@@ -107,8 +102,6 @@ function App() {
     }
     return () => clearInterval(timer);
   }, [pathname, validateJwt]);
-
-  const nav = useNavigate();
 
   useEffect(() => {
     getSelfAllowed();
