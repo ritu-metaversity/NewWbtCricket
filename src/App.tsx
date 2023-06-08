@@ -92,7 +92,9 @@ function App() {
     let timer: ReturnType<typeof setInterval>;
     if (token) {
       if (
-        ["welcome", "sign-in", "sign-up"].every((i) => !pathname.includes(i))
+        ["welcome", "sign-in", "sign-up", "OldChangePassword"].every(
+          (i) => !pathname.includes(i)
+        )
       ) {
         validateJwt();
         timer = setInterval(() => validateJwt(), 1000);

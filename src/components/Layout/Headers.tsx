@@ -97,9 +97,10 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   const getMsg = async () => {
     await axios
       .post(
-        "http://api.a2zscore.com/admin-new-apis/enduser/get-user-message",
+        "enduser/get-user-message",
         {},
         {
+          baseURL: process.env.REACT_APP_API_URL,
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

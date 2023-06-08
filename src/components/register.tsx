@@ -31,12 +31,14 @@ const Register = () => {
   //   const [password, setPassword] = useState("");
 
   const handleClick = async () => {
-    console.log(register, "reg");
     if (register.password !== register.confirmPassword) {
       snackBarUtil.error("Password does not match!!");
       return;
     }
-    const { response } = await authServices.registeration(register);
+    const { response } = await authServices.registeration({
+      ...register,
+      userId: register.username,
+    });
 
     if (response?.status) {
       snackBarUtil.success(response.message);

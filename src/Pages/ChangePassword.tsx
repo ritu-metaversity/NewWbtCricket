@@ -30,6 +30,7 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
     setLoading && setLoading((prev) => ({ ...prev, handleClick: true }));
     const { response } = await userServices.changePassword({
       oldPassword,
+      currentPassword: oldPassword,
       newPassword,
     });
     if (response) {

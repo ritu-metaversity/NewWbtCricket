@@ -31,10 +31,10 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
     if (response?.token) {
       localStorage.setItem("token", response?.token);
       localStorage.setItem("userid", response?.userId);
-      setIsSignedIn(true);
       if (response.passwordtype === "old") {
         navigate("/OldChangePassword", { replace: true });
       } else {
+        setIsSignedIn(true);
         navigate("/terms", { replace: true });
       }
     }
