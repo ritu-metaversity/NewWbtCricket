@@ -176,8 +176,8 @@ const Account = () => {
               <option selected value="1">
                 ALL
               </option>
-              <option value="2">Deposit/Withdarw Report</option>
-              <option value="3">Game Report</option>
+              <option value="3">Deposit/Withdarw Report</option>
+              <option value="2">Game Report</option>
             </select>
           </Grid>
           {/* <button type="button" onClick={handleClick} style={{

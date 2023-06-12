@@ -253,11 +253,17 @@ const Bet: FC<any> = (props: { event: number }) => {
       </Dialog>
       {matchOdd && matchOdd[0] && (
         <TitleStyled>
-          {matchOdd[0]
-            ? `${matchOdd[0]?.Series}  > ${matchOdd[0]?.matchname} `
-            : " "}
+          {matchOdd?.length > 0 || bookmakerOdd?.length > 0
+            ? ` ${
+                matchOdd[0]?.matchName ||
+                (bookmakerOdd && bookmakerOdd[0]?.matchName) ||
+                " Name Unavailable "
+              } `
+            : " &nsbp; "}
 
-          <Typography component={"span"}>{matchOdd[0]?.eventTime}</Typography>
+          <Typography component={"span"} textAlign={"right"}>
+            {matchOdd[0]?.eventTime}
+          </Typography>
         </TitleStyled>
       )}
       <BetSlip
@@ -266,7 +272,7 @@ const Bet: FC<any> = (props: { event: number }) => {
         bet={bet}
         buttonData={buttonData}
       />
-      {matchOdd
+      {/* {matchOdd
         ?.filter((i) => i.Name === "Match Odds")
         .map((match, index) => (
           <>
@@ -292,7 +298,7 @@ const Bet: FC<any> = (props: { event: number }) => {
               </Typography>
             </Marquee>
           </>
-        ))}{" "}
+        ))} */}
       {originBookMaker?.length > 0 && (
         <>
           {" "}
@@ -323,7 +329,7 @@ const Bet: FC<any> = (props: { event: number }) => {
           </Marquee>
         </>
       )}
-      {matchOdd
+      {/* {matchOdd
         ?.filter((i) => i.Name !== "Match Odds")
         .map((match, index) => (
           <>
@@ -348,7 +354,7 @@ const Bet: FC<any> = (props: { event: number }) => {
               </Typography>
             </Marquee>
           </>
-        ))}
+        ))} */}
       {bookmakerToss?.length > 0 && (
         <>
           {" "}
@@ -383,7 +389,11 @@ const Bet: FC<any> = (props: { event: number }) => {
         activeFancy &&
         Object.keys(activeFancy).map((keys: any) => {
           if (
-            ["Fancy2", "Fancy3", "OddEven"].includes(keys) &&
+            [
+              "Fancy2",
+              // "Fancy3",
+              // "OddEven"
+            ].includes(keys) &&
             activeFancy[keys]?.length
           ) {
             return (

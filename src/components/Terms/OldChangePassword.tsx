@@ -88,6 +88,7 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
           label="Enter Current Password"
           fullWidth
           name="oldPassword"
+          type="password"
           value={oldPassword}
           onChange={handleChange}
         />
@@ -95,6 +96,7 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
           size="small"
           margin="dense"
           label="Enter New Password"
+          type="password"
           fullWidth
           name="newPassword"
           value={newPassword}
@@ -102,6 +104,7 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
         />
         <TextField
           size="small"
+          type="password"
           margin="dense"
           label="Enter New Password"
           fullWidth

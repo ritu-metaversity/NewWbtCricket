@@ -39,7 +39,6 @@ export const userResources: {
     URL: "/enduser/profile",
     METHOD: "POST",
   },
-
   USER_STATEMENT: {
     URL: "/enduser/account-statement",
     METHOD: "POST",
