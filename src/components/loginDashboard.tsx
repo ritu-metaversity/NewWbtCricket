@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { LoaderContext } from "../App";
 import Footer from "./Layout/Footer";
 import { Sports } from "../Pages/Sports";
+import { colorHex } from "../utils/constants";
 
 interface Props {
   isSignedIn: boolean;
@@ -19,16 +20,11 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
     <Box height={"100vh"} display="flex" flexDirection={"column"}>
       <AppBar
         position="sticky"
-        style={{ backgroundColor: "#757ce8" }}
+        style={{ backgroundColor: colorHex.bg2 }}
         enableColorOnDark
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <h3>Exchange</h3>
-          <Box>
-            <HeaderTextStyle></HeaderTextStyle>
-            <HeaderTextStyle></HeaderTextStyle>
-            <HeaderTextStyle></HeaderTextStyle>
-          </Box>
           <div style={{ display: "flex" }}>
             <Button
               sx={{ fontSize: "0.7rem" }}

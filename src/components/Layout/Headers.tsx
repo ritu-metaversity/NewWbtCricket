@@ -30,6 +30,7 @@ import SummarizeIcon from "@mui/icons-material/Summarize";
 import Marquee from "react-fast-marquee";
 import axios from "axios";
 import { LoaderContext } from "../../App";
+import { colorHex } from "../../utils/constants";
 
 const data = {
   balance: 0,
@@ -117,8 +118,12 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   const { appData } = useContext(LoaderContext);
   return (
     <>
-      <AppBar position="sticky" color="primary" enableColorOnDark>
-        <Toolbar sx={{ justifyContent: "space-between", bgcolor: "#0336FF" }}>
+      <AppBar
+        position="sticky"
+        enableColorOnDark
+        style={{ background: colorHex.bg2 }}
+      >
+        <Toolbar sx={{ justifyContent: "space-between" }}>
           <IconButton title="Go back" onClick={() => navigation(-1)}>
             <KeyboardBackspaceIcon fontSize="large" htmlColor="white" />
           </IconButton>

@@ -6,6 +6,7 @@ import SummaryCard, {
   SummaryCardProps,
 } from "../../components/Inplay/SummaryCard";
 import { sportServices } from "../../utils/api/sport/services";
+import Match from "../../components/Inplay/Match";
 
 function a11yProps(index: number) {
   return {
@@ -75,6 +76,8 @@ const Sports = () => {
         value={tabValue}
         onChange={handleChange}
         aria-label="basic tabs example"
+        scrollButtons
+        variant="scrollable"
       >
         {activeSportList.map((s: any) => (
           <Tab key={s.sportId + "tab"} label={s?.sportName} {...a11yProps(0)} />
@@ -82,7 +85,8 @@ const Sports = () => {
       </Tabs>
       {activeEventList?.length > 0
         ? activeEventList.map((item) => (
-            <SummaryCard key={item.matchId + "summaryCard"} {...item} />
+            <Match matches={item} sportId={"0"} />
+            // <SummaryCard key={item.matchId + "summaryCard"} {...item} />
           ))
         : show && (
             <Typography mt="15vh" variant="h4" color="error">

@@ -13,6 +13,7 @@ import SummaryCard, {
   SummaryCardProps,
 } from "../../components/Inplay/SummaryCard";
 import { sportServices } from "../../utils/api/sport/services";
+import Match from "../../components/Inplay/Match";
 
 interface InplayInterface {
   sportId: string;
@@ -58,7 +59,8 @@ const Inplay = () => {
               </AccordionSummary>
               <AccordionDetails sx={{ px: 1 }}>
                 {sportItem.matchList.map((item) => (
-                  <SummaryCard key={item.matchId + "summaryCard"} {...item} />
+                  // <SummaryCard key={item.matchId + "summaryCard"} {...item} />
+                  <Match matches={item} sportId={sportItem.sportId} />
                 ))}
               </AccordionDetails>
             </Accordion>

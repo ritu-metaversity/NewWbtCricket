@@ -49,7 +49,12 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
   };
   return (
     <>
-      <Typography mt="64px" variant="h1" fontWeight={"700"} color="#e91e63">
+      <Typography
+        mt="64px"
+        fontSize={{ xs: "h3", md: "h1" }}
+        fontWeight={"700"}
+        color="#e91e63"
+      >
         {window.location.hostname}
       </Typography>
       <Box
