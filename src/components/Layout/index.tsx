@@ -36,7 +36,7 @@ const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
       >
         {isSignedIn && <Outlet />}
       </Box>
-      <Footer isSignedIn={isSignedIn} />
+      {/* <Footer isSignedIn={isSignedIn} /> */}
     </Box>
   );
 };

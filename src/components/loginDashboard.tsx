@@ -49,7 +49,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
       <Box flex={1} height={"max-content"}>
         <Sports />
       </Box>
-      <Footer isSignedIn={isSignedIn} />
+      {/* <Footer isSignedIn={isSignedIn} /> */}
     </Box>
   );
 };

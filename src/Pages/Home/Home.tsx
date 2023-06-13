@@ -1,12 +1,13 @@
 import { Grid, GridProps } from "@mui/material";
 import React, { FC } from "react";
-
+import './Home.css'
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { Link, Outlet } from "react-router-dom";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
 interface ActionCardProps {
   cardTitle: string;
@@ -14,10 +15,10 @@ interface ActionCardProps {
   cardDesc?: string;
   cardForwardHref: string;
 }
-export const ActionAreaCard:FC<ActionCardProps>=({ cardTitle, cardForwardHref , cardImageSrc, cardDesc })=> {
+export const ActionAreaCard: FC<ActionCardProps> = ({ cardTitle, cardForwardHref, cardImageSrc, cardDesc }) => {
   return (
     <Card sx={{ width: 345, height: "100%" }}>
-      <Link to={cardForwardHref} style={{textDecoration:"none", color:"unset"}}>
+      <Link to={cardForwardHref} style={{ textDecoration: "none", color: "unset" }}>
         <CardActionArea sx={{ height: "100%" }}>
           <CardMedia
             component="img"
@@ -90,6 +91,18 @@ const ActionCardPropsList: ActionCardProps[] = [
     cardImageSrc: "/password.png",
     cardForwardHref: "/password-change",
   },
+  {
+    cardTitle: "Sports",
+    // cardDesc: "Sports list",
+    cardImageSrc: '/trophy.png',
+    cardForwardHref: "/sports",
+  },
+  {
+    cardTitle: "Profile",
+    // cardDesc: "change your mybet password",
+    cardImageSrc: "/profile.png",
+    cardForwardHref: "/profile",
+  },
 ];
 const Home = () => {
   const gridItemProps: GridProps = {
@@ -101,7 +114,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="main_container">
       <Grid container gap={2} pt={2} justifyContent="center">
         {ActionCardPropsList.map((cardProps, index) => (
           <Grid key={`main-menu-card-${index}`} {...gridItemProps}>

@@ -70,9 +70,10 @@ const Sports = () => {
   }, [tabValue, activeSportList, setLoading]);
 
   return (
-    <Box maxWidth={900} mx="auto">
-      <BacktoMenuButton />
+    <Box maxWidth={900} mx="auto" >
+      {/* <BacktoMenuButton /> */}
       <Tabs
+        sx={{ backgroundColor: '#dddddd' }}
         value={tabValue}
         onChange={handleChange}
         aria-label="basic tabs example"
@@ -85,14 +86,14 @@ const Sports = () => {
       </Tabs>
       {activeEventList?.length > 0
         ? activeEventList.map((item) => (
-            <Match matches={item} sportId={"0"} />
-            // <SummaryCard key={item.matchId + "summaryCard"} {...item} />
-          ))
+          <Match matches={item} sportId={"0"} />
+          // <SummaryCard key={item.matchId + "summaryCard"} {...item} />
+        ))
         : show && (
-            <Typography mt="15vh" variant="h4" color="error">
-              {"No active event found"}
-            </Typography>
-          )}
+          <Typography mt="15vh" variant="h4" color="error">
+            {"No active event found"}
+          </Typography>
+        )}
     </Box>
   );
 };

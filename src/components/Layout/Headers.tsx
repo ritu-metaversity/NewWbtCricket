@@ -7,8 +7,11 @@ import {
   ListItemIcon,
   Menu,
   MenuItem,
+  Stack,
   Toolbar,
+  Typography,
 } from "@mui/material";
+import './Headers.css'
 import { Box } from "@mui/system";
 import React, {
   Dispatch,
@@ -22,7 +25,7 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoneyTwoTone";
 import MoneyIcon from "@mui/icons-material/MoneyTwoTone";
 import { HeaderTextStyle, UserIconImage } from "./styledComponents";
-import { Logout } from "@mui/icons-material";
+import { HomeRepairServiceOutlined, Logout } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { userServices } from "../../utils/api/user/services";
 import { authServices } from "../../utils/api/auth/services";
@@ -31,6 +34,7 @@ import Marquee from "react-fast-marquee";
 import axios from "axios";
 import { LoaderContext } from "../../App";
 import { colorHex } from "../../utils/constants";
+
 
 const data = {
   balance: 0,
@@ -45,7 +49,9 @@ interface Props {
 const Headers: FC<Props> = ({ setIsSignedIn }) => {
   const [wallet, setWallet] = useState(data);
   const navigation = useNavigate();
-
+  const { appData } = useContext(LoaderContext)
+  console.log(appData?.logo, "appData")
+  const userid = localStorage.getItem("userid");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [message, setmessage] = useState("");
   useEffect(() => {
@@ -115,7 +121,6 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
     getMsg();
   }, []);
 
-  const { appData } = useContext(LoaderContext);
   return (
     <>
       <AppBar
@@ -124,14 +129,44 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
         style={{ background: colorHex.bg2 }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <IconButton title="Go back" onClick={() => navigation(-1)}>
-            <KeyboardBackspaceIcon fontSize="large" htmlColor="white" />
-          </IconButton>
-          <Box>
-            <HeaderTextStyle></HeaderTextStyle>
-            <HeaderTextStyle>Coins: {wallet.balance}</HeaderTextStyle>
-            <HeaderTextStyle>Liability: {wallet.libality}</HeaderTextStyle>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginRight: '20px', width: '20%' }}>
+            <Link to={"/"} className="logoimg" >
+              <img src={appData?.logo} alt="Logo" />
+
+            </Link>
+
+
+            <Box sx={{ display: 'flex', alignItems: 'center', pl: "1rem", flexDirection: 'column' }}>
+              <Typography component="p">
+                {userid}
+              </Typography>
+              <Typography component="p" sx={{ display: { xs: "none", md: "block" } }}  >
+                chips: <Typography component={'span'}>{wallet.balance}</Typography>
+              </Typography>
+            </Box>
+
           </Box>
+
+          <Stack direction="row" display={{ xs: "none", md: "flex" }} spacing={2} style={{ marginLeft: "48%", alignItems: 'center', justifyContent: 'space-around' }}>
+            <Box>
+              {/* <HeaderTextStyle>Coins: {wallet.balance}</HeaderTextStyle>
+            <HeaderTextStyle>Liability: {wallet.libality}</HeaderTextStyle> */}
+              <HeaderTextStyle className="home_icon">
+                <Link to="/" style={{ padding: '12px' }}>
+                  <img src="https://bmxpro.in/home-page-50.png" alt="" style={{ height: "28px", width: "28px", marginBottom: "0" }} />
+
+                  <p className="home_lable" style={{ color: "rgb(255, 255, 255)", marginLeft: "4px", margin: '0' }}>HOME</p>
+                </Link>
+              </HeaderTextStyle>
+            </Box>
+            <Box>
+              <HeaderTextStyle className="home_icon" onClick={clickHandler}>
+                <p><img src="https://bmxpro.in/images/logout-new.png" alt="" style={{ height: "28px", width: "28px" }} />
+                </p>
+                <p className="home_lable" style={{ color: "rgb(255, 255, 255)", marginLeft: "4px" }} >LOGOUT
+                </p></HeaderTextStyle>
+            </Box>
+          </Stack>
           <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
             <UserIconImage src="/user.png" alt="" />
           </IconButton>
@@ -240,6 +275,8 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
           </MenuItem>
         </Menu>
       </AppBar>
+      <div style={{ padding: "4px", background: "#ddd", textAlign: "center", margin: "12px 0px", fontSize: "13px" }}><span>Chips: 1000.00</span> <span>Expo : <span style={{ color: "red" }}>0.00</span></span></div>
+
       <Marquee speed={50} gradient={false}>
         {message}
       </Marquee>

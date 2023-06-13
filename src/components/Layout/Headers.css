@@ -1,0 +1,11 @@
+.home_icon {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.logoimg {
+    width: 100px;
+    display: flex;
+}

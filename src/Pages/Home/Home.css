@@ -1,0 +1,26 @@
+.main_container{
+    width: 85% !important;
+    margin: auto !important;
+}
+.MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-5\.5.MuiGrid-grid-md-3\.7.css-1f8rchh-MuiGrid-root {
+    width: 47% !important;
+    max-width: 47% !important;
+    min-width: 47% !important;
+}
+.css-a91je7-MuiPaper-root-MuiCard-root {
+    background-color: unset !important;
+    color: unset !important;
+    transition: unset !important;
+    border-radius: unset !important;
+    box-shadow: unset !important;
+    overflow: unset !important;
+    width: unset !important;
+    height: unset !important;
+}
+.css-1bfukrz-MuiCardMedia-root {
+    width: 100px !important;
+}
+.css-h93ljk-MuiTypography-root{
+    font-size: 14px !important;
+    margin-bottom: -20px !important;
+}

@@ -10,6 +10,7 @@ interface Props {
 }
 
 const Footer: FC<Props> = ({ isSignedIn }) => {
+  
   return (
     <div className="appBottomMenu">
       <Link to={!isSignedIn ? "/sign-in" : "/sports"}>
