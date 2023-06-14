@@ -275,7 +275,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
           </MenuItem>
         </Menu>
       </AppBar>
-      <div style={{ padding: "4px", background: "#ddd", textAlign: "center", margin: "12px 0px", fontSize: "13px" }}><span>Chips: 1000.00</span> <span>Expo : <span style={{ color: "red" }}>0.00</span></span></div>
+      <div style={{ padding: "4px", background: "#ddd", textAlign: "center", margin: "12px 0px", fontSize: "13px" }}><span>Chips: {wallet.balance}</span> <span>Expo : <span style={{ color: "red" }}>0.00</span></span></div>
 
       <Marquee speed={50} gradient={false}>
         {message}
