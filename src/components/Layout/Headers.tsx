@@ -131,7 +131,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginRight: '20px', width: '20%' }}>
             <Link to={"/"} className="logoimg" >
-              <img src={appData?.logo} alt="Logo" />
+              <img src={appData?.logo} alt="Logo" style={{ width: "44%" }} />
 
             </Link>
 

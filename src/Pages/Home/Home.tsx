@@ -98,10 +98,10 @@ const ActionCardPropsList: ActionCardProps[] = [
     cardForwardHref: "/sports",
   },
   {
-    cardTitle: "Profile",
+    cardTitle: "Current Bet",
     // cardDesc: "change your mybet password",
-    cardImageSrc: "/profile.png",
-    cardForwardHref: "/profile",
+    cardImageSrc: "/CurrentBet.jpg",
+    cardForwardHref: "/current-bet",
   },
 ];
 const Home = () => {
