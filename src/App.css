@@ -6,33 +6,40 @@
   height: 40vmin;
   pointer-events: none;
 }
+
 a {
   text-decoration: none;
   color: unset;
 }
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
-  } 
+  }
 }
-:root{
+
+:root {
   scrollbar-color: transparent !important;
   scrollbar-width: 0 !important;
 }
+
 html {
-overflow: hidden;
-width: 100%;
+  overflow: hidden;
+  width: 100%;
 }
+
 body {
-height: 100%;
-position: fixed;
-overflow-y: scroll;
--webkit-overflow-scrolling: touch;
+  height: 100%;
+  position: fixed;
+  overflow-y: scroll;
+  /* font-family: Roboto,serif!important; */
 }
+
 main {
   min-height: 85vh;
   min-width: 100vw;
 }
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -52,7 +59,12 @@ main {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+main {
+  background: #ddd;
 }

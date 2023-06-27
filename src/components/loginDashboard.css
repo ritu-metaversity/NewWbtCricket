@@ -24,5 +24,11 @@ a strong {
 }
 a{
    flex:  1 0 0%;
-   /* color: white; */
+   color: white;
+}
+
+@media screen  and (max-width:400px){
+  main {
+    width: 81%;
+}
 }

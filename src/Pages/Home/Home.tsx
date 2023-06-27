@@ -55,27 +55,27 @@ const ActionCardPropsList: ActionCardProps[] = [
   {
     cardTitle: "In Play",
     cardDesc: "matches that are on going or incoming",
-    cardImageSrc: "/inplay.png",
+    cardImageSrc: "/inplay1.png",
     cardForwardHref: "/in-play",
   },
   {
     cardTitle: "Completed Games",
     cardDesc: "matches that are completed and the results are declared",
-    cardImageSrc: "/complete.jpg",
+    cardImageSrc: "/complete2.png",
     cardForwardHref: "/complete-games",
   },
 
   {
     cardTitle: "My Ledger",
     cardDesc: "check your history, wins and rewards",
-    cardImageSrc: "/ledger.png",
+    cardImageSrc: "/myledger6.png",
     cardForwardHref: "/account-summary",
   },
 
   {
     cardTitle: "Profile",
     cardDesc: "View your profile and edit your information",
-    cardImageSrc: "/profile.png",
+    cardImageSrc: "/profile2.png",
     cardForwardHref: "/profile",
   },
 
@@ -88,19 +88,19 @@ const ActionCardPropsList: ActionCardProps[] = [
   {
     cardTitle: "Change Password",
     cardDesc: "change your mybet password",
-    cardImageSrc: "/password.png",
+    cardImageSrc: "/changespassword4.png",
     cardForwardHref: "/password-change",
   },
   {
     cardTitle: "Sports",
     // cardDesc: "Sports list",
-    cardImageSrc: '/trophy.png',
+    cardImageSrc: '/freegame5.png',
     cardForwardHref: "/sports",
   },
   {
     cardTitle: "Current Bet",
     // cardDesc: "change your mybet password",
-    cardImageSrc: "/CurrentBet.jpg",
+    cardImageSrc: "/aaaaaaaaa.png",
     cardForwardHref: "/current-bet",
   },
 ];

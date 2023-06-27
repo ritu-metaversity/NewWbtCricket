@@ -111,7 +111,7 @@ export const SpacedBetween = emotionStyled.div`
   align-items: center;
   @media (max-width: 580px) {
 
-    font-size: 0.8rem;
+    // font-size: 0.8rem;
   } 
   
   `;

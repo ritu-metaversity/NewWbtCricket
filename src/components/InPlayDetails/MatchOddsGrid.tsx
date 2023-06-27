@@ -1,10 +1,11 @@
 import { Box, Grid } from "@mui/material";
 
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import { BetGridItem, redGreenComponent } from "./Bet";
 import { BetText, BetTextMedium } from "./styledComponents";
 import { BetDetailsInterface, ProfitInterface } from "./types";
-
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import "./common.css"
 interface MatchOddsGridProps {
   runners: {
     back1price: number;
@@ -88,40 +89,138 @@ export const MatchOddsGrid: FC<Props> = ({
       name,
     });
   };
+  const [show, setShow] = useState(false)
+  const handleChange = () => {
+    if (show === true) {
+      setShow(false)
+    } else {
+      setShow(true)
+    }
+  }
   return (
-    <>
-      <Box display="flex" justifyContent={"space-evenly"}>
-        <BetTextMedium>Max Bet:{maxBet}</BetTextMedium>
-        <BetTextMedium>Min Bet:{minBet}</BetTextMedium>
-      </Box>
-      <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
-        <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
-        {runners.map((item, index) => {
-          return (
-            <>
-              <BetGridItem
-                suspended={["SUSPENDED", "CLOSED"].includes(status)}
-                values={[
+
+
+    <div>
+      <div className="scroll-form oddsTable row" style={{ fontSize: 14 }}>
+        <table className="table-bordered" style={{ width: "100%" }}>
+          <thead>
+            <tr>
+
+              <th
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color"
+                style={{ width: "40%" }}
+              >
+                <div className="head">
+                  <div style={{ width: "20%" }}>
+                    <ArrowDropUpIcon onClick={handleChange} style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)" }} />
+                  </div>
+                  <div className="maxMin">
+
+                    <span>Min: {minBet}</span>
+                    <span>Max: {maxBet}</span>
+
+                  </div>
+                </div>
+                {/* <ArrowDropUpIcon onClick={handleChange} /> */}
+              </th>
+              <th
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color"
+                style={{ width: "10%" }}
+              >
+
+              </th>
+              <th
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color"
+                style={{ width: "10%" }}
+              >
+
+              </th>
+
+
+              <th
+                className="bet-place-tbl-th lagai-box-color"
+                style={{ width: "10%" }}>LAGAI</th>
+              <th
+                className="bet-place-tbl-th khai-box-color"
+                style={{ width: "10%" }}
+              >
+                KHAI
+              </th>
+              <th
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color"
+                style={{ width: "10%" }}
+              >
+
+              </th>
+              <th
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color"
+                style={{ width: "10%" }}
+              >
+
+              </th>
+            </tr>
+          </thead>
+
+          {show && <tbody>
+            {runners.map((item, index) => {
+              return (
+
+                <tr>
                   <>
-                    {" "}
-                    {item.name}
-                    {redGreenComponent(
-                      OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
-                        ?.value || 0
-                    )}
-                  </>,
-                  <Box
-                    className={
-                      PrevRunner[index].ex.availableToBack[0].price <
+
+                    <td
+                      className="bet-place-tbl-td "
+                      style={{ textAlign: "left", padding: 10, fontWeight: 750 }}
+                    >
+                      {item.name}
+                      <div>
+                        <span>
+                          {redGreenComponent(
+                            OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
+                              ?.value || 0
+                          )}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="bet-place-tbl-td cursor-pointer"
+                    >
+                      <span style={{
+                        fontSize: "13px",
+                        color: "#5957ff",
+                        fontWeight: "700"
+                      }}>0</span>
+                      <div>
+
+                        <span style={{
+                          fontSize: "13px",
+                          color: "#5957ff",
+                          fontWeight: "400"
+                        }}>0</span>
+                      </div>
+                    </td>
+                    <td className="bet-place-tbl-td cursor-pointer"
+                    >
+                      <span style={{
+                        fontSize: "16px",
+                        color: "#5957ff",
+                        fontWeight: "750"
+                      }}>0</span>
+                      <div>
+
+                        <span style={{
+                          fontSize: "13px",
+                          color: "#5957ff",
+                          fontWeight: "400"
+                        }}>0</span>
+                      </div>
+                    </td>
+                    <td className={`bet-place-tbl-td cursor-pointer ${PrevRunner[index].ex.availableToBack[0].price <
                       item.ex.availableToBack[0].price
-                        ? "odds-up"
-                        : PrevRunner[index].ex.availableToBack[0].price >
-                          item.ex.availableToBack[0].price
+                      ? "odds-up"
+                      : PrevRunner[index].ex.availableToBack[0].price >
+                        item.ex.availableToBack[0].price
                         ? "odds-down"
-                        : ""
-                    }
-                  >
-                    <BetText
+                        : ""}`}
                       onClick={() =>
                         updateBet(
                           true,
@@ -136,24 +235,28 @@ export const MatchOddsGrid: FC<Props> = ({
                           item.name
                         )
                       }
-                      color="blue"
                     >
-                      {item.ex.availableToBack[0].price}
-                    </BetText>
-                    {item.ex.availableToBack[0].size}
-                  </Box>,
-                  <Box
-                    className={
-                      PrevRunner[index].ex.availableToLay[0].price <
+                      <span style={{
+                        fontSize: "16px",
+                        color: "#ff5c72",
+                        fontWeight: "750"
+                      }}>{item.ex.availableToBack[0].price}</span>
+                      <div>
+                        <span style={{
+                          fontSize: "13px",
+                          color: "#ff5c72",
+                          fontWeight: "400"
+                        }}>{item.ex.availableToBack[0].size}</span>
+                      </div>
+
+                    </td>
+                    <td className={`bet-place-tbl-td cursor-pointer ${PrevRunner[index].ex.availableToLay[0].price <
                       item.ex.availableToLay[0].price
-                        ? "odds-up"
-                        : PrevRunner[index].ex.availableToLay[0].price >
-                          item.ex.availableToLay[0].price
+                      ? "odds-up"
+                      : PrevRunner[index].ex.availableToLay[0].price >
+                        item.ex.availableToLay[0].price
                         ? "odds-down"
-                        : ""
-                    }
-                  >
-                    <BetText
+                        : ""}`}
                       onClick={() =>
                         updateBet(
                           false,
@@ -168,18 +271,155 @@ export const MatchOddsGrid: FC<Props> = ({
                           item.name
                         )
                       }
-                      color="red"
                     >
-                      {item.ex.availableToLay[0].price}
-                    </BetText>
-                    {item.ex.availableToLay[0].size}
-                  </Box>,
-                ]}
-              />
-            </>
-          );
-        })}
-      </Grid>
-    </>
+                      <span style={{
+                        fontSize: "16px",
+                        color: "#5957ff",
+                        fontWeight: "750"
+                      }}>{item.ex.availableToLay[0].price}</span>
+                      <div>
+
+                        <span style={{
+                          fontSize: "13px",
+                          color: "#5957ff",
+                          fontWeight: "400"
+                        }}>{item.ex.availableToLay[0].size}</span>
+                      </div>
+                    </td>
+                    <td className="bet-place-tbl-td cursor-pointer"
+                    >
+                      <span style={{
+                        fontSize: "16px",
+                        color: "#5957ff",
+                        fontWeight: "750"
+                      }}>0</span>
+                      <div>
+
+                        <span style={{
+                          fontSize: "13px",
+                          color: "#5957ff",
+                          fontWeight: "400"
+                        }}>0</span>
+                      </div>
+                    </td>
+                    <td className="bet-place-tbl-td cursor-pointer"
+                    >
+                      <span style={{
+                        fontSize: "16px",
+                        color: "#5957ff",
+                        fontWeight: "750"
+                      }}>0</span>
+                      <div>
+
+                        <span style={{
+                          fontSize: "13px",
+                          color: "#5957ff",
+                          fontWeight: "400"
+                        }}>0</span>
+                      </div>
+                    </td>
+                  </>
+
+                </tr>
+              )
+            })}
+          </tbody>
+          }
+        </table>
+      </div>
+    </div >
+    // <>
+
+    //   <Box display="flex" justifyContent={"space-evenly"}>
+    //     <BetTextMedium>Max Bet:{maxBet}</BetTextMedium>
+    //     <BetTextMedium>Min Bet:{minBet}</BetTextMedium>
+    //   </Box>
+    //   <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
+    //     <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
+    //     {runners.map((item, index) => {
+    //       return (
+    //         <>
+    //           <BetGridItem
+    //             suspended={["SUSPENDED", "CLOSED"].includes(status)}
+    //             values={[
+    //               <>
+    //                 {" "}
+    //                 {item.name}
+    //                 {redGreenComponent(
+    //                   OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
+    //                     ?.value || 0
+    //                 )}
+    //               </>,
+    //               <Box
+    //                 className={
+    //                   PrevRunner[index].ex.availableToBack[0].price <
+    //                   item.ex.availableToBack[0].price
+    //                     ? "odds-up"
+    //                     : PrevRunner[index].ex.availableToBack[0].price >
+    //                       item.ex.availableToBack[0].price
+    //                     ? "odds-down"
+    //                     : ""
+    //                 }
+    //               >
+    //                 <BetText
+    //                   onClick={() =>
+    //                     updateBet(
+    //                       true,
+    //                       +item.ex.availableToBack[0].price,
+    //                       0,
+    //                       item.selectionId,
+    //                       marketId,
+    //                       matchId,
+    //                       date,
+    //                       +item.ex.availableToBack[0].price,
+    //                       false,
+    //                       item.name
+    //                     )
+    //                   }
+    //                   color="blue"
+    //                 >
+    //                   {item.ex.availableToBack[0].price}
+    //                 </BetText>
+    //                 {item.ex.availableToBack[0].size}
+    //               </Box>,
+    //               <Box
+    //                 className={
+    //                   PrevRunner[index].ex.availableToLay[0].price <
+    //                   item.ex.availableToLay[0].price
+    //                     ? "odds-up"
+    //                     : PrevRunner[index].ex.availableToLay[0].price >
+    //                       item.ex.availableToLay[0].price
+    //                     ? "odds-down"
+    //                     : ""
+    //                 }
+    //               >
+    //                 <BetText
+    //                   onClick={() =>
+    //                     updateBet(
+    //                       false,
+    //                       +item.ex.availableToLay[0].price,
+    //                       0,
+    //                       item.selectionId,
+    //                       marketId,
+    //                       matchId,
+    //                       date,
+    //                       +item.ex.availableToLay[0].price,
+    //                       false,
+    //                       item.name
+    //                     )
+    //                   }
+    //                   color="red"
+    //                 >
+    //                   {item.ex.availableToLay[0].price}
+    //                 </BetText>
+    //                 {item.ex.availableToLay[0].size}
+    //               </Box>,
+    //             ]}
+    //           />
+    //         </>
+    //       );
+    //     })}
+    //   </Grid>
+    // </>
   );
 };

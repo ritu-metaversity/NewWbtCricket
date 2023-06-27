@@ -4,7 +4,7 @@ export const userResources: {
   [x: string]: ApiResource;
 } = {
   GET_IP_ADDRESS: {
-    URL: "https://api.ipify.org/?format=json",
+    URL: "https://oddsapi.247idhub.com/betfair_api/my-ip",
     METHOD: "GET",
   },
   GET_WALLET: {

@@ -1,11 +1,11 @@
 import { AppBar, Box, Button, Toolbar } from "@mui/material";
 import React, { FC, useContext } from "react";
-import { HeaderTextStyle } from "./Layout/styledComponents";
+// import { HeaderTextStyle } from "./Layout/styledComponents";
 import "./loginDashboard.css";
 
 import { Link } from "react-router-dom";
 import { LoaderContext } from "../App";
-import Footer from "./Layout/Footer";
+// import Footer from "./Layout/Footer";
 import { Sports } from "../Pages/Sports";
 import { colorHex } from "../utils/constants";
 

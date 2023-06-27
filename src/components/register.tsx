@@ -19,8 +19,7 @@ interface RegisterInterface {
 
 const Register = () => {
   const [open, setOpen] = useState(false);
-  const [newCredAfterRegister, setNewCredAfterRegister] =
-    useState<RegisterInterface | null>(null);
+  const [newCredAfterRegister, setNewCredAfterRegister] =useState<RegisterInterface | null>(null);
   const navigate = useNavigate();
   const [register, setRegistration] = useState<any>({
     username: "",

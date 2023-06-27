@@ -23,4 +23,9 @@ export const inPlayDetailResources: { [x: string]: ApiResource } = {
     URL: "enduser/user-fancy-book",
     METHOD: "POST",
   },
+  Bet_List_History: {
+    URL: "enduser/bet-list-history",
+    METHOD: "POST",
+  },
+
 };

@@ -1,6 +1,7 @@
 import {
   apiHandler,
   ApiServiceInterface,
+  apiWithErrorSnackbar,
   apiWithSnackbar,
 } from "../apiService";
 import { inPlayDetailResources } from "./resources";
@@ -13,12 +14,19 @@ export const inPlayDetailServices = {
     };
     return apiHandler(params);
   },
+  betListHistory: (data: any) => {
+    const params: ApiServiceInterface = {
+      resource: inPlayDetailResources.Bet_List_History,
+      data
+    };
+    return apiHandler(params);
+  },
   updateBetPlace: (data: any) => {
     const params: ApiServiceInterface = {
       resource: inPlayDetailResources.PLACE_BET,
       data,
     };
-    return apiWithSnackbar(params);
+    return apiHandler(params);
   },
 
   getuserOddsPnl: (matchId: any) => {

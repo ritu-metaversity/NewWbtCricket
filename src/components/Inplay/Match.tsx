@@ -90,6 +90,7 @@ const Match = ({ matches, sportId }: Props) => {
   //     setModal({ login: true });
   //   }
   // };
+  console.log(sportId, 'sdfsdds')
   const isChannelAvailable = useMemo(
     () =>
       matches.channelId && matches.channelId.toString() !== "0" ? true : false,
@@ -101,7 +102,7 @@ const Match = ({ matches, sportId }: Props) => {
       onClick={() =>
         navigate(
           isSignedIn
-            ? "/in-play-details/?event-id=" + matches.matchId
+            ? "/in-play-details/?event-id=" + matches.matchId + "&Sports-id=" + sportId
             : "/sign-in"
         )
       }
@@ -110,7 +111,7 @@ const Match = ({ matches, sportId }: Props) => {
       sx={{ cursor: "pointer" }}
       m={{ xs: "4px 0px", lg: 0 }}
       gap={{ xs: 0.5, lg: 0 }}
-      // borderBottom={{ xs: "", lg: "1px solid rgba(60,68,75)" }}
+    // borderBottom={{ xs: "", lg: "1px solid rgba(60,68,75)" }}
     >
       <Grid
         item

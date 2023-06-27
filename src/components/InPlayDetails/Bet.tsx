@@ -31,14 +31,21 @@ import PnlModal from "./pnlModal";
 import { inPlayDetailServices } from "../../utils/api/inplayDetails/services";
 import { userServices } from "../../utils/api/user/services";
 import Marquee from "react-fast-marquee";
+import AllMatch from "./AllMatch";
+import { useParams } from "react-router-dom";
 
-const Bet: FC<any> = (props: { event: number }) => {
+const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
   const [amount, setAmount] = useState(10);
   const [buttonData, setButtonData] = useState<{ [x: string]: number }>({});
+  // const [eventidd, setEventIdd] = useState()
   const handleChange = (e: any) => {
     setAmount(e.target.value);
   };
-
+  // let { id } = useParams();
+  // useEffect(() => {
+  //   setEventIdd(props)
+  // }, [])
+  console.log(props?.sportsId, "ididididididv")
   const [selectedPnlMarketId, setSelectedPnlMarketId] = useState("");
 
   const [activeFancy, setActiveFancy] = useState<any[]>([]);
@@ -167,8 +174,8 @@ const Bet: FC<any> = (props: { event: number }) => {
           newResponse[i] = response[i].map((single: any, index: number) => ({
             ...(activeFancySlower[i]
               ? activeFancySlower[i].find(
-                  (odd: FancyOddsInterface) => odd.sid === single.sid
-                ) || {}
+                (odd: FancyOddsInterface) => odd.sid === single.sid
+              ) || {}
               : {}),
             ...single,
           }));
@@ -218,9 +225,17 @@ const Bet: FC<any> = (props: { event: number }) => {
   const getButtondata = async () => {
     const { response } = await userServices.getButtonValue();
     if (response) {
-      setButtonData(response.data);
+      const getValue = (num: any) => {
+        if ((num / 1000000) >= 1) {return num / 1000000 + 'M';}
+        else if ((num / 1000) >= 1) {return num / 1000 + 'K';}
+        else {return num};
+      }
+      const data:any = {};
+      for (let x in response?.data) data[x] = getValue(response.data[x]);
+      setButtonData(data);
     }
   };
+
 
   useEffect(() => {
     getButtondata();
@@ -251,37 +266,39 @@ const Bet: FC<any> = (props: { event: number }) => {
           />
         </DialogContent>
       </Dialog>
-      {matchOdd && matchOdd[0] && (
+      {/* {matchOdd && matchOdd[0] && (
         <TitleStyled>
           {matchOdd?.length > 0 || bookmakerOdd?.length > 0
-            ? ` ${
-                matchOdd[0]?.matchName ||
-                (bookmakerOdd && bookmakerOdd[0]?.matchName) ||
-                " Name Unavailable "
-              } `
+            ? ` ${matchOdd[0]?.matchName ||
+            (bookmakerOdd && bookmakerOdd[0]?.matchName) ||
+            " Name Unavailable "
+            } `
             : " &nsbp; "}
 
           <Typography component={"span"} textAlign={"right"}>
             {matchOdd[0]?.eventTime}
           </Typography>
         </TitleStyled>
-      )}
-      <BetSlip
+      )} */}
+      {/* <BetSlip
         profits={profits}
         setBet={setBet}
         bet={bet}
         buttonData={buttonData}
-      />
-      {/* {matchOdd
-        ?.filter((i) => i.Name === "Match Odds")
-        .map((match, index) => (
-          <>
-            {" "}
-            <Accordion key={"matchodd" + index} defaultExpanded>
+      /> */}
+      <div>
+
+        <div className="container">
+          {matchOdd
+            ?.filter((i) => i.Name === "Match Odds")
+            .map((match, index) => (
+              <>
+                {" "}
+                {/* <Accordion key={"matchodd" + index} defaultExpanded>
               <AccordionSummary expandIcon={<ExpandCircleDown />}>
                 {match.Name}
               </AccordionSummary>
-              <AccordionDetails sx={{ p: 0 }}>
+              <AccordionDetails sx={{ p: 0 }}> */}
                 <MatchOddsGrid
                   bet={bet}
                   setBet={setBet}
@@ -290,23 +307,25 @@ const Bet: FC<any> = (props: { event: number }) => {
                   matchId={props.event}
                   OddsPnl={profits.Odds[match?.marketId]}
                 />
-              </AccordionDetails>
-            </Accordion>
-            <Marquee speed={50} gradient={false}>
-              <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
-                {match.display_message}
-              </Typography>
-            </Marquee>
-          </>
-        ))} */}
-      {originBookMaker?.length > 0 && (
-        <>
-          {" "}
-          <Accordion defaultExpanded>
-            <AccordionSummary expandIcon={<ExpandCircleDown />}>
-              Bookmaker
-            </AccordionSummary>
-            <AccordionDetails sx={{ p: 0 }}>
+                {/* </AccordionDetails>
+            </Accordion> */}
+                <Marquee speed={50} gradient={false}>
+                  <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
+                    {match.display_message}
+                  </Typography>
+                </Marquee>
+              </>
+            ))}
+
+
+          {originBookMaker?.length > 0 && (
+            <>
+              {" "}
+              {/* <Accordion defaultExpanded> */}
+              {/* <AccordionSummary expandIcon={<ExpandCircleDown />}>
+                Bookmaker
+              </AccordionSummary> */}
+              {/* <AccordionDetails sx={{ p: 0 }}> */}
               <BookMakerOddsgrid
                 setBet={setBet}
                 bet={bet}
@@ -317,19 +336,19 @@ const Bet: FC<any> = (props: { event: number }) => {
                 matchId={props.event}
                 OddsPnl={oddPnl}
               />
-            </AccordionDetails>
-          </Accordion>
-          <Marquee speed={50} gradient={false}>
-            <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
-              {
-                originBookMaker?.find((i: FancyOddsInterface) => i.t !== "TOSS")
-                  ?.display_message
-              }
-            </Typography>
-          </Marquee>
-        </>
-      )}
-      {/* {matchOdd
+              {/* </AccordionDetails> */}
+              {/* </Accordion> */}
+              <Marquee speed={50} gradient={false}>
+                <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
+                  {
+                    originBookMaker?.find((i: FancyOddsInterface) => i.t !== "TOSS")
+                      ?.display_message
+                  }
+                </Typography>
+              </Marquee>
+            </>
+          )}
+          {/* {matchOdd
         ?.filter((i) => i.Name !== "Match Odds")
         .map((match, index) => (
           <>
@@ -355,7 +374,7 @@ const Bet: FC<any> = (props: { event: number }) => {
             </Marquee>
           </>
         ))} */}
-      {bookmakerToss?.length > 0 && (
+          {/* {bookmakerToss?.length > 0 && (
         <>
           {" "}
           <Accordion defaultExpanded>
@@ -384,41 +403,53 @@ const Bet: FC<any> = (props: { event: number }) => {
             </Typography>
           </Marquee>
         </>
-      )}
-      {Object.keys(activeFancy)?.length > 0 &&
-        activeFancy &&
-        Object.keys(activeFancy).map((keys: any) => {
-          if (
-            [
-              "Fancy2",
-              // "Fancy3",
-              // "OddEven"
-            ].includes(keys) &&
-            activeFancy[keys]?.length
-          ) {
-            return (
-              <Accordion defaultExpanded>
-                <AccordionSummary expandIcon={<ExpandCircleDown />}>
-                  {keys}
-                </AccordionSummary>
-                <AccordionDetails sx={{ p: 0 }}>
-                  <SessionOddsGrid
-                    bet={bet}
-                    setMarketId={setSelectedPnlMarketId}
-                    setBet={setBet}
-                    buttonData={buttonData}
-                    CurrentOdd={activeFancy[keys]}
-                    PrevOdds={preFancyOdds[keys]}
-                    matchId={props.event}
-                    title={keys}
-                    FancyPnl={fancyPnl}
-                  />
-                </AccordionDetails>
-              </Accordion>
-            );
-          } else return "";
-        })}
-      <Box
+      )} */}
+          {Object.keys(activeFancy)?.length > 0 &&
+            activeFancy &&
+            Object.keys(activeFancy).map((keys: any) => {
+              if (
+                [
+                  "Fancy2",
+                  // "Fancy3",
+                  // "OddEven"
+                ].includes(keys) &&
+                activeFancy[keys]?.length
+              ) {
+                return (
+                  // <Accordion defaultExpanded>
+                  //   <AccordionSummary expandIcon={<ExpandCircleDown />}>
+                  //     {keys}
+                  //   </AccordionSummary>
+                  //   <AccordionDetails sx={{ p: 0 }}>
+                  <>
+
+                    < SessionOddsGrid
+                      bet={bet}
+                      setMarketId={setSelectedPnlMarketId}
+                      setBet={setBet}
+                      buttonData={buttonData}
+                      CurrentOdd={activeFancy[keys]}
+                      PrevOdds={preFancyOdds[keys]}
+                      matchId={props.event}
+                      title={keys}
+                      FancyPnl={fancyPnl}
+                    />
+                  </>
+                  //   </AccordionDetails>
+                  // </Accordion>
+                );
+              } else return "";
+            })}
+          <AllMatch
+            setBet={setBet}
+            bet={bet}
+            buttonData={buttonData}
+            event={props.event}
+            sportsId={props.sportsId}
+          />
+        </div>
+      </div>
+      {/* <Box
         display="flex"
         flexDirection={"column"}
         gap={2}
@@ -426,7 +457,7 @@ const Bet: FC<any> = (props: { event: number }) => {
         alignItems="center"
       >
         <TitleStyled width="100%">Bets</TitleStyled>
-      </Box>
+      </Box> */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -462,6 +493,7 @@ const Bet: FC<any> = (props: { event: number }) => {
           </Box>
         </Box>
       </Modal>
+
     </>
   );
 };
@@ -487,9 +519,9 @@ export const BetGridItem = ({
     ...BetGridItemGridItemProps,
     ...(title
       ? {
-          bgcolor: "rgb(82, 181, 225)",
-          color: "#FFF",
-        }
+        bgcolor: "rgb(82, 181, 225)",
+        color: "#FFF",
+      }
       : {}),
   };
   const gridItems = (

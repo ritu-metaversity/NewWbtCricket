@@ -2,14 +2,14 @@ import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 
 export const TitleStyled = styled(Typography)({
-  backgroundColor: "#00FFFF",
+  backgroundColor: "#7b7c7f",
   fontWeight: 700,
   textAlign:'center',
   padding: 8,
   display: "flex",
   justifyContent: "space-between",
   textTransform: "uppercase",
-  color: "#00F",
+  color: "#fff",
 });
 
 export const TableCellText = styled(Typography)({

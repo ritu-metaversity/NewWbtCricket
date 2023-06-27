@@ -1,14 +1,31 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import TablePagination from "@mui/material/TablePagination";
-import React, { useContext, useEffect } from "react";
-import BacktoMenuButton from "../../components/BacktoMenuButton";
+import React, { useContext } from "react";
 import StickyTable from "../../components/custom/TableWithoutPagination";
-import { userServices } from "../../utils/api/user/services";
+import { ProfitLossPayload, userServices } from "../../utils/api/user/services";
 import { LoaderContext } from "../../App";
 import moment from "moment";
+import Filter from "../Complete/Filter";
+import BacktoMenuButton from "../../components/BacktoMenuButton";
 
+interface ProfitLossData {
+  pnl: string;
+  uplineAmount: string;
+  downLineAmount: number | null;
+  commssionMila: string;
+  commssionDiya: string;
+  matchId: string;
+  matchName: string;
+}
 export interface Column {
-  id: "matchName" | "wonBy" | "won" | "lost" | "balance" | string;
+  id:
+  | "pnl"
+  | "uplineAmount"
+  | "downLineAmount"
+  | "commssionMila"
+  | "commssionDiya"
+  | "matchName"
+  | "matchId";
   label: string;
   minWidth?: number;
   align?: "right" | "center";
@@ -17,62 +34,54 @@ export interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: "sno", label: "Sr.", minWidth: 30 },
-  { id: "date", label: "Date", align: "center", minWidth: 120 },
+  { id: "matchId", label: "Id", align: "center", minWidth: 120 },
+  { id: "pnl", label: "Pnl.", minWidth: 30, align: "center", colorCoded: true },
+  // { id: "uplineAmount", label: "uplineAmount", align: "center", minWidth: 120 },
+  // {
+  //   id: "downLineAmount",
+  //   label: "downLineAmount",
+  //   minWidth: 20,
+  //   align: "right",
+  //   colorCoded: true,
+  // },
   {
-    id: "credit",
-    label: "Credit",
+    id: "commssionMila",
+    label: "commssionMila",
     minWidth: 20,
-    align: "right",
+    align: "center",
     colorCoded: true,
   },
+  // {
+  //   id: "commssionDiya",
+  //   label: "commssionDiya",
+  //   minWidth: 20,
+  //   align: "right",
+  //   colorCoded: true,
+  // },
   {
-    id: "debit",
-    label: "Debit",
+    id: "matchName",
+    label: "Name",
     minWidth: 20,
-    align: "right",
-    colorCoded: true,
   },
-  {
-    id: "pts",
-    label: "Balance",
-    minWidth: 20,
-    align: "right",
-    colorCoded: true,
-  },
-  { id: "remark", label: "Remark", align: "center", minWidth: 120 },
 ];
-
 const Account = () => {
-  const style = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "10px",
-  };
-  const inputStyle = {
-    padding: "10px",
-    borderRadius: "5px",
-    marginRight: " 8px",
-    width: "100%",
-    maxWidth: "200px",
-  };
-  const [countPage] = React.useState();
+  const [countPage, setCount] = React.useState(1);
 
-  const lableStyle = { alignSelf: "center" };
   const date = new Date();
   const futureDate = date.getDate() - 60;
   date.setDate(futureDate);
   const defaultValue = moment().subtract(1, "month").format("YYYY-MM-DD");
   const currentValue = moment().format("YYYY-MM-DD");
 
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = React.useState<ProfitLossPayload>({
     fromDate: defaultValue,
     toDate: currentValue,
-    type: 1,
+    sportId: "1",
+    matchId: "",
     index: 0,
     noOfRecords: 25,
     totalPages: 1,
+    userId: "",
   });
 
   function handleChange(event: { target: { name: any; value: any } }) {
@@ -83,33 +92,19 @@ const Account = () => {
       };
     });
   }
-  const [accountStatement, setAccountStatement] = React.useState([]);
+
+  const [accountStatement, setAccountStatement] = React.useState<
+    ProfitLossData[]
+  >([]);
   const { loading, setLoading } = useContext(LoaderContext);
-
-  // console.log(loading);
-  // console.log(setLoading);
-  // setLoading({ data: null });
-
-  useEffect(() => {
-    const getList = async () => {
-      setLoading && setLoading((prev) => ({ ...prev, getList: true }));
-
-      const { response } = await userServices.getAccountStatement(formData);
-      if (response?.data?.dataList) {
-        setAccountStatement(response.data.dataList);
-        // console.log(response.data)
-      }
-      setLoading && setLoading((prev) => ({ ...prev, getList: false }));
-    };
-    getList();
-  }, [formData, setLoading]);
 
   const handleClick = () => {
     const getList = async () => {
       setLoading && setLoading((prev) => ({ ...prev, getListdata: true }));
-      const { response } = await userServices.getAccountStatement(formData);
-      if (response?.data?.dataList) {
-        setAccountStatement(response.data.dataList);
+      const { response } = await userServices.profitLoss(formData);
+      if (response?.data) {
+        setAccountStatement(response.data.market);
+        setCount(response.data.totalRecord);
       }
       setLoading && setLoading((prev) => ({ ...prev, getListdata: false }));
     };
@@ -122,100 +117,86 @@ const Account = () => {
     setFormData((preState) => {
       return {
         ...preState,
-        noOfRecords: +event.target.value,
+        noOfRecords: +Number(event.target.value),
         index: 0,
       };
     });
-    // setPage(0);
   };
 
   const handleChangePage = (event: unknown, newPage: number) => {
-    setFormData((preState) => {
-      return { ...preState, index: newPage };
-    });
+    if (formData.index < countPage)
+      setFormData((preState) => {
+        return { ...preState, index: newPage };
+      });
   };
-
+  console.log(accountStatement, "accountStatementaccountStatement")
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
       <BacktoMenuButton />
-      <form style={style}>
-        <Grid container>
-          <Grid item xs={6} md={3} style={style}>
-            <label style={lableStyle} htmlFor="fromDate">
-              From Date
-            </label>
-            <input
-              style={inputStyle}
-              type="date"
-              defaultValue={formData.fromDate}
-              placeholder="YYYY-MM-DD"
-              onChange={handleChange}
-              name="fromDate"
-            />
-          </Grid>
-          <Grid item xs={6} md={3} style={style}>
-            {" "}
-            <label style={lableStyle} htmlFor="toDate">
-              To Date
-            </label>
-            <input
-              style={inputStyle}
-              type="date"
-              defaultValue={formData.toDate}
-              placeholder="YYYY-MM-DD"
-              onChange={handleChange}
-              name="toDate"
-            />
-          </Grid>
-          <Grid item xs={6} md={3} style={style}>
-            {" "}
-            <label style={lableStyle} htmlFor="type">
-              Type
-            </label>
-            <select style={inputStyle} onChange={handleChange} name="type">
-              <option selected value="1">
-                ALL
-              </option>
-              <option value="3">Deposit/Withdarw Report</option>
-              <option value="2">Game Report</option>
-            </select>
-          </Grid>
-          {/* <button type="button" onClick={handleClick} style={{
 
-        }}>Search</button>  */}
-
-          <Grid item xs={6} md={3} style={style}>
-            <Button
-              fullWidth
-              type="button"
-              variant="contained"
-              onClick={handleClick}
-            >
-              search
-            </Button>
-          </Grid>
-          {/* <label style={lableStyle} htmlFor="noOfRecords">No Of Rows</label>
-        <select style={inputStyle} onChange={handleChange} name="noOfRecords">
-          <option selected value="1">10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-        */}
-        </Grid>
-      </form>
+      <Filter
+        setFormData={setFormData}
+        formData={formData}
+        handleChange={handleChange}
+        handleClick={handleClick}
+      />
       <br />
       <br />
 
       {accountStatement?.length > 0 ? (
         <>
           {" "}
-          <StickyTable
+          {/* <StickyTable
             rows={accountStatement}
             columns={columns}
-            title={"Account Summary"}
-            // noOfRecords={formData.noOfRecords}
-          />
+            title={""}
+          /> */}
+          <div className="content-top-padding row" style={{ paddingBottom: 15 }}>
+            <table className="" style={{ width: "100%" }}>
+              <thead>
+                <tr>
+                  <th colSpan={5} className="bet-place-tbl-th market_type_row ">
+                    MY LEDGER
+                  </th>
+                </tr>
+                <tr>
+                  <th className="ldg-tbl-th match-box-color" style={{ width: "50%" }}>
+                    DESCRIPTION
+                  </th>
+                  <th className="ldg-tbl-th match-box-color">PNL</th>
+                  {/* <th className="ldg-tbl-th match-box-color">WON</th>
+                  <th className="ldg-tbl-th match-box-color">LOST</th>
+                  <th className="ldg-tbl-th match-box-color">HISAB</th> */}
+                </tr>
+              </thead>
+              <tbody style={{ fontSize: 12 }}>
+                {accountStatement.map((item: any) =>
+                  <tr>
+                    <td
+                      className="ldg-tbl-td match-value-box-color"
+                      style={{ textAlign: "left" }}
+                    >
+                      <a href="/">
+
+                        {item?.matchName}
+                      </a>
+                    </td>
+                    {item?.pnl < 0 ?
+
+                      (<td className="ldg-tbl-td match-value-box-color" style={{ color: "red" }}>{item?.pnl}</td>) :
+
+                      (<td className="ldg-tbl-td match-value-box-color" style={{ color: "green" }}>{item?.pnl}</td>)
+                    }
+                    {/* <td className="ldg-tbl-td match-value-box-color">0</td>
+                    <td className="ldg-tbl-td match-value-box-color">190</td>
+                    <td className="ldg-tbl-td match-value-box-color">-190</td> */}
+                  </tr>
+                )}
+
+              </tbody>
+            </table>
+          </div>
+
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
@@ -231,7 +212,7 @@ const Account = () => {
           />
         </>
       ) : (
-        !loading.getList && (
+        !loading.getListdata && (
           <Typography mt="15vh" variant="h4" color="error">
             {"No Data Found"}
           </Typography>

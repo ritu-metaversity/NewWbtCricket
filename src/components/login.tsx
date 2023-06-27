@@ -8,9 +8,10 @@ import {
 } from "@mui/material";
 // import axios from "axios";
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authServices } from "../utils/api/auth/services";
-
+import "./Login.css"
+import LoginIcon from '@mui/icons-material/Login';
 
 interface Props {
   setIsSignedIn: Dispatch<SetStateAction<boolean>>;
@@ -48,64 +49,52 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
     }
   };
   return (
-    <>
-      <Typography
-        mt="64px"
-        fontSize={{ xs: "h3", md: "h1" }}
-        fontWeight={"700"}
-        color="#e91e63"
-      >
-        {window.location.hostname}
-      </Typography>
-      <Box
-        maxWidth={"450px"}
-        mx="auto"
-        mb="2em"
-        p="2em"
-        display={"flex"}
-        flexDirection="column"
-        gap={"1.5em"}
-      >
-        <Typography
-          textAlign={"center"}
-          fontWeight="bold"
-          variant="h5"
-          color="#3f51b5"
-          marginTop="-24px"
-        >
-          Sign In
-        </Typography>
-        <TextField
-          required
-          label="Client Code"
-          name="login"
-          fullWidth
+    <div className="loginBackground new-login-content ">
+      <div className="logo-img">
+        <img src="https://bmxpro.in/static/media/poplogin1609.320f8bee.png" alt="" />
+      </div>
+      <div className="login-form">
+        <span className="login-text">Please Login To Continue</span>
+        <input className="login-Input"
+          placeholder="Username"
           value={userId}
-          onChange={handleChange}
-        />
-        <Box textAlign={"left"}>
-          <TextField
-            required
-            name="password"
-            label="Password"
-            type="password"
-            value={password}
-            onChange={handleChange}
-            fullWidth
-          />
-          <FormControlLabel control={<Checkbox />} label="Remember me" />
-        </Box>
-        <Button
-          variant="contained"
-          size="large"
-          onClick={handleClick}
-          fullWidth
-          sx={{ bgcolor: "#e91e63" }}
-        >
-          Sign in
-        </Button>
-      </Box>
-    </>
+          name="login"
+          onChange={handleChange} />
+
+        <input className="login-Input"
+          name="password"
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChange={handleChange} />
+        <div className="login_main" onClick={handleClick}>
+          <button className="login-Button">
+            login
+          </button>
+          <div>
+            <LoginIcon />
+          </div>
+        </div>
+        <div className="_term_section">
+          <div className="sub_term">
+            <Link to="">
+              <span>Privacy Policy</span>
+            </Link>
+            <Link to="">
+              <span>Terms & Conditions</span>
+            </Link>
+          </div>
+          <div>
+            <Link to="">
+
+              <span> Rules & Regulations</span>
+            </Link>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -16,12 +16,14 @@ function a11yProps(index: number) {
 }
 
 const Sports = () => {
-  const [activeSportList, setActiveSportList] = useState([]);
+  const [activeSportList, setActiveSportList] = useState<any>([]);
   const [activeEventList, setActiveEventList] = useState<SummaryCardProps[]>(
     []
   );
+
   const [tabValue, setTab] = useState(0);
   const [show, setShow] = useState(false);
+  console.log(activeSportList, "tabValuetabValue")
   const { setLoading } = useContext(LoaderContext);
   useEffect(() => {
     const getList = async () => {
@@ -29,6 +31,7 @@ const Sports = () => {
       const { response } = await sportServices.activeSportList();
       console.log(JSON.stringify(response));
       if (response?.data) {
+        console.log(response.data, "adklsjhvbhghvbn")
         setActiveSportList(response.data);
       }
       setLoading && setLoading((prev) => ({ ...prev, Inplay: false }));
@@ -46,6 +49,7 @@ const Sports = () => {
       console.log(activeSportList);
       if (!activeSportList.length) return;
       const { sportId } = activeSportList[tabValue];
+      console.log(sportId, "spoeqweqwrtIdsportIdsportIdsportId")
       if (!sportId) return;
 
       const { response } = await sportServices.activeEventFromSport(sportId);
@@ -69,6 +73,8 @@ const Sports = () => {
     return () => clearInterval(timer);
   }, [tabValue, activeSportList, setLoading]);
 
+  console.log(activeSportList[tabValue]?.sportId, "sporasdftid");
+
   return (
     <Box maxWidth={900} mx="auto" >
       {/* <BacktoMenuButton /> */}
@@ -86,7 +92,7 @@ const Sports = () => {
       </Tabs>
       {activeEventList?.length > 0
         ? activeEventList.map((item) => (
-          <Match matches={item} sportId={"0"} />
+          <Match matches={item} sportId={activeSportList[tabValue]?.sportId} />
           // <SummaryCard key={item.matchId + "summaryCard"} {...item} />
         ))
         : show && (

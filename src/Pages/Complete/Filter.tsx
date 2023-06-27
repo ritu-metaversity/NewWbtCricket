@@ -16,6 +16,7 @@ import { LoaderContext } from "../../App";
 import { sportServices } from "../../utils/api/sport/services";
 const style = {
   padding: "10px",
+
 };
 
 const inputStyle = {
@@ -23,6 +24,11 @@ const inputStyle = {
   borderRadius: "5px",
   width: "calc(100% - 20px)",
 };
+const inputStyle1 = {
+  padding: "10px",
+  borderRadius: "5px",
+  width: "100%",
+}
 
 interface Props {
   formData: ProfitLossPayload;
@@ -172,7 +178,7 @@ const Filter: FC<Props> = ({
     <>
       <Tabs value={tab} sx={{ m: 2 }} onChange={(e, value) => setTab(value)}>
         <Tab value={0} label="Sports" />
-        <Tab value={1} label="Casino" />
+        {/* <Tab value={1} label="Casino" /> */}
       </Tabs>
       <form style={style}>
         <Grid container>
@@ -209,7 +215,7 @@ const Filter: FC<Props> = ({
             </label>
             <select
               value={formData.sportId}
-              style={inputStyle}
+              style={inputStyle1}
               onChange={handleChange}
               name="sportId"
             >
@@ -217,11 +223,11 @@ const Filter: FC<Props> = ({
 
               {tab === 1
                 ? casinoTypes.map((casino) => (
-                    <option value={casino.id}>{casino.name}</option>
-                  ))
+                  <option value={casino.id}>{casino.name}</option>
+                ))
                 : activeSportList.map((sport) => (
-                    <option value={sport.sportId}>{sport.sportName}</option>
-                  ))}
+                  <option value={sport.sportId}>{sport.sportName}</option>
+                ))}
             </select>
           </Grid>
           <Grid item xs={6} md={2} style={style}>
@@ -230,26 +236,27 @@ const Filter: FC<Props> = ({
               {tab === 1 ? "Select Casino" : "Select Match"}
             </label>
             <select
+
               value={formData.matchId}
-              style={inputStyle}
+              style={inputStyle1}
               onChange={handleChange}
               name="matchId"
             >
               <option value={""}>ALL</option>
               {tab === 1
                 ? casinoList.map((casino) => (
-                    <option
-                      key={casino.gameId + casino.gameCode}
-                      value={casino.gameId}
-                    >
-                      {casino.gameName}
-                    </option>
-                  ))
+                  <option
+                    key={casino.gameId + casino.gameCode}
+                    value={casino.gameId}
+                  >
+                    {casino.gameName}
+                  </option>
+                ))
                 : activeEventList.map((event) => (
-                    <option key={event.matchId} value={event.matchId}>
-                      {event.matchName}
-                    </option>
-                  ))}
+                  <option key={event.matchId} value={event.matchId}>
+                    {event.matchName}
+                  </option>
+                ))}
             </select>
           </Grid>
           <Grid

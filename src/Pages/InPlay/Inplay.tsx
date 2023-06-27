@@ -46,30 +46,30 @@ const Inplay = () => {
     }, 60000);
     return () => clearInterval(timer);
   }, [setLoading]);
-
+  console.log(activeEventList, "daafskdflmopiuhjb")
   return (
     <Box maxWidth={900} mx="auto">
       <BacktoMenuButton />
 
       {activeEventList?.length > 0
-        ? activeEventList.map((sportItem) => (
-            <Accordion defaultExpanded>
-              <AccordionSummary expandIcon={<ExpandCircleDown />}>
-                {sportItem.name}
-              </AccordionSummary>
-              <AccordionDetails sx={{ px: 1 }}>
-                {sportItem.matchList.map((item) => (
-                  // <SummaryCard key={item.matchId + "summaryCard"} {...item} />
-                  <Match matches={item} sportId={sportItem.sportId} />
-                ))}
-              </AccordionDetails>
-            </Accordion>
-          ))
+        ? activeEventList.map((sportItem: any) => (
+          <Accordion defaultExpanded>
+            <AccordionSummary expandIcon={<ExpandCircleDown />}>
+              {sportItem.name}
+            </AccordionSummary>
+            <AccordionDetails sx={{ px: 1 }}>
+              {sportItem.matchList.map((item: any) => (
+                // <SummaryCard key={item.matchId + "summaryCard"} {...item} />
+                <Match matches={item} sportId={sportItem.sportid} />
+              ))}
+            </AccordionDetails>
+          </Accordion>
+        ))
         : !loading.Inplay && (
-            <Typography mt="15vh" variant="h4" color="error">
-              {"No active event found"}
-            </Typography>
-          )}
+          <Typography mt="15vh" variant="h4" color="error">
+            {"No active event found"}
+          </Typography>
+        )}
     </Box>
   );
 };

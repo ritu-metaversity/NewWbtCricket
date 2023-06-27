@@ -13,7 +13,7 @@ import { inPlayDetailServices } from "../../utils/api/inplayDetails/services";
 import { userServices } from "../../utils/api/user/services";
 import { BetDetailsInterface, ProfitObjectInterface } from "./types";
 
-const getDeviceType = () => {
+export const getDeviceType = () => {
   const ua = navigator.userAgent;
   if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
     return "tablet";
@@ -75,6 +75,7 @@ const BetSlip: FC<Props> = ({ bet, setBet, profits, buttonData }) => {
       },
     });
     if (response) {
+      
       setBet(null);
     }
     setLoading && setLoading((prev) => ({ ...prev, ClickButtonValue: false }));
