@@ -32,7 +32,10 @@ const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
         m="auto"
         boxSizing={"content-box"}
         width="100%"
-        maxWidth={{ xs: "100vw", sm: "lg" }}
+        bgcolor="#dddddd"
+        paddingBottom={{ xs: "50px", sm: "50px", }}
+        maxWidth={{ xs: "100vw", sm: "lg", }}
+
       >
         {isSignedIn && <Outlet />}
       </Box>
