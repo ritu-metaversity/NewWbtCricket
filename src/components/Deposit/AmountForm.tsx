@@ -1,10 +1,12 @@
-import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
 import { StyledAmountInput, StyledButtonSmall } from "./styledComponents";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { Box, Typography } from "@mui/material";
+import axios from "axios";
 // import { colorHex } from "../../utils/constants";
 
+let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 const buttonAmountArr = [100, 500, 1000, 5000];
 interface Props {
   amount: number;
@@ -25,6 +27,28 @@ export function AmountForm({ amount, setAmount }: Props) {
       setAmount(0);
     }
   };
+  const [stackValue, setStackValue] = useState([]);
+
+  useEffect(() => {
+    const TokenId = localStorage.getItem("token");
+
+    axios
+      .post(
+        `${REACT_APP_API_URL}/request-stack`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${TokenId}`,
+          },
+        }
+      )
+      .then((res: any) => {
+        setStackValue(res?.data?.data);
+        console.log(res?.data?.data);
+      });
+  }, [])
+  console.log(stackValue, "adsasdasdas")
   return (
     <>
       {amount < 100 && amount !== 0 && (
@@ -75,12 +99,12 @@ export function AmountForm({ amount, setAmount }: Props) {
           </Box>
         </Box>
         <Box display="flex">
-          {buttonAmountArr.map((amount) => (
+          {stackValue.map((value: any, index) => (
             <StyledButtonSmall
-              key={`${amount}-button`}
-              onClick={() => setAmount((o) => o + amount)}
+              key={`${value.key}-button-${value.value}-${index}`}
+              onClick={() => setAmount((o) => o + value?.value)}
             >
-              +{amount}
+              {value?.key}
             </StyledButtonSmall>
           ))}
         </Box>

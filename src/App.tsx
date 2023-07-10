@@ -36,6 +36,8 @@ import { authServices } from "./utils/api/auth/services";
 import Inplay from "./Pages/InPlay/Inplay";
 import { Sports } from "./Pages/Sports";
 import { selfServices } from "./utils/api/selfWithrawDeposit/service";
+import { ImCross } from "react-icons/im";
+import { ToastContainer } from "react-toastify";
 
 interface LoadingType {
   [x: string]: boolean;
@@ -113,6 +115,24 @@ function App() {
     <LoaderContext.Provider
       value={{ loading, appData, isSignedIn, setLoading }}
     >
+
+      <ToastContainer
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+        position="bottom-left"
+        closeButton={<div style={{ display: 'flex', alignItems: "center", paddingInline: "3px" }}>
+          <ImCross />
+        </div>}
+      // icon={<></>}
+      // progress={undefined:any}
+      />
       {!Object.keys(loading).every((key) => loading[key] === false) && (
         <div className="loader-container">
           <CircularProgress />

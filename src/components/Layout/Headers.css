@@ -9,3 +9,12 @@
     width: 100px;
     display: flex;
 }
+
+.logo-name {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    width: 150px;
+}

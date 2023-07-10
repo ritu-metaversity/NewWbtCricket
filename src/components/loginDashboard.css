@@ -1,8 +1,7 @@
-
-.appBottomMenu{
-    min-height: 56px;
+.appBottomMenu {
+  min-height: 56px;
   position: sticky;
-  margin-top:auto;
+  margin-top: auto;
   z-index: 999;
   width: 100%;
   bottom: 0;
@@ -13,22 +12,24 @@
   align-items: center;
   justify-content: center;
   border-top: 1px solid #dcdce9;
-  color:white;
+  color: white;
   padding-left: 4px;
   padding-right: 4px;
   padding-bottom: env(safe-area-inset-bottom);
 }
+
 a strong {
   font-size: small;
   line-height: 0.5;
 }
-a{
-   flex:  1 0 0%;
-   color: white;
+
+a {
+  flex: 1 0 0%;
+  color: black;
 }
 
-@media screen  and (max-width:400px){
+@media screen and (max-width:400px) {
   main {
     width: 81%;
-}
+  }
 }

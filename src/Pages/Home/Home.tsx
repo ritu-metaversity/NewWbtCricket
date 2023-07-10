@@ -15,43 +15,43 @@ interface ActionCardProps {
   cardDesc?: string;
   cardForwardHref: string;
 }
-export const ActionAreaCard: FC<ActionCardProps> = ({ cardTitle, cardForwardHref, cardImageSrc, cardDesc }) => {
-  return (
-    <Card sx={{ width: 345, height: "100%" }}>
-      <Link to={cardForwardHref} style={{ textDecoration: "none", color: "unset" }}>
-        <CardActionArea sx={{ height: "100%" }}>
-          <CardMedia
-            component="img"
-            // width="100px"
-            sx={{
-              alignSelf: "center",
-              // height: "100px",
-              width: "100%",
-              maxWidth: "220px",
-              maxHeight: "220px",
-              margin: "auto",
-              pt: 2,
-            }}
-            // height= "200"
-            image={cardImageSrc}
-            // image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
-            alt="icon-image"
-          />
-          <CardContent sx={{ mt: "" }}>
-            <Typography gutterBottom variant="h5" component="div">
-              {cardTitle}
-            </Typography>
-            {/* <Typography variant="body2" color="text.secondary">
-            {cardDesc}
-          </Typography> */}
-          </CardContent>
-        </CardActionArea>
-      </Link>
-    </Card>
-  );
-}
+// export const ActionAreaCard: FC<ActionCardProps> = ({ cardTitle, cardForwardHref, cardImageSrc, cardDesc }) => {
+//   return (
+//     <Card sx={{ width: 345, height: "100%" }}>
+//       <div  to={cardForwardHref} style={{ textDecoration: "none", color: "unset" }}>
+//         <CardActionArea sx={{ height: "100%" }}>
+//           <CardMedia
+//             component="img"
+//             // width="100px"
+//             sx={{
+//               alignSelf: "center",
+//               // height: "100px",
+//               width: "100%",
+//               maxWidth: "220px",
+//               maxHeight: "220px",
+//               margin: "auto",
+//               pt: 2,
+//             }}
+//             // height= "200"
+//             image={cardImageSrc}
+//             // image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+//             alt="icon-image"
+//           />
+//           <CardContent sx={{ mt: "" }}>
+//             <Typography gutterBottom variant="h5" component="div">
+//               {cardTitle}
+//             </Typography>
+//             {/* <Typography variant="body2" color="text.secondary">
+//             {cardDesc}
+//           </Typography> */}
+//           </CardContent>
+//         </CardActionArea>
+//       </div>
+//     </Card>
+//   );
+// }
 
-const ActionCardPropsList: ActionCardProps[] = [
+const ActionCardPropsList = [
   {
     cardTitle: "In Play",
     cardDesc: "matches that are on going or incoming",
@@ -102,8 +102,8 @@ const ActionCardPropsList: ActionCardProps[] = [
     // cardDesc: "change your mybet password",
     cardImageSrc: "/aaaaaaaaa.png",
     cardForwardHref: "/current-bet",
-  },
-];
+  },]
+
 const Home = () => {
   const gridItemProps: GridProps = {
     xs: 5.5,
@@ -114,16 +114,20 @@ const Home = () => {
   };
 
   return (
-    <div className="main_container">
-      <Grid container gap={2} pt={2} justifyContent="center">
-        {ActionCardPropsList.map((cardProps, index) => (
-          <Grid key={`main-menu-card-${index}`} {...gridItemProps}>
-            <ActionAreaCard {...cardProps} />
-          </Grid>
+    <div className="main_container" >
+      <div className="mid_container">
+        {ActionCardPropsList.map((item) => (
+          <Link to={item.cardForwardHref} className="single_container"   >
+
+            <img className="img_container" src={item?.cardImageSrc} alt="" />
+            <span>{item?.cardTitle}</span>
+
+          </Link>
         ))}
-      </Grid>
+
+      </div>
       <Outlet />
-    </div>
+    </div >
   );
 };
 

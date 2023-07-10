@@ -7,6 +7,7 @@ import StickyHeadTable from "../custom/Table";
 import { LoaderContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import { selfServices } from "../../utils/api/selfWithrawDeposit/service";
+import WithDraw1 from "./WithDraw1";
 
 const Withdraw = () => {
   const nav = useNavigate();
@@ -42,9 +43,9 @@ const Withdraw = () => {
         // backgroundColor: ,
       }}
     >
-      <Box mx={2}>
-        <WithdrawForm getWithdrawList={getWithdrawList} />
-      </Box>
+
+      <WithDraw1 />
+
 
       <StickyHeadTable
         columns={columns}

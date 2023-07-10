@@ -107,56 +107,62 @@ export const MatchOddsGrid: FC<Props> = ({
             <tr>
 
               <th
-                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color"
-                style={{ width: "40%" }}
-              >
-                <div className="head">
-                  <div style={{ width: "20%" }}>
-                    <ArrowDropUpIcon onClick={handleChange} style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)" }} />
-                  </div>
-                  <div className="maxMin">
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktoptableheadSize"
 
-                    <span>Min: {minBet}</span>
-                    <span>Max: {maxBet}</span>
+              >
+                <div className="bookmakerheader">
+                  {/* <div style={{ width: "10%" }}> */}
+                  <ArrowDropUpIcon onClick={handleChange} style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)" }} />
+                  {/* </div> */}
+                  <div className="_child">
+
+                    Min: {minBet}
+                    Max: {maxBet}
 
                   </div>
                 </div>
                 {/* <ArrowDropUpIcon onClick={handleChange} /> */}
               </th>
               <th
-                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color"
-                style={{ width: "10%" }}
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktop desktopSize"
+
               >
 
               </th>
               <th
-                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color"
-                style={{ width: "10%" }}
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktop desktopSize"
+
               >
 
               </th>
 
 
               <th
-                className="bet-place-tbl-th lagai-box-color"
-                style={{ width: "10%" }}>LAGAI</th>
+                className="bet-place-tbl-th lagai-box-color desktopSize"
+              >LAGAI</th>
               <th
-                className="bet-place-tbl-th khai-box-color"
-                style={{ width: "10%" }}
+                className="bet-place-tbl-th khai-box-color desktopSize"
+
               >
                 KHAI
               </th>
               <th
-                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color"
-                style={{ width: "10%" }}
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktop desktopSize"
+
               >
 
               </th>
               <th
-                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color"
-                style={{ width: "10%" }}
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-colo desktop desktopSize"
+
               >
 
+              </th>
+              <th
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktopSize"
+
+              >
+                POS.
               </th>
             </tr>
           </thead>
@@ -174,47 +180,42 @@ export const MatchOddsGrid: FC<Props> = ({
                     >
                       {item.name}
                       <div>
-                        <span>
-                          {redGreenComponent(
-                            OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
-                              ?.value || 0
-                          )}
-                        </span>
-                      </div>
-                    </td>
-                    <td className="bet-place-tbl-td cursor-pointer"
-                    >
-                      <span style={{
-                        fontSize: "13px",
-                        color: "#5957ff",
-                        fontWeight: "700"
-                      }}>0</span>
-                      <div>
 
-                        <span style={{
-                          fontSize: "13px",
-                          color: "#5957ff",
-                          fontWeight: "400"
-                        }}>0</span>
                       </div>
                     </td>
-                    <td className="bet-place-tbl-td cursor-pointer"
+                    <td className="bet-place-tbl-td cursor-pointer desktop desktopSize"
                     >
                       <span style={{
                         fontSize: "16px",
                         color: "#5957ff",
                         fontWeight: "750"
-                      }}>0</span>
+                      }}>{item.ex.availableToBack[2].price}</span>
                       <div>
 
                         <span style={{
-                          fontSize: "13px",
+                          fontSize: "9px",
                           color: "#5957ff",
-                          fontWeight: "400"
-                        }}>0</span>
+                          fontWeight: "500"
+                        }}>{item.ex.availableToBack[2].size}</span>
                       </div>
                     </td>
-                    <td className={`bet-place-tbl-td cursor-pointer ${PrevRunner[index].ex.availableToBack[0].price <
+                    <td className="bet-place-tbl-td cursor-pointer desktop desktopSize"
+                    >
+                      <span style={{
+                        fontSize: "16px",
+                        color: "#5957ff",
+                        fontWeight: "750"
+                      }}>{item.ex.availableToBack[1].price}</span>
+                      <div>
+
+                        <span style={{
+                          fontSize: "9px",
+                          color: "#5957ff",
+                          fontWeight: "500"
+                        }}>{item.ex.availableToBack[1].size}</span>
+                      </div>
+                    </td>
+                    <td className={`bet-place-tbl-td cursor-pointer desktopSize ${PrevRunner[index].ex.availableToBack[0].price <
                       item.ex.availableToBack[0].price
                       ? "odds-up"
                       : PrevRunner[index].ex.availableToBack[0].price >
@@ -240,17 +241,18 @@ export const MatchOddsGrid: FC<Props> = ({
                         fontSize: "16px",
                         color: "#ff5c72",
                         fontWeight: "750"
-                      }}>{item.ex.availableToBack[0].price}</span>
+                      }}>
+                        {item.ex.availableToBack[0].price}</span>
                       <div>
                         <span style={{
-                          fontSize: "13px",
+                          fontSize: "9px",
                           color: "#ff5c72",
-                          fontWeight: "400"
+                          fontWeight: "500"
                         }}>{item.ex.availableToBack[0].size}</span>
                       </div>
 
                     </td>
-                    <td className={`bet-place-tbl-td cursor-pointer ${PrevRunner[index].ex.availableToLay[0].price <
+                    <td className={`bet-place-tbl-td cursor-pointer desktopSize ${PrevRunner[index].ex.availableToLay[0].price <
                       item.ex.availableToLay[0].price
                       ? "odds-up"
                       : PrevRunner[index].ex.availableToLay[0].price >
@@ -280,42 +282,61 @@ export const MatchOddsGrid: FC<Props> = ({
                       <div>
 
                         <span style={{
-                          fontSize: "13px",
+                          fontSize: "9px",
                           color: "#5957ff",
-                          fontWeight: "400"
+                          fontWeight: "500"
                         }}>{item.ex.availableToLay[0].size}</span>
                       </div>
                     </td>
-                    <td className="bet-place-tbl-td cursor-pointer"
+                    <td className="bet-place-tbl-td cursor-pointer desktop desktopSize"
                     >
                       <span style={{
                         fontSize: "16px",
                         color: "#5957ff",
                         fontWeight: "750"
-                      }}>0</span>
+                      }}>{item.ex.availableToBack[1].price}</span>
                       <div>
 
                         <span style={{
-                          fontSize: "13px",
+                          fontSize: "9px",
                           color: "#5957ff",
                           fontWeight: "400"
-                        }}>0</span>
+                        }}>{item.ex.availableToBack[1].size}</span>
                       </div>
                     </td>
-                    <td className="bet-place-tbl-td cursor-pointer"
+                    <td className="bet-place-tbl-td cursor-pointer desktop desktopSize"
                     >
                       <span style={{
                         fontSize: "16px",
                         color: "#5957ff",
                         fontWeight: "750"
-                      }}>0</span>
+                      }}>{item.ex.availableToBack[2].price}</span>
                       <div>
 
                         <span style={{
+                          fontSize: "9px",
+                          color: "#5957ff",
+                          fontWeight: "400"
+                        }}>{item.ex.availableToBack[2].size}</span>
+                      </div>
+                    </td>
+                    <td className="bet-place-tbl-td cursor-pointer desktopSize"
+                    >
+                      <span style={{
+                        fontSize: "16px",
+                        color: "#5957ff",
+                        fontWeight: "750"
+                      }}> {redGreenComponent(
+                        OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
+                          ?.value || 0
+                      )}</span>
+                      <div>
+
+                        {/* <span style={{
                           fontSize: "13px",
                           color: "#5957ff",
                           fontWeight: "400"
-                        }}>0</span>
+                        }}>0</span> */}
                       </div>
                     </td>
                   </>

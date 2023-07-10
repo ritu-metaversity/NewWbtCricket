@@ -44,9 +44,9 @@ import { GiHamburgerMenu } from "react-icons/gi"
 import { MdManageAccounts } from "react-icons/md"
 import { ImPlay3 } from "react-icons/im"
 import { BsTrophyFill, BsFillMenuButtonFill } from "react-icons/bs"
-import { GrCurrency } from "react-icons/gr"
+
 import { BiMoneyWithdraw } from "react-icons/bi"
-import { MdOutlineRealEstateAgent, MdWorkHistory, MdSportsScore } from "react-icons/md"
+import { MdOutlineRealEstateAgent, MdWorkHistory, MdSportsScore, MdLegendToggle } from "react-icons/md"
 import { HiOutlineLogout } from "react-icons/hi"
 
 const data = {
@@ -154,9 +154,18 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
 
 
             <Box sx={{ display: 'flex', alignItems: 'center', pl: "1rem", flexDirection: 'column' }}>
-              <Typography component="p">
-                {userid}
-              </Typography>
+              <Link to="/" >
+
+                <Typography component="p">
+                  <div className="logo-name">
+
+
+                    <img src={appData?.logo} alt="Logo" style={{ width: "44%" }} />
+
+                    {userid}
+                  </div>
+                </Typography>
+              </Link>
               <Typography component="p" sx={{ display: { xs: "none", md: "block" } }}  >
                 chips: <Typography component={'span'}>{wallet.balance}</Typography>
               </Typography>
@@ -209,7 +218,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
               <li > <Link to="/profile" onClick={() => setDrawerOpen(false)}><p><span><MdManageAccounts /></span>PROFILE</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/in-play" onClick={() => setDrawerOpen(false)}><p><span><ImPlay3 /></span>IN PLAY</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/sports" onClick={() => setDrawerOpen(false)}><p><span><BsTrophyFill /></span>SPORTS</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/deposit" onClick={() => setDrawerOpen(false)}><p><span><GrCurrency /></span>LADGER</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/deposit" onClick={() => setDrawerOpen(false)}><p><span><MdLegendToggle /></span>LADGER</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/deposit" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw style={{ rotate: "180deg" }} /></span>DEPOSIT</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/withdraw" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw /></span>WITHDRAW</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/account-summary" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>ACCOUNT SUMMARY</p>  <span><FaArrowRight /></span>   </Link></li>

@@ -20,7 +20,7 @@
     align-items: center;
     justify-content: center;
     align-items: center;
-    margin-left: 55px;
+    margin-left: 23px;
 
 }
 
@@ -31,7 +31,7 @@
 }
 
 .bookmakerheader {
-    margin-left: 56px;
+    margin-left: 22px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -39,20 +39,16 @@
 }
 
 ._child {
-    margin-left: 55px;
+    margin-left: 19px;
     font-weight: bold;
     font-size: 14px;
 }
 
 @media screen and (max-width:580px) {
     .sessionPart {
-        margin-left: 15px;
+        margin-left: 0px;
     }
 
-    .sessionchild {
-        margin-left: 15px;
-
-    }
 
     .bookmakerheader {
         justify-content: flex-start;
@@ -62,5 +58,31 @@
 
     ._child {
         margin-left: 0px;
+    }
+}
+
+.desktopSize {
+    width: 10%;
+}
+
+.desktoptableheadSize {
+    width: 30%;
+}
+
+
+@media screen and (max-width:700px) {
+    .desktop {
+        display: none;
+
+
+    }
+
+    .desktopSize {
+
+        width: 15%;
+    }
+
+    .desktoptableheadSize {
+        width: 55%;
     }
 }

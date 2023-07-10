@@ -79,14 +79,14 @@ export const SessionOddsGrid: FC<Props> = ({
 
             <th className="bet-place-tbl-th run-pos-rate-amt-run-mod-color sess_row_head1">
               {/* <svg data-testid="ArrowDropUpIcon"></svg>/ */}
-              <div className="sessionPart">
+              <div className="bookmakerheader">
 
                 <ArrowDropUpIcon onClick={handleChange} style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)" }} />
 
-                <div className="sessionchild">
-                  <span>
-                    SESSION
-                  </span>
+                <div className="_child">
+
+                  SESSION
+
 
                 </div>
 
@@ -131,7 +131,7 @@ export const SessionOddsGrid: FC<Props> = ({
                 <td className="bet-place-tbl-td" style={{ textAlign: "left" }}>
                   <div>
                     <div
-                      style={{ fontWeight: 750, overflow: "hidden", height: 20 }}
+                      style={{ fontWeight: 750, overflow: "hidden", height: 20, fontSize: "14px" }}
                     >
                       {item?.nation}
                     </div>
@@ -195,7 +195,7 @@ export const SessionOddsGrid: FC<Props> = ({
                     )
                   }
                 >
-                  <div>{item.l1}</div>
+                  <div style={{ fontWeight: 750 }}>{item.l1}</div>
                   <div style={{ fontSize: 10 }}>{item.ls1}</div>
                 </td>
               </tr>

@@ -1,12 +1,17 @@
-.main_container{
+.main_container {
     width: 85% !important;
     margin: auto !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-5\.5.MuiGrid-grid-md-3\.7.css-1f8rchh-MuiGrid-root {
     width: 47% !important;
     max-width: 47% !important;
     min-width: 47% !important;
 }
+
 .css-a91je7-MuiPaper-root-MuiCard-root {
     background-color: unset !important;
     color: unset !important;
@@ -17,10 +22,87 @@
     width: unset !important;
     height: unset !important;
 }
+
 .css-1bfukrz-MuiCardMedia-root {
     width: 100px !important;
 }
-.css-h93ljk-MuiTypography-root{
+
+.css-h93ljk-MuiTypography-root {
     font-size: 14px !important;
     margin-bottom: -20px !important;
+}
+
+.mid_container {
+    display: flex;
+    /* width: 70%; */
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 7px 100px;
+}
+
+/* 
+.single_container {
+    width: 50%;
+    padding: 60px;
+} */
+
+
+.img_container {
+    width: 30%;
+}
+
+.single_container {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex: unset !important
+}
+
+@media screen and (min-width:300px) and (max-width:500px) {
+    .img_container {
+        width: 100%;
+    }
+
+    .mid_container {
+        display: flex;
+        width: 84%;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 1px 50px;
+    }
+}
+
+@media screen and (min-width:500px) and (max-width:700px) {
+    .img_container {
+        width: 90%;
+    }
+
+    .mid_container {
+        display: flex;
+        width: 84%;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 1px 65px;
+    }
+}
+
+@media screen and (min-width:700px) and (max-width:1000px) {
+    .img_container {
+        width: 70%;
+    }
+
+    .mid_container {
+        display: flex;
+        width: 84%;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 1px 80px;
+    }
 }

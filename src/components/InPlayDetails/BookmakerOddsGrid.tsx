@@ -76,8 +76,8 @@ const BookMakerOddsgrid: FC<{
             <tr>
 
               <th
-                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color"
-                style={{ width: "55%" }}
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktoptableheadSize"
+
               >
                 <div className="bookmakerheader">
 
@@ -93,20 +93,44 @@ const BookMakerOddsgrid: FC<{
 
               </th>
               <th
-                className="bet-place-tbl-th lagai-box-color"
-                style={{ width: "15%" }}
+                className="bet-place-tbl-th lagai-box-color desktop desktopSize"
+
+              >
+
+              </th>
+              <th
+                className="bet-place-tbl-th lagai-box-color desktop desktopSize"
+
+              >
+
+              </th>
+              <th
+                className="bet-place-tbl-th lagai-box-color desktopSize"
+
               >
                 LAGAI
               </th>
               <th
-                className="bet-place-tbl-th khai-box-color"
-                style={{ width: "15%" }}
+                className="bet-place-tbl-th khai-box-color desktopSize"
+
               >
                 KHAI
               </th>
               <th
-                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color"
-                style={{ width: "15%" }}
+                className="bet-place-tbl-th khai-box-color desktop desktopSize"
+
+              >
+
+              </th>
+              <th
+                className="bet-place-tbl-th khai-box-color desktop desktopSize"
+
+              >
+
+              </th>
+              <th
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktopSize"
+
               >
                 POS.
               </th>
@@ -130,7 +154,23 @@ const BookMakerOddsgrid: FC<{
                   {console.log(item, "kuhgbjkiuytfgcvbnj")}
                 </td>
 
-                <td className="bet-place-tbl-td cursor-pointer " style={{
+                <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
+                  fontSize: "16px",
+                  fontWeight: 750,
+                  color: "#5957ff"
+                }}
+                >
+                  <span>0</span>
+                </td>
+                <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
+                  fontSize: "16px",
+                  fontWeight: 750,
+                  color: "#5957ff"
+                }}
+                >
+                  <span>0</span>
+                </td>
+                <td className="bet-place-tbl-td cursor-pointer desktopSize" style={{
                   fontSize: "16px",
                   fontWeight: 750,
                   color: "#5957ff"
@@ -153,7 +193,7 @@ const BookMakerOddsgrid: FC<{
                   }>
                   <span>{item.b1}</span>
                 </td>
-                <td className="bet-place-tbl-td cursor-pointer " style={{
+                <td className="bet-place-tbl-td cursor-pointer desktopSize" style={{
                   fontSize: "16px",
                   fontWeight: 750,
                   color: "#ff5c72"
@@ -174,8 +214,22 @@ const BookMakerOddsgrid: FC<{
                 }>
                   <span>{item.l1}</span>
                 </td>
+                <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
+                  fontSize: "16px",
+                  fontWeight: 750,
+                  color: "#ff5c72"
+                }} >
+                  <span>0</span>
+                </td>
+                <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
+                  fontSize: "16px",
+                  fontWeight: 750,
+                  color: "#ff5c72"
+                }} >
+                  <span>0</span>
+                </td>
                 <td
-                  className="bet-place-tbl-td"
+                  className="bet-place-tbl-td desktopSize"
                   // style={{ color: "rgb(81, 153, 230)" }}
                   style={{
                     fontSize: "16px",
