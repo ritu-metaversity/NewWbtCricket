@@ -225,14 +225,8 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
   const getButtondata = async () => {
     const { response } = await userServices.getButtonValue();
     if (response) {
-      const getValue = (num: any) => {
-        if ((num / 1000000) >= 1) {return num / 1000000 + 'M';}
-        else if ((num / 1000) >= 1) {return num / 1000 + 'K';}
-        else {return num};
-      }
-      const data:any = {};
-      for (let x in response?.data) data[x] = getValue(response.data[x]);
-      setButtonData(data);
+
+      setButtonData(response.data);
     }
   };
 

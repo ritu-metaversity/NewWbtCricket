@@ -40,7 +40,7 @@ const SetButtonValue = () => {
       setLoading && setLoading((prev) => ({ ...prev, getButtonValue: false }));
     };
     getButtonValue();
-    return () => {};
+    return () => { };
   }, [setLoading]);
 
   const handleClick = async (e: any) => {
@@ -51,7 +51,7 @@ const SetButtonValue = () => {
   return (
     <Box mx="auto" my={{ sx: 0, md: 4 }}>
       <TitleStyled variant="h4">Change Button Value</TitleStyled>
-      <Grid container rowGap={3} my={3}>
+      <Grid container rowGap={3} my={3} style={{ padding: "0px 40px 0px 0px" }}>
         {Object.keys(buttonValue).map((item, index) => {
           return (
             <>

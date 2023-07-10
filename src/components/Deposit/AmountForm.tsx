@@ -5,7 +5,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { Box, Typography } from "@mui/material";
 import axios from "axios";
 // import { colorHex } from "../../utils/constants";
-
+import "./Deposite.css"
 let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 const buttonAmountArr = [100, 500, 1000, 5000];
 interface Props {
@@ -87,9 +87,11 @@ export function AmountForm({ amount, setAmount }: Props) {
             borderRadius={"8px"}
             height={46}
             display="flex"
+            style={{ width: "50%" }}
           >
             <RemoveIcon onClick={handleMinusClick} />
             <StyledAmountInput
+
               type="text"
               placeholder="Amount"
               value={amount || ""}
@@ -98,7 +100,7 @@ export function AmountForm({ amount, setAmount }: Props) {
             <AddIcon onClick={handlePlusClick} />
           </Box>
         </Box>
-        <Box display="flex">
+        <Box display="flex" style={{ minWidth: "100px" }}>
           {stackValue.map((value: any, index) => (
             <StyledButtonSmall
               key={`${value.key}-button-${value.value}-${index}`}

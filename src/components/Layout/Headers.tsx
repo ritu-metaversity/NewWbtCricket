@@ -148,7 +148,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginRight: '20px', width: '20%' }}>
             <Link to={"/"} className="logoimg" >
-              <img src={appData?.logo} alt="Logo" style={{ width: "44%" }} />
+              <img src={appData?.logo} alt="Logo" className="desktop_logogogo" />
 
             </Link>
 
@@ -160,7 +160,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
                   <div className="logo-name">
 
 
-                    <img src={appData?.logo} alt="Logo" style={{ width: "44%" }} />
+                    <img src={appData?.logo} alt="Logo" className="mobile_logogoggo" style={{ width: "60%" }} />
 
                     {userid}
                   </div>
@@ -218,7 +218,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
               <li > <Link to="/profile" onClick={() => setDrawerOpen(false)}><p><span><MdManageAccounts /></span>PROFILE</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/in-play" onClick={() => setDrawerOpen(false)}><p><span><ImPlay3 /></span>IN PLAY</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/sports" onClick={() => setDrawerOpen(false)}><p><span><BsTrophyFill /></span>SPORTS</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/deposit" onClick={() => setDrawerOpen(false)}><p><span><MdLegendToggle /></span>LADGER</p>  <span><FaArrowRight /></span>   </Link></li>
+              {/* <li > <Link to="/account-summary" onClick={() => setDrawerOpen(false)}><p><span><MdLegendToggle /></span>LADGER</p>  <span><FaArrowRight /></span>   </Link></li> */}
               <li > <Link to="/deposit" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw style={{ rotate: "180deg" }} /></span>DEPOSIT</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/withdraw" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw /></span>WITHDRAW</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/account-summary" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>ACCOUNT SUMMARY</p>  <span><FaArrowRight /></span>   </Link></li>

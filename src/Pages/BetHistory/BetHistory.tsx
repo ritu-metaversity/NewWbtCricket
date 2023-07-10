@@ -4,17 +4,17 @@ import { userServices } from "../../utils/api/user/services";
 import StickyTable from "../../components/custom/TableWithoutPagination";
 import TablePagination from "@mui/material/TablePagination";
 import { LoaderContext } from "../../App";
-
+import "./BetHistory.css"
 export interface Column {
   id:
-    | "sportName"
-    | "eventName"
-    | "marketname"
-    | "nation"
-    | "rate"
-    | "amount"
-    | "time"
-    | string;
+  | "sportName"
+  | "eventName"
+  | "marketname"
+  | "nation"
+  | "rate"
+  | "amount"
+  | "time"
+  | string;
   label: string;
   minWidth?: number;
   align?: "right" | "center";
@@ -120,7 +120,7 @@ const BetHistory = () => {
 
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
-      <form style={{ display: "inline-flex", padding: "10px" }}>
+      <form style={{ display: "inline-flex", padding: "10px", gap: "3px" }}>
         <input
           type="radio"
           id="all"
@@ -153,12 +153,13 @@ const BetHistory = () => {
         <br />
 
         <input
-          style={{ marginLeft: "30px" }}
+
           type="radio"
           id="all"
           checked={formData.isDeleted === "false"}
           name="isDeleted"
           value="false"
+          className="seprate_data"
           onChange={handleChange}
         />
         <label htmlFor="all">Matched</label>
@@ -173,6 +174,8 @@ const BetHistory = () => {
         />
         <label htmlFor="back">Deleted</label>
         <br />
+
+
       </form>
       <StickyTable
         // rows={accountStatement}

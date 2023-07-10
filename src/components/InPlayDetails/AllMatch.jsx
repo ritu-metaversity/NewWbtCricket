@@ -26,6 +26,11 @@ const stylee = {
     px: 4,
     pb: 3,
 };
+const getValue = (num) => {
+    if ((num / 1000000) >= 1) { return num / 1000000 + 'M'; }
+    else if ((num / 1000) >= 1) { return num / 1000 + 'K'; }
+    else { return num };
+}
 const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
     const [betRecord, setBetRecord] = useState("");
     const [Show, setShow] = useState(false);
@@ -316,7 +321,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
                                                                 setBet((o) =>
                                                                     o ? { ...o, stake: item } : null
                                                                 )
-                                                            }> {item}</button>
+                                                            }> {getValue(item)}</button>
                                                     </td>
                                                 )}
 

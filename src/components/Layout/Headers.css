@@ -18,3 +18,21 @@
     gap: 20px;
     width: 150px;
 }
+
+.desktop_logogogo {
+    width: 70%;
+}
+
+@media screen and (min-width: 900px) {
+    .mobile_logogoggo {
+        display: none;
+    }
+
+}
+
+@media screen and (min-width: 900px) and (max-width: 1200px) {
+    .desktop_logogogo {
+        width: 100px;
+    }
+
+}

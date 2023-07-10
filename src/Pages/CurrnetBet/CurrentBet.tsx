@@ -8,14 +8,14 @@ import { LoaderContext } from "../../App";
 
 export interface Column {
   id:
-    | "sportName"
-    | "eventName"
-    | "marketname"
-    | "nation"
-    | "rate"
-    | "amount"
-    | "time"
-    | string;
+  | "sportName"
+  | "eventName"
+  | "marketname"
+  | "nation"
+  | "rate"
+  | "amount"
+  | "time"
+  | string;
   label: string;
   minWidth?: number;
   align?: "right" | "center";
@@ -104,7 +104,7 @@ const CurrentBet = () => {
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
       <BacktoMenuButton />
-      <form style={{ display: "inline-flex", padding: "10px" }}>
+      <form style={{ display: "inline-flex", padding: "10px", gap: "20px" }}>
         <input
           type="radio"
           id="all"
