@@ -26,7 +26,7 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
     const data = {
       userId,
       password,
-      appUrl: host === "localhost" ? "localhost" : "localhost",
+      appUrl: host === "localhost" ? "localhost" : host,
     };
     const { response } = await authServices.login(data);
     if (response?.token) {
