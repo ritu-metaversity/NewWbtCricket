@@ -1,11 +1,12 @@
-import { styled, Tab, Tabs, tabClasses, Typography } from "@mui/material";
+import { styled, Tab, Tabs, tabClasses, Typography, Modal } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { casinoService } from "../../utils/api/casino/service";
 import BacktoMenuButton from "../BacktoMenuButton";
 import { CasinoIcon, StyledGameThumb } from "./StyledComponent";
-
+import { RxCross2 } from 'react-icons/rx'
+import "./Casion.css"
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: "20px",
   marginRight: "10px",
@@ -36,7 +37,8 @@ const Casino = () => {
   >([]);
 
   const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
-
+  const [trueee, setTrueee] = useState(false);
+  const [casionId, setCasionId] = useState("")
   const nav = useNavigate();
   const getCasinoList = async () => {
     const isSignedIn = localStorage.getItem("token");
@@ -51,6 +53,7 @@ const Casino = () => {
       setCasinoList([]);
     }
   };
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     getCasinoList();
@@ -73,8 +76,23 @@ const Casino = () => {
       }
     };
     getCasinoTypes();
-    return () => {};
+    return () => { };
   }, []);
+  const handleChangeaa = (val: any) => {
+    // console.log(val)
+    // /m/casino/:id
+    if (
+      token
+    ) {
+      setCasionId(val)
+      setTrueee(true)
+      // navigate(`/m/casino/${val}`);
+    } else {
+      // navigate("/m/login");
+      // setCasionId(val)
+      // setTrueee(true)
+    }
+  };
 
   return (
     <>
@@ -136,13 +154,48 @@ const Casino = () => {
               }}
               m="auto"
             >
-              <Link to={"/casino/" + item.gameId}>
-                <StyledGameThumb src={item.imageUrl} alt="thumb" />{" "}
-              </Link>
+              {/* <Link to={"/casino/" + item.gameId}> */}
+              <StyledGameThumb src={item.imageUrl} alt="thumb" onClick={() => handleChangeaa(item.gameId)} />{" "}
+              {/* </Link> */}
             </Box>
           ))}
         </Box>
       </Box>
+      <Modal
+        open={trueee}
+        onClose={() => setTrueee(false)}
+        style={{ padding: "10px" }}
+        // m="xl"
+        className="slot_game"
+      >
+        {/* <Box className="bet-box"> */}
+
+        <>
+          <RxCross2 className="modal_CrosssIcon" onClick={() => setTrueee(false)} />
+          <iframe
+            src={`https://d2.fawk.app/#/splash-screen/${token}/9482/?opentable=${casionId}`}
+            // height="82vh"
+            // className="mobile_if"
+            width="100%"
+            style={{ minHeight: "100vh" }}
+            title="mobile"
+            className="for_Desktop"
+            allowFullScreen={true}
+          ></iframe>
+          <iframe
+            src={`https://m2.fawk.app/#/splash-screen/${token}/9482/?opentable=${casionId}`}
+            // height="82vh"
+            // className="mobile_if"
+            width="100%"
+            style={{ minHeight: "100vh" }}
+            title="mobile"
+            className="For_mobile"
+            allowFullScreen={true}
+
+          ></iframe>
+        </>
+        {/* </Box> */}
+      </Modal>
     </>
   );
 };

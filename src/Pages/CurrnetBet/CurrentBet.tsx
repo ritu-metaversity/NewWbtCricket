@@ -24,8 +24,19 @@ export interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: "sportName", label: "Sports", minWidth: 30, align: "center" },
-  { id: "eventName", label: "Event Name", align: "center", minWidth: 120 },
+  {
+    id: "sportName",
+    label: "Sports",
+    minWidth: 30,
+    align:
+      "center"
+  },
+  {
+    id: "eventName",
+    label: "Event Name",
+    align: "center",
+    minWidth: 120
+  },
   {
     id: "marketname",
     label: "Market Name",
@@ -42,10 +53,20 @@ const columns: readonly Column[] = [
     id: "rate",
     label: "User Rate",
     minWidth: 20,
-    align: "right",
+    align: "center",
   },
-  { id: "amount", label: "Amount", align: "right", minWidth: 120 },
-  { id: "time", label: "Place Date", align: "center", minWidth: 120 },
+  {
+    id: "amount",
+    label: "Amount",
+    align: "center",
+    minWidth: 120
+  },
+  {
+    id: "time",
+    label: "Place Date",
+    align: "center",
+    minWidth: 120
+  },
 ];
 
 const CurrentBet = () => {

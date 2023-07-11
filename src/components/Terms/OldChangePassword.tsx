@@ -26,7 +26,9 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
 
   const handleClick = async (e: any) => {
     if (confirmPassword !== newPassword) {
-      return snackBarUtil.error("Password does not match!");
+      return snackBarUtil.error("New Password And Confirm Password does not match!");
+    } else if (oldPassword === "" && confirmPassword === "" && newPassword === "") {
+      return snackBarUtil.error("Please enter all the mandatory details");
     }
     const userid = localStorage.getItem("userid") || "";
     const token = localStorage.getItem("token") || "";
@@ -106,7 +108,7 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
           size="small"
           type="password"
           margin="dense"
-          label="Enter New Password"
+          label="Confirm New Password"
           fullWidth
           name="confirmPassword"
           value={confirmPassword}

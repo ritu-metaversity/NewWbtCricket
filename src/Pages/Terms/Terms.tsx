@@ -46,7 +46,9 @@ const Terms = () => {
             <span style={{ fontSize: 20 }}>
               <em style={{ boxSizing: "border-box" }}>
                 <strong>
-                  <a className="btn btn-secondary btn-lg" href="#">
+                  <a
+                    style={{ backgroundColor: "#7b7c7f" }}
+                    className="btn btn-secondary btn-lg" href="#">
                     <span style={{ color: "#000000" }}>Hindi</span>
                   </a>
                 </strong>
@@ -57,6 +59,7 @@ const Terms = () => {
               <em>
                 <strong>
                   <a
+                    style={{ backgroundColor: "#7b7c7f" }}
                     className="btn btn-secondary btn-lg"
                     href="#english-rules-btns"
                     id="hindi-rules-btns"
@@ -1440,6 +1443,7 @@ const Terms = () => {
               <em>
                 <strong>
                   <a
+                    style={{ backgroundColor: "#7b7c7f" }}
                     className="btn btn-secondary btn-lg"
                     href="#hindi-rules-btns"
                     id="english-rules-btns"

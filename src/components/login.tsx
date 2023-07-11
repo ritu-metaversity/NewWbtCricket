@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { authServices } from "../utils/api/auth/services";
 import "./Login.css"
 import LoginIcon from '@mui/icons-material/Login';
+import snackBarUtil from "./Layout/snackBarUtil";
 
 interface Props {
   setIsSignedIn: Dispatch<SetStateAction<boolean>>;
@@ -23,20 +24,27 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
   const [password, setPassword] = useState("");
   const host = window.location.hostname;
   const handleClick = async () => {
-    const data = {
-      userId,
-      password,
-      appUrl: host === "localhost" ? "localhost" : host,
-    };
-    const { response } = await authServices.login(data);
-    if (response?.token) {
-      localStorage.setItem("token", response?.token);
-      localStorage.setItem("userid", response?.userId);
-      if (response.passwordtype === "old") {
-        navigate("/OldChangePassword", { replace: true });
-      } else {
-        setIsSignedIn(true);
-        navigate("/terms", { replace: true });
+
+    if (password === "" && userId === "") {
+      return snackBarUtil.error("Please enter all the mandatory details");
+    } else {
+
+
+      const data = {
+        userId,
+        password,
+        appUrl: host === "localhost" ? "localhost" : host,
+      };
+      const { response } = await authServices.login(data);
+      if (response?.token) {
+        localStorage.setItem("token", response?.token);
+        localStorage.setItem("userid", response?.userId);
+        if (response.passwordtype === "old") {
+          navigate("/OldChangePassword", { replace: true });
+        } else {
+          setIsSignedIn(true);
+          navigate("/terms", { replace: true });
+        }
       }
     }
   };
@@ -51,7 +59,7 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
   return (
     <div className="loginBackground new-login-content ">
       <div className="logo-img">
-        <img src="https://bmxpro.in/static/media/poplogin1609.320f8bee.png" alt="" />
+        <img src="https://bmxpro.in/static/media/poplogin1609.320f8bee.png" alt="" className="logoimgggggg" />
       </div>
       <div className="login-form">
         <span className="login-text">Please Login To Continue</span>

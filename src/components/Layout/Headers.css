@@ -17,6 +17,7 @@
     justify-content: center;
     gap: 20px;
     width: 150px;
+    margin-left: -10px;
 }
 
 .desktop_logogogo {
@@ -34,5 +35,10 @@
     .desktop_logogogo {
         width: 100px;
     }
+
+}
+
+.css-1yo9slo-MuiToolbar-root {
+    padding-left: unset;
 
 }

@@ -19,32 +19,43 @@ interface RegisterInterface {
 
 const Register = () => {
   const [open, setOpen] = useState(false);
-  const [newCredAfterRegister, setNewCredAfterRegister] =useState<RegisterInterface | null>(null);
+  const [newCredAfterRegister, setNewCredAfterRegister] = useState<RegisterInterface | null>(null);
   const navigate = useNavigate();
   const [register, setRegistration] = useState<any>({
     username: "",
     password: "",
     mobile: "",
+    confirmPassword: "",
     appUrl: "",
   });
   //   const [password, setPassword] = useState("");
+  const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
 
   const handleClick = async () => {
-    if (register.password !== register.confirmPassword) {
-      snackBarUtil.error("Password does not match!!");
-      return;
-    }
-    const { response } = await authServices.registeration({
-      ...register,
-      userId: register.username,
-    });
 
-    if (response?.status) {
-      snackBarUtil.success(response.message);
-      setOpen(true);
-      setNewCredAfterRegister(response);
-      // navigate("/sign-in", { replace: true });
+    if (register.username === "" && register.mobile === "" && register.password === "" && register.confirmPassword === "") {
+      return snackBarUtil.error("Please enter all the mandatory details");
+    } else if (register?.password !== "" && register?.mobile === "" && register?.username !== "" && register?.confirmPassword !== "") {
+      return snackBarUtil.error(" Please provide Mobile no.");
+    } else if (register?.password === "" && register?.mobile !== "" && register?.username !== "" && register?.confirmPassword !== "") {
+      return snackBarUtil.error("Please provide password ");
+    } else if (register?.password !== "" && register?.mobile !== "" && register?.username !== "" && register?.confirmPassword === "") {
+      return snackBarUtil.error("Please provide Confirm password");
+    } else if (register.password !== register.confirmPassword) {
+      return snackBarUtil.error("Password does not match!!");
     } else {
+      const { response } = await authServices.registeration({
+        ...register,
+        userId: register.username,
+      });
+
+      if (response?.status) {
+        snackBarUtil.success(response.message);
+        setOpen(true);
+        setNewCredAfterRegister(response);
+        // navigate("/sign-in", { replace: true });
+      } else {
+      }
     }
   };
   const handleChange = (e: any) => {
@@ -111,9 +122,13 @@ const Register = () => {
         required
         name="mobile"
         label="Mobile No"
+        type="number"
         value={register?.mobile}
         onChange={handleChange}
         fullWidth
+        onKeyDown={(e) =>
+          symbolsArrMail.includes(e.key) && e.preventDefault()
+        }
       />
       <Box textAlign={"left"}>
         <TextField

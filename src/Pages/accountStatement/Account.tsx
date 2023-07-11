@@ -151,7 +151,7 @@ const Account = () => {
             columns={columns}
             title={""}
           /> */}
-          <div className="content-top-padding row" style={{ paddingBottom: 15 }}>
+          <div className="content-top-padding" style={{ padding: "20px 20px" }}>
             <table className="" style={{ width: "100%" }}>
               <thead>
                 <tr>
@@ -213,7 +213,7 @@ const Account = () => {
         </>
       ) : (
         !loading.getListdata && (
-          <Typography mt="15vh" variant="h4" color="error">
+          <Typography variant="h4" color="error">
             {"No Data Found"}
           </Typography>
         )

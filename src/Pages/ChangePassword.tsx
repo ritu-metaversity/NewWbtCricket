@@ -25,7 +25,9 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
   const { setLoading } = useContext(LoaderContext);
   const handleClick = async (e: any) => {
     if (confirmPassword !== newPassword) {
-      return snackBarUtil.error("Password does not match!");
+      return snackBarUtil.error("New Password And Confirm Password does not match!");
+    } else if (oldPassword === "" && confirmPassword === "" && newPassword === "") {
+      return snackBarUtil.error("Please enter all the mandatory details");
     }
     setLoading && setLoading((prev) => ({ ...prev, handleClick: true }));
     const { response } = await userServices.changePassword({
@@ -98,7 +100,7 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
         <TextField
           size="small"
           margin="dense"
-          label="Enter New Password"
+          label="Confirm New Password"
           fullWidth
           name="confirmPassword"
           value={confirmPassword}
