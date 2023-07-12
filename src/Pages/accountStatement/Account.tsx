@@ -105,6 +105,9 @@ const Account = () => {
       if (response?.data) {
         setAccountStatement(response.data.market);
         setCount(response.data.totalRecord);
+      } else {
+        setAccountStatement([]);
+
       }
       setLoading && setLoading((prev) => ({ ...prev, getListdata: false }));
     };
