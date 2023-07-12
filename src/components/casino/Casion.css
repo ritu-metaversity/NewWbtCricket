@@ -27,3 +27,10 @@
     font-size: 21px;
     cursor: pointer;
 }
+.casinoName{
+    background-color: rgb(123, 124, 127);
+    margin-top: -4px;
+    border-radius: 0px 0px 3px 3px;
+    font-weight: 600;
+    color: whitesmoke;
+}

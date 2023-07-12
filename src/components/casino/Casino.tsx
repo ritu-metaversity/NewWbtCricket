@@ -97,7 +97,7 @@ const Casino = () => {
   return (
     <>
       <BacktoMenuButton />
-      {casinoTypes?.length > 0 && (
+      {/* {casinoTypes?.length > 0 && (
         <Tabs
           variant="scrollable"
           scrollButtons={true}
@@ -129,7 +129,7 @@ const Casino = () => {
             />
           ))}
         </Tabs>
-      )}
+      )} */}
       <Box
       // bgcolor={colorHex.bg1}
       >
@@ -156,6 +156,7 @@ const Casino = () => {
             >
               {/* <Link to={"/casino/" + item.gameId}> */}
               <StyledGameThumb src={item.imageUrl} alt="thumb" onClick={() => handleChangeaa(item.gameId)} />{" "}
+              <div className="casinoName"> {item?.gameCode}</div>
               {/* </Link> */}
             </Box>
           ))}

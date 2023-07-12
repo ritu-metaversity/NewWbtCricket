@@ -138,6 +138,11 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const matches = useMediaQuery('(min-width:500px)');
 
+  useEffect(() => {
+    setAnchorEl(null)
+
+  }, [matches])
+
   return (
     <>
       <AppBar

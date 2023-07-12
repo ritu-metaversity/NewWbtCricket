@@ -267,62 +267,60 @@ const Complete = () => {
           <span className="white">MY ACCOUNT STATEMENT ({pagination?.dataList?.length})</span>
         </div>
       </div>
-      <div className="row date_picker" style={{ textAlign: "center", marginTop: 10 }}>
-        <div
-          className="col-12 col-sm-6 col-md-4 col-lg-4"
-          style={{ marginBottom: 10 }}
-        >
-          <div className="DateRangePicker DateRangePicker_1">
-            <Space direction="horizontal" >
-              <DatePicker
-                className="startDate"
-                defaultValue={dayjs(startDate)}
-                format={dateFormat}
+      {/* <div className="row date_picker" style={{ textAlign: "center", marginTop: 10 }}> */}
+      <div
+        className="date_and_data"
+      >
+        <div className="DateRangePicker DateRangePicker_1">
+          <Space direction="horizontal" >
+            <DatePicker
+              className="startDate"
+              defaultValue={dayjs(startDate)}
+              format={dateFormat}
 
-                onChange={StartDateValue}
-                disabledDate={(d) =>
-                  !d ||
-                  d.isBefore(dayjs().subtract(2, "month")) ||
-                  d.isAfter(dayjs())
-                }
-              />
-              <DatePicker
-                className="endDate"
-                defaultValue={dayjs(endDate)}
+              onChange={StartDateValue}
+              disabledDate={(d) =>
+                !d ||
+                d.isBefore(dayjs().subtract(2, "month")) ||
+                d.isAfter(dayjs())
+              }
+            />
+            <DatePicker
+              className="endDate"
+              defaultValue={dayjs(endDate)}
 
-                format={dateFormat}
-                onChange={EndDateValue}
-                disabledDate={(d) =>
-                  !d ||
-                  d.isBefore(dayjs().subtract(2, "month")) ||
-                  d.isAfter(dayjs())
-                }
-              />
-            </Space>
-          </div>
+              format={dateFormat}
+              onChange={EndDateValue}
+              disabledDate={(d) =>
+                !d ||
+                d.isBefore(dayjs().subtract(2, "month")) ||
+                d.isAfter(dayjs())
+              }
+            />
+          </Space>
         </div>
-        <div className="col-12 col-sm-6 col-md-6 col-lg-6">
-          <div role="group" className="btn-group">
-            <button type="button" className="all btn btn-primary btn-lg" onClick={() => handleOption("1")} >
-              All
-            </button>
-            <button type="button" className="btn btn-primary btn-lg" onClick={() => handleOption("2")}>
-              P&amp;L
-            </button>
-            <button type="button" className="btn btn-primary btn-lg">
-              PDC
-            </button>
-            <button type="button" className="account_btn btn btn-primary btn-lg" onClick={() => handleOption("3")} >
-              Account
-            </button>
-          </div>
+        <div role="group" className="btn-group">
+          <button type="button" className="all btn btn-primary btn-lg" onClick={() => handleOption("1")} >
+            All
+          </button>
+          <button type="button" className="btn btn-primary btn-lg" onClick={() => handleOption("2")}>
+            P&amp;L
+          </button>
+          <button type="button" className="btn btn-primary btn-lg">
+            PDC
+          </button>
+          <button type="button" className="account_btn btn btn-primary btn-lg" onClick={() => handleOption("3")} >
+            Account
+          </button>
         </div>
+        {/* </div> */}
+
       </div >
       <div className="content-top-padding row" style={{ paddingBottom: 15 }}>
         <table className="" style={{ width: "100%" }}>
           <thead>
             <tr>
-              <th className="ldg-tbl-th match-box-color">Sr no.</th>
+              <th className="ldg-tbl-th match-box-color" style={{ whiteSpace: "nowrap" }}>Sr no.</th>
               <th className="ldg-tbl-th match-box-color">DATE</th>
               <th className="ldg-tbl-th match-box-color" style={{ width: "40%" }}>
                 Remark
@@ -334,9 +332,10 @@ const Complete = () => {
               {/* <th className="ldg-tbl-th match-box-color">BALANCE</th> */}
             </tr>
           </thead>
-          <tbody>
-            {profitandLossData?.length > 0 ?
-              profitandLossData?.map((item: any) => {
+          {profitandLossData?.length > 0 ?
+            <tbody>
+
+              {profitandLossData?.map((item: any) => {
                 return (<tr>
                   <>
                     <td className="ldg-tbl-td match-value-box-color" style={{ textAlign: "left" }}>{item?.sno}</td>
@@ -349,20 +348,24 @@ const Complete = () => {
                   </>
                 </tr>
                 )
-              }) :
+              })}
 
 
+            </tbody>
+            :
+
+
+            <tbody>
 
               <tr>
-                <>
-                  <td className="ldg-tbl-td match-value-box-color" style={{ textAlign: "left" }}>No data found</td>
-                </>
+                <td colSpan={5}>
+
+                  No data found
+                </td>
               </tr>
+            </tbody>
 
-            }
-
-
-          </tbody>
+          }
         </table>
       </div>
 

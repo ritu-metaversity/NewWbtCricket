@@ -63,6 +63,8 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
       sx={{
         mx: "auto",
         maxWidth: "sm",
+        overflow: "hidden",
+        overflowY: "scroll",
       }}
     >
       <Paper
@@ -74,6 +76,8 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
           display: "flex",
           alignItems: "center",
           flexDirection: "column",
+          overflow: "hidden",
+          overflowY: "scroll",
         }}
       >
         <LockPersonIcon sx={{ fontSize: "80px" }} />

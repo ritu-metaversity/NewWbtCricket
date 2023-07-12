@@ -267,3 +267,14 @@ button.account_btn.btn.btn-primary.btn-lg {
 .MuiBox-root.css-87072h {
     overflow-x: hidden;
 }
+
+.date_and_data {
+
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}

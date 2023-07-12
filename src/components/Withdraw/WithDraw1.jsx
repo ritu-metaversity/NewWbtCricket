@@ -235,7 +235,7 @@ const WithDraw1 = () => {
                 setIsLoading(false);
                 return false;
             }
-        } else if (withType == "UPI") {
+        } else if (withType === "UPI") {
             console.log("helo");
             if (
                 withCoinValue === "" ||
