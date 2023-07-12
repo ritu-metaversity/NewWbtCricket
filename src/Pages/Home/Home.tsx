@@ -59,7 +59,7 @@ const ActionCardPropsList = [
     cardForwardHref: "/in-play",
   },
   {
-    cardTitle: "Completed Games",
+    cardTitle: "Statement",
     cardDesc: "matches that are completed and the results are declared",
     cardImageSrc: "/complete2.png",
     cardForwardHref: "/complete-games",

@@ -174,7 +174,7 @@ const Complete = () => {
       type: vl
     }
 
-    axios.post("http://api.247365.exchange/admin-new-apis/enduser/account-statement",
+    axios.post("https://api.247365.exchange/admin-new-apis/enduser/account-statement",
       data,
       { headers: { Authorization: `Bearer ${token}` } }
     )
@@ -195,7 +195,7 @@ const Complete = () => {
       type: "1"
     }
 
-    axios.post("http://api.247365.exchange/admin-new-apis/enduser/account-statement",
+    axios.post("https://api.247365.exchange/admin-new-apis/enduser/account-statement",
       data,
       { headers: { Authorization: `Bearer ${token}` } }
     )
