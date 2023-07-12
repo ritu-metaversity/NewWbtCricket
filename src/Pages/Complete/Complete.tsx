@@ -123,7 +123,7 @@ const Complete = () => {
   const [endDate, setEndDate] = useState(time);
   const [profitandLossData, setProfitandLossData] = useState([]);
   const [pagination, setPagination] = useState([] as any);
-  const [paginationAddNo, setPaginationAddNo] = useState(1);
+  const [paginationAddNo, setPaginationAddNo] = useState(0);
 
   console.log(startDate, endDate, "endDateendDateendDateendDateendDate")
 
@@ -383,7 +383,7 @@ const Complete = () => {
             <a
               role="button"
             >
-              {paginationAddNo}
+              {paginationAddNo + 1}
             </a>
           </li>
 

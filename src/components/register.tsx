@@ -36,11 +36,11 @@ const Register = () => {
     if (register.username === "" && register.mobile === "" && register.password === "" && register.confirmPassword === "") {
       return snackBarUtil.error("Please enter all the mandatory details");
     } else if (register?.password !== "" && register?.mobile === "" && register?.username !== "" && register?.confirmPassword !== "") {
-      return snackBarUtil.error(" Please provide Mobile no.");
+      return snackBarUtil.error(" invalid mobile number");
     } else if (register?.password === "" && register?.mobile !== "" && register?.username !== "" && register?.confirmPassword !== "") {
-      return snackBarUtil.error("Please provide password ");
+      return snackBarUtil.error("invalid password ");
     } else if (register?.password !== "" && register?.mobile !== "" && register?.username !== "" && register?.confirmPassword === "") {
-      return snackBarUtil.error("Please provide Confirm password");
+      return snackBarUtil.error("invalid Confirm password");
     } else if (register.password !== register.confirmPassword) {
       return snackBarUtil.error("Password does not match!!");
     } else {
@@ -119,7 +119,7 @@ const Register = () => {
         onChange={handleChange}
         style={{
           width: "100%",
-          height: "8vh",
+          height: "5vh",
           borderRadius: "4px"
         }}
       />
@@ -132,7 +132,7 @@ const Register = () => {
         onChange={handleChange}
         style={{
           width: "100%",
-          height: "8vh",
+          height: "5vh",
           borderRadius: "4px"
         }}
         onKeyDown={(e) =>
@@ -149,7 +149,7 @@ const Register = () => {
           onChange={handleChange}
           style={{
             width: "100%",
-            height: "8vh",
+            height: "5vh",
             borderRadius: "4px"
           }}
         />
@@ -164,7 +164,7 @@ const Register = () => {
           onChange={handleChange}
           style={{
             width: "100%",
-            height: "8vh",
+            height: "5vh",
             borderRadius: "4px"
           }}
         />

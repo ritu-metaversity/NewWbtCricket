@@ -42,3 +42,19 @@
     padding-left: unset;
 
 }
+
+.home_btn {
+
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 12px;
+
+}
+
+.home_lable {
+    font-weight: 600;
+}

@@ -150,7 +150,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
         enableColorOnDark
         style={{ background: colorHex.bg2 }}
       >
-        <Toolbar sx={{ justifyContent: "space-between" }}>
+        <Toolbar sx={{ justifyContent: "space-between", height: "64px" }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginRight: '20px', width: '20%' }}>
             <Link to={"/"} className="logoimg" >
               <img src={appData?.logo} alt="Logo" className="desktop_logogogo" />
@@ -178,23 +178,34 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
 
           </Box>
 
-          <Stack direction="row" display={{ xs: "none", md: "flex" }} spacing={2} style={{ marginLeft: "48%", alignItems: 'center', justifyContent: 'space-around' }}>
-            <Box>
+          <Stack direction="row" display={{ xs: "none", md: "flex" }} spacing={2} style={{ marginLeft: "37%", alignItems: 'center', justifyContent: 'space-around' }}>
+            <Box style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap"
+            }}>
               {/* <HeaderTextStyle>Coins: {wallet.balance}</HeaderTextStyle>
             <HeaderTextStyle>Liability: {wallet.libality}</HeaderTextStyle> */}
-              <HeaderTextStyle className="home_icon">
-                <Link to="/" style={{ padding: '12px' }}>
-                  <img src="https://bmxpro.in/home-page-50.png" alt="" style={{ height: "28px", width: "28px", marginBottom: "0" }} />
+              {/* <HeaderTextStyle className="home_icon"> */}
+              {/* <div> */}
+              <Link to="/" className="home_btn">
 
-                  <p className="home_lable" style={{ color: "rgb(255, 255, 255)", marginLeft: "4px", margin: '0' }}>HOME</p>
-                </Link>
-              </HeaderTextStyle>
+
+                <img src="https://bmxpro.in/home-page-50.png" alt="" style={{ height: "28px", width: "28px", marginBottom: "0" }} />
+
+                <p className="home_lable" style={{ color: "rgb(255, 255, 255)", marginLeft: "4px", margin: '0' }} >HOME</p>
+              </Link>
+              {/* </div> */}
+              {/* </HeaderTextStyle> */}
             </Box>
             <Box>
               <HeaderTextStyle className="home_icon" onClick={clickHandler}>
                 <p><img src="https://bmxpro.in/images/logout-new.png" alt="" style={{ height: "28px", width: "28px" }} />
                 </p>
-                <p className="home_lable" style={{ color: "rgb(255, 255, 255)", marginLeft: "4px" }} >LOGOUT
+                <p style={{ color: "rgb(255, 255, 255)", marginLeft: "4px" }} >LOGOUT
                 </p></HeaderTextStyle>
             </Box>
           </Stack>
