@@ -90,7 +90,7 @@
 
     body,
     .container {
-        height: auto;
+        /* height: auto; */
         overflow: auto;
     }
 }
