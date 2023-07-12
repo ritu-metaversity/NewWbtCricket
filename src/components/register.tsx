@@ -110,46 +110,63 @@ const Register = () => {
       <Typography textAlign={"center"} fontWeight="bold" variant="h5">
         Sign Up
       </Typography>
-      <TextField
+      <input
         required
-        label="User Name"
+        placeholder="User Name"
         name="username"
-        fullWidth
+
         value={register?.username}
         onChange={handleChange}
+        style={{
+          width: "100%",
+          height: "8vh",
+          borderRadius: "4px"
+        }}
       />
-      <TextField
+      <input
         required
         name="mobile"
-        label="Mobile No"
+        placeholder="Mobile No"
         type="number"
         value={register?.mobile}
         onChange={handleChange}
-        fullWidth
+        style={{
+          width: "100%",
+          height: "8vh",
+          borderRadius: "4px"
+        }}
         onKeyDown={(e) =>
           symbolsArrMail.includes(e.key) && e.preventDefault()
         }
       />
       <Box textAlign={"left"}>
-        <TextField
+        <input
           required
           name="password"
-          label="Password"
+          placeholder="Password"
           type="password"
           value={register?.password}
           onChange={handleChange}
-          fullWidth
+          style={{
+            width: "100%",
+            height: "8vh",
+            borderRadius: "4px"
+          }}
         />
       </Box>
       <Box textAlign={"left"}>
-        <TextField
+        <input
           required
           name="confirmPassword"
-          label="Confirm Password"
+          placeholder="Confirm Password"
           type="password"
           value={register?.confirmPassword}
           onChange={handleChange}
-          fullWidth
+          style={{
+            width: "100%",
+            height: "8vh",
+            borderRadius: "4px"
+          }}
         />
       </Box>
       <Button variant="contained" size="large" onClick={handleClick} fullWidth>

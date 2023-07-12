@@ -182,7 +182,7 @@ const Filter: FC<Props> = ({
       </Tabs>
       <form style={style}>
         <Grid container>
-          <Grid item xs={6} md={2} >
+          <Grid item xs={6} md={2} style={style}>
             <label style={lableStyle} htmlFor="fromDate">
               From Date
             </label>
@@ -195,7 +195,7 @@ const Filter: FC<Props> = ({
               name="fromDate"
             />
           </Grid>
-          <Grid item xs={6} md={2} >
+          <Grid item xs={6} md={2} style={style}>
             {" "}
             <label style={lableStyle} htmlFor="toDate">
               To Date

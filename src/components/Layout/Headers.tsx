@@ -219,11 +219,11 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
             <ul className="sider-ul">
 
               {/* <li > <p><span><AiOutlineHome /></span>Home</p>  <span><FaArrowRight /></span>   </li> */}
-              <li > <Link to="/" onClick={() => setDrawerOpen(false)}><p><span><AiOutlineHome /></span>Home</p>  <span><FaArrowRight /></span> </Link>  </li>
+              <li > <Link to="/" onClick={() => setDrawerOpen(false)}><p><span><AiOutlineHome /></span>HOME</p>  <span><FaArrowRight /></span> </Link>  </li>
               <li > <Link to="/profile" onClick={() => setDrawerOpen(false)}><p><span><MdManageAccounts /></span>PROFILE</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/in-play" onClick={() => setDrawerOpen(false)}><p><span><ImPlay3 /></span>IN PLAY</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/sports" onClick={() => setDrawerOpen(false)}><p><span><BsTrophyFill /></span>SPORTS</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/password-change" onClick={() => setDrawerOpen(false)}><p><span><BsKey /></span>Password Change</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/password-change" onClick={() => setDrawerOpen(false)}><p><span><BsKey /></span>PASSWORD CHNAGE</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/deposit" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw style={{ rotate: "180deg" }} /></span>DEPOSIT</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/withdraw" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw /></span>WITHDRAW</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/account-summary" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>ACCOUNT SUMMARY</p>  <span><FaArrowRight /></span>   </Link></li>
@@ -231,7 +231,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
               <li > <Link to="/current-bet" onClick={() => setDrawerOpen(false)}><p><span><MdSportsScore /></span>CURRENT BET</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/bet-history" onClick={() => setDrawerOpen(false)}><p><span><MdWorkHistory /></span>BET HISTORY</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/set-button-value" onClick={() => setDrawerOpen(false)}><p><span><BsFillMenuButtonFill /></span>SET BUTTON VALUE</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/welcome" onClick={clickHandler}><p><span><HiOutlineLogout /></span>Logout</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/welcome" onClick={clickHandler}><p><span><HiOutlineLogout /></span>LOGOUT</p>  <span><FaArrowRight /></span>   </Link></li>
 
             </ul>
 
