@@ -33,3 +33,21 @@ a {
     width: 81%;
   }
 }
+
+@media (min-width: 600px) {
+
+  .css-1yo9slo-MuiToolbar-root {
+    min-height: unset;
+  }
+}
+
+.Login_btnnnnss {
+  padding: 0px 4%;
+}
+
+.main_header {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

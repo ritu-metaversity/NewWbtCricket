@@ -7,10 +7,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { authServices } from "../utils/api/auth/services";
 import snackBarUtil from "./Layout/snackBarUtil";
+import "./Login.css"
 
 interface RegisterInterface {
   username?: string;
@@ -21,6 +23,8 @@ const Register = () => {
   const [open, setOpen] = useState(false);
   const [newCredAfterRegister, setNewCredAfterRegister] = useState<RegisterInterface | null>(null);
   const navigate = useNavigate();
+  const [selfAllowedd, SetselfAllowedd] = useState();
+
   const [register, setRegistration] = useState<any>({
     username: "",
     password: "",
@@ -58,6 +62,10 @@ const Register = () => {
       }
     }
   };
+  const handleClickLogin = () => {
+    navigate("/sign-in")
+
+  }
   const handleChange = (e: any) => {
     setRegistration({
       ...register,
@@ -65,16 +73,29 @@ const Register = () => {
       appUrl: window.location.hostname,
     });
   };
+  useEffect(() => {
+    let appUrll = window.location.hostname;
+    // let appUrll = "localhost";
+    axios
+      .post(
+        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        console.log(res, "dadasdas")
+        SetselfAllowedd(res?.data?.data?.logo);
+      });
+  }, []);
 
   return (
     <Box
-      maxWidth={"450px"}
-      mx="auto"
-      mb="2em"
-      p="2em"
-      display={"flex"}
-      flexDirection="column"
-      gap={"1.5em"}
+    // // maxWidth={"450px"}
+    // mx="auto"
+    // mb="2em"
+    // p="2em"
+    // display={"flex"}
+    // flexDirection="column"
+    // gap={"1.5em"}
     >
       <Dialog
         onClose={() => {
@@ -103,75 +124,60 @@ const Register = () => {
           </Typography>
         </DialogContent>
       </Dialog>
+      <div className="loginBackground new-login-content ">
+        <div className="logo-img">
+          <img src={selfAllowedd} alt="" className="logoimgggggg" />
+        </div>
+        <div className="login-form">
+          <span className="login-text">Sign up </span>
+          <input className="sign-Input"
+            required
+            placeholder="User Name"
+            name="username"
 
-      <Typography variant="h1" fontWeight={"700"} color="primary">
-        MyBet
-      </Typography>
-      <Typography textAlign={"center"} fontWeight="bold" variant="h5">
-        Sign Up
-      </Typography>
-      <input
-        required
-        placeholder="User Name"
-        name="username"
+            value={register?.username}
+            onChange={handleChange}
+          />
 
-        value={register?.username}
-        onChange={handleChange}
-        style={{
-          width: "100%",
-          height: "5vh",
-          borderRadius: "4px"
-        }}
-      />
-      <input
-        required
-        name="mobile"
-        placeholder="Mobile No"
-        type="number"
-        value={register?.mobile}
-        onChange={handleChange}
-        style={{
-          width: "100%",
-          height: "5vh",
-          borderRadius: "4px"
-        }}
-        onKeyDown={(e) =>
-          symbolsArrMail.includes(e.key) && e.preventDefault()
-        }
-      />
-      <Box textAlign={"left"}>
-        <input
-          required
-          name="password"
-          placeholder="Password"
-          type="password"
-          value={register?.password}
-          onChange={handleChange}
-          style={{
-            width: "100%",
-            height: "5vh",
-            borderRadius: "4px"
-          }}
-        />
-      </Box>
-      <Box textAlign={"left"}>
-        <input
-          required
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          type="password"
-          value={register?.confirmPassword}
-          onChange={handleChange}
-          style={{
-            width: "100%",
-            height: "5vh",
-            borderRadius: "4px"
-          }}
-        />
-      </Box>
-      <Button variant="contained" size="large" onClick={handleClick} fullWidth>
-        Sign Up
-      </Button>
+          <input className="sign-Input"
+            required
+            name="mobile"
+            placeholder="Mobile No"
+            type="number"
+            value={register?.mobile}
+            onChange={handleChange}
+
+            onKeyDown={(e) =>
+              symbolsArrMail.includes(e.key) && e.preventDefault()
+            } />
+          <input className="sign-Input"
+            required
+            name="password"
+            placeholder="Password"
+            type="password"
+            value={register?.password}
+            onChange={handleChange}
+          />
+          <input className="sign-Input"
+            required
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            type="password"
+            value={register?.confirmPassword}
+            onChange={handleChange}
+          />
+          <div className="login_main" onClick={handleClick}>
+            <button className="login-Button">
+              Sign Up
+            </button>
+            <div>
+
+              {/* <LoginIcon /> */}
+            </div>
+          </div>
+
+        </div>
+      </div>
     </Box>
   );
 };

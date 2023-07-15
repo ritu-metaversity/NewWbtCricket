@@ -59,3 +59,114 @@ h1 {
     position: absolute;
     top: 100px;
 }
+
+.maindatatashow {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    margin: auto;
+    margin-top: 4%;
+    border-radius: 4px;
+}
+
+.mainheader-popup {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
+    background-color: #4e4e4e !important;
+    border-radius: 4px 4px 0px 0px;
+    height: 39.9px;
+}
+
+.closecross {
+    border: unset;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 600;
+    color: #404040 !important;
+}
+
+.custom-body {
+    height: 253px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 7px;
+}
+
+.namehead {
+    font-weight: 500;
+}
+
+.namehead2 {
+    font-weight: 700;
+}
+
+.namehead_data {
+
+    font-size: 13px;
+}
+
+.namehead_data2 {
+
+    font-size: 13px;
+    font-weight: 500;
+
+}
+
+.modal-footer {
+    border: solid 1px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px 15px;
+    height: 45px;
+    border-style: inset;
+}
+
+.cancelbtn {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+    font-weight: 400;
+    border-radius: 0.25rem;
+    font-size: 10px;
+    border: unset;
+    padding: 5px;
+}
+
+@media screen and (min-width: 900px) {
+    .maindatatashow {
+
+        width: 30%;
+        margin-top: 15px;
+
+    }
+
+    .mainheader-popup {
+        background-color: #9d9d9d !important;
+
+    }
+}
+
+@media screen and (min-width: 700px) and (max-width:900px) {
+    .maindatatashow {
+
+        width: 55%;
+        margin-top: 15px;
+
+    }
+
+    .mainheader-popup {
+        background-color: #9d9d9d !important;
+
+    }
+}

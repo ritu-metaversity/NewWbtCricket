@@ -18,7 +18,7 @@ const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
   }, []);
   return (
     <Box
-      height={"100vh"}
+      // height={"100vh"}
       width={"100vw"}
       display="flex"
       flexDirection={"column"}
@@ -37,9 +37,8 @@ const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
         maxWidth={{ xs: "100vw", sm: "lg", }}
 
       >
-        {isSignedIn && <Outlet />}
+        {(isSignedIn || localStorage.getItem("passwordType") === "old") && <Outlet />}
       </Box>
-      {/* <Footer isSignedIn={isSignedIn} /> */}
     </Box>
   );
 };

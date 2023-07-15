@@ -12,7 +12,7 @@ import { userServices } from "../utils/api/user/services";
 import { useNavigate } from "react-router-dom";
 import { LoaderContext } from "../App";
 import snackBarUtil from "../components/Layout/snackBarUtil";
-
+import "./ChangePassword.css"
 interface Props {
   setIsSignedIn: Dispatch<SetStateAction<boolean>>;
 }
@@ -53,84 +53,47 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
     }
   };
   return (
-    <Box
-      sx={{
-        mx: "auto",
-        maxWidth: "sm",
-        overflow: "hidden",
-        overflowY: "scroll",
-      }}
-    >
-      <Paper
-        elevation={10}
-        sx={{
-          m: 2,
-          p: 3,
-          gap: 3,
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          overflow: "hidden",
-          overflowY: "scroll",
-        }}
-      >
-        <LockPersonIcon sx={{ fontSize: "80px" }} />
-        <Typography variant="h4" fontWeight={500}>
-          Change Password?
-        </Typography>
-        <Typography variant="subtitle1">
-          You can change your password here.
-        </Typography>
 
-        <TextField
-          size="small"
-          margin="dense"
-          label="Enter Current Password"
-          fullWidth
-          name="oldPassword"
-          value={oldPassword}
-          onChange={handleChange}
-        />
-        <TextField
-          size="small"
-          margin="dense"
-          label="Enter New Password"
-          fullWidth
-          name="newPassword"
-          value={newPassword}
-          onChange={handleChange}
-        />
+    <div className="outer_body_pass">
+      <div className="inner_body_pass">
+        <div className="main_div">
 
-        <TextField
-          size="small"
-          margin="dense"
-          label="Confirm New Password"
-          fullWidth
-          name="confirmPassword"
-          value={confirmPassword}
-          onChange={handleChange}
-        />
-        <Typography variant="subtitle2" textAlign="start">
-          {/* आपके अकाउंट की सुरक्षा को ध्यान रखते हुए आपके लिए कंप्यूटर जनित
-          पासवर्ड बनाया जा रहा है | नीचे दिए गए बटन पर क्लिक करके एक नया पासवर्ड
-          बनाएं|
-          <br /> */}
-          Keeping in mind the security of your account, a new password is being
-          created for you..
-          <br />
-          <br />
-          Create a new password by clicking on the button below
-        </Typography>
-        <Button
-          fullWidth
-          variant="contained"
-          onClick={handleClick}
-          sx={{ p: 1 }}
-        >
-          Generate Password
-        </Button>
-      </Paper>
-    </Box>
+          <span className="change_pass">
+            Change Password
+
+          </span>
+          <input className="login_text_field"
+            placeholder="OLD PASSWORD"
+            name="oldPassword"
+            type="password"
+            value={oldPassword}
+            onChange={handleChange}
+
+          />
+          <input className="login_text_field"
+            placeholder="NEW PASSWORD"
+            name="newPassword"
+            type="password"
+            value={newPassword}
+            onChange={handleChange}
+
+          />
+          <input className="login_text_field"
+            placeholder="CONFIRM PASSWORD"
+            name="confirmPassword"
+            type="password"
+            value={confirmPassword}
+            onChange={handleChange}
+          />
+
+          <button className="wwwpurp_btn" onClick={handleClick}>
+            Done
+          </button>
+        </div>
+
+      </div>
+    </div>
+
   );
 };
 

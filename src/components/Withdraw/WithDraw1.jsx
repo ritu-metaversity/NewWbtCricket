@@ -44,6 +44,7 @@ const WithDraw1 = () => {
     const [withdrawType, setWithdrawType] = useState();
     const [getAccountData, setGetAccountData] = useState();
     const [userBalance, setuserBalance] = useState();
+    const [savedBankdetailsName, setSavedBankdetailsName] = useState("")
     const handleClose = () => {
         setShow(false);
         snackBarUtil.success("Withdraw Request Submited Successfully");
@@ -65,6 +66,9 @@ const WithDraw1 = () => {
         setIFSC("");
         setBankName("");
         setwithCoinValue(0);
+        setSavedBankdetailsName(val)
+        console.log(val, id, "lkjhgfdsa")
+
     };
     useEffect(() => {
         const TokenId = localStorage.getItem("token");
@@ -351,7 +355,7 @@ const WithDraw1 = () => {
     //     dispatch(postpendingapppii(data))
     //     setpendingmodal(false)
     // }
-
+    console.log(withdrawData, "kjhgtfdcvgyg")
     return (
         <div className="withdraw_page">
 
@@ -406,8 +410,9 @@ const WithDraw1 = () => {
                                                 handlePaymentDetails(
                                                     res?.withdrawType,
                                                     res?.id
-                                                )
-                                            }>
+                                                )}
+                                            style={{ backgroundColor: (bankID === res?.id) ? "#7b7c7f" : "" }}
+                                        >
                                             <div className="css-1502y4u">
                                                 <img
                                                     src={res?.image}
@@ -428,122 +433,124 @@ const WithDraw1 = () => {
 
 
 
-                {withType === "BANK" ? (
-                    <div
-                        className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
-                            } accountWith`}>
-                        <div className="mx-input-wrapper account-field">
-                            <label className="account-lable">Account Number</label>
+                {
+                    withType === "BANK" ? (
+                        <div
+                            className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
+                                } accountWith`}>
+                            <div className="mx-input-wrapper account-field">
+                                <label className="account-lable">Account Number</label>
 
-                            <input
-                                type="number"
-                                className="account-input"
-                                value={accountNumber}
-                                onChange={(e) => setAccountNumber(e.target.value)}
-                            />
-                        </div>
-                        <div className="mx-input-wrapper account-field">
-                            <label className="account-lable">Account Name</label>
-
-                            <input
-                                type="text"
-                                className="account-input"
-                                value={accountHolderName}
-                                onChange={(e) =>
-                                    setAccountHolderName(
-                                        e.target.value.replace(/[^A-Za-z]+$/, " ")
-                                    )
-                                }
-                            />
-                        </div>
-                        <div className="mx-input-wrapper account-field">
-                            <label className="account-lable">Bank Name</label>
-
-                            <input
-                                type="type"
-                                className="account-input"
-                                value={bankName}
-                                onChange={(e) =>
-                                    setBankName(
-                                        e.target.value.replace(/[^A-Za-z]+$/, " ")
-                                    )
-                                }
-                            />
-                        </div>
-                        <div className="mx-input-wrapper account-field">
-                            <label className="account-lable">IFSC</label>
-
-                            <input
-                                type="type"
-                                className="account-input"
-                                value={ifsc}
-                                onChange={(e) =>
-                                    setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, " "))
-                                }
-                            />
-                        </div>
-                        <div className="mx-input-wrapper account-field">
-                            <label className="account-lable">Account Type</label>
-
-                            <select
-                                name="reportType"
-                                // style={{ width: "100%" }}
-                                className="custom-select select-type accounttype"
-                                onChange={(e) => setAccountType(e.target.value)}>
-                                <option value="Saving">Saving</option>
-                                <option value="Current">Current</option>
-                            </select>
-                        </div>
-                    </div>
-                ) : (
-                    <div
-                        className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
-                            } accountWith`}>
-                        <div className="mx-input-wrapper account-field asdfghjkl">
-                            <label className="account-lable">
-                                {withType === "PAYTM" ? "Mobile No" : "UPI ID"}
-                            </label>
-
-                            {withType === "PAYTM" ? (
                                 <input
                                     type="number"
                                     className="account-input"
                                     value={accountNumber}
                                     onChange={(e) => setAccountNumber(e.target.value)}
                                 />
-                            ) : (
+                            </div>
+                            <div className="mx-input-wrapper account-field">
+                                <label className="account-lable">Account Name</label>
+
                                 <input
                                     type="text"
                                     className="account-input"
-                                    value={accountNumber}
+                                    value={accountHolderName}
                                     onChange={(e) =>
-                                        setAccountNumber(
-                                            e.target.value.replace(
-                                                /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/
-                                            )
+                                        setAccountHolderName(
+                                            e.target.value.replace(/[^A-Za-z]+$/, " ")
                                         )
                                     }
                                 />
-                            )}
-                        </div>
-                        <div className="mx-input-wrapper account-field asdfghjkl">
-                            <label className="account-lable">
-                                {withType === "PAYTM" ? "Name" : "Account Name"}
-                            </label>
+                            </div>
+                            <div className="mx-input-wrapper account-field">
+                                <label className="account-lable">Bank Name</label>
 
-                            <input
-                                type="text"
-                                className="account-input"
-                                value={accountHolderName}
-                                onChange={(e) =>
-                                    setAccountHolderName(
-                                        e.target.value.replace(/[^A-Za-z]+$/, " ")
-                                    )
-                                }
-                            />
+                                <input
+                                    type="type"
+                                    className="account-input"
+                                    value={bankName}
+                                    onChange={(e) =>
+                                        setBankName(
+                                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="mx-input-wrapper account-field">
+                                <label className="account-lable">IFSC</label>
+
+                                <input
+                                    type="type"
+                                    className="account-input"
+                                    value={ifsc}
+                                    onChange={(e) =>
+                                        setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, " "))
+                                    }
+                                />
+                            </div>
+                            <div className="mx-input-wrapper account-field">
+                                <label className="account-lable">Account Type</label>
+
+                                <select
+                                    name="reportType"
+                                    // style={{ width: "100%" }}
+                                    className="custom-select select-type accounttype"
+                                    onChange={(e) => setAccountType(e.target.value)}>
+                                    <option value="Saving">Saving</option>
+                                    <option value="Current">Current</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    ) : (
+                        <div
+                            className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
+                                } accountWith`}>
+                            <div className="mx-input-wrapper account-field asdfghjkl">
+                                <label className="account-lable">
+                                    {withType === "PAYTM" ? "Mobile No" : "UPI ID"}
+                                </label>
+
+                                {withType === "PAYTM" ? (
+                                    <input
+                                        type="number"
+                                        className="account-input"
+                                        value={accountNumber}
+                                        onChange={(e) => setAccountNumber(e.target.value)}
+                                    />
+                                ) : (
+                                    <input
+                                        type="text"
+                                        className="account-input"
+                                        value={accountNumber}
+                                        onChange={(e) =>
+                                            setAccountNumber(
+                                                e.target.value.replace(
+                                                    /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/
+                                                )
+                                            )
+                                        }
+                                    />
+                                )}
+                            </div>
+                            <div className="mx-input-wrapper account-field asdfghjkl">
+                                <label className="account-lable">
+                                    {withType === "PAYTM" ? "Name" : "Account Name"}
+                                </label>
+
+                                <input
+                                    type="text"
+                                    className="account-input"
+                                    value={accountHolderName}
+                                    onChange={(e) =>
+                                        setAccountHolderName(
+                                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                                        )
+                                    }
+                                />
+                            </div>
+                        </div>
+                    )
+                }
                 <div className={openForm ? "" : "d-none"}>
                     <div className="row row5 mt-2">
                         <div className="col-12">
@@ -599,7 +606,7 @@ const WithDraw1 = () => {
                                                 scope="col"
                                                 aria-colindex="6"
                                                 className="text-left">
-                                                Action
+                                                Actiondas
                                             </th>
                                         </tr>
                                     </thead>
@@ -679,7 +686,7 @@ const WithDraw1 = () => {
                     </div>
                 </div>
 
-            </div>
+            </div >
 
             <Modal
                 open={show}
@@ -714,7 +721,7 @@ const WithDraw1 = () => {
                 </Box>
             </Modal>
 
-        </div>
+        </div >
     )
 }
 

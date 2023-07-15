@@ -3,7 +3,7 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { TitleStyled } from "../../components/custom/styledComponents";
 import { userServices } from "../../utils/api/user/services";
 import { LoaderContext } from "../../App";
-
+import "./setButtonValue.css"
 const GridItemProps = {
   item: true,
   xs: 6,
@@ -50,34 +50,38 @@ const SetButtonValue = () => {
   };
   return (
     <Box mx="auto" my={{ sx: 0, md: 4 }}>
-      <TitleStyled variant="h4">Change Button Value</TitleStyled>
-      <Grid container rowGap={3} my={3} style={{ padding: "0px 40px 0px 0px" }}>
+      <TitleStyled variant="h6">Change Button Value</TitleStyled>
+      <Grid container rowGap={3} my={3} style={{
+        padding: "0px 40px 0px 0px", display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "10px",
+        flexDirection: "column"
+      }}>
         {Object.keys(buttonValue).map((item, index) => {
           return (
-            <>
-              <Grid {...GridItemProps}>
-                <Typography my={2}>{"Button Value " + (index + 1)}</Typography>
-              </Grid>
-              <Grid {...GridItemProps}>
-                <TextField
-                  onChange={handleChange}
-                  name={item}
-                  value={buttonValue[item]}
-                />
-              </Grid>
-            </>
+            <div className="main_stack">
+
+              <button className="btn_stack">{"Stack " + (index + 1)}</button>
+
+
+              <input
+                onChange={handleChange}
+                name={item}
+                value={buttonValue[item]}
+              />
+
+            </div>
           );
         })}
       </Grid>
-      <Button
-        variant="contained"
-        fullWidth
-        sx={{ p: 2, my: 2 }}
+      <button
+        className="btn_save"
         onClick={handleClick}
       >
         {" "}
         Save and Submit
-      </Button>
+      </button>
     </Box>
   );
 };

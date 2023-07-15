@@ -7,12 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 // import axios from "axios";
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authServices } from "../utils/api/auth/services";
 import "./Login.css"
 import LoginIcon from '@mui/icons-material/Login';
 import snackBarUtil from "./Layout/snackBarUtil";
+import axios from "axios";
 
 interface Props {
   setIsSignedIn: Dispatch<SetStateAction<boolean>>;
@@ -23,6 +24,8 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
   const [userId, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const host = window.location.hostname;
+  const [selfAllowedd, SetselfAllowedd] = useState();
+
   const handleClick = async () => {
 
     if (password === "" && userId === "") {
@@ -39,6 +42,7 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
       if (response?.token) {
         localStorage.setItem("token", response?.token);
         localStorage.setItem("userid", response?.userId);
+        localStorage.setItem("passwordType", response?.passwordtype);
         if (response.passwordtype === "old") {
           navigate("/OldChangePassword", { replace: true });
         } else {
@@ -56,10 +60,25 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
       setPassword(e.target.value);
     }
   };
+
+
+  useEffect(() => {
+    let appUrll = window.location.hostname;
+    // let appUrll = "localhost";
+    axios
+      .post(
+        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        console.log(res, "dadasdas")
+        SetselfAllowedd(res?.data?.data?.logo);
+      });
+  }, []);
   return (
     <div className="loginBackground new-login-content ">
       <div className="logo-img">
-        <img src="https://bmxpro.in/static/media/poplogin1609.320f8bee.png" alt="" className="logoimgggggg" />
+        <img src={selfAllowedd} alt="" className="logoimgggggg" />
       </div>
       <div className="login-form">
         <span className="login-text">Please Login To Continue</span>

@@ -27,10 +27,74 @@
     font-size: 21px;
     cursor: pointer;
 }
-.casinoName{
+
+.casinoName {
     background-color: rgb(123, 124, 127);
     margin-top: -4px;
     border-radius: 0px 0px 3px 3px;
     font-weight: 600;
     color: whitesmoke;
+}
+
+.casinoicons .casino-name {
+    background-image: linear-gradient(#0088cc, #2c3e50);
+    color: #fff;
+    padding: 5px;
+    position: absolute;
+    width: 100%;
+    bottom: -15px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 8px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.casinoicons img {
+    margin-bottom: 9px;
+    width: 130px;
+    height: auto;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.col-3 {
+    flex: 0 0 auto;
+    width: 25%;
+}
+
+.row.row5 {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.row.row5 {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+@media screen and (max-width: 780px) {
+
+    .mt-2,
+    .my-2 {
+        margin-top: 0.5rem !important;
+    }
+}
+
+.casinoicons {
+    position: relative;
+    box-shadow: 0 25px 8px -8px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    width: 100%;
+    cursor: pointer;
+    color: #007bff;
 }

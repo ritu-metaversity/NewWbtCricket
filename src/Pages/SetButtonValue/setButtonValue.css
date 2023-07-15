@@ -1,0 +1,32 @@
+.main_stack {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.mjuytrdcvhj {
+    display: flex;
+    padding: 0px 40px 0px 0px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+}
+
+.btn_stack {
+    padding: 3px 15px;
+    border-radius: 4px;
+    border-color: black;
+    border: solid;
+}
+
+.btn_save {
+    padding: 3px 15px;
+    border-radius: 4px;
+    border-color: black !important;
+    border: solid;
+    background-color: #7b7c7f;
+    padding: 10px;
+    color: white;
+}

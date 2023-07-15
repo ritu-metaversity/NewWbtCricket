@@ -8,7 +8,6 @@ import {
   Menu,
   MenuItem,
   Stack,
-  Toolbar,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -43,6 +42,7 @@ import { ImCross } from "react-icons/im"
 import { GiHamburgerMenu } from "react-icons/gi"
 import { MdManageAccounts } from "react-icons/md"
 import { ImPlay3 } from "react-icons/im"
+import { AiFillCaretDown } from "react-icons/ai"
 import { BsTrophyFill, BsFillMenuButtonFill, BsKey } from "react-icons/bs"
 
 import { BiMoneyWithdraw } from "react-icons/bi"
@@ -63,9 +63,9 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   const [wallet, setWallet] = useState(data);
   const navigation = useNavigate();
   const { appData } = useContext(LoaderContext)
-  console.log(appData?.logo, "appData")
   const userid = localStorage.getItem("userid");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
   const [message, setmessage] = useState("");
   useEffect(() => {
     const getWallet = async () => {
@@ -74,14 +74,13 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
         setWallet(response.data);
       }
     };
-    getWallet();
-    const timer = setInterval(() => getWallet(), 5000);
+    localStorage.getItem("passwordType") === "new" && getWallet();
+    const timer = setInterval(() => localStorage.getItem("passwordType") === "new" && getWallet(), 5000);
 
     return () => clearInterval(timer);
   }, []);
 
   // const handleClick = async (e: any) =>  await authServices.logout();
-
   async function clickHandler() {
     await authServices.logout();
     localStorage.removeItem("token");
@@ -136,49 +135,58 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   }, []);
 
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const matches = useMediaQuery('(min-width:500px)');
+  const matches = useMediaQuery('(min-width:900px)');
 
+  const handledrawer = () => {
+    if (localStorage.getItem("passwordType") === "new") {
+      setDrawerOpen(true)
+
+    } else {
+    }
+  }
   useEffect(() => {
     setAnchorEl(null)
 
   }, [matches])
-
   return (
     <>
       <AppBar
         position="sticky"
         enableColorOnDark
-        style={{ background: colorHex.bg2 }}
+        style={{ background: colorHex.bg2, height: "50px" }}
+        className="main_header"
       >
-        <Toolbar sx={{ justifyContent: "space-between", height: "64px" }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginRight: '20px', width: '20%' }}>
-            <Link to={"/"} className="logoimg" >
+        <div className="header_inner" >
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '60%' }}>
+
+            {/* <Link to={(localStorage.getItem("passwordType") === "new") ? "/" : "OldChangePassword"} className="logoimg" >
               <img src={appData?.logo} alt="Logo" className="desktop_logogogo" />
 
-            </Link>
+            </Link> */}
 
 
-            <Box sx={{ display: 'flex', alignItems: 'center', pl: "1rem", flexDirection: 'column' }}>
-              <Link to="/" >
+            <Box sx={{ display: 'flex', alignItems: 'center', pl: "3px", flexDirection: 'column' }}>
 
-                <Typography component="p">
-                  <div className="logo-name">
+              <Link to={(localStorage.getItem("passwordType") === "new") ? "/" : "OldChangePassword"} >
+
+                {/* <Typography component="p"> */}
+                <div className="logo-name">
 
 
-                    <img src={appData?.logo} alt="Logo" className="mobile_logogoggo" style={{ width: "60%" }} />
+                  <img src={appData?.logo} alt="Logo" className="desktop_logogogo" style={{height: "54px" }} />
+
+                  <span className="mobile_logogoggo" style={{ color: "white" }}>
 
                     {userid}
-                  </div>
-                </Typography>
+                  </span>
+                </div>
+                {/* </Typography> */}
               </Link>
-              <Typography component="p" sx={{ display: { xs: "none", md: "block" } }}  >
-                chips: <Typography component={'span'}>{wallet.balance}</Typography>
-              </Typography>
             </Box>
 
           </Box>
 
-          <Stack direction="row" display={{ xs: "none", md: "flex" }} spacing={2} style={{ marginLeft: "37%", alignItems: 'center', justifyContent: 'space-around' }}>
+          <Stack direction="row" display={{ xs: "none", md: "flex", gap: "10%", width: "40%" }} spacing={2} >
             <Box style={{
               display: "flex",
               flexDirection: "row",
@@ -191,7 +199,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
             <HeaderTextStyle>Liability: {wallet.libality}</HeaderTextStyle> */}
               {/* <HeaderTextStyle className="home_icon"> */}
               {/* <div> */}
-              <Link to="/" className="home_btn">
+              <Link to={(localStorage.getItem("passwordType") === "new") ? "/" : "OldChangePassword"} className="home_btn">
 
 
                 <img src="https://bmxpro.in/home-page-50.png" alt="" style={{ height: "28px", width: "28px", marginBottom: "0" }} />
@@ -201,18 +209,38 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
               {/* </div> */}
               {/* </HeaderTextStyle> */}
             </Box>
-            <Box>
+            <div className="Username_chip">
+              <span>
+                {userid}
+              </span>
+              <span >
+                chips:{wallet.balance}
+
+              </span>
+            </div>
+            {/* <Box>
               <HeaderTextStyle className="home_icon" onClick={clickHandler}>
                 <p><img src="https://bmxpro.in/images/logout-new.png" alt="" style={{ height: "28px", width: "28px" }} />
                 </p>
                 <p style={{ color: "rgb(255, 255, 255)", marginLeft: "4px" }} >LOGOUT
                 </p></HeaderTextStyle>
-            </Box>
+            </Box> */}
           </Stack>
           {matches ?
-            <IconButton onClick={(e) => { setAnchorEl(e.currentTarget); }}>
-              <UserIconImage src="/user.png" alt="" />
-            </IconButton> : <GiHamburgerMenu onClick={() => setDrawerOpen(true)} />
+            ((localStorage.getItem("passwordType") === "new") ?
+              <IconButton onClick={(e) => { setAnchorEl(e.currentTarget); }}>
+                <AiFillCaretDown style={{ color: "white" }} />
+              </IconButton>
+              :
+              <IconButton >
+                <AiFillCaretDown style={{ color: "white" }} />
+              </IconButton>
+            )
+
+
+
+            :
+            <GiHamburgerMenu onClick={handledrawer} style={{ width: "10%" }} />
           }
           {!matches && <Drawer
             anchor={"left"}
@@ -234,10 +262,10 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
               <li > <Link to="/profile" onClick={() => setDrawerOpen(false)}><p><span><MdManageAccounts /></span>PROFILE</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/in-play" onClick={() => setDrawerOpen(false)}><p><span><ImPlay3 /></span>IN PLAY</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/sports" onClick={() => setDrawerOpen(false)}><p><span><BsTrophyFill /></span>SPORTS</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/password-change" onClick={() => setDrawerOpen(false)}><p><span><BsKey /></span>PASSWORD CHNAGE</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/password-change" onClick={() => setDrawerOpen(false)}><p><span><BsKey /></span>PASSWORD CHANGE</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/deposit" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw style={{ rotate: "180deg" }} /></span>DEPOSIT</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/withdraw" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw /></span>WITHDRAW</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/account-summary" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>ACCOUNT SUMMARY</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/account-summary" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span> PROFIT & LOSS</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/login-history" onClick={() => setDrawerOpen(false)}><p><span><AiOutlineHistory /></span>LOGIN HISTORY</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/current-bet" onClick={() => setDrawerOpen(false)}><p><span><MdSportsScore /></span>CURRENT BET</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/bet-history" onClick={() => setDrawerOpen(false)}><p><span><MdWorkHistory /></span>BET HISTORY</p>  <span><FaArrowRight /></span>   </Link></li>
@@ -249,7 +277,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
             {/* #7b7c7f */}
 
           </Drawer>}
-        </Toolbar>
+        </div>
         {matches && <Menu
           anchorEl={anchorEl}
           onClick={handleClose}
@@ -260,7 +288,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
           PaperProps={{
             elevation: 0,
             sx: {
-              overflow: "visible",
+              overflow: "scroll",
               filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
               mt: 1.5,
               color: "black",
@@ -352,9 +380,18 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
             </ListItemIcon>
             Logout
           </MenuItem>
-        </Menu>}
+        </Menu>
+
+        }
       </AppBar>
-      <div style={{ padding: "4px", background: "#fff", textAlign: "center", margin: "12px 0px", fontSize: "13px" }}><span>Chips: {wallet.balance}</span> <span>Expo : <span style={{ color: "red" }}>{wallet.libality}</span></span></div>
+      <div className="header_chips_expo">
+        <div className="inner_chips" style={{ fontWeight: "600" }}>
+          <span>Chips: {wallet.balance}</span>
+          {" "}
+          <span>Expo : <span style={{ color: "red" }}>{wallet.libality}</span>
+          </span>
+        </div>
+      </div>
 
       <Marquee speed={50} gradient={false}>
         {message}

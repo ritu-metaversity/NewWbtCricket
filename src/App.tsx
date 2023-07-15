@@ -143,10 +143,7 @@ function App() {
         <SnackbarProvider maxSnack={5} autoHideDuration={1000}>
           <main>
             <Routes>
-              <Route
-                path="OldChangePassword"
-                element={<OldChangePassword setIsSignedIn={setIsSignedIn} />}
-              />
+
 
               <Route
                 path="/welcome"
@@ -167,7 +164,10 @@ function App() {
                   />
                 }
               >
+                <Route path="OldChangePassword" element={<OldChangePassword setIsSignedIn={setIsSignedIn} />} />
+
                 <Route path="/" element={<Home />} />
+
                 <Route path="/deposit" element={<Deposit />} />
                 <Route path="/withdraw" element={<Withdraw />} />
                 <Route path="in-play" element={<Inplay />} />
@@ -183,12 +183,10 @@ function App() {
                 <Route path="current-bet" element={<CurrentBet />} />
                 <Route path="casino" element={<Casino />} />
                 <Route path="casino/:id" element={<CasinoGame />} />
+                <Route path="terms" element={<Terms />} />
+                <Route path="password-change" element={<ChangePassword setIsSignedIn={setIsSignedIn} />} />
               </Route>
-              <Route
-                path="password-change"
-                element={<ChangePassword setIsSignedIn={setIsSignedIn} />}
-              />
-              <Route path="terms" element={<Terms />} />
+
             </Routes>
           </main>
 

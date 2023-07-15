@@ -1,5 +1,5 @@
 import Layout from "antd/es/layout/layout";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   TermsContainer,
@@ -10,6 +10,8 @@ import {
 } from "../../components/Terms/styledComponents";
 import WelcomeDialog from "../../components/Terms/WelcomeDialog";
 import "./Term.css";
+import { Box, Modal } from "@mui/material";
+
 const TermsList = [
   "लोगिन करने के बाद अपना पासवर्ड बदल लें।",
   " प्रत्येक गेम के लिए 100/- Coins चार्ज और टेस्ट गेम में प्रतिदिन 100/- coins चार्ज रहेगा।",
@@ -30,10 +32,52 @@ const Terms = () => {
   const handleClick = () => {
     navigate("/", { replace: true });
   };
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    setShow(true)
+  }, [])
+
   return (
     <>
       <div className="main-div">
+        {/* <WelcomeDialog /> */}
+        <Modal
+          open={show}
+          onClose={() => setShow(false)}
+          aria-labelledby="parent-modal-title"
+          aria-describedby="parent-modal-description"
+        >
+          <div className="maindatatashow">
+            <div className="mainheader-popup">
+              <h6 className="maintitle" style={{ color: "#fff" }}>Welcome to bmx</h6>
+              <button type="button" className="closecross" aria-label="Close" onClick={() => setShow(false)}>
+                <span >×</span>
+              </button>
+            </div>
+            <div className="custom-body" >
+              <span className="namehead"> प्रिय ग्राहक,</span>
+              <span className="namehead_data">
+                {" "}
+                आपसे अनुरोध है हमारी कोई डुप्लीकेट साइट नही है हमारी आधिकारिक साइट
+                <b>'bmx99.in, bmxBET99.IN , bmxPRO.IN' </b>से लॉगिन करें। लॉगइन करने से पहले साइट
+                का नाम जरूर देख लें। आपके समर्थन के लिए धन्यवाद। टीम <b> bmx99</b>
+              </span>
+              <span className="namehead2">Dear Client,</span>
+              <span className="namehead_data2">
+                {" "}
+                We don't have any duplicate site , You are requested to login with our
+                official site 'bmx99.in, bmxBET99.IN , bmxPRO.I only. Please check the
+                site name before you login. Thanks for your support. Team bmx99
+              </span>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="cancelbtn" onClick={() => setShow(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
 
+        </Modal>
         {/* <div className="lang-switch-btn" style={{ paddingLeft: "0px", paddingRight: "0px" }}> */}
         <div className="main_menu_btn" style={{ textAlign: "center", marginBottom: "-17px" }}>
           <Link className="btn rules-btn" id="create_bets" to="/">

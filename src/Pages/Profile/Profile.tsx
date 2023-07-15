@@ -77,7 +77,7 @@ const Profile = () => {
         <Grid {...gridItemProps}>{prolile?.doj}</Grid>
         <Grid {...gridItemProps}>Address:</Grid>
         <Grid {...gridItemProps}>{prolile?.city}</Grid>
-        <Grid {...gridItemProps}>Available Balance:</Grid>
+        <Grid {...gridItemProps}>Balance:</Grid>
         <Grid {...gridItemProps}>{prolile?.balance}</Grid>{" "}
         <Grid {...gridItemProps}>Win:</Grid>
         <Grid {...gridItemProps}>{prolile?.win}</Grid>{" "}

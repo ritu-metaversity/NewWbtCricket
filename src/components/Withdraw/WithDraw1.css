@@ -54,6 +54,10 @@
     border-radius: 3px;
 }
 
+.d-none {
+    display: none;
+}
+
 .withdrow_type p {
     padding-top: 12px;
     margin: 12px 30px;
@@ -88,6 +92,14 @@
 
 .withdraw_image.col .css-1502y4u {
     padding: 12px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.withdraw_image.col:hover {
+    background-color: #7b7c7f;
 }
 
 .withdraw_table input {

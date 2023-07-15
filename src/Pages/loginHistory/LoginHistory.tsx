@@ -54,6 +54,7 @@ const LoginHistory = () => {
   return (
     <Box maxWidth={900} mx="auto">
       <BacktoMenuButton />
+
       <Tabs
         value={selectedTab}
         textColor="primary"
@@ -63,7 +64,7 @@ const LoginHistory = () => {
         }}
       >
         <Tab label="Login History" />
-        <Tab label="User Password Change History" />
+        <Tab label="Change Password History" />
       </Tabs>
       {selectedTab.toString() === "0" ? (
         <LoginhistoryData />

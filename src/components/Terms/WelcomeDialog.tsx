@@ -8,8 +8,8 @@ import {
 
 const titleComponent = (
   <>
-    <HeaderStyle>Welcome to</HeaderStyle>
-    <HeaderStyle>{window.location.hostname}</HeaderStyle>
+    <HeaderStyle>Welcome to {window.location.hostname}</HeaderStyle>
+
   </>
 );
 
@@ -23,7 +23,7 @@ const WelcomeDialog = () => {
     <Dialog
       sx={{ mt: "-280px" }}
       titlSD={titleComponent}
-      actions={actionComponent}
+      // actions={actionComponent}
       // sx={{ bgcolor:  }}
       open={open}
       PaperProps={{ sx: { maxWidth: "80%" } }}

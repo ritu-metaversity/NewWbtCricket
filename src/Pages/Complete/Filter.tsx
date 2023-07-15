@@ -22,7 +22,7 @@ const style = {
 const inputStyle = {
   padding: "10px",
   borderRadius: "5px",
-  width: "calc(100% - 20px)",
+  width: "(100%)",
 };
 const inputStyle1 = {
   padding: "10px",
@@ -145,6 +145,26 @@ const Filter: FC<Props> = ({
 
   useEffect(() => {
     const getNewEvent = async () => {
+
+
+      setLoading && setLoading((prev) => ({ ...prev, getNewEvent: true }));
+      const { response } = await sportServices.activeEventFromSport(4);
+      console.log(formData.sportId, "jhygtfds")
+      if (response?.data) {
+        if (response?.data?.length > 0) {
+          setActiveEventList(response.data);
+          // setFormData((o) => ({ ...o, matchId: response.data[0].matchId }));
+        }
+      } else {
+        setActiveEventList([]);
+      }
+      setLoading && setLoading((prev) => ({ ...prev, getNewEvent: false }));
+
+    };
+    getNewEvent();
+  }, []);
+  useEffect(() => {
+    const getNewEvent = async () => {
       console.log(activeSportList);
       if (!activeSportList.length) return;
 
@@ -152,6 +172,7 @@ const Filter: FC<Props> = ({
       const { response } = await sportServices.activeEventFromSport(
         Number(formData.sportId)
       );
+      console.log(formData.sportId, "jhygtfds")
       if (response?.data) {
         if (response?.data?.length > 0) {
           setActiveEventList(response.data);
@@ -219,7 +240,7 @@ const Filter: FC<Props> = ({
               onChange={handleChange}
               name="sportId"
             >
-              <option value={""}>ALL</option>
+              <option value={""}> Select</option>
 
               {tab === 1
                 ? casinoTypes.map((casino) => (
@@ -242,7 +263,7 @@ const Filter: FC<Props> = ({
               onChange={handleChange}
               name="matchId"
             >
-              <option value={""}>ALL</option>
+              <option value={""}>Select</option>
               {tab === 1
                 ? casinoList.map((casino) => (
                   <option

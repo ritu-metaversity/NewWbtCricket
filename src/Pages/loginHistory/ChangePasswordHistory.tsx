@@ -6,16 +6,17 @@ import { Button } from "react-bootstrap";
 import { LoaderContext } from "../../App";
 import StickyHeadTable from "../../components/custom/Table";
 import { userServices } from "../../utils/api/user/services";
+import "./LoginHistory.css"
 
 export interface Column {
   id:
-    | "byUser"
-    | "action"
-    | "createdOn"
-    | "deviceInfo"
-    | "userId"
-    | "ipAddress"
-    | string;
+  | "byUser"
+  | "action"
+  | "createdOn"
+  | "deviceInfo"
+  | "userId"
+  | "ipAddress"
+  | string;
   label: string;
   minWidth?: number;
   colorCoded?: boolean;
@@ -115,60 +116,51 @@ export const ChnagePasswordHistory: FC<any> = () => {
         <>
           <form style={style}>
             <Grid container>
-              <Grid item xs={6} md={3} style={style}>
-                <label style={lableStyle} htmlFor="fromDate">
-                  From Date
-                </label>
-                <input
-                  style={inputStyle}
-                  type="date"
-                  defaultValue={formData.fromDate}
-                  placeholder="YYYY-MM-DD"
-                  onChange={handleChange}
-                  name="fromDate"
-                />
-              </Grid>
-              <Grid item xs={6} md={3} style={style}>
-                {" "}
-                <label style={lableStyle} htmlFor="toDate">
-                  To Date
-                </label>
-                <input
-                  style={inputStyle}
-                  type="date"
-                  defaultValue={formData.toDate}
-                  placeholder="YYYY-MM-DD"
-                  onChange={handleChange}
-                  name="toDate"
-                />
-              </Grid>
-              {/* <Grid item xs={6} md={3} style={style}>
-                {" "}
-                <label style={lableStyle} htmlFor="type">
-                  Type
-                </label>
-                <select style={inputStyle} onChange={getNewEvent} name="type">
-                  <option selected value="1">
-                    ALL
-                  </option>
-                  <option value="2">Deposit/Withdarw Report</option>
-                  <option value="3">Game Report</option>
-                </select>
-              </Grid> */}
-              {/* <button type="button" onClick={getNewEvent} style={{}}>
-                Search
-              </button> */}
+              <div className="date_time">
+                <div className="time_input">
+                  <div className="from_date">
 
-              <Grid item xs={6} md={3} style={style}>
-                <Button
+                    <label style={lableStyle} htmlFor="fromDate">
+                      From Date
+                    </label>
+                    <input
+                      style={inputStyle}
+                      type="date"
+                      defaultValue={formData.fromDate}
+                      placeholder="YYYY-MM-DD"
+                      onChange={handleChange}
+                      name="fromDate"
+                    />
+                  </div>
+
+                  {" "}
+                  <div className="from_date">
+
+                    <label style={lableStyle} htmlFor="toDate">
+                      To Date
+                    </label>
+                    <input
+                      style={inputStyle}
+                      type="date"
+                      defaultValue={formData.toDate}
+                      placeholder="YYYY-MM-DD"
+                      onChange={handleChange}
+                      name="toDate"
+                    />
+                  </div>
+                </div>
+
+                <button
                   // fullWidth
+                  className="button_datetime"
                   type="button"
-                  variant="contained"
+                  // variant="contained"
                   onClick={getNewEvent}
                 >
                   search
-                </Button>
-              </Grid>
+                </button>
+              </div>
+
               {/* <label style={lableStyle} htmlFor="noOfRecords">No Of Rows</label>
         <select style={inputStyle} onChange={handleChange} name="noOfRecords">
           <option selected value="1">10</option>

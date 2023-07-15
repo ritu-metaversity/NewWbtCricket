@@ -125,7 +125,7 @@ const Complete = () => {
   const [pagination, setPagination] = useState([] as any);
   const [paginationAddNo, setPaginationAddNo] = useState(0);
 
-  console.log(startDate, endDate, "endDateendDateendDateendDateendDate")
+
 
   const StartDateValue = (date: any, dateString: any) => {
     setStartDate(dateString);
@@ -133,8 +133,7 @@ const Complete = () => {
   const EndDateValue = (date: any, dateString: any) => {
     setEndDate(dateString);
   };
-  console.log(paginationAddNo, "paginationAddNo")
-  console.log(pagination, "paginationAddNo")
+
 
   const date = new Date();
   const futureDate = date.getDate() - 60;
@@ -236,7 +235,7 @@ const Complete = () => {
     // console.log(id, "id")
     let data = 1
     if (id === "prev") {
-      if (paginationAddNo! <= 1) {
+      if (paginationAddNo! <= 0) {
 
       } else {
         setPaginationAddNo(paginationAddNo - 1)
@@ -252,6 +251,8 @@ const Complete = () => {
 
     }
   })
+
+
   return (
 
     <div className="container">

@@ -152,7 +152,7 @@ const BetHistory = () => {
         <label htmlFor="lay">Khayi</label>
         <br />
 
-        <input
+        {/* <input
 
           type="radio"
           id="all"
@@ -173,7 +173,7 @@ const BetHistory = () => {
           onChange={handleChange}
         />
         <label htmlFor="back">Deleted</label>
-        <br />
+        <br /> */}
 
 
       </form>
