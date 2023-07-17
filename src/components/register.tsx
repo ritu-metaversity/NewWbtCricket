@@ -85,6 +85,12 @@ const Register = () => {
       .then((res) => {
         console.log(res, "dadasdas")
         SetselfAllowedd(res?.data?.data?.logo);
+        if (res?.data?.data?.selfAllowed === false) {
+
+          navigate("/sign-in")
+        } else {
+
+        }
       });
   }, []);
 
@@ -136,7 +142,6 @@ const Register = () => {
   //   setUserNameError("")
   //   setConfirmPasswordError("")
   // }, [])
-
 
   const handleConfirmPasswordsValidation = (e: any) => {
     setRegistration({

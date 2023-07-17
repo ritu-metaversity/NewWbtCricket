@@ -12,7 +12,7 @@ export const columns: ColumnsInterface<columnIds>[] = [
   {
     id: "amount",
     label: "Amount",
-    align: "right",
+    align: "center",
   },
 
   {
@@ -25,10 +25,12 @@ export const columns: ColumnsInterface<columnIds>[] = [
   {
     id: "time",
     label: "Date",
+    align: "center",
   },
 
   {
     id: "status",
     label: "Status",
+    align: "center",
   },
 ];

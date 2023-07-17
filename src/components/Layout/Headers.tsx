@@ -264,8 +264,15 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
               <li > <Link to="/in-play" onClick={() => setDrawerOpen(false)}><p><span><ImPlay3 /></span>IN PLAY</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/sports" onClick={() => setDrawerOpen(false)}><p><span><BsTrophyFill /></span>SPORTS</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/password-change" onClick={() => setDrawerOpen(false)}><p><span><BsKey /></span>CHANGE PASSWORD </p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/deposit" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw style={{ rotate: "180deg" }} /></span>DEPOSIT</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/withdraw" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw /></span>WITHDRAW</p>  <span><FaArrowRight /></span>   </Link></li>
+              {
+                appData?.selfAllowed === true ?
+                  <>
+                    <li > <Link to="/deposit" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw style={{ rotate: "180deg" }} /></span>DEPOSIT</p>  <span><FaArrowRight /></span>   </Link></li>
+                    <li > <Link to="/withdraw" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw /></span>WITHDRAW</p>  <span><FaArrowRight /></span>   </Link></li></>
+                  : ""
+
+              }
+
               <li > <Link to="/account-summary" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>MY LEDGER</p>  <span><FaArrowRight /></span>   </Link></li>
               {/* <li > <Link to="/login-history" onClick={() => setDrawerOpen(false)}><p><span><AiOutlineHistory /></span>LOGIN HISTORY</p>  <span><FaArrowRight /></span>   </Link></li> */}
               <li > <Link to="/current-bet" onClick={() => setDrawerOpen(false)}><p><span><MdSportsScore /></span>CURRENT BET</p>  <span><FaArrowRight /></span>   </Link></li>

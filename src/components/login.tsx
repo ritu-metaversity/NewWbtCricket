@@ -25,6 +25,7 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
   const [password, setPassword] = useState("");
   const host = window.location.hostname;
   const [selfAllowedd, SetselfAllowedd] = useState();
+  const [selfsignup, Setselfsignup] = useState();
 
   const handleClick = async () => {
 
@@ -73,9 +74,10 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
         "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
         { appUrl: appUrll }
       )
-      .then((res) => {
+      .then((res: any) => {
         console.log(res, "dadasdas")
         SetselfAllowedd(res?.data?.data?.logo);
+        Setselfsignup(res?.data?.data?.selfAllowed);
       });
   }, []);
   return (
@@ -105,14 +107,20 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
             <LoginIcon />
           </div>
         </div>
-        <div className="login_main" onClick={handleSign}>
-          <button className="login-Button">
-            Sign up
-          </button>
-          <div>
-            <LoginIcon style={{ rotate: "180deg" }} />
-          </div>
-        </div>
+        {selfsignup === true ?
+
+          <div className="login_main" onClick={handleSign}>
+            <button className="login-Button">
+              Sign up
+            </button>
+            <div>
+              <LoginIcon style={{ rotate: "180deg" }} />
+            </div>
+          </div> : ""
+
+
+        }
+
         <div className="_term_section">
           <div className="sub_term">
             <Link to="">
