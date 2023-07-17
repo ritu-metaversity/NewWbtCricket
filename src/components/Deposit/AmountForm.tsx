@@ -80,13 +80,8 @@ export function AmountForm({ amount, setAmount }: Props) {
           <Typography variant="caption" textAlign={"left"}>
             Enter Amount:
           </Typography>
-          <Box
-            bgcolor={"#e0ddddfb"}
-            p="0 5px"
-            alignItems="center"
-            borderRadius={"8px"}
-            height={46}
-            display="flex"
+          <div
+
             className="lkjhgfdsa"
           >
             <RemoveIcon onClick={handleMinusClick} />
@@ -98,7 +93,7 @@ export function AmountForm({ amount, setAmount }: Props) {
               onChange={handleChange}
             />
             <AddIcon onClick={handlePlusClick} />
-          </Box>
+          </div>
         </Box>
         <Box display="flex" style={{ minWidth: "100px" }}>
           {stackValue.map((value: any, index) => (

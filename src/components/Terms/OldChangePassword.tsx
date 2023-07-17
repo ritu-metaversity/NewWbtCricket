@@ -27,6 +27,12 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const { setLoading } = useContext(LoaderContext);
 
+  const [errorForall, setErrorForall] = useState("")
+  // const [useeerror, setUserNameError] = useState("")
+  // const [mobileerror, setmobileNumberError] = useState("")
+  const [passworderror, setPasswordError] = useState("")
+  const [confirmpassword, setConfirmPasswordError] = useState("")
+
   const handleClick = async (e: any) => {
     if (confirmPassword !== newPassword) {
       return snackBarUtil.error("New Password And Confirm Password does not match!");
@@ -36,19 +42,30 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
     const userid = localStorage.getItem("userid") || "";
     const token = localStorage.getItem("token") || "";
     setLoading && setLoading((prev) => ({ ...prev, handleClick: true }));
-    const { response } = await userServices.oldChangePassword({
-      oldPassword,
-      currentPassword: oldPassword,
-      newPassword,
-      confirmPassword,
-      userid,
-      token,
-    });
-    if (response) {
-      navigate("/sign-in");
-      localStorage.clear();
-      setIsSignedIn(false);
+
+
+
+    if ((newPassword?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&_]{8,12}$/) ===
+      null) === true) {
+      setPasswordError(
+        "Password should contain atleast one number and one lower case and one upper case."
+      );
+    } else {
+      const { response } = await userServices.oldChangePassword({
+        oldPassword,
+        currentPassword: oldPassword,
+        newPassword,
+        confirmPassword,
+        userid,
+        token,
+      });
+      if (response) {
+        navigate("/sign-in");
+        localStorage.clear();
+        setIsSignedIn(false);
+      }
     }
+
     setLoading && setLoading((prev) => ({ ...prev, handleClick: false }));
   };
 
@@ -56,27 +73,29 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
     setNewPassword(e.target.value)
     const passData = e.target.value;
     if (passData === "") {
-      snackBarUtil.error("Password is required.");
+      setPasswordError("Password is required.");
     } else if (passData?.length < 8) {
-      snackBarUtil.error("Minimum 8 letters required.");
+      setPasswordError("Minimum 8 letters required.");
     } else if (passData?.length > 13) {
-      snackBarUtil.error("Maximum 12 letters required");
+      setPasswordError("Maximum 12 letters required");
     } else if (
       passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&_]{8,12}$/) ===
       null
     ) {
-      snackBarUtil.error(
+      setPasswordError(
         "Password should contain atleast one number and one lower case and one upper case."
       );
     } else {
+      setPasswordError("")
     }
   };
   const handleConfirmPasswordsValidation = (e: any) => {
     setConfirmPassword(e.target.value)
     const confirmPass = e.target.value;
     if (newPassword !== confirmPass) {
-      snackBarUtil.error("Password must be equal.");
+      setConfirmPasswordError("Password must be equal.");
     } else {
+      setConfirmPasswordError("");
 
     }
   };
@@ -90,6 +109,7 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
     //   setConfirmPassword(e.target.value);
     // }
   };
+  console.log(oldPassword, newPassword, confirmPassword, "uytrfcvbhjuyg")
   return (
 
     <div className="outer_body_pass">
@@ -106,7 +126,6 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
             type="password"
             value={oldPassword}
             onChange={handleChange}
-
           />
           <input className="login_text_field"
             placeholder="NEW PASSWORD"
@@ -116,6 +135,8 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
             onChange={handlePassWordsValidation}
 
           />
+          <label style={{ color: "red" }}>{passworderror}</label>
+
           <input className="login_text_field"
             placeholder="CONFIRM PASSWORD"
             name="confirmPassword"
@@ -123,7 +144,7 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
             value={confirmPassword}
             onChange={handleConfirmPasswordsValidation}
           />
-
+          <label style={{ color: "red" }}>{confirmpassword}</label>
           <button className="wwwpurp_btn" onClick={handleClick}>
             Done
           </button>

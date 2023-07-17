@@ -24,12 +24,14 @@
     width: calc(40% - 50px);
 }
 
-@media screen and (min-width:300px) and (max-width: 700px) {
+@media screen and (min-width:700px) and (max-width: 1024px) {
     .lkjhgfdsa {
-        width: 50% !important;
+        width: 25% !important;
     }
 }
 
-.lkjhgfdsa {
-    width: 100%;
+@media screen and (min-width:300px) and (max-width: 700px) {
+    .lkjhgfdsa {
+        width: 35% !important;
+    }
 }

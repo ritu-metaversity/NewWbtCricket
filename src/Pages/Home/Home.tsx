@@ -94,13 +94,13 @@ const ActionCardPropsList = [
   {
     cardTitle: "Sports",
     // cardDesc: "Sports list",
-    cardImageSrc: '/freegame5.png',
+    cardImageSrc: '/spotssssss.png',
     cardForwardHref: "/sports",
   },
   {
     cardTitle: "Current Bet",
     // cardDesc: "change your mybet password",
-    cardImageSrc: "/aaaaaaaaa.png",
+    cardImageSrc: "/now_5579093.png",
     cardForwardHref: "/current-bet",
   },]
 

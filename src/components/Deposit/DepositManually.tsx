@@ -67,6 +67,7 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
               onChange={(e) => e.target.files && setFiles(e.target.files[0])}
               type="file"
               style={{ display: "none" }}
+              accept="image/*"
             />
           </label>
           {files && (

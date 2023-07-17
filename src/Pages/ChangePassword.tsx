@@ -21,7 +21,8 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [passworderror, setPasswordError] = useState("")
+  const [confirmpassword, setConfirmPasswordError] = useState("")
   const { setLoading } = useContext(LoaderContext);
   const handleClick = async (e: any) => {
     if (confirmPassword !== newPassword) {
@@ -30,15 +31,22 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
       return snackBarUtil.error("Please enter all the mandatory details");
     }
     setLoading && setLoading((prev) => ({ ...prev, handleClick: true }));
-    const { response } = await userServices.changePassword({
-      oldPassword,
-      currentPassword: oldPassword,
-      newPassword,
-    });
-    if (response) {
-      navigate("/sign-in");
-      localStorage.clear();
-      setIsSignedIn(false);
+    if ((newPassword?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&_]{8,12}$/) ===
+      null) === true) {
+      setPasswordError(
+        "Password should contain atleast one number and one lower case and one upper case."
+      );
+    } else {
+      const { response } = await userServices.changePassword({
+        oldPassword,
+        currentPassword: oldPassword,
+        newPassword,
+      });
+      if (response) {
+        navigate("/sign-in");
+        localStorage.clear();
+        setIsSignedIn(false);
+      }
     }
     setLoading && setLoading((prev) => ({ ...prev, handleClick: false }));
   };
@@ -46,28 +54,29 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
     setNewPassword(e.target.value)
     const passData = e.target.value;
     if (passData === "") {
-      snackBarUtil.error("Password is required.");
+      setNewPassword("Password is required.");
     } else if (passData?.length < 8) {
-      snackBarUtil.error("Minimum 8 letters required.");
+      setNewPassword("Minimum 8 letters required.");
     } else if (passData?.length > 13) {
-      snackBarUtil.error("Maximum 12 letters required");
+      setNewPassword("Maximum 12 letters required");
     } else if (
       passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&_]{8,12}$/) ===
       null
     ) {
-      snackBarUtil.error(
+      setNewPassword(
         "Password should contain atleast one number and one lower case and one upper case."
       );
     } else {
+      setNewPassword("")
     }
   };
   const handleConfirmPasswordsValidation = (e: any) => {
     setConfirmPassword(e.target.value)
     const confirmPass = e.target.value;
     if (newPassword !== confirmPass) {
-      snackBarUtil.error("Password must be equal.");
+      setConfirmPasswordError("Password must be equal.");
     } else {
-
+      setConfirmPasswordError("")
     }
   };
   const handleChange = (e: any) => {
@@ -105,6 +114,8 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
             onChange={handlePassWordsValidation}
 
           />
+          <label style={{ color: "red" }}>{passworderror}</label>
+
           <input className="login_text_field"
             placeholder="CONFIRM PASSWORD"
             name="confirmPassword"
@@ -112,6 +123,7 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
             value={confirmPassword}
             onChange={handleConfirmPasswordsValidation}
           />
+          <label style={{ color: "red" }}>{confirmpassword}</label>
 
           <button className="wwwpurp_btn" onClick={handleClick}>
             Done

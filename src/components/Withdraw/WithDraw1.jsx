@@ -329,13 +329,19 @@ const WithDraw1 = () => {
         accHolderName,
         BankName,
         ifscNum,
-        accType
+        accType,
+        withdrawType,
+        bankid
+
     ) => {
         setAccountHolderName(accHolderName);
         setAccountNumber(accNumber);
         setBankName(BankName);
         setIFSC(ifscNum);
         setAccountType(accType);
+        setwithType(withdrawType)
+        // setBankId(bankid)
+        // setWithdrawType(withdrawType)
     };
 
     // console.log(message, "dfsfsdfssfgdsdjijfv")
@@ -643,8 +649,9 @@ const WithDraw1 = () => {
                                                         aria-colindex="5"
                                                         className={`text-left withdraw-data ${withType === "BANK" ? "" : "d-none"
                                                             }`}>
-                                                        {item?.accountType}
+                                                        {item?.accountType}fsdfd
                                                     </td>
+                                                    {console.log(item, "jhgfds")}
                                                     <td
                                                         style={{ cursor: "pointer" }}
                                                         onClick={() =>
@@ -653,7 +660,10 @@ const WithDraw1 = () => {
                                                                 item.accountHolderName,
                                                                 item?.bankName,
                                                                 item?.ifsc,
-                                                                item?.accountType
+                                                                item?.accountType,
+                                                                item?.withdrawType,
+                                                                item?.id
+
                                                             )
                                                         }
                                                         aria-colindex="5"

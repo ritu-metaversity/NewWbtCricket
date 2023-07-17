@@ -292,6 +292,7 @@ select.custom-select.select-type.accounttype {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        gap: 10px
     }
 
     .card-header.header-card {

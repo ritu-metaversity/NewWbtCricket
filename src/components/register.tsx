@@ -36,18 +36,28 @@ const Register = () => {
   //   const [password, setPassword] = useState("");
   const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
 
+  const [errorForall, setErrorForall] = useState("")
+  const [useeerror, setUserNameError] = useState("")
+  const [mobileerror, setmobileNumberError] = useState("")
+  const [passworderror, setPasswordError] = useState("")
+  const [confirmpassword, setConfirmPasswordError] = useState("")
   const handleClick = async () => {
 
     if (register.username === "" && register.mobile === "" && register.password === "" && register.confirmPassword === "") {
-      return snackBarUtil.error("Please enter all the mandatory details");
+      return setErrorForall("Please enter all the mandatory details");
     } else if (register?.password !== "" && register?.mobile === "" && register?.username !== "" && register?.confirmPassword !== "") {
-      return snackBarUtil.error(" invalid mobile number");
+      return setErrorForall(" invalid mobile number");
     } else if (register?.password === "" && register?.mobile !== "" && register?.username !== "" && register?.confirmPassword !== "") {
-      return snackBarUtil.error("invalid password ");
+      return setErrorForall("invalid password ");
     } else if (register?.password !== "" && register?.mobile !== "" && register?.username !== "" && register?.confirmPassword === "") {
-      return snackBarUtil.error("invalid Confirm password");
+      return setErrorForall("invalid Confirm password");
     } else if (register.password !== register.confirmPassword) {
-      return snackBarUtil.error("Password does not match!!");
+      return setErrorForall("Password does not match!!");
+    } else if ((register?.password?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) ===
+      null) === true) {
+      return setPasswordError(
+        "Password should contain atleast one number and one lower case and one upper case."
+      );
     } else {
       const { response } = await authServices.registeration({
         ...register,
@@ -99,22 +109,35 @@ const Register = () => {
     })
     const passData = e.target.value;
     if (passData === "") {
-      snackBarUtil.error("Password is required.");
+      setPasswordError("Password is required.");
     } else if (passData?.length < 8) {
-      snackBarUtil.error("Minimum 8 letters required.");
+      setPasswordError("Minimum 8 letters required.");
     } else if (passData?.length > 13) {
-      snackBarUtil.error("Maximum 12 letters required");
+      setPasswordError("Maximum 12 letters required");
     } else if (
       passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) ===
       null
     ) {
-      snackBarUtil.error(
+      setPasswordError(
         "Password should contain atleast one number and one lower case and one upper case."
       );
     } else {
-
+      setPasswordError("")
     }
+    console.log(passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) ===
+      null, "uytgbnjiygbn")
   };
+
+
+
+  // useEffect(() => {
+  //   setPasswordError("")
+  //   setmobileNumberError("")
+  //   setUserNameError("")
+  //   setConfirmPasswordError("")
+  // }, [])
+
+
   const handleConfirmPasswordsValidation = (e: any) => {
     setRegistration({
       username: register?.username,
@@ -125,9 +148,9 @@ const Register = () => {
     })
     const confirmPass = e.target.value;
     if (register?.password !== confirmPass) {
-      snackBarUtil.error("Password must be equal.");
+      setConfirmPasswordError("Password must be equal.");
     } else {
-
+      setConfirmPasswordError("")
     }
   };
   const handleMobileNumber = (e: any) => {
@@ -139,13 +162,11 @@ const Register = () => {
       appUrl: window.location.hostname,
     })
     if (e.target.value === "") {
-      snackBarUtil.error("Mobile number must not be empty.");
-    } else if (e.target.value?.length < 7) {
-      snackBarUtil.error("Must be minimum 7 digit");
-    } else if (e.target.value?.length > 10) {
-      snackBarUtil.error("Must be maximum 10 digit");
+      setmobileNumberError("Mobile number must not be empty.");
+    } else if (e.target.value?.length !== 10) {
+      setmobileNumberError("Must be minimum 10 digit");
     } else {
-
+      setmobileNumberError("")
     }
   };
   const handleUserName = (e: any) => {
@@ -159,15 +180,15 @@ const Register = () => {
     // setUserName(e.target.value);
     const userData = e.target.value;
     if (userData === "") {
-      snackBarUtil.error("User Name is required");
+      setUserNameError("User Name is required");
     } else if (userData?.length < 4) {
-      snackBarUtil.error("Minimum 4 letters required.");
+      setUserNameError("Minimum 4 letters required.");
     } else if (userData?.length > 8) {
-      snackBarUtil.error("Maximum 8 letters required.");
+      setUserNameError("Maximum 8 letters required.");
     } else if (userData?.match(/^[a-zA-Z0-9]+$/) === null) {
-      snackBarUtil.error("Only number and alphabet are allowed.");
+      setUserNameError("Only number and alphabet are allowed.");
     } else {
-
+      setUserNameError("")
     }
   };
 
@@ -232,7 +253,7 @@ const Register = () => {
             value={register?.username}
             onChange={handleUserName}
           />
-
+          <label style={{ color: "red" }}>{useeerror}</label>
           <input className="sign-Input"
             required
             name="mobile"
@@ -244,6 +265,8 @@ const Register = () => {
             onKeyDown={(e) =>
               symbolsArrMail.includes(e.key) && e.preventDefault()
             } />
+          <label style={{ color: "red" }}>{mobileerror}</label>
+
           <input className="sign-Input"
             required
             name="password"
@@ -252,6 +275,8 @@ const Register = () => {
             value={register?.password}
             onChange={handlePassWordsValidation}
           />
+          <label style={{ color: "red" }}>{passworderror}</label>
+
           <input className="sign-Input"
             required
             name="confirmPassword"
@@ -260,6 +285,8 @@ const Register = () => {
             value={register?.confirmPassword}
             onChange={handleConfirmPasswordsValidation}
           />
+          <label style={{ color: "red" }}>{confirmpassword}</label>
+
           <div className="login_main" onClick={handleClick}>
             <button className="login-Button">
               Sign Up
@@ -269,6 +296,7 @@ const Register = () => {
             <LoginIcon />
             {/* </div> */}
           </div>
+          <label style={{ color: "red" }}>{errorForall}</label>
           <div className="login_main" onClick={handleClickLogin}>
             <button className="login-Button">
               Login
