@@ -23,3 +23,13 @@
     color: black;
     width: calc(40% - 50px);
 }
+
+@media screen and (min-width:300px) and (max-width: 700px) {
+    .lkjhgfdsa {
+        width: 50% !important;
+    }
+}
+
+.lkjhgfdsa {
+    width: 100%;
+}

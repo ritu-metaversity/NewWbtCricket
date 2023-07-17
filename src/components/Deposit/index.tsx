@@ -23,10 +23,10 @@ const Deposit = () => {
   const [depositList, setDepositList] = useState<DepositListInterface[]>([]);
 
   const getDepositList = async () => {
-    const { response } = await selfServices.getDepositList();
+    const { response } = await selfServices?.getDepositList();
     console.log(response, "deposit data");
-    if (response.data) {
-      setDepositList(response.data);
+    if (response?.data) {
+      setDepositList(response?.data);
     }
   };
   const [imageSelected, setImageSelected] = useState("");

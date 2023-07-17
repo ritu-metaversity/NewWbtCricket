@@ -43,7 +43,7 @@ import { GiHamburgerMenu } from "react-icons/gi"
 import { MdManageAccounts } from "react-icons/md"
 import { ImPlay3 } from "react-icons/im"
 import { AiFillCaretDown } from "react-icons/ai"
-import { BsTrophyFill, BsFillMenuButtonFill, BsKey } from "react-icons/bs"
+import { BsTrophyFill, BsFillMenuButtonFill, BsKey, BsFileEarmarkRuled } from "react-icons/bs"
 
 import { BiMoneyWithdraw } from "react-icons/bi"
 import { MdOutlineRealEstateAgent, MdWorkHistory, MdSportsScore, MdLegendToggle } from "react-icons/md"
@@ -153,6 +153,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
       <AppBar
         position="sticky"
         enableColorOnDark
+        onClick={handleClose}
         style={{ background: colorHex.bg2, height: "50px" }}
         className="main_header"
       >
@@ -173,7 +174,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
                 <div className="logo-name">
 
 
-                  <img src={appData?.logo} alt="Logo" className="desktop_logogogo" style={{height: "54px" }} />
+                  <img src={appData?.logo} alt="Logo" className="desktop_logogogo" style={{ height: "54px" }} />
 
                   <span className="mobile_logogoggo" style={{ color: "white" }}>
 
@@ -228,7 +229,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
           </Stack>
           {matches ?
             ((localStorage.getItem("passwordType") === "new") ?
-              <IconButton onClick={(e) => { setAnchorEl(e.currentTarget); }}>
+              <IconButton onClick={(e) => { e.stopPropagation(); setAnchorEl((o) => o ? null : e.currentTarget); }}>
                 <AiFillCaretDown style={{ color: "white" }} />
               </IconButton>
               :
@@ -262,14 +263,15 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
               <li > <Link to="/profile" onClick={() => setDrawerOpen(false)}><p><span><MdManageAccounts /></span>PROFILE</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/in-play" onClick={() => setDrawerOpen(false)}><p><span><ImPlay3 /></span>IN PLAY</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/sports" onClick={() => setDrawerOpen(false)}><p><span><BsTrophyFill /></span>SPORTS</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/password-change" onClick={() => setDrawerOpen(false)}><p><span><BsKey /></span>PASSWORD CHANGE</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/password-change" onClick={() => setDrawerOpen(false)}><p><span><BsKey /></span>CHANGE PASSWORD </p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/deposit" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw style={{ rotate: "180deg" }} /></span>DEPOSIT</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/withdraw" onClick={() => setDrawerOpen(false)}><p><span><BiMoneyWithdraw /></span>WITHDRAW</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/account-summary" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span> PROFIT & LOSS</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/login-history" onClick={() => setDrawerOpen(false)}><p><span><AiOutlineHistory /></span>LOGIN HISTORY</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/account-summary" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>MY LEDGER</p>  <span><FaArrowRight /></span>   </Link></li>
+              {/* <li > <Link to="/login-history" onClick={() => setDrawerOpen(false)}><p><span><AiOutlineHistory /></span>LOGIN HISTORY</p>  <span><FaArrowRight /></span>   </Link></li> */}
               <li > <Link to="/current-bet" onClick={() => setDrawerOpen(false)}><p><span><MdSportsScore /></span>CURRENT BET</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/bet-history" onClick={() => setDrawerOpen(false)}><p><span><MdWorkHistory /></span>BET HISTORY</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/set-button-value" onClick={() => setDrawerOpen(false)}><p><span><BsFillMenuButtonFill /></span>SET BUTTON VALUE</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/terms" onClick={() => setDrawerOpen(false)}><p><span><BsFileEarmarkRuled /></span>RULES</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/welcome" onClick={clickHandler}><p><span><HiOutlineLogout /></span>LOGOUT</p>  <span><FaArrowRight /></span>   </Link></li>
 
             </ul>
@@ -278,111 +280,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
 
           </Drawer>}
         </div>
-        {matches && <Menu
-          anchorEl={anchorEl}
-          onClick={handleClose}
-          id="account-menu"
-          open={open}
-          onClose={handleClose}
-          sx={{ zIndex: 10 }}
-          PaperProps={{
-            elevation: 0,
-            sx: {
-              overflow: "scroll",
-              filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-              mt: 1.5,
-              color: "black",
-              "& .MuiAvatar-root": {
-                width: 32,
-                height: 32,
-                ml: -0.5,
-                mr: 1,
-              },
-              "&:before": {
-                content: '""',
-                display: "block",
-                position: "absolute",
-                top: 0,
-                right: 20,
-                width: 10,
-                height: 10,
-                bgcolor: "background.paper",
-                transform: "translateY(-50%) rotate(45deg)",
-                zIndex: 0,
-              },
-            },
-          }}
-          transformOrigin={{ horizontal: "right", vertical: "top" }}
-          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-        >
-          {appData?.selfAllowed && (
-            <Box style={{ display: "flex" }}>
-              <Link to="/deposit">
-                <MenuItem>
-                  <Button
-                    variant="contained"
-                    style={{ borderRadius: "10px" }}
-                    color="success"
-                  >
-                    Deposit
-                  </Button>
-                </MenuItem>
-              </Link>
-              <Link to="/withdraw">
-                <MenuItem>
-                  <Button
-                    variant="contained"
-                    style={{ borderRadius: "10px" }}
-                    color="error"
-                  >
-                    Withdraw
-                  </Button>
-                </MenuItem>
-              </Link>
-            </Box>
-          )}
-          <Link to="/profile">
-            <MenuItem>
-              <Avatar /> Profile
-            </MenuItem>
-          </Link>
-          <Link to="/account-summary">
-            <MenuItem>
-              <AttachMoneyIcon /> Account Statement
-            </MenuItem>
-          </Link>
-          <Link to="/login-history">
-            <MenuItem>
-              <SummarizeIcon /> Login History
-            </MenuItem>
-          </Link>
-          <Link to="/current-bet">
-            <MenuItem>
-              <AttachMoneyIcon /> Current Bet
-            </MenuItem>
-          </Link>
-          <Link to="/bet-history">
-            <MenuItem>
-              <AttachMoneyIcon /> Bet History
-            </MenuItem>
-          </Link>
 
-          <Link to="/set-button-value">
-            <MenuItem>
-              <MoneyIcon /> Set button value
-            </MenuItem>
-          </Link>
-          <Divider />
-
-          <MenuItem onClick={clickHandler}>
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Logout
-          </MenuItem>
-        </Menu>
-
-        }
       </AppBar>
       <div className="header_chips_expo">
         <div className="inner_chips" style={{ fontWeight: "600" }}>
@@ -392,7 +290,111 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
           </span>
         </div>
       </div>
+      {matches && <Menu
+        anchorEl={anchorEl}
+        onClick={handleClose}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        sx={{ zIndex: 10 }}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: "scroll",
+            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+            mt: 1.5,
+            color: "black",
+            "& .MuiAvatar-root": {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+            },
+            "&:before": {
+              content: '""',
+              display: "block",
+              position: "absolute",
+              top: 0,
+              right: 20,
+              width: 10,
+              height: 10,
+              bgcolor: "background.paper",
+              transform: "translateY(-50%) rotate(45deg)",
+              zIndex: 0,
+            },
+          },
+        }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      >
+        {appData?.selfAllowed && (
+          <Box style={{ display: "flex" }}>
+            <Link to="/deposit">
+              <MenuItem>
+                <Button
+                  variant="contained"
+                  style={{ borderRadius: "10px" }}
+                  color="success"
+                >
+                  Deposit
+                </Button>
+              </MenuItem>
+            </Link>
+            <Link to="/withdraw">
+              <MenuItem>
+                <Button
+                  variant="contained"
+                  style={{ borderRadius: "10px" }}
+                  color="error"
+                >
+                  Withdraw
+                </Button>
+              </MenuItem>
+            </Link>
+          </Box>
+        )}
+        <Link to="/profile">
+          <MenuItem>
+            <Avatar /> Profile
+          </MenuItem>
+        </Link>
+        <Link to="/account-summary">
+          <MenuItem>
+            <AttachMoneyIcon /> Account Statement
+          </MenuItem>
+        </Link>
+        {/* <Link to="/login-history">
+          <MenuItem>
+            <SummarizeIcon /> Login History
+          </MenuItem>
+        </Link> */}
+        <Link to="/current-bet">
+          <MenuItem>
+            <AttachMoneyIcon /> Current Bet
+          </MenuItem>
+        </Link>
+        <Link to="/bet-history">
+          <MenuItem>
+            <AttachMoneyIcon /> Bet History
+          </MenuItem>
+        </Link>
 
+        <Link to="/set-button-value">
+          <MenuItem>
+            <MoneyIcon /> Set button value
+          </MenuItem>
+        </Link>
+        <Divider />
+
+        <MenuItem onClick={clickHandler}>
+          <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
+
+      }
       <Marquee speed={50} gradient={false}>
         {message}
       </Marquee>

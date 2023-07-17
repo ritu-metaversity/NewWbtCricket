@@ -12,7 +12,7 @@ const Withdraw = () => {
   const nav = useNavigate();
   const [withdrawList, setWithdrawList] = useState([]);
   const getWithdrawList = async () => {
-    const { response } = await selfServices.getWithdrawList();
+    const { response } = await selfServices?.getWithdrawList();
     if (response.data) {
       setWithdrawList(response.data);
     }

@@ -133,7 +133,7 @@ const Casino = () => {
       <Box
       // bgcolor={colorHex.bg1}
       >
-        <Box m={"10px"} display={"flex"} flexWrap="wrap" gap={"10px"}>
+        <Box className="casino_main_list">
           {!(casinoList?.length > 0) && (
             <Typography
               textAlign={"center"}
@@ -146,17 +146,11 @@ const Casino = () => {
           )}
           {casinoList.map((item) => (
             <Box
-              width={{
-                xs: "calc(50% - 10px)",
-                sm: "calc(50% - 10px)",
-                md: "calc(25% - 10px)",
-                lg: "calc(20% - 10px)",
-              }}
-              m="auto"
+              className="casino_inner_list"
             >
               {/* <Link to={"/casino/" + item.gameId}> */}
-              <StyledGameThumb src={item.imageUrl} alt="thumb" onClick={() => handleChangeaa(item.gameId)} />{" "}
-              <div className="casinoName"> {item?.gameCode}</div>
+              <img src={item.imageUrl} alt="thumb" onClick={() => handleChangeaa(item.gameId)} className="csino_img" style={{ width: "100%" }} />{" "}
+              <span style={{ width: "100%" }} className="casinoGameNAame"> {item?.gameCode}</span>
               {/* </Link> */}
             </Box>
           ))}

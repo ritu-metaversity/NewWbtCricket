@@ -87,7 +87,7 @@ export function AmountForm({ amount, setAmount }: Props) {
             borderRadius={"8px"}
             height={46}
             display="flex"
-            style={{ width: "50%" }}
+            className="lkjhgfdsa"
           >
             <RemoveIcon onClick={handleMinusClick} />
             <StyledAmountInput

@@ -12,7 +12,8 @@ export const selfResources: {
     METHOD: "POST",
   },
   PAYMENT_DETAILS: {
-    URL: "enduser/get-paymnet-detail-app-id-wise",
+    URL: "deposit-type/get_sub",
+    // URL: "enduser/get-paymnet-detail-app-id-wise",
     METHOD: "POST",
   },
   WITHDRAW_LIST: {

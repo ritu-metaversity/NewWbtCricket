@@ -13,6 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { authServices } from "../utils/api/auth/services";
 import snackBarUtil from "./Layout/snackBarUtil";
 import "./Login.css"
+import LoginIcon from '@mui/icons-material/Login';
 
 interface RegisterInterface {
   username?: string;
@@ -62,17 +63,7 @@ const Register = () => {
       }
     }
   };
-  const handleClickLogin = () => {
-    navigate("/sign-in")
 
-  }
-  const handleChange = (e: any) => {
-    setRegistration({
-      ...register,
-      [e.target.name]: e.target.value,
-      appUrl: window.location.hostname,
-    });
-  };
   useEffect(() => {
     let appUrll = window.location.hostname;
     // let appUrll = "localhost";
@@ -86,6 +77,109 @@ const Register = () => {
         SetselfAllowedd(res?.data?.data?.logo);
       });
   }, []);
+
+  const handleClickLogin = () => {
+    navigate("/sign-in")
+
+  }
+  // const handleChange = (e: any) => {
+  //   setRegistration({
+  //     ...register,
+  //     [e.target.name]: e.target.value,
+  //     appUrl: window.location.hostname,
+  //   });
+  // };
+  const handlePassWordsValidation = (e: any) => {
+    setRegistration({
+      username: register?.username,
+      password: e.target.value,
+      mobile: register?.mobile,
+      confirmPassword: register?.confirmPassword,
+      appUrl: window.location.hostname,
+    })
+    const passData = e.target.value;
+    if (passData === "") {
+      snackBarUtil.error("Password is required.");
+    } else if (passData?.length < 8) {
+      snackBarUtil.error("Minimum 8 letters required.");
+    } else if (passData?.length > 13) {
+      snackBarUtil.error("Maximum 12 letters required");
+    } else if (
+      passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) ===
+      null
+    ) {
+      snackBarUtil.error(
+        "Password should contain atleast one number and one lower case and one upper case."
+      );
+    } else {
+
+    }
+  };
+  const handleConfirmPasswordsValidation = (e: any) => {
+    setRegistration({
+      username: register?.username,
+      password: register?.password,
+      mobile: register?.mobile,
+      confirmPassword: e.target.value,
+      appUrl: window.location.hostname,
+    })
+    const confirmPass = e.target.value;
+    if (register?.password !== confirmPass) {
+      snackBarUtil.error("Password must be equal.");
+    } else {
+
+    }
+  };
+  const handleMobileNumber = (e: any) => {
+    setRegistration({
+      username: register?.username,
+      password: register?.password,
+      mobile: e.target.value,
+      confirmPassword: register?.confirmPassword,
+      appUrl: window.location.hostname,
+    })
+    if (e.target.value === "") {
+      snackBarUtil.error("Mobile number must not be empty.");
+    } else if (e.target.value?.length < 7) {
+      snackBarUtil.error("Must be minimum 7 digit");
+    } else if (e.target.value?.length > 10) {
+      snackBarUtil.error("Must be maximum 10 digit");
+    } else {
+
+    }
+  };
+  const handleUserName = (e: any) => {
+    setRegistration({
+      username: e.target.value,
+      password: register?.password,
+      mobile: register?.mobile,
+      confirmPassword: register?.confirmPassword,
+      appUrl: window.location.hostname,
+    })
+    // setUserName(e.target.value);
+    const userData = e.target.value;
+    if (userData === "") {
+      snackBarUtil.error("User Name is required");
+    } else if (userData?.length < 4) {
+      snackBarUtil.error("Minimum 4 letters required.");
+    } else if (userData?.length > 8) {
+      snackBarUtil.error("Maximum 8 letters required.");
+    } else if (userData?.match(/^[a-zA-Z0-9]+$/) === null) {
+      snackBarUtil.error("Only number and alphabet are allowed.");
+    } else {
+
+    }
+  };
+
+
+
+
+
+
+
+
+
+
 
   return (
     <Box
@@ -136,7 +230,7 @@ const Register = () => {
             name="username"
 
             value={register?.username}
-            onChange={handleChange}
+            onChange={handleUserName}
           />
 
           <input className="sign-Input"
@@ -145,7 +239,7 @@ const Register = () => {
             placeholder="Mobile No"
             type="number"
             value={register?.mobile}
-            onChange={handleChange}
+            onChange={handleMobileNumber}
 
             onKeyDown={(e) =>
               symbolsArrMail.includes(e.key) && e.preventDefault()
@@ -156,7 +250,7 @@ const Register = () => {
             placeholder="Password"
             type="password"
             value={register?.password}
-            onChange={handleChange}
+            onChange={handlePassWordsValidation}
           />
           <input className="sign-Input"
             required
@@ -164,16 +258,25 @@ const Register = () => {
             placeholder="Confirm Password"
             type="password"
             value={register?.confirmPassword}
-            onChange={handleChange}
+            onChange={handleConfirmPasswordsValidation}
           />
           <div className="login_main" onClick={handleClick}>
             <button className="login-Button">
               Sign Up
             </button>
-            <div>
+            {/* <div> */}
 
-              {/* <LoginIcon /> */}
-            </div>
+            <LoginIcon />
+            {/* </div> */}
+          </div>
+          <div className="login_main" onClick={handleClickLogin}>
+            <button className="login-Button">
+              Login
+            </button>
+            {/* <div> */}
+            <LoginIcon style={{ rotate: "180deg" }} />
+
+            {/* </div> */}
           </div>
 
         </div>

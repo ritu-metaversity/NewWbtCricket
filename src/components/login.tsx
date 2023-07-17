@@ -52,7 +52,10 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
       }
     }
   };
+  const handleSign = () => {
+    navigate("/sign-up");
 
+  }
   const handleChange = (e: any) => {
     if (e.target.name === "login") {
       setLogin(e.target.value);
@@ -100,6 +103,14 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
           </button>
           <div>
             <LoginIcon />
+          </div>
+        </div>
+        <div className="login_main" onClick={handleSign}>
+          <button className="login-Button">
+            Sign up
+          </button>
+          <div>
+            <LoginIcon style={{ rotate: "180deg" }} />
           </div>
         </div>
         <div className="_term_section">
