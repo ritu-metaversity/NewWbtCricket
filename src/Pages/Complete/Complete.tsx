@@ -321,14 +321,16 @@ const Complete = () => {
         <table className="" style={{ width: "100%" }}>
           <thead>
             <tr>
-              <th className="ldg-tbl-th match-box-color" style={{ whiteSpace: "nowrap" }}>Sr no.</th>
+              {/* <th className="ldg-tbl-th match-box-color" style={{ whiteSpace: "nowrap" }}>Sr no.</th> */}
               <th className="ldg-tbl-th match-box-color">DATE</th>
               <th className="ldg-tbl-th match-box-color" style={{ width: "40%" }}>
-                Remark
+                DESCRIPTION
               </th>
               {/* <th className="ldg-tbl-th match-box-color"></th> */}
+              <th className="ldg-tbl-th match-box-color">Prev. Bal</th>
               <th className="ldg-tbl-th match-box-color">CREDIT</th>
               <th className="ldg-tbl-th match-box-color">DEBIT</th>
+              <th className="ldg-tbl-th match-box-color">BALANCE</th>
               {/* <th className="ldg-tbl-th match-box-color">Comm+</th> */}
               {/* <th className="ldg-tbl-th match-box-color">BALANCE</th> */}
             </tr>
@@ -339,11 +341,13 @@ const Complete = () => {
               {profitandLossData?.map((item: any) => {
                 return (<tr>
                   <>
-                    <td className="ldg-tbl-td match-value-box-color" style={{ textAlign: "left" }}>{item?.sno}</td>
-                    <td className="ldg-tbl-td match-value-box-color" style={{ textAlign: "left" }}>{item.date}{" "}</td>
-                    <td className="ldg-tbl-td match-value-box-color">{item?.fromto}</td>
+                    {/* <td className="ldg-tbl-td match-value-box-color" style={{ textAlign: "left" }}>{item?.sno}</td> */}
+                    <td className="ldg-tbl-td match-value-box-color" >{item.date}{" "}</td>
+                    <td className="ldg-tbl-td match-value-box-color" style={{ textAlign: "left" }}>{item?.remark}</td>
+                    <td className="ldg-tbl-td match-value-box-color text-green" >0</td>
                     <td className="ldg-tbl-td match-value-box-color text-green" style={{ color: "green" }}>{item?.credit}</td>
                     <td className="ldg-tbl-td match-value-box-color text-red" style={{ color: "red" }}>{item?.debit}</td>
+                    <td className="ldg-tbl-td match-value-box-color text-red" >{item?.pts}</td>
                     {/* <td className="ldg-tbl-td match-value-box-color text-green">0</td>
             <td className="ldg-tbl-td match-value-box-color">810</td> */}
                   </>
@@ -369,35 +373,40 @@ const Complete = () => {
           }
         </table>
       </div>
+      {
+        pagination?.totalPages === 1 ?
+          ""
+          :
+          <div className="row" style={{ textAlign: "center" }}>
+            <ul className="pagination">
 
-      <div className="row" style={{ textAlign: "center" }}>
-        <ul className="pagination">
+              <li
+                // className={`previous ${pagination ? "disabled" : ""}`}
+                onClick={() => handlePaggi("prev")}>
+                <a role="button" aria-disabled="true">
+                  Prev
+                </a>
+              </li>
+              <li className="active">
+                <a
+                  role="button"
+                >
+                  {paginationAddNo + 1}
+                </a>
+              </li>
 
-          <li
-            // className={`previous ${pagination ? "disabled" : ""}`}
-            onClick={() => handlePaggi("prev")}>
-            <a role="button" aria-disabled="true">
-              Prev
-            </a>
-          </li>
-          <li className="active">
-            <a
-              role="button"
-            >
-              {paginationAddNo + 1}
-            </a>
-          </li>
-
-          <li onClick={() => handlePaggi("next")} className="next" >
-            <a tabIndex={0} role="button" aria-disabled="true">
-              Next
-            </a>
-          </li>
+              <li onClick={() => handlePaggi("next")} className="next" >
+                <a tabIndex={0} role="button" aria-disabled="true">
+                  Next
+                </a>
+              </li>
 
 
 
-        </ul>
-      </div>
+            </ul>
+          </div>
+      }
+
       {/* <div className="row">
         <div className="backtoMenu" style={{ width: "100%" }}>
           <a href="/">

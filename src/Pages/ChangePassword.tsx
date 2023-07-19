@@ -20,6 +20,7 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
   const navigate = useNavigate();
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [newPasswordError, setNewPasswordError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passworderror, setPasswordError] = useState("")
   const [confirmpassword, setConfirmPasswordError] = useState("")
@@ -31,7 +32,7 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
       return snackBarUtil.error("Please enter all the mandatory details");
     }
     setLoading && setLoading((prev) => ({ ...prev, handleClick: true }));
-    if ((newPassword?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&_]{8,12}$/) ===
+    if ((newPassword?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?#&_]{8,12}$/) ===
       null) === true) {
       setPasswordError(
         "Password should contain atleast one number and one lower case and one upper case."
@@ -51,26 +52,29 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
     setLoading && setLoading((prev) => ({ ...prev, handleClick: false }));
   };
   const handlePassWordsValidation = (e: any) => {
+    console.log(e.target.value, "fsdfsdfsdfsdfd");
+
     setNewPassword(e.target.value)
     const passData = e.target.value;
     if (passData === "") {
-      setNewPassword("Password is required.");
+      setPasswordError("Password is required.");
     } else if (passData?.length < 8) {
-      setNewPassword("Minimum 8 letters required.");
+      setPasswordError("Minimum 8 letters required.");
     } else if (passData?.length > 13) {
-      setNewPassword("Maximum 12 letters required");
+      setPasswordError("Maximum 12 letters required");
     } else if (
-      passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&_]{8,12}$/) ===
+      passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?#&_]{8,12}$/) ===
       null
     ) {
-      setNewPassword(
+      setPasswordError(
         "Password should contain atleast one number and one lower case and one upper case."
       );
     } else {
-      setNewPassword("")
+      setPasswordError("")
     }
   };
   const handleConfirmPasswordsValidation = (e: any) => {
+
     setConfirmPassword(e.target.value)
     const confirmPass = e.target.value;
     if (newPassword !== confirmPass) {
@@ -112,7 +116,6 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
             type="password"
             value={newPassword}
             onChange={handlePassWordsValidation}
-
           />
           <label style={{ color: "red" }}>{passworderror}</label>
 

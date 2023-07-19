@@ -8,4 +8,37 @@
     color: #fff !important;
     padding: 0 !important;
     /* color: #7b7c7f; */
+
+
+}
+
+.btnprofilebtnnn {
+    border: 1px solid #000;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 13px;
+    color: #FFF;
+    padding: 8px;
+    font-weight: bold;
+    background: #87bb33;
+    width: 100%;
+}
+
+.rateinfo {
+    /* height: 48px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back_btn_profile {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.conmanybtn_profile {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 3px;
+    color: #fff;
 }

@@ -45,7 +45,7 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
 
 
 
-    if ((newPassword?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&_]{8,12}$/) ===
+    if ((newPassword?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?#&_]{8,12}$/) ===
       null) === true) {
       setPasswordError(
         "Password should contain atleast one number and one lower case and one upper case."
@@ -79,7 +79,7 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
     } else if (passData?.length > 13) {
       setPasswordError("Maximum 12 letters required");
     } else if (
-      passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&_]{8,12}$/) ===
+      passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?#&_]{8,12}$/) ===
       null
     ) {
       setPasswordError(

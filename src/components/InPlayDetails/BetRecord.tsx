@@ -34,7 +34,7 @@ const BetRecord = (props: { item: any }) => {
   }, [props.item]);
 
   return (
-    <Box display="flex" flexDirection="column" gap={2}>
+    <>    <Box display="flex" flexDirection="column" gap={2}>
       {betRecord &&
         Object.keys(betRecord).map((key) => (
           <StickyTable
@@ -50,7 +50,7 @@ const BetRecord = (props: { item: any }) => {
             accordion
           />
         ))}
-    </Box>
+    </Box></>
   );
 };
 

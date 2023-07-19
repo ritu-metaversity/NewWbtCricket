@@ -26,11 +26,11 @@ const WithDraw1 = () => {
     // const [active, setActive] = useState(0);
 
     const [show, setShow] = useState(false);
-    const [withType, setwithType] = useState("");
+    const [withType, setwithType] = useState();
     const [withCoinValue, setwithCoinValue] = useState(0);
     // const [userAmount, setUserAmount] = useState();
     const [accountNumber, setAccountNumber] = useState();
-    const [accountHolderName, setAccountHolderName] = useState();
+    const [accountHolderName, setAccountHolderName] = useState("");
     const [ifsc, setIFSC] = useState();
     const [bankName, setBankName] = useState();
     const [AccountType, setAccountType] = useState("Saving");
@@ -57,6 +57,10 @@ const WithDraw1 = () => {
         setBankName("");
         setwithCoinValue(0);
     };
+    console.log(withType, "iuhjuhnij");
+    // const handleCancel = () => {
+    //     setshowWithdraw(false);
+    //   };
     const handlePaymentDetails = (val, id) => {
         setwithType(val);
         setBankId(id);
@@ -65,7 +69,7 @@ const WithDraw1 = () => {
         setAccountNumber("");
         setIFSC("");
         setBankName("");
-        setwithCoinValue(0);
+        // setwithCoinValue(0);
         setSavedBankdetailsName(val)
         console.log(val, id, "lkjhgfdsa")
 
@@ -219,6 +223,15 @@ const WithDraw1 = () => {
                 snackBarUtil.error(erreeee?.infcRequired)
                 setIsLoading(false);
                 return false;
+            } else if (ifsc === "") {
+                snackBarUtil.error(erreeee?.infcRequired)
+                setIsLoading(false);
+                return false;
+            }
+            else if (ifsc.match(/^[A-Za-z]{4}\d{4,8}$/) === null) {
+                snackBarUtil.error("Please enter a valid IFSC CODE")
+                setIsLoading(false);
+                return false;
             }
         } else if (withType === "PAYTM") {
             console.log("heloo");
@@ -236,6 +249,12 @@ const WithDraw1 = () => {
                 return false;
             } else if (accountHolderName === "") {
                 snackBarUtil.error(erreeee?.AmountNamerequired)
+                setIsLoading(false);
+                return false;
+            } else if (accountNumber.length !== 10) {
+                snackBarUtil.error("Enter Valid Mobile number");
+                // setErrorAlert(true);
+                // setColorName("danger");
                 setIsLoading(false);
                 return false;
             }
@@ -256,8 +275,8 @@ const WithDraw1 = () => {
                 return false;
             } else if (accountHolderName === "") {
                 snackBarUtil.error(erreeee?.AmountNamerequired)
-                setErrorAlert(true);
-                setColorName("danger");
+                // setErrorAlert(true);
+                // setColorName("danger");
                 setIsLoading(false);
                 return false;
             } else if (
@@ -265,8 +284,8 @@ const WithDraw1 = () => {
                 null
             ) {
                 snackBarUtil.error(erreeee?.upivalid)
-                setErrorAlert(true);
-                setColorName("danger");
+                // setErrorAlert(true);
+                // setColorName("danger");
                 setIsLoading(false);
                 return false;
             }
@@ -283,10 +302,10 @@ const WithDraw1 = () => {
         if (handleValidate()) {
             const data = {
                 accountHolderName: accountHolderName,
-                bankName: bankName,
+                bankName: bankName ? bankName : "",
                 accountType: withType === "BANK" ? AccountType : "",
                 amount: withCoinValue,
-                ifsc: ifsc,
+                ifsc: ifsc ? ifsc.toUpperCase() : "",
                 accountNumber: accountNumber,
                 withdrawType: bankID,
                 withdrawMode: withdrawType,
@@ -300,7 +319,9 @@ const WithDraw1 = () => {
                     },
                 })
                 .then((res) => {
-                    if (res?.data?.data?.bankExist === false) {
+                    // setWithdrawReq(res.data);
+                    // setDataLength(res.data.length);
+                    if (res?.data?.bankExist === false) {
                         setShow(true);
                         console.log(res, "yutfdgchjiouytfgdxcvbhjkiuygfc")
                     } else {
@@ -316,9 +337,9 @@ const WithDraw1 = () => {
 
                 })
                 .catch((error) => {
-                    setErrorAlert(true);
+                    // setErrorAlert(true);
                     setIsLoading(false);
-                    setColorName("danger");
+                    // setColorName("danger");
                     snackBarUtil.error(error?.response?.data?.message)
                     // setMessage(error?.response?.data?.message);
                 });
@@ -398,7 +419,7 @@ const WithDraw1 = () => {
                 className="withdrow_type"
                 style={{ marginBottom: "12px", width: "100%" }}>
                 <select onChange={(e) => setWithdrawType(e.target.value)} style={{ with: "50%" }}>
-                    <option selected>Select Withdraw Type</option>
+                    <option value="">Select Withdraw Type</option>
                     <option value="Normal">Normal</option>
                     <option value="Instant">Instant</option>
                 </select>
@@ -438,7 +459,6 @@ const WithDraw1 = () => {
                 </Container>
 
 
-
                 {
                     withType === "BANK" ? (
                         <div
@@ -450,8 +470,10 @@ const WithDraw1 = () => {
                                 <input
                                     type="number"
                                     className="account-input"
-                                    value={accountNumber}
-                                    onChange={(e) => setAccountNumber(e.target.value)}
+                                    value={accountNumber?.toString().replace(".", "")}
+                                    onChange={(e) =>
+                                        e.target.value.match(/^[0-9]*$/) &&
+                                        setAccountNumber(Number(e.target.value))}
                                 />
                             </div>
                             <div className="mx-input-wrapper account-field">
@@ -460,10 +482,11 @@ const WithDraw1 = () => {
                                 <input
                                     type="text"
                                     className="account-input"
-                                    value={accountHolderName}
+                                    value={accountHolderName.trimStart()}
                                     onChange={(e) =>
+                                        e.target.value.match(/^[a-zA-Z ]*$/) &&
                                         setAccountHolderName(
-                                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                                            e.target.value
                                         )
                                     }
                                 />
@@ -476,8 +499,9 @@ const WithDraw1 = () => {
                                     className="account-input"
                                     value={bankName}
                                     onChange={(e) =>
+                                        e.target.value.match(/^[a-zA-Z ]*$/) &&
                                         setBankName(
-                                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                                            e.target.value
                                         )
                                     }
                                 />
@@ -531,7 +555,7 @@ const WithDraw1 = () => {
                                         onChange={(e) =>
                                             setAccountNumber(
                                                 e.target.value.replace(
-                                                    /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/
+                                                    /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/, ""
                                                 )
                                             )
                                         }
@@ -546,17 +570,24 @@ const WithDraw1 = () => {
                                 <input
                                     type="text"
                                     className="account-input"
-                                    value={accountHolderName}
+                                    value={accountHolderName.trimStart()}
                                     onChange={(e) =>
+                                        e.target.value.match(/^[a-zA-Z ]*$/) &&
                                         setAccountHolderName(
-                                            e.target.value.replace(/[^A-Za-z]+$/, " ")
+                                            e.target.value
                                         )
                                     }
                                 />
                             </div>
                         </div>
                     )
+
+
                 }
+
+
+
+
                 <div className={openForm ? "" : "d-none"}>
                     <div className="row row5 mt-2">
                         <div className="col-12">
@@ -612,7 +643,7 @@ const WithDraw1 = () => {
                                                 scope="col"
                                                 aria-colindex="6"
                                                 className="text-left">
-                                                Actiondas
+                                                Action
                                             </th>
                                         </tr>
                                     </thead>
@@ -736,3 +767,4 @@ const WithDraw1 = () => {
 }
 
 export default WithDraw1
+

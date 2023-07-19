@@ -80,6 +80,14 @@
 }
 
 @media screen and (max-width: 500px) {
+
+    .loginBackground {
+        background: #8c9088;
+        height: unset;
+    }
+}
+
+@media screen and (max-width: 500px) {
     .logo-img img {
         width: 90%;
     }

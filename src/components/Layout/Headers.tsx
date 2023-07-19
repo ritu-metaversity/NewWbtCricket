@@ -176,10 +176,10 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
 
                   <img src={appData?.logo} alt="Logo" className="desktop_logogogo" style={{ height: "54px" }} />
 
-                  <span className="mobile_logogoggo" style={{ color: "white" }}>
+                  {/* <span className="mobile_logogoggo" style={{ color: "white" }}>
 
                     {userid}
-                  </span>
+                  </span> */}
                 </div>
                 {/* </Typography> */}
               </Link>
@@ -241,7 +241,13 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
 
 
             :
-            <GiHamburgerMenu onClick={handledrawer} style={{ width: "10%" }} />
+            <>
+              <span className="mobile_logogoggo" style={{ color: "white" }}>
+
+                {userid}
+              </span>
+              <GiHamburgerMenu onClick={handledrawer} style={{ width: "10%" }} />
+            </>
           }
           {!matches && <Drawer
             anchor={"left"}

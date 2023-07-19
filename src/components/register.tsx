@@ -53,7 +53,7 @@ const Register = () => {
       return setErrorForall("invalid Confirm password");
     } else if (register.password !== register.confirmPassword) {
       return setErrorForall("Password does not match!!");
-    } else if ((register?.password?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) ===
+    } else if ((register?.password?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?#&_]{8,12}$/) ===
       null) === true) {
       return setPasswordError(
         "Password should contain atleast one number and one lower case and one upper case."
@@ -121,7 +121,7 @@ const Register = () => {
     } else if (passData?.length > 13) {
       setPasswordError("Maximum 12 letters required");
     } else if (
-      passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) ===
+      passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?#&_]{8,12}$/) ===
       null
     ) {
       setPasswordError(
@@ -130,7 +130,7 @@ const Register = () => {
     } else {
       setPasswordError("")
     }
-    console.log(passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,12}$/) ===
+    console.log(passData?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?#&_]{8,12}$/) ===
       null, "uytgbnjiygbn")
   };
 

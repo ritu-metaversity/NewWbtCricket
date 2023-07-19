@@ -51,9 +51,9 @@ const columns: readonly Column[] = [
     id: "rate",
     label: "User Rate",
     minWidth: 20,
-    align: "right",
+    align: "center",
   },
-  { id: "amount", label: "Amount", align: "right", minWidth: 120 },
+  { id: "amount", label: "Amount", align: "center", minWidth: 120 },
   { id: "time", label: "Place Date", align: "center", minWidth: 120 },
 ];
 

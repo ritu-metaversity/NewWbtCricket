@@ -88,6 +88,12 @@ const UnSeletdBets = ({ betRecord, completedMatches }) => {
                                                         {console.log(item, "jhgbvh")}
                                                         {item?.nation}
                                                     </td>
+                                                    <td
+                                                        data-modal="modal-1"
+                                                        className="bet-place-tbl-td md-trigger runs-2-value-box-color"
+                                                    >
+                                                        {item?.rate}{" "}
+                                                    </td>
                                                     {key.includes("Fancy") && <td
                                                         data-modal="modal-1"
                                                         className="bet-place-tbl-td md-trigger runs-2-value-box-color"
@@ -95,12 +101,7 @@ const UnSeletdBets = ({ betRecord, completedMatches }) => {
                                                         {item?.priveValue}
                                                     </td>}
 
-                                                    <td
-                                                        data-modal="modal-1"
-                                                        className="bet-place-tbl-td md-trigger runs-2-value-box-color"
-                                                    >
-                                                        {item?.rate}{" "}
-                                                    </td>
+
                                                     <td className="bet-place-tbl-td runs-2-value-box-color">{item?.amount}</td>
                                                     <td className="bet-place-tbl-td runs-2-value-box-color">{item?.back === true ? "YES" : "NO"}</td>
                                                 </tr>

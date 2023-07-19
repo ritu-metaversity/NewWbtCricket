@@ -1,6 +1,7 @@
 import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import moment from 'moment';
 import React, { useContext, useEffect, useState } from 'react'
+import { Link, useSearchParams } from "react-router-dom";
 import { LoaderContext } from '../../App';
 import { inPlayDetailServices } from '../../utils/api/inplayDetails/services';
 import { sportServices } from '../../utils/api/sport/services';
@@ -53,7 +54,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
         return () => clearInterval(timers)
     }, [Show])
 
-
+    const [searchParams] = useSearchParams();
     useEffect(() => {
         const getIpy = async () => {
             const { response: ipRes } = await userServices.getIpfy();
@@ -184,7 +185,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
         getList();
     }, [sportsId])
     console.log(completedMatches, "dushyant")
-
+    // const sportsId = searchParams.get("Sports-id");
     return (
         <div>
             <div>
@@ -358,9 +359,8 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
                     if (item.matchId !== event) {
 
                         return (
-
                             <div>
-                                <a href="item?.matchId">
+                                <Link to={`/in-play-details/?event-id=${item.matchId}&Sports-id=${searchParams.get("Sports-id")}`}>
                                     <div
                                         className="row"
                                         style={{
@@ -383,7 +383,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
                                             </span>
                                         </div>
                                     </div>
-                                </a>
+                                </Link>
                             </div>
                         )
                     }

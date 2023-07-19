@@ -14,6 +14,7 @@ import { CasinoList } from "../../components/casino/Casino";
 import { SummaryCardProps } from "../../components/Inplay/SummaryCard";
 import { LoaderContext } from "../../App";
 import { sportServices } from "../../utils/api/sport/services";
+
 const style = {
   padding: "10px",
 
@@ -22,7 +23,7 @@ const style = {
 const inputStyle = {
   padding: "10px",
   borderRadius: "5px",
-  width: "(100%)",
+  width: "100%",
 };
 const inputStyle1 = {
   padding: "10px",
@@ -199,7 +200,7 @@ const Filter: FC<Props> = ({
     <>
       <Tabs value={tab} sx={{ m: 2 }} onChange={(e, value) => setTab(value)}>
         <Tab value={0} label="Sports" />
-        {/* <Tab value={1} label="Casino" /> */}
+        <Tab value={1} label="Casino" />
       </Tabs>
       <form style={style}>
         <Grid container>
@@ -216,6 +217,7 @@ const Filter: FC<Props> = ({
               name="fromDate"
             />
           </Grid>
+
           <Grid item xs={6} md={2} style={style}>
             {" "}
             <label style={lableStyle} htmlFor="toDate">
@@ -228,6 +230,7 @@ const Filter: FC<Props> = ({
               placeholder="YYYY-MM-DD"
               onChange={handleChange}
               name="toDate"
+
             />
           </Grid>
           <Grid item xs={6} md={2} style={style}>
@@ -239,8 +242,9 @@ const Filter: FC<Props> = ({
               style={inputStyle1}
               onChange={handleChange}
               name="sportId"
+
             >
-              <option value={""}> Select</option>
+              {/* <option value={""}> Select</option> */}
 
               {tab === 1
                 ? casinoTypes.map((casino) => (
