@@ -1,5 +1,5 @@
 import Layout from "antd/es/layout/layout";
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   TermsContainer,
@@ -27,14 +27,18 @@ const TermsList = [
   " टेस्ट में पारी डिक्लेअर होने पर जो सेशन रनिंग में हे उस सेशन को डिक्लेअर करने के लिए दूसरी टीम के ओवर या बॉल काउंट किये जायेंगे|",
   "नोट : सर्वर या वेबसाईट में किसी तरह की खराबी आने या बंद हो जाने पर केवल किये गए सौदे ही मान्य होंगे। ऐसी स्थिति में किसी भी तरह का वाद-विवाद मान्य नहीं होगा।",
 ];
-const Terms = () => {
+interface Props {
+  show: boolean | null;
+  setShow: Dispatch<SetStateAction<boolean | null>>
+}
+const Terms: FC<Props> = ({ show, setShow }) => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/", { replace: true });
   };
-  const [show, setShow] = useState(false)
+  // const [show, setShow] = useState(false)
   useEffect(() => {
-    setShow(true)
+    // setShow(true)
   }, [])
 
   return (
@@ -42,7 +46,7 @@ const Terms = () => {
       <div className="main-div">
         {/* <WelcomeDialog /> */}
         <Modal
-          open={show}
+          open={!!show}
           onClose={() => setShow(false)}
           aria-labelledby="parent-modal-title"
           aria-describedby="parent-modal-description"

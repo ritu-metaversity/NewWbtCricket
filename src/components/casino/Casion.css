@@ -88,7 +88,7 @@
     font-size: 8px; */
 }
 
-.casino_inner_list{
+.casino_inner_list {
     border-radius: 4px;
     box-shadow: 0 12px 8px -10px;
     color: #007bff;
@@ -98,13 +98,15 @@
     width: 100%;
 }
 
-.casinoGameNAame{
+.casinoGameNAame {
     position: absolute;
     bottom: 0;
     left: 0;
     color: #fff;
     padding: 2px;
+    word-wrap: break-word;
 }
+
 .MuiTableContainer-root.css-nmqc57-MuiTableContainer-root {
     height: unset !important;
     max-height: unset;

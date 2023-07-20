@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Box, Button, Modal } from "@mui/material";
+import { Box, Button, Modal, TextField } from "@mui/material";
 
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap';
@@ -20,6 +20,7 @@ const WithDraw1 = () => {
         upireq: "UPI ID is required",
         upivalid: "Enter Valid UPI ID",
     };
+    const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
 
     let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
     const [withdrawData, setWithdrawData] = useState();
@@ -155,7 +156,22 @@ const WithDraw1 = () => {
                 setIsLoading(false);
                 setColorName("success");
                 snackBarUtil.success(res?.data?.message)
+                const TokenId = localStorage.getItem("token");
 
+                axios
+                    .post(
+                        `${REACT_APP_API_URL}/get/client-bank`,
+                        {},
+                        {
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${TokenId}`,
+                            },
+                        }
+                    )
+                    .then((res) => {
+                        setGetAccountData(res?.data?.data);
+                    });
                 // setMessage(res?.data?.message);
 
             })
@@ -207,7 +223,11 @@ const WithDraw1 = () => {
                 return false;
             } else if (accountNumber === "") {
                 snackBarUtil.error(erreeee?.AmountNumberrequired)
-
+                setIsLoading(false);
+                return false;
+            } else if (accountNumber.match(/^[0-9]{8,18}$/) === null) {
+                snackBarUtil.error("Invalid account number")
+                setIsLoading(false);
 
                 setIsLoading(false);
                 return false;
@@ -228,7 +248,7 @@ const WithDraw1 = () => {
                 setIsLoading(false);
                 return false;
             }
-            else if (ifsc.match(/^[A-Za-z]{4}\d{4,8}$/) === null) {
+            else if (ifsc.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) === null) {
                 snackBarUtil.error("Please enter a valid IFSC CODE")
                 setIsLoading(false);
                 return false;
@@ -246,6 +266,11 @@ const WithDraw1 = () => {
             } else if (accountNumber === "") {
                 snackBarUtil.error(erreeee?.mobilenorequired)
                 setIsLoading(false);
+                return false;
+            } else if (accountNumber.match(/^[0-9]{10}$/) === null) {
+                snackBarUtil.error("Invalid number")
+                setIsLoading(false);
+
                 return false;
             } else if (accountHolderName === "") {
                 snackBarUtil.error(erreeee?.AmountNamerequired)
@@ -321,9 +346,11 @@ const WithDraw1 = () => {
                 .then((res) => {
                     // setWithdrawReq(res.data);
                     // setDataLength(res.data.length);
-                    if (res?.data?.bankExist === false) {
+                    // console.log(res?.data?.data                        , "sdsadasd")
+                    if (res?.data?.data?.bankExist === false) {
+                        // console.log(res, "yutfdgchjiouytfgdxcvbhjkiuygfc")
                         setShow(true);
-                        console.log(res, "yutfdgchjiouytfgdxcvbhjkiuygfc")
+
                     } else {
                         // setMessage(res?.data?.message
                         // );
@@ -331,6 +358,11 @@ const WithDraw1 = () => {
                         setErrorAlert(true);
                         setColorName("success");
                         setIsLoading(false);
+                        setAccountHolderName("");
+                        setAccountNumber("");
+                        setIFSC("");
+                        setBankName("");
+                        setwithCoinValue(0);
                         snackBarUtil.success(res?.data?.message)
 
                     }
@@ -396,6 +428,9 @@ const WithDraw1 = () => {
                         value={withCoinValue}
                         onChange={handleStaticAmountInput}
                         type="number"
+                        onKeyDown={(e) =>
+                            symbolsArrMail.includes(e.key) && e.preventDefault()
+                        }
                     />
                 </div>
                 <div>
@@ -468,12 +503,17 @@ const WithDraw1 = () => {
                                 <label className="account-lable">Account Number</label>
 
                                 <input
-                                    type="number"
+                                    // type="number"
                                     className="account-input"
                                     value={accountNumber?.toString().replace(".", "")}
-                                    onChange={(e) =>
-                                        e.target.value.match(/^[0-9]*$/) &&
-                                        setAccountNumber(Number(e.target.value))}
+                                    onChange={(e) => e.target.value.match(/^[0-9]{0,18}$/) && setAccountNumber(e.target.value)}
+
+                                // onChange={(e) =>
+                                //     e.target.value.match(/^[0-9]*$/) &&
+                                //     setAccountNumber(Number(e.target.value))}
+                                // onKeyDown={(e) =>
+                                //     symbolsArrMail.includes(e.key) && e.preventDefault()
+                                // }
                                 />
                             </div>
                             <div className="mx-input-wrapper account-field">
@@ -514,7 +554,7 @@ const WithDraw1 = () => {
                                     className="account-input"
                                     value={ifsc}
                                     onChange={(e) =>
-                                        setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, " "))
+                                        setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, " ").toUpperCase())
                                     }
                                 />
                             </div>
@@ -542,10 +582,13 @@ const WithDraw1 = () => {
 
                                 {withType === "PAYTM" ? (
                                     <input
-                                        type="number"
+                                        // type="number"
                                         className="account-input"
                                         value={accountNumber}
-                                        onChange={(e) => setAccountNumber(e.target.value)}
+                                        onChange={(e) => e.target.value.match(/^[0-9]{0,10}$/) && setAccountNumber(e.target.value)}
+                                    // onKeyDown={(e) =>
+                                    //     symbolsArrMail.includes(e.key) && e.preventDefault()
+                                    // }
                                     />
                                 ) : (
                                     <input

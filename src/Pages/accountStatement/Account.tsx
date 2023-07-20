@@ -154,7 +154,7 @@ const Account = () => {
             columns={columns}
             title={""}
           /> */}
-          <div className="content-top-padding" style={{ padding: "20px 20px" }}>
+          <div className="content-top-padding" style={{ padding: "20px 20px", overflow: "scroll" }}>
             <table className="" style={{ width: "100%" }}>
               <thead>
                 <tr>
@@ -166,7 +166,10 @@ const Account = () => {
                   <th className="ldg-tbl-th match-box-color" style={{ width: "50%" }}>
                     DESCRIPTION
                   </th>
-                  <th className="ldg-tbl-th match-box-color">PNL</th>
+                  <th className="ldg-tbl-th match-box-color">WON BY</th>
+                  <th className="ldg-tbl-th match-box-color">WON</th>
+                  <th className="ldg-tbl-th match-box-color">LOST</th>
+                  <th className="ldg-tbl-th match-box-color">HISAB</th>
                   {/* <th className="ldg-tbl-th match-box-color">WON</th>
                   <th className="ldg-tbl-th match-box-color">LOST</th>
                   <th className="ldg-tbl-th match-box-color">HISAB</th> */}
@@ -183,6 +186,25 @@ const Account = () => {
 
                         {item?.matchName}
                       </a>
+                    </td>
+                    <td
+                      className="ldg-tbl-td match-value-box-color"
+                      style={{ textAlign: "center" }}
+                    >
+                      N/A
+                    </td>
+                    <td
+                      className="ldg-tbl-td match-value-box-color"
+                      style={{ textAlign: "left" }}
+                    >
+                      {item?.pnl < 0 ? 0 : item?.pnl}
+                    </td>
+
+                    <td
+                      className="ldg-tbl-td match-value-box-color"
+                      style={{ textAlign: "left" }}
+                    >
+                      {item?.pnl > 0 ? 0 : item?.pnl}
                     </td>
                     {item?.pnl < 0 ?
 

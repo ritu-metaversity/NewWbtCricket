@@ -29,7 +29,7 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
     if (confirmPassword !== newPassword) {
       return snackBarUtil.error("New Password And Confirm Password does not match!");
     } else if (oldPassword === "" && confirmPassword === "" && newPassword === "") {
-      return snackBarUtil.error("Please enter all the mandatory details");
+      return snackBarUtil.error("Something went wrong! Please try again later.");
     }
     setLoading && setLoading((prev) => ({ ...prev, handleClick: true }));
     if ((newPassword?.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?#&_]{8,12}$/) ===

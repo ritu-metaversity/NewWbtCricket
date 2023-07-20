@@ -37,7 +37,7 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
     if (confirmPassword !== newPassword) {
       return snackBarUtil.error("New Password And Confirm Password does not match!");
     } else if (oldPassword === "" && confirmPassword === "" && newPassword === "") {
-      return snackBarUtil.error("Please enter all the mandatory details");
+      return snackBarUtil.error("Something went wrong! Please try again later.");
     }
     const userid = localStorage.getItem("userid") || "";
     const token = localStorage.getItem("token") || "";

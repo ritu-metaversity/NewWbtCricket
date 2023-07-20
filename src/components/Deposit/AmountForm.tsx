@@ -95,7 +95,7 @@ export function AmountForm({ amount, setAmount }: Props) {
             <AddIcon onClick={handlePlusClick} />
           </div>
         </Box>
-        <Box display="flex" style={{ minWidth: "100px" }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: '100px' }}>
           {stackValue.map((value: any, index) => (
             <StyledButtonSmall
               key={`${value.key}-button-${value.value}-${index}`}

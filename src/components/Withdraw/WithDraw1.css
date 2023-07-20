@@ -98,9 +98,9 @@
     justify-content: center;
 }
 
-.withdraw_image.col:hover {
+/* .withdraw_image.col:hover {
     background-color: #7b7c7f;
-}
+} */
 
 .withdraw_table input {
     border: 1px solid #ddd;
@@ -179,7 +179,7 @@ p.lodder.depositLoading.withloading.withdraw_deposit i {
     .mainAccount.main_withdrow.accountWith {
         display: flex;
         justify-content: center;
-        gap: 5%;
+        gap: 2%;
     }
 
     select.custom-select.select-type.accounttype {

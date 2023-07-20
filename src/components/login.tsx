@@ -17,9 +17,10 @@ import axios from "axios";
 
 interface Props {
   setIsSignedIn: Dispatch<SetStateAction<boolean>>;
+  setShow: Dispatch<SetStateAction<boolean | null>>;
 }
 
-const Login: FC<Props> = ({ setIsSignedIn }) => {
+const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
   const navigate = useNavigate();
   const [userId, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +31,7 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
   const handleClick = async () => {
 
     if (password === "" && userId === "") {
-      return snackBarUtil.error("Please enter all the mandatory details");
+      return snackBarUtil.error("All fields are mandatory");
     } else {
 
 
@@ -48,6 +49,7 @@ const Login: FC<Props> = ({ setIsSignedIn }) => {
           navigate("/OldChangePassword", { replace: true });
         } else {
           setIsSignedIn(true);
+          setShow(true)
           navigate("/terms", { replace: true });
         }
       }

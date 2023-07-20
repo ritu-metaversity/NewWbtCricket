@@ -69,6 +69,7 @@ function App() {
   const [appData, setAppData] = useState<AppDataInterface | null>(null);
 
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+  const [welcomePopup, setWelcomePopup] = useState<boolean | null>(null);
 
   const { pathname } = useLocation();
   const getSelfAllowed = async () => {
@@ -151,7 +152,7 @@ function App() {
               />
               <Route
                 path="/sign-in"
-                element={<Login setIsSignedIn={setIsSignedIn} />}
+                element={<Login setShow={setWelcomePopup} setIsSignedIn={setIsSignedIn} />}
               />
               <Route path="/sign-up" element={<Register />} />
 
@@ -183,7 +184,7 @@ function App() {
                 <Route path="current-bet" element={<CurrentBet />} />
                 <Route path="casino" element={<Casino />} />
                 <Route path="casino/:id" element={<CasinoGame />} />
-                <Route path="terms" element={<Terms />} />
+                <Route path="terms" element={<Terms show={welcomePopup} setShow={setWelcomePopup} />} />
                 <Route path="password-change" element={<ChangePassword setIsSignedIn={setIsSignedIn} />} />
               </Route>
 

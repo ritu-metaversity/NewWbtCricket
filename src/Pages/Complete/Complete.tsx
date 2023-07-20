@@ -330,6 +330,7 @@ const Complete = () => {
               <th className="ldg-tbl-th match-box-color">Prev. Bal</th>
               <th className="ldg-tbl-th match-box-color">CREDIT</th>
               <th className="ldg-tbl-th match-box-color">DEBIT</th>
+              <th className="ldg-tbl-th match-box-color">comm+</th>
               <th className="ldg-tbl-th match-box-color">BALANCE</th>
               {/* <th className="ldg-tbl-th match-box-color">Comm+</th> */}
               {/* <th className="ldg-tbl-th match-box-color">BALANCE</th> */}
@@ -344,9 +345,10 @@ const Complete = () => {
                     {/* <td className="ldg-tbl-td match-value-box-color" style={{ textAlign: "left" }}>{item?.sno}</td> */}
                     <td className="ldg-tbl-td match-value-box-color" >{item.date}{" "}</td>
                     <td className="ldg-tbl-td match-value-box-color" style={{ textAlign: "left" }}>{item?.remark}</td>
-                    <td className="ldg-tbl-td match-value-box-color text-green" >0</td>
+                    <td className="ldg-tbl-td match-value-box-color text-green" >{item?.pts - item?.credit - item?.debit}</td>
                     <td className="ldg-tbl-td match-value-box-color text-green" style={{ color: "green" }}>{item?.credit}</td>
                     <td className="ldg-tbl-td match-value-box-color text-red" style={{ color: "red" }}>{item?.debit}</td>
+                    <td className="ldg-tbl-td match-value-box-color text-red" style={{ color: "red" }}>0</td>
                     <td className="ldg-tbl-td match-value-box-color text-red" >{item?.pts}</td>
                     {/* <td className="ldg-tbl-td match-value-box-color text-green">0</td>
             <td className="ldg-tbl-td match-value-box-color">810</td> */}
