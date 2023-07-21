@@ -14,6 +14,7 @@ import { CasinoList } from "../../components/casino/Casino";
 import { SummaryCardProps } from "../../components/Inplay/SummaryCard";
 import { LoaderContext } from "../../App";
 import { sportServices } from "../../utils/api/sport/services";
+import { DatePicker, Input } from "antd";
 
 const style = {
   padding: "10px",
@@ -212,12 +213,12 @@ const Filter: FC<Props> = ({
             <label style={lableStyle} htmlFor="fromDate">
               From Date
             </label>
-            <input
+            <DatePicker
               style={inputStyle}
-              type="date"
-              defaultValue={formData.fromDate}
+              // type="date"
+              // value={formData.fromDate}
               placeholder="YYYY-MM-DD"
-              onChange={handleChange}
+              onChange={(e, v) => setFormData((prev) => ({ ...prev, fromDate: v }))}
               name="fromDate"
             />
           </Grid>
@@ -227,12 +228,12 @@ const Filter: FC<Props> = ({
             <label style={lableStyle} htmlFor="toDate">
               To Date
             </label>
-            <input
+            <DatePicker
               style={inputStyle}
-              type="date"
-              defaultValue={formData.toDate}
+              // type="date"
+              // value={formData.toDate}
               placeholder="YYYY-MM-DD"
-              onChange={handleChange}
+              onChange={(e, v) => setFormData((prev) => ({ ...prev, toDate: v }))}
               name="toDate"
 
             />

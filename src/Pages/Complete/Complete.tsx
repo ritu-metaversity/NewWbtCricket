@@ -396,12 +396,15 @@ const Complete = () => {
                   {paginationAddNo + 1}
                 </a>
               </li>
+              {pagination?.totalPages === paginationAddNo + 1 ?
+                "" :
+                <li onClick={() => handlePaggi("next")} className="next" >
+                  <a tabIndex={0} role="button" aria-disabled="true">
+                    Next
+                  </a>
+                </li>
+              }
 
-              <li onClick={() => handlePaggi("next")} className="next" >
-                <a tabIndex={0} role="button" aria-disabled="true">
-                  Next
-                </a>
-              </li>
 
 
 

@@ -350,6 +350,7 @@ const WithDraw1 = () => {
                     if (res?.data?.data?.bankExist === false) {
                         // console.log(res, "yutfdgchjiouytfgdxcvbhjkiuygfc")
                         setShow(true);
+                        snackBarUtil.success(res?.data?.message)
 
                     } else {
                         // setMessage(res?.data?.message
