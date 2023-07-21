@@ -99,92 +99,94 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
     getFancyOdds();
   }, [props.event]);
 
-  useEffect(() => {
-    const getFancyOdds = async () => {
-      const { response } = await inPlayDetailServices.newFancy(
-        props.event.toString()
+  const getFancyOdds = async () => {
+    const { response } = await inPlayDetailServices.newFancy(
+      props.event.toString()
+    );
+    if (response) {
+      setBookMakerOdds(response.Bookmaker);
+      let newBookmakerOdd: FancyOddsInterface[] = response.Bookmaker.map(
+        (item: any, index: number) => ({
+          ...(activeFancySlower?.Bookmaker
+            ? activeFancySlower?.Bookmaker[index] || {}
+            : {}),
+          ...item,
+        })
       );
-      if (response) {
-        setBookMakerOdds(response.Bookmaker);
-        let newBookmakerOdd: FancyOddsInterface[] = response.Bookmaker.map(
-          (item: any, index: number) => ({
-            ...(activeFancySlower?.Bookmaker
-              ? activeFancySlower?.Bookmaker[index] || {}
-              : {}),
-            ...item,
-          })
+      if (newBookmakerOdd) {
+        setBookMakerToss(() =>
+          newBookmakerOdd
+            .filter((item) => item.t === "TOSS")
+            .filter((item) => item != null)
         );
-        if (newBookmakerOdd) {
-          setBookMakerToss(() =>
-            newBookmakerOdd
-              .filter((item) => item.t === "TOSS")
-              .filter((item) => item != null)
-          );
 
-          setOriginbookMaker(() =>
-            newBookmakerOdd
+        setOriginbookMaker(() =>
+          newBookmakerOdd
+            .filter((item) => item.t !== "TOSS")
+            .filter((item) => item != null)
+        );
+        if (originBookMaker.length) {
+          setPrvBookMakerOdds([...originBookMaker]);
+        } else {
+          setPrvBookMakerOdds(() =>
+            bookmakerOdd
               .filter((item) => item.t !== "TOSS")
               .filter((item) => item != null)
           );
-          if (originBookMaker.length) {
-            setPrvBookMakerOdds([...originBookMaker]);
-          } else {
-            setPrvBookMakerOdds(() =>
-              bookmakerOdd
-                .filter((item) => item.t !== "TOSS")
-                .filter((item) => item != null)
-            );
-          }
-          if (bookmakerToss.length) {
-            setPreBookMakerToss([...bookmakerToss]);
-          } else {
-            setPreBookMakerToss(() =>
-              bookmakerOdd
-                .filter((item) => item.t === "TOSS")
-                .filter((item) => item != null)
-            );
-          }
         }
-        setMatchOdds(
-          response.Odds.map((item: any, index: number) => ({
-            ...(activeFancySlower?.Odds
-              ? activeFancySlower?.Odds[index] || {}
-              : {}),
-            ...item,
-          }))
-        );
-        if (matchOdd.length) {
-          setPreMetchOdds([...matchOdd]);
+        if (bookmakerToss.length) {
+          setPreBookMakerToss([...bookmakerToss]);
         } else {
-          setPreMetchOdds(response.Odds);
+          setPreBookMakerToss(() =>
+            bookmakerOdd
+              .filter((item) => item.t === "TOSS")
+              .filter((item) => item != null)
+          );
         }
-        if (activeFancy.length) {
-          setPreFancyOdds([...activeFancy]);
-        } else {
-          const newResponse = { ...response };
-          newResponse.Odds = undefined;
-          setPreFancyOdds(newResponse);
-        }
-
-        const newResponse = { ...response };
-        for (let i in response) {
-          if (["Odds"].includes(i)) {
-            continue;
-          }
-          newResponse[i] = response[i].map((single: any, index: number) => ({
-            ...(activeFancySlower[i]
-              ? activeFancySlower[i].find(
-                (odd: FancyOddsInterface) => odd.sid === single.sid
-              ) || {}
-              : {}),
-            ...single,
-          }));
-        }
-        // newResponse.Odds = undefined;
-        setActiveFancy(newResponse);
       }
-    };
+      setMatchOdds(
+        response.Odds.map((item: any, index: number) => ({
+          ...(activeFancySlower?.Odds
+            ? activeFancySlower?.Odds[index] || {}
+            : {}),
+          ...item,
+        }))
+      );
+      if (matchOdd.length) {
+        setPreMetchOdds([...matchOdd]);
+      } else {
+        setPreMetchOdds(response.Odds);
+      }
+      if (activeFancy.length) {
+        setPreFancyOdds([...activeFancy]);
+      } else {
+        const newResponse = { ...response };
+        newResponse.Odds = undefined;
+        setPreFancyOdds(newResponse);
+      }
 
+      const newResponse = { ...response };
+      for (let i in response) {
+        if (["Odds"].includes(i)) {
+          continue;
+        }
+        newResponse[i] = response[i].map((single: any, index: number) => ({
+          ...(activeFancySlower[i]
+            ? activeFancySlower[i].find(
+              (odd: FancyOddsInterface) => odd.sid === single.sid
+            ) || {}
+            : {}),
+          ...single,
+        }));
+      }
+      // newResponse.Odds = undefined;
+      setActiveFancy(newResponse);
+    }
+  };
+  useEffect(() => {
+    getFancyOdds()
+  }, [])
+  useEffect(() => {
     setTimeout(() => getFancyOdds(), 500);
   }, [activeFancy, matchOdd]);
 

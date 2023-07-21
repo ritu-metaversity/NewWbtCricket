@@ -134,7 +134,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
                 setBetRecord(response.data);
             }
         };
-        getList();
+        setTimeout(() => { getList() }, 5000)
     }, [event, betRecord]);
 
     const [allGame, setAllGames] = useState({})
@@ -166,7 +166,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
         // setActiveEventList([]);
         // setShow(true);
         // }
-    }, [sportsId, betRecord])
+    }, [sportsId])
 
 
     const [completedMatches, setCompletedMatches] = useState({})

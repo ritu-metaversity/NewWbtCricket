@@ -154,72 +154,80 @@ const Account = () => {
             columns={columns}
             title={""}
           /> */}
-          <div className="content-top-padding" style={{ padding: "20px 20px", overflow: "scroll" }}>
-            <table className="" style={{ width: "100%" }}>
-              <thead>
-                <tr>
-                  <th colSpan={5} className="bet-place-tbl-th market_type_row ">
-                    MY LEDGER
-                  </th>
-                </tr>
-                <tr>
-                  <th className="ldg-tbl-th match-box-color" style={{ width: "50%" }}>
-                    DESCRIPTION
-                  </th>
-                  <th className="ldg-tbl-th match-box-color">WON BY</th>
-                  <th className="ldg-tbl-th match-box-color">WON</th>
-                  <th className="ldg-tbl-th match-box-color">LOST</th>
-                  <th className="ldg-tbl-th match-box-color">HISAB</th>
-                  {/* <th className="ldg-tbl-th match-box-color">WON</th>
+          <table className="" style={{ width: "100%" }}>
+            <thead>
+              <tr>
+                <th colSpan={5} className="bet-place-tbl-th market_type_row ">
+                  MY LEDGER
+                </th>
+              </tr>
+            </thead>
+          </table>
+          <div className="content-top-padding" style={{ overflow: "scroll" }}>
+            <div style={{ width: "100%", overflow: "scroll" }}>
+
+              <table className="" style={{ width: "100%" }}>
+                <thead>
+                  <tr>
+                    <th className="ldg-tbl-th match-box-color" style={{ width: "50%" }}>
+                      DESCRIPTION
+                    </th>
+                    <th className="ldg-tbl-th match-box-color">WON BY</th>
+                    <th className="ldg-tbl-th match-box-color">WON</th>
+                    <th className="ldg-tbl-th match-box-color">LOST</th>
+                    <th className="ldg-tbl-th match-box-color">HISAB</th>
+                    {/* <th className="ldg-tbl-th match-box-color">WON</th>
                   <th className="ldg-tbl-th match-box-color">LOST</th>
                   <th className="ldg-tbl-th match-box-color">HISAB</th> */}
-                </tr>
-              </thead>
-              <tbody style={{ fontSize: 12 }}>
-                {accountStatement.map((item: any) =>
-                  <tr>
-                    <td
-                      className="ldg-tbl-td match-value-box-color"
-                      style={{ textAlign: "left" }}
-                    >
-                      <a href="/">
+                  </tr>
+                </thead>
+                <tbody style={{ fontSize: 12 }}>
+                  {accountStatement.map((item: any) =>
+                    <tr>
+                      <td
+                        className="ldg-tbl-td match-value-box-color"
+                        style={{ textAlign: "left" }}
+                      >
+                        <a href="/">
 
-                        {item?.matchName}
-                      </a>
-                    </td>
-                    <td
-                      className="ldg-tbl-td match-value-box-color"
-                      style={{ textAlign: "center" }}
-                    >
-                      N/A
-                    </td>
-                    <td
-                      className="ldg-tbl-td match-value-box-color"
-                      style={{ textAlign: "left" }}
-                    >
-                      {item?.pnl < 0 ? 0 : item?.pnl}
-                    </td>
+                          {item?.matchName}
+                        </a>
+                      </td>
+                      <td
+                        className="ldg-tbl-td match-value-box-color"
+                        style={{ textAlign: "center" }}
+                      >
+                        N/A
+                      </td>
+                      <td
+                        className="ldg-tbl-td match-value-box-color"
+                        style={{ textAlign: "center" }}
+                      >
+                        {item?.pnl < 0 ? 0 : item?.pnl}
+                      </td>
 
-                    <td
-                      className="ldg-tbl-td match-value-box-color"
-                      style={{ textAlign: "left" }}
-                    >
-                      {item?.pnl > 0 ? 0 : item?.pnl}
-                    </td>
-                    {item?.pnl < 0 ?
+                      <td
+                        className="ldg-tbl-td match-value-box-color"
+                        style={{ textAlign: "center" }}
+                      >
+                        {item?.pnl > 0 ? 0 : item?.pnl}
+                      </td>
+                      {item?.pnl < 0 ?
 
-                      (<td className="ldg-tbl-td match-value-box-color" style={{ color: "red" }}>{item?.pnl}</td>) :
+                        (<td className="ldg-tbl-td match-value-box-color" style={{ color: "red", textAlign: "center" }}>{item?.pnl}</td>) :
 
-                      (<td className="ldg-tbl-td match-value-box-color" style={{ color: "green" }}>{item?.pnl}</td>)
-                    }
-                    {/* <td className="ldg-tbl-td match-value-box-color">0</td>
+                        (<td className="ldg-tbl-td match-value-box-color" style={{ color: "green", textAlign: "center" }}>{item?.pnl}</td>)
+                      }
+                      {/* <td className="ldg-tbl-td match-value-box-color">0</td>
                     <td className="ldg-tbl-td match-value-box-color">190</td>
                     <td className="ldg-tbl-td match-value-box-color">-190</td> */}
-                  </tr>
-                )}
+                    </tr>
+                  )}
 
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
+
           </div>
 
           <TablePagination

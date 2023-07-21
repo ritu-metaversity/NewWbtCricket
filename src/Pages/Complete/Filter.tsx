@@ -29,6 +29,7 @@ const inputStyle1 = {
   padding: "10px",
   borderRadius: "5px",
   width: "100%",
+  color: "#000"
 }
 
 interface Props {
@@ -38,7 +39,10 @@ interface Props {
   setFormData: Dispatch<SetStateAction<ProfitLossPayload>>;
 }
 
-const lableStyle = { alignSelf: "center" };
+const lableStyle = {
+  alignSelf: "center",
+  color: "#000"
+};
 
 const Filter: FC<Props> = ({
   formData,
@@ -241,9 +245,7 @@ const Filter: FC<Props> = ({
               value={formData.sportId}
               style={inputStyle1}
               onChange={handleChange}
-              name="sportId"
-
-            >
+              name="sportId">
               {/* <option value={""}> Select</option> */}
 
               {tab === 1
@@ -267,13 +269,13 @@ const Filter: FC<Props> = ({
               onChange={handleChange}
               name="matchId"
             >
-              <option value={""}>Select</option>
+              <option value={""} style={{ color: "#000" }}>Select</option>
               {tab === 1
                 ? casinoList.map((casino) => (
                   <option
                     key={casino.gameId + casino.gameCode}
                     value={casino.gameId}
-                  >
+                    style={{ color: "#000" }}>
                     {casino.gameName}
                   </option>
                 ))
