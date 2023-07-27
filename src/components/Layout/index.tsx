@@ -23,7 +23,7 @@ const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
       display="flex"
       flexDirection={"column"}
     >
-      <header>
+      <header >
         <Headers setIsSignedIn={setIsSignedIn} />
       </header>
       <Box
@@ -32,7 +32,7 @@ const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
         m="auto"
         boxSizing={"content-box"}
         width="100%"
-        bgcolor="#dddddd"
+        bgcolor="#e9e9e9"
         paddingBottom={{ xs: "50px", sm: "50px", }}
         maxWidth={{ xs: "100vw", sm: "lg", }}
 

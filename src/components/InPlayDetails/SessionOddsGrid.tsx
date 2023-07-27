@@ -42,7 +42,8 @@ export const SessionOddsGrid: FC<Props> = ({
     priceValue: number,
     isFancy: boolean,
     t: string,
-    marketName: string
+    marketName: string,
+    marketnameid: string
   ) => {
     if (odds > 0) {
       setBet(null);
@@ -60,6 +61,7 @@ export const SessionOddsGrid: FC<Props> = ({
       placeTime: placeTime,
       priceValue: priceValue,
       isFancy: isFancy,
+      marketnameid: marketnameid
     });
   };
   const [show, setShow] = useState(true)
@@ -90,7 +92,7 @@ export const SessionOddsGrid: FC<Props> = ({
 
                 </div>
 
-                <a href="/terms">
+                {/* <a href="/terms">
                   <span
                     style={{
                       float: "right",
@@ -102,7 +104,7 @@ export const SessionOddsGrid: FC<Props> = ({
                   >
                     𝓲
                   </span>
-                </a>
+                </a> */}
               </div>
             </th>
             <th
@@ -131,7 +133,7 @@ export const SessionOddsGrid: FC<Props> = ({
                 <td className="bet-place-tbl-td" style={{ textAlign: "left" }}>
                   <div>
                     <div
-                      style={{ fontWeight: 750, overflow: "hidden", height: 20, fontSize: "14px" }}
+                      style={{ fontWeight: 750, overflow: "hidden", fontSize: "14px" }}
                     >
                       {item?.nation}
                     </div>
@@ -145,8 +147,36 @@ export const SessionOddsGrid: FC<Props> = ({
                     )}</div>
                   </div>
                 </td>
+
                 <td
-                  className={`first-runner-bet-odds-no-value cursor-pointer ${PrevOdds[index].b1 < item.b1
+                  className={`first-runner-bet-odds-no-value cursor-pointer ${PrevOdds[index].l1 < item.l1
+                    ? "odds-up"
+                    : PrevOdds[index].l1 > item.l1
+                      ? "odds-down"
+                      : ""}`}
+                  style={{}}
+                  onClick={() =>
+                    updateBet(
+                      false,
+                      +item.l1,
+                      0,
+                      0,
+                      item.sid,
+                      matchId.toString(),
+                      date,
+                      +item.ls1,
+                      true,
+                      item.nation,
+                      "Session",
+                      "YES"
+                    )
+                  }
+                >
+                  <div style={{ fontWeight: 750, fontSize: 16 }}>{item.l1}</div>
+                  <div style={{ fontSize: 10 }}>{item.ls1}</div>
+                </td>
+                <td
+                  className={`first-runner-bet-odds-yes-value cursor-pointer ${PrevOdds[index].b1 < item.b1
                     ? "odds-up"
                     : PrevOdds[index].b1 > item.b1
                       ? "odds-down"
@@ -165,38 +195,13 @@ export const SessionOddsGrid: FC<Props> = ({
                       +item.bs1,
                       true,
                       item.nation,
-                      "Session"
+                      "Session",
+                      "NOT"
                     )
                   }
                 >
-                  <div style={{ fontWeight: 750 }}>{item.b1}</div>
+                  <div style={{ fontWeight: 750, fontSize: 16 }}>{item.b1}</div>
                   <div style={{ fontSize: 10 }}>{item.bs1}</div>
-                </td>
-                <td
-                  className={`first-runner-bet-odds-yes-value cursor-pointer ${PrevOdds[index].l1 < item.l1
-                    ? "odds-up"
-                    : PrevOdds[index].l1 > item.l1
-                      ? "odds-down"
-                      : ""}`}
-                  style={{}}
-                  onClick={() =>
-                    updateBet(
-                      false,
-                      +item.l1,
-                      0,
-                      0,
-                      item.sid,
-                      matchId.toString(),
-                      date,
-                      +item.ls1,
-                      true,
-                      item.nation,
-                      "Session"
-                    )
-                  }
-                >
-                  <div style={{ fontWeight: 750 }}>{item.l1}</div>
-                  <div style={{ fontSize: 10 }}>{item.ls1}</div>
                 </td>
               </tr>
             ))}

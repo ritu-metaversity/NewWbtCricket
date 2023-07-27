@@ -80,7 +80,7 @@ const SetButtonValue = () => {
         onClick={handleClick}
       >
         {" "}
-        Save and Submit
+        Submit
       </button>
     </Box>
   );

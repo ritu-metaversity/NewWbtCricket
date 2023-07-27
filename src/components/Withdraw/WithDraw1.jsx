@@ -8,6 +8,7 @@ import snackBarUtil from "../Layout/snackBarUtil";
 import { toast } from 'react-toastify';
 
 import './WithDraw1.css'
+import { userServices } from '../../utils/api/user/services';
 const WithDraw1 = () => {
 
     const erreeee = {
@@ -48,7 +49,7 @@ const WithDraw1 = () => {
     const [savedBankdetailsName, setSavedBankdetailsName] = useState("")
     const handleClose = () => {
         setShow(false);
-        snackBarUtil.success("Withdraw Request Submited Successfully");
+        // snackBarUtil.success("Withdraw Request Submited Successfully");
         setErrorAlert(true);
         setIsLoading(false);
         setColorName("success");
@@ -58,7 +59,7 @@ const WithDraw1 = () => {
         setBankName("");
         setwithCoinValue(0);
     };
-    console.log(withType, "iuhjuhnij");
+    console.log(userBalance, "iuhjuhnij");
     // const handleCancel = () => {
     //     setshowWithdraw(false);
     //   };
@@ -120,9 +121,31 @@ const WithDraw1 = () => {
             .then((res) => {
                 setGetAccountData(res?.data?.data);
             });
+        axios
+            .post(
+                `${REACT_APP_API_URL}/enduser/get-user-balance`,
+                {},
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${TokenId}`,
+                    },
+                }
+            )
+            .then((res) => {
+                setuserBalance(res?.data?.data?.balance);
+
+            });
+        // const getWallet = async () => {
+        // const { response } = userServices.wallet();
+        // if (response) {
+        //     console.log(response,"sbhdkjnfds")
+        //     setuserBalance(response?.data?.data?.balance);
+        // };
         // UserAPI.User_Balance().then((res)=>{
         //   setuserBalance(res?.data?.balance)
         // })
+        // getWallet()
     }, []);
     const handleStaticAmountInput = (e) => {
         let Inputvalue = e.target.value;
@@ -316,6 +339,7 @@ const WithDraw1 = () => {
             }
         }
         return true;
+
     };
 
     const handleClick = () => {
@@ -417,362 +441,363 @@ const WithDraw1 = () => {
     // }
     console.log(withdrawData, "kjhgtfdcvgyg")
     return (
-        <div className="withdraw_page">
+        <>
+            <div className="withdraw_page">
 
-            <div className="withdrow_coin">
-                <div className="withdrow_title">
-                    <p style={{ marginLeft: "-1px", marginBottom: "10px" }}>
-                        Withdraw Coins
-                    </p>
-                    <input
-                        placeholder="Withdraw Coins"
-                        value={withCoinValue}
-                        onChange={handleStaticAmountInput}
-                        type="number"
-                        onKeyDown={(e) =>
-                            symbolsArrMail.includes(e.key) && e.preventDefault()
-                        }
-                    />
-                </div>
-                <div>
-                    <p
-                        className="choose_val"
-                        style={{ marginLeft: "0px", marginBottom: "10px" }}>
-                        Choose From your Favourite transaction{" "}
-                    </p>
-                    <div className="coin_value">
-                        {stackValue?.map((res) => {
-                            return (
-                                <button onClick={() => handleBtnValue(res?.value)}>
-                                    {res?.key}
-                                </button>
-                            );
-                        })}
+                <div className="withdrow_coin">
+                    <div className="withdrow_title">
+                        <p style={{ marginLeft: "-1px", marginBottom: "10px" }}>
+                            Withdraw Coins
+                        </p>
+                        <input
+                            placeholder="Withdraw Coins"
+                            value={withCoinValue}
+                            onChange={handleStaticAmountInput}
+                            type="number"
+                            onKeyDown={(e) =>
+                                symbolsArrMail.includes(e.key) && e.preventDefault()
+                            }
+                        />
                     </div>
-                </div>
-            </div>
-            <div
-                className="withdrow_type"
-                style={{ marginBottom: "12px", width: "100%" }}>
-                <select onChange={(e) => setWithdrawType(e.target.value)} style={{ with: "50%" }}>
-                    <option value="">Select Withdraw Type</option>
-                    <option value="Normal">Normal</option>
-                    <option value="Instant">Instant</option>
-                </select>
-            </div>
-            <div className="with_paymethod">
-                <Container>
-                    <div className="bank-logo with_bank_logo">
-                        <Row className='innerRow'>
-                            {withdrawData?.map((res, id) => {
+                    <div>
+                        <p
+                            className="choose_val"
+                            style={{ marginLeft: "0px", marginBottom: "10px" }}>
+                            Choose From your Favourite transaction{" "}
+                        </p>
+                        <div className="coin_value">
+                            {stackValue?.map((res) => {
                                 return (
-                                    <>
-                                        <Col
-                                            className="withdraw_image"
-                                            onClick={() =>
-                                                handlePaymentDetails(
-                                                    res?.withdrawType,
-                                                    res?.id
-                                                )}
-                                            style={{ backgroundColor: (bankID === res?.id) ? "#7b7c7f" : "" }}
-                                        >
-                                            <div className="css-1502y4u">
-                                                <img
-                                                    src={res?.image}
-                                                    className="css-37vfbv"
-                                                    alt="Bank"
-                                                />
-                                                <p className="Typography-root ">
-                                                    {res?.withdrawType}
-                                                </p>
-                                            </div>
-                                        </Col>
-                                    </>
+                                    <button onClick={() => handleBtnValue(res?.value)}>
+                                        {res?.key}
+                                    </button>
                                 );
                             })}
-                        </Row>
-                    </div>
-                </Container>
-
-
-                {
-                    withType === "BANK" ? (
-                        <div
-                            className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
-                                } accountWith`}>
-                            <div className="mx-input-wrapper account-field">
-                                <label className="account-lable">Account Number</label>
-
-                                <input
-                                    // type="number"
-                                    className="account-input"
-                                    value={accountNumber?.toString().replace(".", "")}
-                                    onChange={(e) => e.target.value.match(/^[0-9]{0,18}$/) && setAccountNumber(e.target.value)}
-
-                                // onChange={(e) =>
-                                //     e.target.value.match(/^[0-9]*$/) &&
-                                //     setAccountNumber(Number(e.target.value))}
-                                // onKeyDown={(e) =>
-                                //     symbolsArrMail.includes(e.key) && e.preventDefault()
-                                // }
-                                />
-                            </div>
-                            <div className="mx-input-wrapper account-field">
-                                <label className="account-lable">Account Name</label>
-
-                                <input
-                                    type="text"
-                                    className="account-input"
-                                    value={accountHolderName.trimStart()}
-                                    onChange={(e) =>
-                                        e.target.value.match(/^[a-zA-Z ]*$/) &&
-                                        setAccountHolderName(
-                                            e.target.value
-                                        )
-                                    }
-                                />
-                            </div>
-                            <div className="mx-input-wrapper account-field">
-                                <label className="account-lable">Bank Name</label>
-
-                                <input
-                                    type="type"
-                                    className="account-input"
-                                    value={bankName}
-                                    onChange={(e) =>
-                                        e.target.value.match(/^[a-zA-Z ]*$/) &&
-                                        setBankName(
-                                            e.target.value
-                                        )
-                                    }
-                                />
-                            </div>
-                            <div className="mx-input-wrapper account-field">
-                                <label className="account-lable">IFSC</label>
-
-                                <input
-                                    type="type"
-                                    className="account-input"
-                                    value={ifsc}
-                                    onChange={(e) =>
-                                        setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, " ").toUpperCase())
-                                    }
-                                />
-                            </div>
-                            <div className="mx-input-wrapper account-field">
-                                <label className="account-lable">Account Type</label>
-
-                                <select
-                                    name="reportType"
-                                    // style={{ width: "100%" }}
-                                    className="custom-select select-type accounttype"
-                                    onChange={(e) => setAccountType(e.target.value)}>
-                                    <option value="Saving">Saving</option>
-                                    <option value="Current">Current</option>
-                                </select>
-                            </div>
                         </div>
-                    ) : (
-                        <div
-                            className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
-                                } accountWith`}>
-                            <div className="mx-input-wrapper account-field asdfghjkl">
-                                <label className="account-lable">
-                                    {withType === "PAYTM" ? "Mobile No" : "UPI ID"}
-                                </label>
+                    </div>
+                </div>
+                <div
+                    className="withdrow_type"
+                    style={{ marginBottom: "12px", width: "100%" }}>
+                    <select onChange={(e) => setWithdrawType(e.target.value)} style={{ with: "50%" }}>
+                        <option value="">Select Withdraw Type</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Instant">Instant</option>
+                    </select>
+                </div>
+                <div className="with_paymethod">
+                    <Container>
+                        <div className="bank-logo with_bank_logo">
+                            <Row className='innerRow'>
+                                {withdrawData?.map((res, id) => {
+                                    return (
+                                        <>
+                                            <Col
+                                                className="withdraw_image"
+                                                onClick={() =>
+                                                    handlePaymentDetails(
+                                                        res?.withdrawType,
+                                                        res?.id
+                                                    )}
+                                                style={{ backgroundColor: (bankID === res?.id) ? "#7b7c7f" : "" }}
+                                            >
+                                                <div className="css-1502y4u">
+                                                    <img
+                                                        src={res?.image}
+                                                        className="css-37vfbv"
+                                                        alt="Bank"
+                                                    />
+                                                    <p className="Typography-root ">
+                                                        {res?.withdrawType}
+                                                    </p>
+                                                </div>
+                                            </Col>
+                                        </>
+                                    );
+                                })}
+                            </Row>
+                        </div>
+                    </Container>
+                    {
+                        withType === "BANK" ? (
+                            <div
+                                className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
+                                    } accountWith`}>
+                                <div className="mx-input-wrapper account-field">
+                                    <label className="account-lable">Account Number</label>
 
-                                {withType === "PAYTM" ? (
                                     <input
                                         // type="number"
                                         className="account-input"
-                                        value={accountNumber}
-                                        onChange={(e) => e.target.value.match(/^[0-9]{0,10}$/) && setAccountNumber(e.target.value)}
+                                        value={accountNumber?.toString().replace(".", "")}
+                                        onChange={(e) => e.target.value.match(/^[0-9]{0,18}$/) && setAccountNumber(e.target.value)}
+
+                                    // onChange={(e) =>
+                                    //     e.target.value.match(/^[0-9]*$/) &&
+                                    //     setAccountNumber(Number(e.target.value))}
                                     // onKeyDown={(e) =>
                                     //     symbolsArrMail.includes(e.key) && e.preventDefault()
                                     // }
                                     />
-                                ) : (
+                                </div>
+                                <div className="mx-input-wrapper account-field">
+                                    <label className="account-lable">Account Name</label>
+
                                     <input
                                         type="text"
                                         className="account-input"
-                                        value={accountNumber}
+                                        value={accountHolderName.trimStart()}
                                         onChange={(e) =>
-                                            setAccountNumber(
-                                                e.target.value.replace(
-                                                    /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/, ""
-                                                )
+                                            e.target.value.match(/^[a-zA-Z ]*$/) &&
+                                            setAccountHolderName(
+                                                e.target.value
                                             )
                                         }
                                     />
+                                </div>
+                                <div className="mx-input-wrapper account-field">
+                                    <label className="account-lable">Bank Name</label>
+
+                                    <input
+                                        type="type"
+                                        className="account-input"
+                                        value={bankName}
+                                        onChange={(e) =>
+                                            e.target.value.match(/^[a-zA-Z ]*$/) &&
+                                            setBankName(
+                                                e.target.value
+                                            )
+                                        }
+                                    />
+                                </div>
+                                <div className="mx-input-wrapper account-field">
+                                    <label className="account-lable">IFSC</label>
+
+                                    <input
+                                        type="type"
+                                        className="account-input"
+                                        value={ifsc}
+                                        onChange={(e) =>
+                                            setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, " ").toUpperCase())
+                                        }
+                                    />
+                                </div>
+                                <div className="mx-input-wrapper account-field">
+                                    <label className="account-lable">Account Type</label>
+
+                                    <select
+                                        name="reportType"
+                                        // style={{ width: "100%" }}
+                                        className="custom-select select-type accounttype"
+                                        onChange={(e) => setAccountType(e.target.value)}>
+                                        <option value="Saving">Saving</option>
+                                        <option value="Current">Current</option>
+                                    </select>
+                                </div>
+                            </div>
+                        ) : (
+                            <div
+                                className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
+                                    } accountWith`}>
+                                <div className="mx-input-wrapper account-field asdfghjkl">
+                                    <label className="account-lable">
+                                        {withType === "PAYTM" ? "Mobile No" : "UPI ID"}
+                                    </label>
+
+                                    {withType === "PAYTM" ? (
+                                        <input
+                                            // type="number"
+                                            className="account-input"
+                                            value={accountNumber}
+                                            onChange={(e) => e.target.value.match(/^[0-9]{0,10}$/) && setAccountNumber(e.target.value)}
+                                        // onKeyDown={(e) =>
+                                        //     symbolsArrMail.includes(e.key) && e.preventDefault()
+                                        // }
+                                        />
+                                    ) : (
+                                        <input
+                                            type="text"
+                                            className="account-input"
+                                            value={accountNumber}
+                                            onChange={(e) =>
+                                                setAccountNumber(
+                                                    e.target.value.replace(
+                                                        /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/, ""
+                                                    )
+                                                )
+                                            }
+                                        />
+                                    )}
+                                </div>
+                                <div className="mx-input-wrapper account-field asdfghjkl">
+                                    <label className="account-lable">
+                                        {withType === "PAYTM" ? "Name" : "Account Name"}
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        className="account-input"
+                                        value={accountHolderName.trimStart()}
+                                        onChange={(e) =>
+                                            e.target.value.match(/^[a-zA-Z ]*$/) &&
+                                            setAccountHolderName(
+                                                e.target.value
+                                            )
+                                        }
+                                    />
+                                </div>
+                            </div>
+                        )
+                    }
+                    <div className={openForm ? "" : "d-none"}>
+                        <div className="row row5 mt-2">
+                            <div className="col-12">
+                                <div className="table-responsive withdrow-table" >
+                                    <table
+                                        role="table"
+                                        aria-busy="false"
+                                        aria-colcount="6"
+                                        className="table b-table table-bordered"
+                                        id="_BVID_104"
+
+                                        style={{
+                                            width: withType === "BANK" ? "900px" : "500px", margin: "auto"
+                                        }}>
+
+                                        <thead>
+                                            < tr role="row" className="account-detail">
+                                                <th
+                                                    role="columnheader"
+                                                    scope="col"
+                                                    aria-colindex="1"
+                                                    className="text-left ">
+                                                    Account Number
+                                                </th>
+                                                <th
+                                                    role="columnheader"
+                                                    scope="col"
+                                                    aria-colindex="2"
+                                                    className="text-left ">
+                                                    Account Name
+                                                </th>
+                                                <th
+                                                    role="columnheader"
+                                                    scope="col"
+                                                    aria-colindex="4"
+                                                    className={`text-left ${withType === "BANK" ? "" : "d-none"
+                                                        }`}>
+                                                    Bank Name
+                                                </th>
+                                                <th
+                                                    role="columnheader"
+                                                    scope="col"
+                                                    aria-colindex="5"
+                                                    className={`text-left ${withType === "BANK" ? "" : "d-none"
+                                                        }`}>
+                                                    IFSC Code
+                                                </th>
+                                                <th
+                                                    role="columnheader"
+                                                    scope="col"
+                                                    aria-colindex="6"
+                                                    className={`text-left ${withType === "BANK" ? "" : "d-none"
+                                                        }`}>
+                                                    Account Type
+                                                </th>
+                                                <th
+                                                    role="columnheader"
+                                                    scope="col"
+                                                    aria-colindex="6"
+                                                    className="text-left">
+                                                    Action
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        {getAccountData?.map((item) => {
+                                            if (item.withdrawType !== withType) return <></>;
+                                            return (
+                                                <tbody
+                                                // className={dataLenth === 0 ? "d-none" : ""}
+                                                >
+                                                    <tr role="row">
+                                                        <td
+                                                            aria-colindex="1"
+                                                            className="text-left withdraw-data">
+                                                            {item.accountNumber}
+                                                        </td>
+                                                        <td
+                                                            aria-colindex="2"
+                                                            className="text-left withdraw-data">
+                                                            {item.accountHolderName}
+                                                        </td>
+                                                        <td
+                                                            aria-colindex="4"
+                                                            className={`text-left withdraw-data ${withType === "BANK" ? "" : "d-none"
+                                                                }`}>
+                                                            {item?.bankName}
+                                                        </td>
+                                                        <td
+                                                            aria-colindex="5"
+                                                            className={`text-left withdraw-data ${withType === "BANK" ? "" : "d-none"
+                                                                }`}>
+                                                            {item?.ifsc}
+                                                        </td>
+                                                        <td
+                                                            aria-colindex="5"
+                                                            className={`text-left withdraw-data ${withType === "BANK" ? "" : "d-none"
+                                                                }`}>
+                                                            {item?.accountType}fsdfd
+                                                        </td>
+                                                        {console.log(item, "jhgfds")}
+                                                        <td
+
+
+                                                            aria-colindex="5"
+                                                            className="text-left">
+                                                            <div className="custom-control custom-control-inline custom-radio">
+                                                                <input onClick={() =>
+                                                                    handleWithdrawData(
+                                                                        item.accountNumber,
+                                                                        item.accountHolderName,
+                                                                        item?.bankName,
+                                                                        item?.ifsc,
+                                                                        item?.accountType,
+                                                                        item?.withdrawType,
+                                                                        item?.id
+
+                                                                    )
+                                                                }
+                                                                    style={{ cursor: "pointer" }} type="radio" value="true" name="radio_btn" />{" "}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            );
+                                        })}
+
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div className="withdraw_coin_btn" >
+                                {isLoading && (
+                                    <p className="lodder depositLoading withloading withdraw_deposit">
+                                        <i className="fa fa-spinner fa-spin"></i>
+                                    </p>
                                 )}
+                                <button onClick={handleClick}
+                                //   disabled={!openForm}
+                                >
+                                    Withdraw Coins
+                                </button>
                             </div>
-                            <div className="mx-input-wrapper account-field asdfghjkl">
-                                <label className="account-lable">
-                                    {withType === "PAYTM" ? "Name" : "Account Name"}
-                                </label>
-
-                                <input
-                                    type="text"
-                                    className="account-input"
-                                    value={accountHolderName.trimStart()}
-                                    onChange={(e) =>
-                                        e.target.value.match(/^[a-zA-Z ]*$/) &&
-                                        setAccountHolderName(
-                                            e.target.value
-                                        )
-                                    }
-                                />
-                            </div>
-                        </div>
-                    )
-
-
-                }
-
-
-
-
-                <div className={openForm ? "" : "d-none"}>
-                    <div className="row row5 mt-2">
-                        <div className="col-12">
-                            <div className="table-responsive withdrow-table">
-                                <table
-                                    role="table"
-                                    aria-busy="false"
-                                    aria-colcount="6"
-                                    className="table b-table table-bordered"
-                                    id="_BVID_104">
-                                    <thead>
-                                        <tr role="row" className="account-detail">
-                                            <th
-                                                role="columnheader"
-                                                scope="col"
-                                                aria-colindex="1"
-                                                className="text-left ">
-                                                Account Number
-                                            </th>
-                                            <th
-                                                role="columnheader"
-                                                scope="col"
-                                                aria-colindex="2"
-                                                className="text-left ">
-                                                Account Name
-                                            </th>
-                                            <th
-                                                role="columnheader"
-                                                scope="col"
-                                                aria-colindex="4"
-                                                className={`text-left ${withType === "BANK" ? "" : "d-none"
-                                                    }`}>
-                                                Bank Name
-                                            </th>
-                                            <th
-                                                role="columnheader"
-                                                scope="col"
-                                                aria-colindex="5"
-                                                className={`text-left ${withType === "BANK" ? "" : "d-none"
-                                                    }`}>
-                                                IFSC Code
-                                            </th>
-                                            <th
-                                                role="columnheader"
-                                                scope="col"
-                                                aria-colindex="6"
-                                                className={`text-left ${withType === "BANK" ? "" : "d-none"
-                                                    }`}>
-                                                Account Type
-                                            </th>
-                                            <th
-                                                role="columnheader"
-                                                scope="col"
-                                                aria-colindex="6"
-                                                className="text-left">
-                                                Action
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    {getAccountData?.map((item) => {
-                                        if (item.withdrawType !== withType) return <></>;
-                                        return (
-                                            <tbody
-                                            // className={dataLenth === 0 ? "d-none" : ""}
-                                            >
-                                                <tr role="row">
-                                                    <td
-                                                        aria-colindex="1"
-                                                        className="text-left withdraw-data">
-                                                        {item.accountNumber}
-                                                    </td>
-                                                    <td
-                                                        aria-colindex="2"
-                                                        className="text-left withdraw-data">
-                                                        {item.accountHolderName}
-                                                    </td>
-                                                    <td
-                                                        aria-colindex="4"
-                                                        className={`text-left withdraw-data ${withType === "BANK" ? "" : "d-none"
-                                                            }`}>
-                                                        {item?.bankName}
-                                                    </td>
-                                                    <td
-                                                        aria-colindex="5"
-                                                        className={`text-left withdraw-data ${withType === "BANK" ? "" : "d-none"
-                                                            }`}>
-                                                        {item?.ifsc}
-                                                    </td>
-                                                    <td
-                                                        aria-colindex="5"
-                                                        className={`text-left withdraw-data ${withType === "BANK" ? "" : "d-none"
-                                                            }`}>
-                                                        {item?.accountType}fsdfd
-                                                    </td>
-                                                    {console.log(item, "jhgfds")}
-                                                    <td
-                                                        style={{ cursor: "pointer" }}
-                                                        onClick={() =>
-                                                            handleWithdrawData(
-                                                                item.accountNumber,
-                                                                item.accountHolderName,
-                                                                item?.bankName,
-                                                                item?.ifsc,
-                                                                item?.accountType,
-                                                                item?.withdrawType,
-                                                                item?.id
-
-                                                            )
-                                                        }
-                                                        aria-colindex="5"
-                                                        className="text-left">
-                                                        <div className="custom-control custom-control-inline custom-radio">
-                                                            <input type="radio" name="radio_btn" />{" "}
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        );
-                                    })}
-
-                                </table>
-                            </div>
-                        </div>
-
-                        <div className="withdraw_coin_btn" >
-                            {isLoading && (
-                                <p className="lodder depositLoading withloading withdraw_deposit">
-                                    <i className="fa fa-spinner fa-spin"></i>
-                                </p>
-                            )}
-                            <button onClick={handleClick}
-                            //   disabled={!openForm}
-                            >
-                                Withdraw Coins
-                            </button>
                         </div>
                     </div>
-                </div>
+
+                </div >
+
 
             </div >
-
             <Modal
                 open={show}
                 onHide={handleClose}
@@ -805,8 +830,7 @@ const WithDraw1 = () => {
                     </div>
                 </Box>
             </Modal>
-
-        </div >
+        </>
     )
 }
 

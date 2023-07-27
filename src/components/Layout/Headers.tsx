@@ -151,10 +151,10 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   return (
     <>
       <AppBar
-        position="sticky"
+
         enableColorOnDark
         onClick={handleClose}
-        style={{ background: colorHex.bg2, height: "50px" }}
+        style={{ background: colorHex.bg2, height: "50px", top: "0px", position: "sticky" }}
         className="main_header"
       >
         <div className="header_inner" >

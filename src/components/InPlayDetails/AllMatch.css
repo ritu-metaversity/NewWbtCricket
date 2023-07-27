@@ -406,7 +406,7 @@ table.bet-value-buttons-table {
 }
 
 table.bet-value-buttons-table tr td button {
-    width: 60px;
+    width: 50px;
     padding: 10px 0;
     margin: 0;
     text-align: center;
@@ -443,7 +443,7 @@ table.bet-value-buttons-table tr td button {
 }
 
 table.bet-value-buttons-table tr td {
-    padding-right: 5px;
+    /* padding-right: 5px; */
     padding-bottom: 5px;
 }
 
@@ -477,7 +477,7 @@ table.bet-value-buttons-table tr td button {
 
 .wrapper {
     display: grid;
-    grid-template-columns: repeat(5, minmax(75px, 1fr));
+    grid-template-columns: repeat(5, minmax(66px, 1fr));
     /* grid-column-gap: 6px; */
     /* grid-row-gap: 6px; */
 }

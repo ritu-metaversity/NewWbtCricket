@@ -24,6 +24,10 @@
     margin-left: -15px;
 }
 
+.active {
+    display: block;
+}
+
 .col-lg-1,
 .col-lg-10,
 .col-lg-11,
@@ -764,4 +768,98 @@ fieldset[disabled] .btn {
         padding-bottom: inherit;
         font-size: inherit;
     }
+}
+
+.tvdatatatat {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+    gap: 30px;
+    background-color: #7b7c7f;
+    padding: 8px 20px 8px 20px;
+}
+
+.scoreCard_icon {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.label_checkbox {}
+
+.scoreCard-icon {
+    /* position: absolute; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* z-index: 11; */
+    /* top: 118px; */
+    /* right: 5px; */
+    height: 100%;
+}
+
+.onoffbtn {
+    /* width:60px;
+    height:30px; */
+    width: 45px;
+    height: 20px;
+    border-radius: 15px;
+    background: #fff;
+    display: block;
+    position: relative;
+}
+
+.onoffbtn:after {
+    position: absolute;
+    height: 18px;
+    width: 19px;
+    display: block;
+    border-radius: 50%;
+    background: #bab19c;
+    top: 1px;
+    left: 1px;
+    content: '';
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
+    text-align: center;
+    line-height: 29px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.onoffbtn.active:after {
+    left: 100%;
+    margin-left: -21px;
+    background: #0f2327e0;
+    content: '';
+}
+
+.onoffbtn input[type="checkbox"] {
+    opacity: 0;
+}
+
+.css-vubbuv {
+    fill: currentcolor;
+    color: #fff;
+    display: inline-block;
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    height: 1em;
+    margin-left: 4px;
+    margin-right: 2px;
+    transition: fill .2s cubic-bezier(.4, 0, .2, 1) 0ms;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 1em;
+}
+
+.icon-medium {
+    font-size: 18px !important;
 }

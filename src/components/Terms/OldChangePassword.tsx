@@ -51,7 +51,7 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
         "Password should contain atleast one number and one lower case and one upper case."
       );
     } else {
-      const { response } = await userServices.oldChangePassword({
+      const { response, error } = await userServices.oldChangePassword({
         oldPassword,
         currentPassword: oldPassword,
         newPassword,
@@ -63,7 +63,16 @@ const OldChangePassword: FC<Props> = ({ setIsSignedIn }) => {
         navigate("/sign-in");
         localStorage.clear();
         setIsSignedIn(false);
+      } else {
+        navigate("/sign-in");
+        localStorage.clear();
+        setIsSignedIn(false);
+        console.log(error, "kjuhytredszxcvgh")
+        // if(error?.status===false){
+
+        // }
       }
+      // console.log(response.status, error, "kjuhytredszxcvgh")
     }
 
     setLoading && setLoading((prev) => ({ ...prev, handleClick: false }));

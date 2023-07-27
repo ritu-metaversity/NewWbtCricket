@@ -1,6 +1,6 @@
 import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import moment from 'moment';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from "react-router-dom";
 import { LoaderContext } from '../../App';
 import { inPlayDetailServices } from '../../utils/api/inplayDetails/services';
@@ -32,7 +32,21 @@ const getValue = (num) => {
     else if ((num / 1000) >= 1) { return num / 1000 + 'K'; }
     else { return num };
 }
+const useFocus = () => {
+    const htmlElRef = useRef(null)
+    const setFocus = () => { console.log(htmlElRef.current, "huihuihui"); htmlElRef.current && htmlElRef.current.focus() }
+
+    return [htmlElRef, setFocus]
+}
+const useFocusForDesktop = () => {
+    const htmlElRef = useRef(null)
+    const setInputFocusForDesktop = () => { console.log(htmlElRef.current, "huihuihui"); htmlElRef.current && htmlElRef.current.focus() }
+
+    return [htmlElRef, setInputFocusForDesktop]
+}
 const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
+    const [inputRef, setInputFocus] = useFocus()
+    const [inputRefForDesktop, setInputFocusForDesktop] = useFocusForDesktop()
     const [betRecord, setBetRecord] = useState("");
     const [Show, setShow] = useState(false);
     const [errorShow, setErrorShow] = useState(true);
@@ -184,7 +198,9 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
         };
         getList();
     }, [sportsId])
-    console.log(completedMatches, "dushyant")
+    console.log(bet, "dushyant")
+    useEffect(() => { console.log("huihiu"); if (bet?.placeTime) { setInputFocus() } }, [bet?.placeTime])
+    useEffect(() => { console.log("huihiu"); if (bet?.placeTime) { setInputFocusForDesktop() } }, [bet?.placeTime])
     // const sportsId = searchParams.get("Sports-id");
     return (
         <div>
@@ -206,6 +222,8 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
                                             list="stacklist"
                                             type="number"
                                             id="stakeInput"
+                                            // autoFocus={!!betRecord}
+                                            ref={inputRef}
                                             className="quantity-session"
                                             // disabled=""
                                             value={bet?.stake || ""}
@@ -279,7 +297,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
                             <div className="col-md-3" >
                                 <div>
 
-                                    <b>RATE&nbsp;:&nbsp; {bet?.odds === undefined ? "(NO)" : bet?.odds}</b>
+                                    <b>RATE&nbsp;:&nbsp;</b> {bet?.odds === undefined ? "0(NO)" : bet?.isBack === true ? (<>{bet?.odds}({bet?.marketnameid})</>) : (<>{bet?.odds}({bet?.marketnameid})</>)}
                                 </div>
                             </div>
 
@@ -294,7 +312,8 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
                                             className="form-control"
                                             defaultValue={0}
                                             style={{ fontSize: 18 }}
-                                            value={bet?.stake || ""}
+                                            value={bet?.stake || 0}
+                                            ref={inputRefForDesktop}
                                             onChange={(e) => {
                                                 setBet((o) =>
                                                     o ? { ...o, stake: Number(e.target.value) } : null
@@ -360,7 +379,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
 
                         return (
                             <div>
-                                <Link to={`/in-play-details/?event-id=${item.matchId}&Sports-id=${searchParams.get("Sports-id")}`}>
+                                <a href={`/in-play-details/?event-id=${item.matchId}&Sports-id=${searchParams.get("Sports-id")}`}>
                                     <div
                                         className="row"
                                         style={{
@@ -383,7 +402,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
                                             </span>
                                         </div>
                                     </div>
-                                </Link>
+                                </a>
                             </div>
                         )
                     }

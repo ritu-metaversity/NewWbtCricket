@@ -28,11 +28,11 @@ a {
   color: black;
 }
 
-@media screen and (max-width:400px) {
-  main {
-    width: 81%;
-  }
-}
+/* @media screen and (max-width:400px) { */
+  /* main {
+    width:100vw;
+  } */
+/* } */
 
 @media (min-width: 600px) {
 

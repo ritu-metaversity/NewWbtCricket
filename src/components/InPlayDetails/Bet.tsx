@@ -33,6 +33,7 @@ import { userServices } from "../../utils/api/user/services";
 import Marquee from "react-fast-marquee";
 import AllMatch from "./AllMatch";
 import { useParams } from "react-router-dom";
+import inplaytv from "./tv_for_inplay.png"
 
 const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
   const [amount, setAmount] = useState(10);
@@ -59,7 +60,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
   const [preBookmakerToss, setPreBookMakerToss] = useState<any[]>([]);
   const [fancyPnl, setFancyPnl] = useState<FancyPnl[]>([]);
   const [oddPnl, setOddsPnl] = useState<Pnl[]>([]);
-  const { setLoading } = useContext(LoaderContext);
+  const { setLoading, loading } = useContext(LoaderContext);
   const [bet, setBet] = useState<BetDetailsInterface | null>(null);
 
   const [activeFancySlower, setActiveFancySlower] = useState<{
@@ -71,6 +72,50 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
     Bookmaker: [],
     Fancy: [],
   });
+
+
+  const [TvShow, setTvShow] = useState(false)
+  const [toggleBtn1, settoggleBtn1] = useState(false)
+  const [toggleBtn2, settoggleBtn2] = useState(false)
+
+  const handleTvShow = () => {
+    if (TvShow === false) {
+      setTvShow(true);
+      settoggleBtn1(false)
+      settoggleBtn2(false)
+    } else {
+      setTvShow(false);
+    }
+  };
+
+
+  const handleOne = (e: any) => {
+    e.preventDefault();
+    if (toggleBtn1 === false) {
+      settoggleBtn1(true)
+      setTvShow(false);
+      settoggleBtn2(false)
+
+    } else {
+      settoggleBtn1(false)
+
+    }
+  };
+
+  const handleTwo = (e: any) => {
+    e.preventDefault();
+
+    if (toggleBtn2 === false) {
+      settoggleBtn1(false)
+
+      settoggleBtn2(true)
+      setTvShow(false);
+
+    } else {
+
+      settoggleBtn2(false)
+    }
+  };
 
   const style = {
     position: "absolute" as "absolute",
@@ -104,6 +149,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
       props.event.toString()
     );
     if (response) {
+
       setBookMakerOdds(response.Bookmaker);
       let newBookmakerOdd: FancyOddsInterface[] = response.Bookmaker.map(
         (item: any, index: number) => ({
@@ -180,10 +226,12 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
         }));
       }
       // newResponse.Odds = undefined;
+      setLoading && setLoading((prev) => ({ ...prev, fancyOdds: false }))
       setActiveFancy(newResponse);
     }
   };
   useEffect(() => {
+    setLoading && setLoading((prev) => ({ ...prev, fancyOdds: true }));
     getFancyOdds()
   }, [])
   useEffect(() => {
@@ -248,6 +296,11 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
     });
   }, [bet?.stake]);
 
+  if (loading.fancyOdds || !(Object.values(activeFancy)?.length > 0)) {
+    return <></>
+  }
+
+  console.log(bet, "liuytgfvbjh")
   return (
     <>
       <Dialog
@@ -283,7 +336,104 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
         buttonData={buttonData}
       /> */}
       <div>
+        <div className="tvdatatatat">
+          <div className="scoreCard_icon" onClick={handleTvShow}>
+            <img src={inplaytv} alt="Live tv"
+              style={{ height: "100%" }} />
+            <span style={{ color: "#fff" }}>
 
+              TV
+            </span>
+            {/* <img
+              alt=""
+              style={{ height: "100%" }}
+              src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
+            /> */}
+          </div>
+          <div className="scoreCard-icon">
+            <svg
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
+              focusable="false"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              data-testid="ScoreboardIcon">
+              <path d="M17.5 13.5H16v-3h1.5v3zM20 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9.5 11.5c0 .55-.45 1-1 1h-2v1h3V15H5v-2.5c0-.55.45-1 1-1h2v-1H5V9h3.5c.55 0 1 .45 1 1v1.5zm3.25 6.5h-1.5v-1.5h1.5V18zm0-3.5h-1.5V13h1.5v1.5zm0-3.5h-1.5V9.5h1.5V11zm0-3.5h-1.5V6h1.5v1.5zM19 14c0 .55-.45 1-1 1h-2.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v4z"></path>
+            </svg>
+            <div>
+              <label
+                className={`onoffbtn ${toggleBtn1 ? "active" : ""}`}
+                onClick={handleOne}>
+                <input type="checkbox" />
+              </label>
+            </div>
+            <svg
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
+              focusable="false"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              data-testid="ScoreboardIcon">
+              <path d="M17.5 13.5H16v-3h1.5v3zM20 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9.5 11.5c0 .55-.45 1-1 1h-2v1h3V15H5v-2.5c0-.55.45-1 1-1h2v-1H5V9h3.5c.55 0 1 .45 1 1v1.5zm3.25 6.5h-1.5v-1.5h1.5V18zm0-3.5h-1.5V13h1.5v1.5zm0-3.5h-1.5V9.5h1.5V11zm0-3.5h-1.5V6h1.5v1.5zM19 14c0 .55-.45 1-1 1h-2.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v4z"></path>
+            </svg>
+            <div>
+              <label
+                className={`onoffbtn ${toggleBtn2 ? "active" : ""}`}
+                onClick={handleTwo}>
+                <input type="checkbox" />
+              </label>
+            </div>
+          </div>
+        </div>
+        {TvShow ? (
+          <div id="scoreboard-box">
+            <div className="scorecard scorecard-mobile">
+              <div className="score-inner">
+                <iframe
+                  src={`http://43.205.116.130/tv.php?eventId=${props.event}`}
+                  // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                  width="100%"
+                  height="290px"
+                  className="score-card"
+                  title="scorecord"
+                  allowFullScreen={true}
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        ) : ""}
+        {toggleBtn1 === true ? <div id="scoreboard-box">
+          <div className="scorecard scorecard-mobile">
+            <div className="score-inner">
+              <iframe
+                src={`http://15.207.182.173:3050/event/${props.event}`}
+
+                // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                width="100%"
+                height="290px"
+                className="score-card"
+                title="scorecord"
+                allowFullScreen={true}
+              ></iframe>
+            </div>
+          </div>
+        </div> : ""}
+        {
+          toggleBtn2 === true ? <div id="scoreboard-box">
+            <div className="scorecard scorecard-mobile">
+              <div className="score-inner">
+                <iframe
+                  //  src={`http://15.207.182.173:3050/event/${id}`}
+
+                  src={`https://internal-consumer-apis.jmk888.com/go-score/template/${props?.sportsId}/${props.event}`}
+                  width="100%"
+                  height="290px"
+                  className="score-card"
+                  title="scorecord"
+                  allowFullScreen={true}
+                ></iframe>
+              </div>
+            </div>
+          </div> : ""
+        }
         <div className="container">
           {matchOdd
             ?.filter((i) => i.Name === "Match Odds")

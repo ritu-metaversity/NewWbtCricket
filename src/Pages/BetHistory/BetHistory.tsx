@@ -90,6 +90,7 @@ const BetHistory = () => {
     };
     getList();
   }, [formData, setLoading]);
+console.log(accountStatement,"iuyghuy");
 
   function handleChange(event: { target: { name: any; value: any } }) {
     setFormData((preState) => {

@@ -76,6 +76,7 @@ function App() {
     const { response } = await selfServices.isSelfAllowed({
       // appUrl: "11hub.atozscore1234.com",
       appUrl: window.location.hostname,
+      // appUrl: "localhost",
     });
 
     if (response?.data) {
@@ -89,7 +90,9 @@ function App() {
       setIsSignedIn(true);
     }
   }, []);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     let timer: ReturnType<typeof setInterval>;

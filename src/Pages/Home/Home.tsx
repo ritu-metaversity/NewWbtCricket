@@ -58,19 +58,6 @@ const ActionCardPropsList = [
     cardImageSrc: "/inplay1.png",
     cardForwardHref: "/in-play",
   },
-  {
-    cardTitle: "Statement",
-    cardDesc: "matches that are completed and the results are declared",
-    cardImageSrc: "/complete2.png",
-    cardForwardHref: "/complete-games",
-  },
-
-  {
-    cardTitle: "My Ledger",
-    cardDesc: "check your history, wins and rewards",
-    cardImageSrc: "/myledger6.png",
-    cardForwardHref: "/account-summary",
-  },
 
   {
     cardTitle: "Profile",
@@ -78,12 +65,11 @@ const ActionCardPropsList = [
     cardImageSrc: "/profile2.png",
     cardForwardHref: "/profile",
   },
-
   {
-    cardTitle: "Casino",
-    cardDesc: "Play online live casino",
-    cardImageSrc: "/casino.png",
-    cardForwardHref: "/casino",
+    cardTitle: "Statement",
+    cardDesc: "matches that are completed and the results are declared",
+    cardImageSrc: "/complete2.png",
+    cardForwardHref: "/complete-games",
   },
   {
     cardTitle: "Change Password",
@@ -102,7 +88,24 @@ const ActionCardPropsList = [
     // cardDesc: "change your mybet password",
     cardImageSrc: "/now_5579093.png",
     cardForwardHref: "/current-bet",
-  },]
+  },
+  {
+    cardTitle: "My Ledger",
+    cardDesc: "check your history, wins and rewards",
+    cardImageSrc: "/myledger6.png",
+    cardForwardHref: "/account-summary",
+  },
+
+
+  {
+    cardTitle: "Casino",
+    cardDesc: "Play online live casino",
+    cardImageSrc: "/casionnewlogo.png",
+    cardForwardHref: "/casino",
+  },
+
+
+]
 
 const Home = () => {
   const gridItemProps: GridProps = {

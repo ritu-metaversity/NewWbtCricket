@@ -68,7 +68,8 @@ export const MatchOddsGrid: FC<Props> = ({
     placeTime: Date,
     priceValue: number,
     isFancy: boolean,
-    name: string
+    name: string,
+    marketnameid: string,
   ) => {
     if (odds <= 0) {
       setBet(null);
@@ -87,6 +88,7 @@ export const MatchOddsGrid: FC<Props> = ({
       priceValue: priceValue,
       isFancy: isFancy,
       name,
+      marketnameid: marketnameid
     });
   };
   const [show, setShow] = useState(false)
@@ -187,14 +189,14 @@ export const MatchOddsGrid: FC<Props> = ({
                     >
                       <span style={{
                         fontSize: "16px",
-                        color: "#5957ff",
+                        color: "#ff5c72",
                         fontWeight: "750"
                       }}>{item.ex.availableToBack[2].price}</span>
                       <div>
 
                         <span style={{
                           fontSize: "9px",
-                          color: "#5957ff",
+                          color: "#ff5c72",
                           fontWeight: "500"
                         }}>{item.ex.availableToBack[2].size}</span>
                       </div>
@@ -203,14 +205,14 @@ export const MatchOddsGrid: FC<Props> = ({
                     >
                       <span style={{
                         fontSize: "16px",
-                        color: "#5957ff",
+                        color: "#ff5c72",
                         fontWeight: "750"
                       }}>{item.ex.availableToBack[1].price}</span>
                       <div>
 
                         <span style={{
                           fontSize: "9px",
-                          color: "#5957ff",
+                          color: "#ff5c72",
                           fontWeight: "500"
                         }}>{item.ex.availableToBack[1].size}</span>
                       </div>
@@ -233,7 +235,8 @@ export const MatchOddsGrid: FC<Props> = ({
                           date,
                           +item.ex.availableToBack[0].price,
                           false,
-                          item.name
+                          item.name,
+                          "LAGAI"
                         )
                       }
                     >
@@ -245,6 +248,7 @@ export const MatchOddsGrid: FC<Props> = ({
                         {item.ex.availableToBack[0].price}</span>
                       <div>
                         <span style={{
+
                           fontSize: "9px",
                           color: "#ff5c72",
                           fontWeight: "500"
@@ -270,11 +274,13 @@ export const MatchOddsGrid: FC<Props> = ({
                           date,
                           +item.ex.availableToLay[0].price,
                           false,
-                          item.name
+                          item.name,
+                          "KHAI"
                         )
                       }
                     >
                       <span style={{
+
                         fontSize: "16px",
                         color: "#5957ff",
                         fontWeight: "750"

@@ -15,17 +15,19 @@
 }
 
 .btn_stack {
-    padding: 3px 15px;
+    padding: 3px 7px;
     border-radius: 4px;
     border-color: black;
-    border: solid;
+    border: solid 1px;
+    width: 99px;
+    color: black;
 }
 
 .btn_save {
     padding: 3px 15px;
     border-radius: 4px;
     border-color: black !important;
-    border: solid;
+    border: unset;
     background-color: #7b7c7f;
     padding: 10px;
     color: white;

@@ -39,6 +39,7 @@
     align-items: center;
     justify-content: center;
     gap: 7px 100px;
+    white-space: nowrap;
 }
 
 /* 

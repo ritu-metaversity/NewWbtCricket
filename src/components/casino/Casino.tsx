@@ -182,7 +182,7 @@ const Casino = () => {
             // height="82vh"
             // className="mobile_if"
             width="100%"
-            style={{ minHeight: "100vh" }}
+            style={{ minHeight: "90vh" }}
             title="mobile"
             className="For_mobile"
             allowFullScreen={true}

@@ -70,34 +70,26 @@ export function AmountForm({ amount, setAmount }: Props) {
         gap={1}
         rowGap={5}
       >
-        <Box
-          width={{
-            xs: "100%",
-            md: "125px",
-          }}
-          textAlign="left"
-        >
-          <Typography variant="caption" textAlign={"left"}>
-            Enter Amount:
-          </Typography>
-          <div
 
-            className="lkjhgfdsa"
-          >
-            <RemoveIcon onClick={handleMinusClick} />
+        <div className="main_for_enter_amount">
+          <div className="name_enter_amount" > <span className="name_enter_amount">Enter Amount</span></div>
+          <div className="field_for_enter_amount">
+            <RemoveIcon onClick={handleMinusClick} style={{ height: "30px" }} />
             <StyledAmountInput
-
               type="text"
               placeholder="Amount"
               value={amount || ""}
               onChange={handleChange}
+              className="field_for_enter_amount"
+              style={{ border: "solid 1px" }}
             />
-            <AddIcon onClick={handlePlusClick} />
+            <AddIcon onClick={handlePlusClick} style={{ height: "30px" }} />
           </div>
-        </Box>
+        </div>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: '100px' }}>
           {stackValue.map((value: any, index) => (
             <StyledButtonSmall
+              // style={{ padding: "0px 0px 7px" }}
               key={`${value.key}-button-${value.value}-${index}`}
               onClick={() => setAmount((o) => o + value?.value)}
             >

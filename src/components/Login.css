@@ -12,7 +12,11 @@
     flex-wrap: wrap;
 }
 
-
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 .login-form {
     display: flex;
@@ -84,6 +88,14 @@
     .loginBackground {
         background: #8c9088;
         height: unset;
+    }
+}
+
+@media screen and (min-height: 500px) and (max-height:900px) {
+
+    .loginBackground {
+        background: #8c9088;
+        height: 100vh;
     }
 }
 

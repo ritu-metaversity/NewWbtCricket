@@ -47,6 +47,7 @@ export interface BetDetailsInterface {
   isFancy: boolean;
   name?: string;
   t?: string;
+  marketnameid?:string;
 }
 export interface FancyOddsInterface {
   mid: string;

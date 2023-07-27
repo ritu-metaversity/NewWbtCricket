@@ -37,13 +37,13 @@ const StickyTable: React.FC<StickyHeadTableProps> = ({
             {title}
           </AccordionSummary>
           <AccordionDetails>
-            <TableContainer sx={{ maxHeight: "70vh", width: "100%" }}>
+            <TableContainer sx={{ maxHeight: "70vh", width: "100%", overflowY: "hidden" }}>
               <Tables
                 columns={columns}
                 rows={rows}
                 page={page}
                 rowsPerPage={rowsPerPage}
-                // value={value}
+              // value={value}
               />
               {result && (
                 <TableResultContainer textAlign={"center"}>

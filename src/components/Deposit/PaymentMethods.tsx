@@ -83,7 +83,7 @@ export function PaymentMethods() {
 
         <BankInfoComponent paymentData={paymentData} type={selected} />
         :
-        " "
+        ""
       }
 
       {/* {selected.toLowerCase() === "UPI".toLowerCase() && (

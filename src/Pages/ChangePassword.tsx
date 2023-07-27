@@ -38,6 +38,8 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
         "Password should contain atleast one number and one lower case and one upper case."
       );
     } else {
+
+      // /user/first-login-cp
       const { response } = await userServices.changePassword({
         oldPassword,
         currentPassword: oldPassword,

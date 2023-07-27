@@ -34,7 +34,9 @@ const BookMakerOddsgrid: FC<{
     priceValue: number,
     isFancy: boolean,
     marketName: string,
-    name: string
+    name: string,
+    marketnameid: string,
+
   ) => {
     if (odds <= 0) {
       setBet(null);
@@ -52,7 +54,8 @@ const BookMakerOddsgrid: FC<{
       placeTime: placeTime,
       priceValue: priceValue,
       isFancy: isFancy,
-      name,
+      marketnameid: marketnameid
+
     });
   };
   const [show, setShow] = useState(true)
@@ -157,7 +160,7 @@ const BookMakerOddsgrid: FC<{
                 <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
                   fontSize: "16px",
                   fontWeight: 750,
-                  color: "#5957ff"
+                  color: "#ff5c72"
                 }}
                 >
                   <span>0</span>
@@ -165,7 +168,7 @@ const BookMakerOddsgrid: FC<{
                 <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
                   fontSize: "16px",
                   fontWeight: 750,
-                  color: "#5957ff"
+                  color: "#ff5c72"
                 }}
                 >
                   <span>0</span>
@@ -173,7 +176,7 @@ const BookMakerOddsgrid: FC<{
                 <td className="bet-place-tbl-td cursor-pointer desktopSize" style={{
                   fontSize: "16px",
                   fontWeight: 750,
-                  color: "#5957ff"
+                  color: "#ff5c72"
                 }}
 
                   onClick={() =>
@@ -188,7 +191,9 @@ const BookMakerOddsgrid: FC<{
                       +item.b1,
                       false,
                       item.t,
-                      item.nation
+                      item.nation,
+                      "LAGAI"
+
                     )
                   }>
                   <span>{item.b1}</span>
@@ -196,7 +201,7 @@ const BookMakerOddsgrid: FC<{
                 <td className="bet-place-tbl-td cursor-pointer desktopSize" style={{
                   fontSize: "16px",
                   fontWeight: 750,
-                  color: "#ff5c72"
+                  color: "#5957ff"
                 }} onClick={() =>
                   updateBet(
                     false,
@@ -209,7 +214,8 @@ const BookMakerOddsgrid: FC<{
                     +item.l1,
                     false,
                     item.t,
-                    item.nation
+                    item.nation,
+                    "KHAI"
                   )
                 }>
                   <span>{item.l1}</span>
@@ -217,14 +223,14 @@ const BookMakerOddsgrid: FC<{
                 <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
                   fontSize: "16px",
                   fontWeight: 750,
-                  color: "#ff5c72"
+                  color: "#5957ff"
                 }} >
                   <span>0</span>
                 </td>
                 <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
                   fontSize: "16px",
                   fontWeight: 750,
-                  color: "#ff5c72"
+                  color: "#5957ff"
                 }} >
                   <span>0</span>
                 </td>

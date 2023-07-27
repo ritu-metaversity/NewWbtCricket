@@ -9,11 +9,12 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { LoaderContext } from "../../App";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
+import InPlayMatch from "../../components/Inplay/InPlayMatch";
 import SummaryCard, {
   SummaryCardProps,
 } from "../../components/Inplay/SummaryCard";
 import { sportServices } from "../../utils/api/sport/services";
-import Match from "../../components/Inplay/Match";
+import "./inplay.css"
 
 interface InplayInterface {
   sportId: string;
@@ -48,29 +49,32 @@ const Inplay = () => {
   }, [setLoading]);
   console.log(activeEventList, "daafskdflmopiuhjb")
   return (
-    <Box maxWidth={900} mx="auto">
+    <div className="main_main_box">
+      {/* // <Box maxWidth={900} mx="auto"> */}
       <BacktoMenuButton />
 
       {activeEventList?.length > 0
-        ? activeEventList.map((sportItem: any) => (
-          <Accordion defaultExpanded>
-            <AccordionSummary expandIcon={<ExpandCircleDown />}>
-              {sportItem.name}
-            </AccordionSummary>
-            <AccordionDetails sx={{ px: 1 }}>
-              {sportItem.matchList.map((item: any) => (
-                // <SummaryCard key={item.matchId + "summaryCard"} {...item} />
-                <Match matches={item} sportId={sportItem.sportid} />
-              ))}
-            </AccordionDetails>
-          </Accordion>
+        ? activeEventList.map((sportItem: any) => (<>
+          {/* // <Accordion defaultExpanded> */}
+          {/* // <AccordionSummary expandIcon={<ExpandCircleDown />}> */}
+          {/* // </AccordionSummary> */}
+          {/* // <AccordionDetails sx={{ px: 1 }}> */}
+          {sportItem.matchList.map((item: any) => (
+            // <SummaryCard key={item.matchId + "summaryCard"} {...item} />
+            <InPlayMatch matches={item} sportId={sportItem.sportid} />
+          ))}
+          {/* // </AccordionDetails> */}
+          {/* </Accordion> */}
+        </>
         ))
         : !loading.Inplay && (
           <Typography mt="15vh" variant="h4" color="error">
             {"No active event found"}
           </Typography>
         )}
-    </Box>
+      {/* // </Box> */}
+    </div>
+
   );
 };
 
