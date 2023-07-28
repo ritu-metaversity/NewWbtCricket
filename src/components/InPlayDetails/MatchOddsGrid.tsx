@@ -1,11 +1,12 @@
 import { Box, Grid } from "@mui/material";
 
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { BetGridItem, redGreenComponent } from "./Bet";
 import { BetText, BetTextMedium } from "./styledComponents";
 import { BetDetailsInterface, ProfitInterface } from "./types";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import "./common.css"
+import { useSearchParams } from "react-router-dom";
 interface MatchOddsGridProps {
   runners: {
     back1price: number;
@@ -91,7 +92,9 @@ export const MatchOddsGrid: FC<Props> = ({
       marketnameid: marketnameid
     });
   };
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(true)
+  const [searchParams] = useSearchParams();
+
   const handleChange = () => {
     if (show === true) {
       setShow(false)
@@ -99,6 +102,13 @@ export const MatchOddsGrid: FC<Props> = ({
       setShow(true)
     }
   }
+
+  useEffect(() => {
+    if ((searchParams.get("Sports-id") === "4")) {
+      setShow(false)
+    }
+  }, [])
+
   return (
 
 
