@@ -173,6 +173,8 @@ console.log(accountStatement,"accountStatement");
         totalPage={countPage}
       />
       <TablePagination
+        nextIconButtonProps={{ sx: { color: "black" } }}
+        backIconButtonProps={{ sx: { color: "black" } }}
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={countPage ? countPage * formData.noOfRecords : -1}
