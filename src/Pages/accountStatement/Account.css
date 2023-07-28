@@ -1,11 +1,13 @@
 .css-13fryhb-MuiTypography-root {
     background-color: #2A363B !important;
-    color: #fff !important;
+    /* color: #fff !important; */
 }
-.search_btn{
+
+.search_btn {
     background: #29363b !important;
 }
-th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-stickyHeader.MuiTableCell-alignCenter{
+
+th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-stickyHeader.MuiTableCell-alignCenter {
     background: #b9b9b9 !important;
     color: #000 !important;
 }

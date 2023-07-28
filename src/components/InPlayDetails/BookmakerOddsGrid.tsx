@@ -160,7 +160,7 @@ const BookMakerOddsgrid: FC<{
                 <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
                   fontSize: "16px",
                   fontWeight: 750,
-                  color: "#ff5c72"
+                  color: "#5957ff"
                 }}
                 >
                   <span>0</span>
@@ -168,7 +168,7 @@ const BookMakerOddsgrid: FC<{
                 <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
                   fontSize: "16px",
                   fontWeight: 750,
-                  color: "#ff5c72"
+                  color: "#5957ff"
                 }}
                 >
                   <span>0</span>
@@ -176,7 +176,7 @@ const BookMakerOddsgrid: FC<{
                 <td className="bet-place-tbl-td cursor-pointer desktopSize" style={{
                   fontSize: "16px",
                   fontWeight: 750,
-                  color: "#ff5c72"
+                  color: "#5957ff"
                 }}
 
                   onClick={() =>
@@ -201,7 +201,7 @@ const BookMakerOddsgrid: FC<{
                 <td className="bet-place-tbl-td cursor-pointer desktopSize" style={{
                   fontSize: "16px",
                   fontWeight: 750,
-                  color: "#5957ff"
+                  color: "#ff5c72"
                 }} onClick={() =>
                   updateBet(
                     false,
@@ -223,14 +223,14 @@ const BookMakerOddsgrid: FC<{
                 <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
                   fontSize: "16px",
                   fontWeight: 750,
-                  color: "#5957ff"
+                  color: "#ff5c72"
                 }} >
                   <span>0</span>
                 </td>
                 <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
                   fontSize: "16px",
                   fontWeight: 750,
-                  color: "#5957ff"
+                  color: "#ff5c72"
                 }} >
                   <span>0</span>
                 </td>

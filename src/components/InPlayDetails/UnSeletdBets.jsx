@@ -127,8 +127,8 @@ const UnSeletdBets = ({ betRecord, completedMatches }) => {
                         COMPLETED FANCY BETS
                     </div>
                     <table
-                        className="table table-responsive table-bordered"
-                        style={{ width: "100%", display: "inline-table" }}
+                        className="table table-responsive table-bordered table_COMPLETED"
+
                     >
                         <thead>
                             <tr>

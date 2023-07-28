@@ -57,6 +57,9 @@ const Sports = () => {
         if (response?.data?.length > 0) {
           setActiveEventList(response.data);
           setShow(false);
+        } else {
+          setActiveEventList([]);
+          setShow(true);
         }
       } else {
         setActiveEventList([]);
@@ -73,7 +76,7 @@ const Sports = () => {
     return () => clearInterval(timer);
   }, [tabValue, activeSportList, setLoading]);
 
-  console.log(activeSportList[tabValue]?.sportId, "sporasdftid");
+  // console.log(activeEventList, "sporasdftid");
 
   return (
     <Box maxWidth={900} mx="auto" >

@@ -59,7 +59,7 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
               />
             ) : (
               <ImageUploadContainer>
-                <AddCircleIcon htmlColor="blue" />
+                <AddCircleIcon style={{ color: "black" }} />
                 <Typography>Click here to upload payment screenshot</Typography>
               </ImageUploadContainer>
             )}

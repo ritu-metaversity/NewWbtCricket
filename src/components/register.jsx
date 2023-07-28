@@ -123,17 +123,29 @@ const Register = () => {
 
 
   const handleMobileNumber = (e) => {
-    console.log(e.target.value, "luhbnoihb")
-    if (e.target.value.match(/^[0-9]{0,10}$/) !== null) {
-      setMobileNumber(e.target.value);
-    }
-    if (e.target.value.match(/^[0-9]{0,10}$/) === "") {
-      setmobileNumberError("Mobile number must not be empty.");
-    } else if (e.target.value?.length !== 10) {
-      setmobileNumberError("Mobile number must be 10 digit number");
+    // if()
+    // console.log(e.target.value, "luhbnoihb")
+    // if (e.target.value >= 10) {
+
+    console.log(e.target.value.match(/^[0-9]{0,40}$/) !== null, "lkjhgfdghj");
+    if ((e.target.value.match(/^[0-9]{0,40}$/) !== null) === true) {
+
+      if (e.target.value.match(/^[0-9]{0,40}$/) !== null) {
+
+        setMobileNumber(e.target.value);
+      }
+      if (e.target.value.match(/^[0-9]{0,10}$/) === "") {
+        setmobileNumberError("Mobile number must not be empty.");
+      } else if (e.target.value?.length !== 10) {
+        setmobileNumberError("Mobile number must be 10 digit number");
+      } else {
+        setmobileNumberError("");
+      }
     } else {
-      setmobileNumberError("");
+      setMobileNumber("")
     }
+    // }
+
   };
 
 
@@ -297,7 +309,8 @@ const Register = () => {
     >
       <Dialog
         onClose={() => {
-          setOpen(false); navigate("/sign-in", { replace: true });}}
+          setOpen(false); navigate("/sign-in", { replace: true });
+        }}
         open={open}
       >
         <DialogContent>
@@ -340,9 +353,8 @@ const Register = () => {
             required
             name="mobile"
             placeholder="Mobile No"
-            type="number"
+            // type="number"
             value={mobileNumber}
-            // value={register?.mobile}
             max="10"
             onChange={handleMobileNumber}
 

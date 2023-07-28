@@ -288,3 +288,18 @@ html {
 ::-webkit-scrollbar-thumb {
     background: transparent;
 }
+
+.table_COMPLETED {
+    width: 800px;
+}
+
+@media screen and (min-width:500px) {
+    .table_COMPLETED {
+        /* width: 100% !important; */
+        display: inline-table;
+    }
+}
+
+.table {
+    width: 100% !important;
+}

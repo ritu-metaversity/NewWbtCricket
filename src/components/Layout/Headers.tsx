@@ -246,7 +246,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
 
                 {userid}
               </span>
-              <GiHamburgerMenu onClick={handledrawer} style={{ width: "10%" }} />
+              <GiHamburgerMenu onClick={handledrawer} style={{ width: "8%" }} />
             </>
           }
           {!matches && <Drawer

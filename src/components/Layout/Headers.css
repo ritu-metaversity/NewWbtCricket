@@ -24,6 +24,7 @@
     width: 40%;
 }
 
+/* padding: 0px 42px; */
 @media screen and (min-width: 900px) {
     .mobile_logogoggo {
         display: none;
@@ -113,6 +114,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 0px 5px 0px 0px;
 }
 
 .inner_chips {

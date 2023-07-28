@@ -189,14 +189,14 @@ export const MatchOddsGrid: FC<Props> = ({
                     >
                       <span style={{
                         fontSize: "16px",
-                        color: "#ff5c72",
+                        color: "#5957ff",
                         fontWeight: "750"
                       }}>{item.ex.availableToBack[2].price}</span>
                       <div>
 
                         <span style={{
                           fontSize: "9px",
-                          color: "#ff5c72",
+                          color: "#5957ff",
                           fontWeight: "500"
                         }}>{item.ex.availableToBack[2].size}</span>
                       </div>
@@ -205,14 +205,14 @@ export const MatchOddsGrid: FC<Props> = ({
                     >
                       <span style={{
                         fontSize: "16px",
-                        color: "#ff5c72",
+                        color: "#5957ff",
                         fontWeight: "750"
                       }}>{item.ex.availableToBack[1].price}</span>
                       <div>
 
                         <span style={{
                           fontSize: "9px",
-                          color: "#ff5c72",
+                          color: "#5957ff",
                           fontWeight: "500"
                         }}>{item.ex.availableToBack[1].size}</span>
                       </div>
@@ -242,15 +242,14 @@ export const MatchOddsGrid: FC<Props> = ({
                     >
                       <span style={{
                         fontSize: "16px",
-                        color: "#ff5c72",
+                        color: "#5957ff",
                         fontWeight: "750"
                       }}>
                         {item.ex.availableToBack[0].price}</span>
                       <div>
                         <span style={{
-
                           fontSize: "9px",
-                          color: "#ff5c72",
+                          color: "#5957ff",
                           fontWeight: "500"
                         }}>{item.ex.availableToBack[0].size}</span>
                       </div>
@@ -280,16 +279,15 @@ export const MatchOddsGrid: FC<Props> = ({
                       }
                     >
                       <span style={{
-
                         fontSize: "16px",
-                        color: "#5957ff",
+                        color: "#ff5c72",
                         fontWeight: "750"
                       }}>{item.ex.availableToLay[0].price}</span>
                       <div>
 
                         <span style={{
                           fontSize: "9px",
-                          color: "#5957ff",
+                          color: "#ff5c72",
                           fontWeight: "500"
                         }}>{item.ex.availableToLay[0].size}</span>
                       </div>
@@ -298,14 +296,14 @@ export const MatchOddsGrid: FC<Props> = ({
                     >
                       <span style={{
                         fontSize: "16px",
-                        color: "#5957ff",
+                        color: "#ff5c72",
                         fontWeight: "750"
                       }}>{item.ex.availableToBack[1].price}</span>
                       <div>
 
                         <span style={{
                           fontSize: "9px",
-                          color: "#5957ff",
+                          color: "#ff5c72",
                           fontWeight: "400"
                         }}>{item.ex.availableToBack[1].size}</span>
                       </div>
@@ -314,14 +312,14 @@ export const MatchOddsGrid: FC<Props> = ({
                     >
                       <span style={{
                         fontSize: "16px",
-                        color: "#5957ff",
+                        color: "#ff5c72",
                         fontWeight: "750"
                       }}>{item.ex.availableToBack[2].price}</span>
                       <div>
 
                         <span style={{
                           fontSize: "9px",
-                          color: "#5957ff",
+                          color: "#ff5c72",
                           fontWeight: "400"
                         }}>{item.ex.availableToBack[2].size}</span>
                       </div>
@@ -330,7 +328,7 @@ export const MatchOddsGrid: FC<Props> = ({
                     >
                       <span style={{
                         fontSize: "16px",
-                        color: "#5957ff",
+                        color: "#ff5c72",
                         fontWeight: "750"
                       }}> {redGreenComponent(
                         OddsPnl?.find((pnl) => pnl.sid === item.selectionId)

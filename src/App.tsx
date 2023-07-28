@@ -143,9 +143,9 @@ function App() {
           {/* <img src={loaderImg} alt="" height={60} width={60} /> */}
         </div>
       )}
-      <div className="App">
+      <div className="App padding_for_desktop" >
         <SnackbarProvider maxSnack={5} autoHideDuration={1000}>
-          <main>
+          <main >
             <Routes>
 
 

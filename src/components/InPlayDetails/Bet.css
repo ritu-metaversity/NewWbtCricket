@@ -90,14 +90,15 @@
     margin-left: auto;
 }
 
+/* 
 @media screen and (max-width: 40em) {
 
     body,
     .container {
-        /* height: auto; */
+        height: auto;
         overflow: auto;
     }
-}
+} */
 
 .row {
     display: flex;

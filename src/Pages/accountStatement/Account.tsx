@@ -134,7 +134,7 @@ const Account = () => {
   };
   console.log(accountStatement, "accountStatementaccountStatement")
   return (
-    <Box sx={{ m: "auto", maxWidth: "lg" }}>
+    <Box sx={{ m: "auto", maxWidth: "lg" }} style={{ padding: "0px 0px 50px 0px" }}>
       <BacktoMenuButton />
 
       <Filter
@@ -163,7 +163,7 @@ const Account = () => {
               </tr>
             </thead>
           </table>
-          <div className="content-top-padding" style={{ overflow: "scroll" }}>
+          <div className="content-top-padding" >
             <div style={{ width: "100%", overflow: "scroll" }}>
 
               <table className="" style={{ width: "100%" }}>

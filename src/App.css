@@ -76,3 +76,9 @@ main {
 /* .css-1mt30ox {
   padding-top: unset !important
 } */
+
+@media screen and (min-width:900px) {
+  .padding_for_desktop {
+    padding: 0px 0px 50px 0px
+  }
+}

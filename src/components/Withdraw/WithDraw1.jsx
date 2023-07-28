@@ -71,6 +71,7 @@ const WithDraw1 = () => {
         setAccountNumber("");
         setIFSC("");
         setBankName("");
+        setRadioButton(false)
         // setwithCoinValue(0);
         setSavedBankdetailsName(val)
         console.log(val, id, "lkjhgfdsa")
@@ -222,7 +223,7 @@ const WithDraw1 = () => {
     };
 
     const handleValidate = () => {
-        if (userBalance < withCoinValue) {
+        if (userBalance < withCoinValue && (withCoinValue >= 100)) {
             snackBarUtil.error("insufficient balance");
             setErrorAlert(true);
             setColorName("danger");
@@ -388,6 +389,7 @@ const WithDraw1 = () => {
                         setIFSC("");
                         setBankName("");
                         setwithCoinValue(0);
+                        setRadioButton(false)
                         snackBarUtil.success(res?.data?.message)
 
                     }
@@ -402,6 +404,7 @@ const WithDraw1 = () => {
                 });
         }
     };
+    const [radioButton, setRadioButton] = useState(false)
     const handleWithdrawData = (
         accNumber,
         accHolderName,
@@ -418,7 +421,7 @@ const WithDraw1 = () => {
         setIFSC(ifscNum);
         setAccountType(accType);
         setwithType(withdrawType)
-        // setBankId(bankid)
+        setRadioButton(accNumber)
         // setWithdrawType(withdrawType)
     };
 
@@ -452,8 +455,11 @@ const WithDraw1 = () => {
                         <input
                             placeholder="Withdraw Coins"
                             value={withCoinValue}
-                            onChange={handleStaticAmountInput}
-                            type="number"
+                            // onChange={handleStaticAmountInput}
+                            onChange={(e) => e.target.value.match(/^[0-9]{0,10}$/) && setwithCoinValue(e.target.value)}
+
+                            // onChange={()=>{  setwithCoinValue(parseInt(Inputvalue)}}
+                            // type="number"
                             onKeyDown={(e) =>
                                 symbolsArrMail.includes(e.key) && e.preventDefault()
                             }
@@ -657,11 +663,11 @@ const WithDraw1 = () => {
                                         role="table"
                                         aria-busy="false"
                                         aria-colcount="6"
-                                        className="table b-table table-bordered"
                                         id="_BVID_104"
 
+                                        className="table b-table table-bordered"
                                         style={{
-                                            width: withType === "BANK" ? "900px" : "500px", margin: "auto"
+                                            width: withType === "BANK" ? "900px !important" : "500px !important", margin: "auto"
                                         }}>
 
                                         <thead>
@@ -767,7 +773,9 @@ const WithDraw1 = () => {
 
                                                                     )
                                                                 }
-                                                                    style={{ cursor: "pointer" }} type="radio" value="true" name="radio_btn" />{" "}
+                                                                    style={{ cursor: "pointer" }} type="radio" checked={radioButton === item.accountNumber ? true : false} name="radio_btn"
+
+                                                                />{" "}
                                                             </div>
                                                         </td>
                                                     </tr>
