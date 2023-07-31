@@ -1,0 +1,63 @@
+.main_casino_modals {
+    position: relative;
+}
+
+.casino_images_modals img {
+    position: absolute;
+    backdrop-filter: blur(1px);
+}
+
+.casino_message .please_note {
+    margin-top: 110px;
+    text-align: center;
+    color: #08c;
+    font-weight: 600;
+    font-size: 16px;
+
+}
+
+.casino_message .points {
+    text-align: center;
+    font-size: 26px;
+    margin: 18px 0px;
+
+}
+
+.casino_dis p {
+    text-align: center;
+    margin: 12px;
+}
+
+.casino_dis p span {
+    color: #08c;
+}
+
+.agree_btn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.agree_btn button {
+    border: unset;
+    background-color: #183f45;
+    padding: 8px 16px;
+    width: 48%;
+    color: #fff;
+}
+
+.agree_btn button:nth-child(2) {
+    border: unset;
+    background-color: #951d1b !important;
+    padding: 8px 16px;
+    width: 48%;
+    color: #fff;
+}
+
+.casino_images_modals {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 13px;
+}

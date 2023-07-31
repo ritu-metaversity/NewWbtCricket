@@ -7,6 +7,7 @@ import BacktoMenuButton from "../BacktoMenuButton";
 import { CasinoIcon, StyledGameThumb } from "./StyledComponent";
 import { RxCross2 } from 'react-icons/rx'
 import "./Casion.css"
+import CasinoModals from "./CasinoModals";
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: "20px",
   marginRight: "10px",
@@ -78,6 +79,20 @@ const Casino = () => {
     getCasinoTypes();
     return () => { };
   }, []);
+  const setDataForAgree = (vl: any) => {
+    console.log(vl, "datataatta")
+  }
+  const [confirmPopup, setConfirmPopup] = useState(false)
+  const handleNotAgree = () => {
+    setConfirmPopup(false)
+  }
+  const handleClose = () => setConfirmPopup(false);
+
+  const handleAgree = () => {
+    setTrueee(true)
+    setConfirmPopup(false)
+
+  }
   const handleChangeaa = (val: any) => {
     // console.log(val)
     // /m/casino/:id
@@ -85,7 +100,7 @@ const Casino = () => {
       token
     ) {
       setCasionId(val)
-      setTrueee(true)
+      setConfirmPopup(true)
       // navigate(`/m/casino/${val}`);
     } else {
       // navigate("/m/login");
@@ -156,6 +171,15 @@ const Casino = () => {
           ))}
         </Box>
       </Box>
+      <Modal open={confirmPopup} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Box className="casino_modals_body" >
+          <CasinoModals />
+          <div className="agree_btn">
+            <button onClick={handleAgree}>Ok I Agree</button>
+            <button onClick={handleNotAgree}>No, I Don't Agree</button>
+          </div>
+        </Box>
+      </Modal>
       <Modal
         open={trueee}
         onClose={() => setTrueee(false)}

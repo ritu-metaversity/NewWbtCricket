@@ -111,3 +111,14 @@
     height: unset !important;
     max-height: unset;
 }
+.casino_modals_body{
+    background-color: #fff;
+    padding: 10px;
+}
+@media screen and (min-width:1024px) {
+    .casino_modals_body{
+        background-color: #fff;
+        padding: 10px;
+        width: 30%;
+    }
+}

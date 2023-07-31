@@ -404,7 +404,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
           <div className="scorecard scorecard-mobile">
             <div className="score-inner">
               <iframe
-                src={`http://15.207.182.173:3050/event/${props.event}`}
+                src={`http://15.207.182.173:3050/event/${props.event}?theme=dark-wolf`}
 
                 // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
                 width="100%"
