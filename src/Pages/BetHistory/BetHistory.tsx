@@ -176,8 +176,6 @@ const BetHistory = () => {
         />
         <label htmlFor="back">Deleted</label>
         <br /> */}
-
-
       </form>
       <StickyTable
         // rows={accountStatement}
@@ -196,7 +194,7 @@ const BetHistory = () => {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={countPage ? countPage * formData.noOfRecords : -1}
+        count={countPage ? countPage * formData.noOfRecords : 0}
         rowsPerPage={formData.noOfRecords}
         page={formData.index}
         onPageChange={handleChangePage}

@@ -5,17 +5,18 @@ import StickyTable from "../../components/custom/TableWithoutPagination";
 import TablePagination from "@mui/material/TablePagination";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
 import { LoaderContext } from "../../App";
+import { log } from "console";
 
 export interface Column {
   id:
-  | "sportName"
-  | "eventName"
-  | "marketname"
-  | "nation"
-  | "rate"
-  | "amount"
-  | "time"
-  | string;
+    | "sportName"
+    | "eventName"
+    | "marketname"
+    | "nation"
+    | "rate"
+    | "amount"
+    | "time"
+    | string;
   label: string;
   minWidth?: number;
   align?: "right" | "center";
@@ -28,14 +29,13 @@ const columns: readonly Column[] = [
     id: "sportName",
     label: "Sports",
     minWidth: 30,
-    align:
-      "center"
+    align: "center",
   },
   {
     id: "eventName",
     label: "Event Name",
     align: "center",
-    minWidth: 120
+    minWidth: 120,
   },
   {
     id: "marketname",
@@ -59,13 +59,13 @@ const columns: readonly Column[] = [
     id: "amount",
     label: "Amount",
     align: "center",
-    minWidth: 120
+    minWidth: 120,
   },
   {
     id: "time",
     label: "Place Date",
     align: "center",
-    minWidth: 120
+    minWidth: 120,
   },
 ];
 
@@ -77,7 +77,7 @@ const CurrentBet = () => {
     betType: "1",
     noOfRecords: 25,
     index: 0,
-    isDeleted: "false"
+    isDeleted: "false",
   });
   const [accountStatement, setAccountStatement] = React.useState([]);
   const { setLoading } = useContext(LoaderContext);
@@ -85,10 +85,10 @@ const CurrentBet = () => {
     const getList = async () => {
       setLoading && setLoading((prev) => ({ ...prev, currentbet: true }));
       const { response } = await userServices.getCurrentBets(formData);
-      if (response?.data?.totalPages) {
+      if (response?.data) {
         setCount(response?.data?.totalPages);
       }
-      if (response?.data?.dataList) {
+      if (response?.data) {
         setAccountStatement(response.data.dataList);
       }
       setLoading && setLoading((prev) => ({ ...prev, currentbet: false }));
@@ -123,8 +123,12 @@ const CurrentBet = () => {
     });
     // setPage(0);
   };
+  {
+    console.log(countPage, formData.index, "count");
+  }
+
   console.log(accountStatement, "accountStatement");
-  console.log(accountStatement, "accountStatement")
+  console.log(accountStatement, "accountStatement");
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
       <BacktoMenuButton />
@@ -175,9 +179,9 @@ const CurrentBet = () => {
         totalPage={countPage}
       />
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[ 10, 25, 100]}
         component="div"
-        count={countPage ? countPage * formData.noOfRecords : -1}
+        count={countPage ? countPage * formData.noOfRecords : 0}
         rowsPerPage={formData.noOfRecords}
         page={formData.index}
         onPageChange={handleChangePage}
