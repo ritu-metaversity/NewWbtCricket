@@ -307,8 +307,9 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
         title="Run Amount"
         open={Boolean(selectedPnlMarketId)}
         onClose={() => setSelectedPnlMarketId("")}
+        style={{ width: "100%" }}
       >
-        <DialogContent>
+        <DialogContent style={{ width: "100%" }}>
           <PnlModal
             fancyId={selectedPnlMarketId}
             matchId={props.event.toString()}
