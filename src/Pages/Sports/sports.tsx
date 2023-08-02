@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs, Typography, Grid, tabClasses } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { LoaderContext } from "../../App";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
@@ -7,6 +7,7 @@ import SummaryCard, {
 } from "../../components/Inplay/SummaryCard";
 import { sportServices } from "../../utils/api/sport/services";
 import Match from "../../components/Inplay/Match";
+
 
 function a11yProps(index: number) {
   return {
@@ -84,24 +85,43 @@ const Sports = () => {
       <Tabs
         sx={{ backgroundColor: '#dddddd' }}
         value={tabValue}
+        TabIndicatorProps={{ sx: { display: "none" } }}
         onChange={handleChange}
         aria-label="basic tabs example"
         scrollButtons
         variant="scrollable"
       >
-        {activeSportList.map((s: any) => (
-          <Tab key={s.sportId + "tab"} label={s?.sportName} {...a11yProps(0)} />
+        {activeSportList.map((s: any, index: any) => (
+          <Tab sx={{ [`&.${tabClasses.selected}`]: { color: "white" }, bgcolor: tabValue === index ? "#7b7c7f" : "" }} key={s.sportId + "tab"} label={s?.sportName} {...a11yProps(0)} />
         ))}
       </Tabs>
+
+      <Grid
+        container
+        // background-color: #7b7c7f;
+        bgcolor="#7b7c7f"
+        p={{ xs: "15px", lg: "15px" }}
+        // sx={{ cursor: "pointer" }}
+        m={{ lg: 0 }}
+      // gap={{ xs: 0.5, lg: 0 }}
+      // borderBottom={{ xs: "", lg: "1px solid rgba(60,68,75)" }}
+      >
+        <Grid item xs={0} display={{ xs: "none", lg: "block" }} lg={6.6} color="#fff">Match Name</Grid>
+        <Grid item xs={4} lg={1.8} color="#fff">1</Grid>
+        <Grid item xs={4} lg={1.8} color="#fff">x</Grid>
+        <Grid item xs={4} lg={1.8} color="#fff">2</Grid>
+      </Grid>
       {activeEventList?.length > 0
         ? activeEventList.map((item) => (
           <Match matches={item} sportId={activeSportList[tabValue]?.sportId} />
           // <SummaryCard key={item.matchId + "summaryCard"} {...item} />
         ))
         : show && (
-          <Typography mt="15vh" variant="h4" color="error">
+
+          <Typography variant="h6" color="error" border="1px solid black">
             {"No active event found"}
           </Typography>
+
         )}
     </Box>
   );

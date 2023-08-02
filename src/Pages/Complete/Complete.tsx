@@ -116,7 +116,7 @@ const Complete = () => {
   const [countPage, setCount] = React.useState(1);
 
   var curr: Date = new Date();
-  const timeBefore = moment(curr).subtract(14, "days").format("YYYY-MM-DD");
+  const timeBefore = moment(curr).subtract(7, "days").format("YYYY-MM-DD");
   const time = moment(curr).format("YYYY-MM-DD");
 
   const [startDate, setStartDate] = useState(timeBefore);
@@ -138,7 +138,7 @@ const Complete = () => {
   const date = new Date();
   const futureDate = date.getDate() - 60;
   date.setDate(futureDate);
-  const defaultValue = moment().subtract(1, "month").format("YYYY-MM-DD");
+  const defaultValue = moment().subtract(7, "days").format("YYYY-MM-DD");
   const currentValue = moment().format("YYYY-MM-DD");
 
   const [formData, setFormData] = React.useState<ProfitLossPayload>({
@@ -336,10 +336,10 @@ const Complete = () => {
               {/* <th className="ldg-tbl-th match-box-color">BALANCE</th> */}
             </tr>
           </thead>
-          {profitandLossData?.length > 0 ?
-            <tbody>
+          <tbody>
+            {profitandLossData?.length > 0 ?
 
-              {profitandLossData?.map((item: any) => {
+              profitandLossData?.map((item: any) => {
                 return (<tr>
                   <>
                     {/* <td className="ldg-tbl-td match-value-box-color" style={{ textAlign: "left" }}>{item?.sno}</td> */}
@@ -355,24 +355,24 @@ const Complete = () => {
                   </>
                 </tr>
                 )
-              })}
+              }) :
 
 
-            </tbody>
-            :
 
-
-            <tbody>
 
               <tr>
-                <td colSpan={5}>
+                <td colSpan={7} className="ldg-tbl-td match-value-box-color">
 
                   No data found
                 </td>
               </tr>
-            </tbody>
 
-          }
+
+            }
+          </tbody>
+
+
+
         </table>
       </div>
       {

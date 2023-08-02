@@ -77,6 +77,7 @@ const CurrentBet = () => {
     betType: "1",
     noOfRecords: 25,
     index: 0,
+    isDeleted: "false"
   });
   const [accountStatement, setAccountStatement] = React.useState([]);
   const { setLoading } = useContext(LoaderContext);
@@ -122,8 +123,8 @@ const CurrentBet = () => {
     });
     // setPage(0);
   };
-console.log(accountStatement,"accountStatement");
-
+  console.log(accountStatement, "accountStatement");
+  console.log(accountStatement, "accountStatement")
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
       <BacktoMenuButton />
@@ -159,6 +160,8 @@ console.log(accountStatement,"accountStatement");
         <label htmlFor="lay">Khayi</label>
         <br />
       </form>
+
+
       <StickyTable
         rows={accountStatement.map((value: any) => {
           value.color = value.isback ? "#b3d9f5" : "#f5bad0";

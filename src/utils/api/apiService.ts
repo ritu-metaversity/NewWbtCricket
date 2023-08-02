@@ -131,7 +131,13 @@ const apiWithErrorSnackbar: (
     if (typeof message === "object") {
       message?.forEach((message) => snackBarUtil.error(message));
     } else {
-      snackBarUtil.error(message);
+      if(message==="No Data Found"){
+
+      }else{
+
+        snackBarUtil.error(message);
+      }
+      console.log(message,"messageerrr")
     }
   }
   return result;

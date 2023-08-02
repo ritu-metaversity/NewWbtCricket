@@ -220,7 +220,7 @@ export function WithdrawForm({
       <Box
         py={3}
         mt={3}
-        // borderTop={{ xs: `1px solid ${colorHex.borderLine}`, lg: "none" }}
+      // borderTop={{ xs: `1px solid ${colorHex.borderLine}`, lg: "none" }}
       >
         <Box display="flex" alignItems="center">
           <LabelText>Show</LabelText>

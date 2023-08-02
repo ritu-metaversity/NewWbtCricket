@@ -70,7 +70,7 @@ const Account = () => {
   const date = new Date();
   const futureDate = date.getDate() - 60;
   date.setDate(futureDate);
-  const defaultValue = moment().subtract(1, "month").format("YYYY-MM-DD");
+  const defaultValue = moment().subtract(7, "days").format("YYYY-MM-DD");
   const currentValue = moment().format("YYYY-MM-DD");
 
   const [formData, setFormData] = React.useState<ProfitLossPayload>({
@@ -146,43 +146,44 @@ const Account = () => {
       <br />
       <br />
 
-      {accountStatement?.length > 0 ? (
-        <>
-          {" "}
-          {/* <StickyTable
+
+      <>
+        {" "}
+        {/* <StickyTable
             rows={accountStatement}
             columns={columns}
             title={""}
           /> */}
-          <table className="" style={{ width: "100%" }}>
-            <thead>
-              <tr>
-                <th colSpan={5} className="bet-place-tbl-th market_type_row ">
-                  MY LEDGER
-                </th>
-              </tr>
-            </thead>
-          </table>
-          <div className="content-top-padding" >
-            <div style={{ width: "100%", overflow: "scroll" }}>
+        <table className="" style={{ width: "100%" }}>
+          <thead>
+            <tr>
+              <th colSpan={5} className="bet-place-tbl-th market_type_row ">
+                MY LEDGER
+              </th>
+            </tr>
+          </thead>
+        </table>
+        <div className="content-top-padding" >
+          <div style={{ width: "100%", overflow: "scroll" }}>
 
-              <table className="" style={{ width: "100%" }}>
-                <thead>
-                  <tr>
-                    <th className="ldg-tbl-th match-box-color" style={{ width: "50%" }}>
-                      DESCRIPTION
-                    </th>
-                    <th className="ldg-tbl-th match-box-color">WON BY</th>
-                    <th className="ldg-tbl-th match-box-color">WON</th>
-                    <th className="ldg-tbl-th match-box-color">LOST</th>
-                    <th className="ldg-tbl-th match-box-color">HISAB</th>
-                    {/* <th className="ldg-tbl-th match-box-color">WON</th>
+            <table className="" style={{ width: "100%" }}>
+              <thead>
+                <tr>
+                  <th className="ldg-tbl-th match-box-color" style={{ width: "50%" }}>
+                    DESCRIPTION
+                  </th>
+                  <th className="ldg-tbl-th match-box-color">WON BY</th>
+                  <th className="ldg-tbl-th match-box-color">WON</th>
+                  <th className="ldg-tbl-th match-box-color">LOST</th>
+                  <th className="ldg-tbl-th match-box-color">HISAB</th>
+                  {/* <th className="ldg-tbl-th match-box-color">WON</th>
                   <th className="ldg-tbl-th match-box-color">LOST</th>
                   <th className="ldg-tbl-th match-box-color">HISAB</th> */}
-                  </tr>
-                </thead>
-                <tbody style={{ fontSize: 12 }}>
-                  {accountStatement.map((item: any) =>
+                </tr>
+              </thead>
+              <tbody style={{ fontSize: 12 }}>
+                {accountStatement?.length > 0 ?
+                  (accountStatement.map((item: any) =>
                     <tr>
                       <td
                         className="ldg-tbl-td match-value-box-color"
@@ -221,36 +222,46 @@ const Account = () => {
                       {/* <td className="ldg-tbl-td match-value-box-color">0</td>
                     <td className="ldg-tbl-td match-value-box-color">190</td>
                     <td className="ldg-tbl-td match-value-box-color">-190</td> */}
+                    </tr>))
+                  :
+                  (!loading.getListdata && (
+                    <tr >
+                      <td
+                        className="ldg-tbl-td match-value-box-color"
+                        colSpan={5}
+                      >
+
+                        <span style={{ color: "red", fontSize: "14px" }}>
+
+                          No Data Found
+                        </span>
+
+                      </td>
                     </tr>
+                  )
                   )}
 
-                </tbody>
-              </table>
-            </div>
-
+              </tbody>
+            </table>
           </div>
 
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={countPage ? countPage * formData.noOfRecords : -1}
-            rowsPerPage={formData.noOfRecords}
-            page={formData.index}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            labelRowsPerPage={<span>Rows: </span>}
-            labelDisplayedRows={({ page }) => {
-              return `Page : ${page + 1}`;
-            }}
-          />
-        </>
-      ) : (
-        !loading.getListdata && (
-          <Typography variant="h4" color="error">
-            {"No Data Found"}
-          </Typography>
-        )
-      )}
+        </div>
+
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={countPage ? countPage * formData.noOfRecords : -1}
+          rowsPerPage={formData.noOfRecords}
+          page={formData.index}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          labelRowsPerPage={<span>Rows: </span>}
+          labelDisplayedRows={({ page }) => {
+            return `Page : ${page + 1}`;
+          }}
+        />
+      </>
+
     </Box>
   );
 };

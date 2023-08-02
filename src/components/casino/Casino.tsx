@@ -183,14 +183,16 @@ const Casino = () => {
       <Modal
         open={trueee}
         onClose={() => setTrueee(false)}
-        style={{ padding: "10px" }}
+        style={{ padding: "17px", overflow: "scroll" }}
         // m="xl"
         className="slot_game"
       >
         {/* <Box className="bet-box"> */}
 
         <>
-          <RxCross2 className="modal_CrosssIcon" onClick={() => setTrueee(false)} />
+          <div className="modal_CrosssIcon">
+            <RxCross2 onClick={() => setTrueee(false)} />
+          </div>
           <iframe
             src={`https://d2.fawk.app/#/splash-screen/${token}/9482/?opentable=${casionId}`}
             // height="82vh"

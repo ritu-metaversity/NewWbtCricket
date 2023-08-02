@@ -223,7 +223,8 @@ const WithDraw1 = () => {
     };
 
     const handleValidate = () => {
-        if (userBalance < withCoinValue) {
+        console.log(userBalance, withCoinValue, "gfdsdfgh");
+        if (Number(userBalance) < Number(withCoinValue)) {
             snackBarUtil.error("insufficient balance");
             setErrorAlert(true);
             setColorName("danger");

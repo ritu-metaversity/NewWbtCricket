@@ -15,6 +15,8 @@ import { SummaryCardProps } from "../../components/Inplay/SummaryCard";
 import { LoaderContext } from "../../App";
 import { sportServices } from "../../utils/api/sport/services";
 import { DatePicker, Input } from "antd";
+import moment from "moment";
+import dayjs from "dayjs";
 
 const style = {
   padding: "10px",
@@ -62,7 +64,6 @@ const Filter: FC<Props> = ({
   >([]);
 
   const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
-
   const nav = useNavigate();
   const getCasinoList = async () => {
     const isSignedIn = localStorage.getItem("token");
@@ -216,7 +217,7 @@ const Filter: FC<Props> = ({
             <DatePicker
               style={inputStyle}
               // type="date"
-              // value={formData.fromDate}
+              defaultValue={dayjs(formData?.fromDate)}
               placeholder="YYYY-MM-DD"
               onChange={(e, v) => setFormData((prev) => ({ ...prev, fromDate: v }))}
               name="fromDate"
@@ -231,7 +232,7 @@ const Filter: FC<Props> = ({
             <DatePicker
               style={inputStyle}
               // type="date"
-              // value={formData.toDate}
+              defaultValue={dayjs(formData.toDate)}
               placeholder="YYYY-MM-DD"
               onChange={(e, v) => setFormData((prev) => ({ ...prev, toDate: v }))}
               name="toDate"

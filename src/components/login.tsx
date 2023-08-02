@@ -86,7 +86,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
   return (
     <div className="loginBackground new-login-content ">
       <div className="logo-img">
-        <img src={selfAllowedd} alt="" className="logoimgggggg" />
+        <img src="logogogogog.png" alt="" className="logoimgggggg" />
       </div>
       <div className="login-form">
         <span className="login-text">Please Login To Continue</span>

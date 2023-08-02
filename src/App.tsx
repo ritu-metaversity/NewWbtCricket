@@ -90,9 +90,11 @@ function App() {
       setIsSignedIn(true);
     }
   }, []);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     let timer: ReturnType<typeof setInterval>;
@@ -114,6 +116,7 @@ function App() {
   useEffect(() => {
     getSelfAllowed();
   }, [isSignedIn]);
+  console.log(window.location.pathname.includes("sign-in"), "gdhsdtgfas");
 
   return (
     <LoaderContext.Provider
@@ -143,7 +146,11 @@ function App() {
           {/* <img src={loaderImg} alt="" height={60} width={60} /> */}
         </div>
       )}
-      <div className="App padding_for_desktop" >
+      {/* <div className={`App ${window.location.pathname.includes("sign-in") || window.location.pathname.includes("sign-up") ? "" : "padding_for_desktop"}`} > */}
+      <div className="App padding_for_desktop"
+        style={{
+          paddingBottom: window.location.pathname.includes("sign-in") || window.location.pathname.includes("sign-up") ? "" : "50px"
+        }}>
         <SnackbarProvider maxSnack={5} autoHideDuration={1000}>
           <main >
             <Routes>

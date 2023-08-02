@@ -96,6 +96,7 @@ const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
+
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
@@ -119,6 +120,8 @@ export function Tables({
   page: number;
   rowsPerPage: number;
 }) {
+  console.log(rows, "row");
+
   return (
     <Table
       stickyHeader
@@ -178,6 +181,7 @@ export function Tables({
                     <TableCell
                       key={column.id}
                       align={column.align}
+
                       sx={{
                         // border: "0.01px solid #d9d9d9",
                         p: 1,
@@ -200,6 +204,28 @@ export function Tables({
               </TableRow>
             );
           })}
+        {
+          rows
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)?.length <= 0 &&
+
+          <TableRow
+            // hover
+
+            sx={{
+
+              width: "100%",
+            }}
+            role="checkbox"
+            tabIndex={-1}
+
+          >
+            <TableCell colSpan={7}>
+              <TableCellText textAlign="center" color="red">
+                No Data Found
+              </TableCellText>
+            </TableCell>
+          </TableRow>
+        }
       </TableBody>
     </Table>
   );

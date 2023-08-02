@@ -93,6 +93,10 @@ input::-webkit-inner-spin-button {
     gap: 34px;
 }
 
+.table {
+    table-layout: unset;
+}
+
 .withdraw_image img {
     display: block;
     margin: auto;

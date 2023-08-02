@@ -168,7 +168,7 @@ export const SessionOddsGrid: FC<Props> = ({
                       true,
                       item.nation,
                       "Session",
-                      "YES"
+                      "NO"
                     )
                   }
                 >
@@ -196,7 +196,7 @@ export const SessionOddsGrid: FC<Props> = ({
                       true,
                       item.nation,
                       "Session",
-                      "NOT"
+                      "YES"
                     )
                   }
                 >

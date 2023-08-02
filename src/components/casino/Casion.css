@@ -111,14 +111,40 @@
     height: unset !important;
     max-height: unset;
 }
-.casino_modals_body{
+
+.casino_modals_body {
     background-color: #fff;
     padding: 10px;
 }
+
 @media screen and (min-width:1024px) {
-    .casino_modals_body{
+    .casino_modals_body {
         background-color: #fff;
         padding: 10px;
         width: 30%;
+    }
+}
+
+.modal_CrosssIcon {
+    position: absolute;
+    top: 19px;
+    right: 19px;
+    color: white;
+    font-size: 21px;
+    padding: 0px 0px 28px 60px;
+    background-color: #0f2227;
+
+}
+
+@media screen and (min-width: 870px) {
+
+    .modal_CrosssIcon {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: black !important;
+        font-size: 21px;
+        padding: unset !important;
+        background-color: unset !important;
     }
 }

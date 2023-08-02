@@ -32,7 +32,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
       });
   }, []);
   return (
-    <Box height={"100vh"} overflow={"scroll"} display="flex" flexDirection={"column"}>
+    <Box height={"100vh"} display="flex" flexDirection={"column"}>
       <div className="main_header"
         style={{ backgroundColor: colorHex.bg2, position: "sticky" }}>
 

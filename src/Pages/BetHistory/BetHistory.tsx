@@ -40,6 +40,7 @@ const columns: readonly Column[] = [
     label: "Market Name",
     minWidth: 20,
     align: "center",
+    
   },
   {
     id: "nation",
@@ -90,7 +91,7 @@ const BetHistory = () => {
     };
     getList();
   }, [formData, setLoading]);
-console.log(accountStatement,"iuyghuy");
+  console.log(accountStatement, "iuyghuy");
 
   function handleChange(event: { target: { name: any; value: any } }) {
     setFormData((preState) => {
@@ -188,7 +189,7 @@ console.log(accountStatement,"iuyghuy");
           return value;
         })}
         columns={columns}
-        title={"Current Bets"}
+        title={"Bet History"}
         noOfRecords={formData.noOfRecords}
         totalPage={countPage}
       />

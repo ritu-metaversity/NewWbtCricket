@@ -174,7 +174,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
                 <div className="logo-name">
 
 
-                  <img src={appData?.logo} alt="Logo" className="desktop_logogogo" style={{ height: "54px" }} />
+                  <img src="logogogogog.png" alt="Logo" className="desktop_logogogo" style={{ height: "54px" }} />
 
                   {/* <span className="mobile_logogoggo" style={{ color: "white" }}>
 
@@ -297,9 +297,9 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
       </AppBar>
       <div className="header_chips_expo">
         <div className="inner_chips" style={{ fontWeight: "600" }}>
-          <span>Chips: {wallet.balance}</span>
+          <span>Chips: {Number(wallet.balance).toFixed(2)}</span>
           {" "}
-          <span>Expo : <span style={{ color: "red" }}>{wallet.libality}</span>
+          <span>Expo : <span style={{ color: "red" }}>{Number(wallet.libality).toFixed(2)}</span>
           </span>
         </div>
       </div>

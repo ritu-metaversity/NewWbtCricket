@@ -18,6 +18,7 @@ export const authServices = {
     };
     return await apiWithSnackbar(params);
   },
+  
   registeration: (data: any) => {
     const params: ApiServiceInterface = {
       resource: authResources.SELF_REGISTER,

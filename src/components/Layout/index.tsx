@@ -20,6 +20,7 @@ const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
     <Box
       // height={"100vh"}
       width={"100vw"}
+      sx={{ overflowX: "hidden" }}
       display="flex"
       flexDirection={"column"}
     >

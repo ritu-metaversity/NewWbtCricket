@@ -74,16 +74,16 @@ export function AmountForm({ amount, setAmount }: Props) {
         <div className="main_for_enter_amount">
           <div className="name_enter_amount" > <span className="name_enter_amount">Enter Amount</span></div>
           <div className="field_for_enter_amount">
-            <RemoveIcon onClick={handleMinusClick} style={{ height: "30px", color: "black" }} />
+            <RemoveIcon onClick={handleMinusClick} style={{ height: "30px", color: "#fff", border: "2px solid black", backgroundColor: "black" }} />
             <StyledAmountInput
               type="text"
               placeholder="Amount"
               value={amount || ""}
               onChange={handleChange}
               className="field_for_enter_amount"
-              style={{ border: "solid 1px" }}
+              style={{ border: "solid 1px", height: "30px" }}
             />
-            <AddIcon onClick={handlePlusClick} style={{ height: "30px", color: "black" }} />
+            <AddIcon onClick={handlePlusClick} style={{ height: "30px", color: "#fff", border: "2px solid black", backgroundColor: "black" }} />
           </div>
         </div>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: '100px' }}>

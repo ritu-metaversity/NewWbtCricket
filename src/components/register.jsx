@@ -107,6 +107,8 @@ const Register = () => {
       setPasswordError(
         "Password should contain atleast one number and one lower case and one upper case."
       );
+    } else if (passData === confirmPassword) {
+      setConfirmPasswordError("")
     } else {
       setPasswordError("");
     }
@@ -335,7 +337,7 @@ const Register = () => {
       </Dialog>
       <div className="loginBackground new-login-content ">
         <div className="logo-img">
-          <img src={logo} alt="" className="logoimgggggg" />
+          <img src="logogogogog.png" alt="" className="logoimgggggg" />
         </div>
         <div className="login-form">
           <span className="login-text">Sign up </span>

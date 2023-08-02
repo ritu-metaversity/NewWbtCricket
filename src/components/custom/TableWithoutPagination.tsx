@@ -28,7 +28,7 @@ const StickyTable: React.FC<StickyHeadTableProps> = ({
 }) => {
   const [page] = React.useState(0);
   const [rowsPerPage] = React.useState(noOfRecords ? noOfRecords : 10);
-
+  console.log(accordion, "accordion")
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       {accordion ? (
@@ -37,7 +37,7 @@ const StickyTable: React.FC<StickyHeadTableProps> = ({
             {title}
           </AccordionSummary>
           <AccordionDetails>
-            <TableContainer sx={{ maxHeight: "70vh", width: "100%", overflowY: "hidden" }}>
+            <TableContainer sx={{ maxHeight: "70vh", width: "100%", overflowY: "hidden", whiteSpace: "nowrap" }}>
               <Tables
                 columns={columns}
                 rows={rows}
@@ -50,13 +50,14 @@ const StickyTable: React.FC<StickyHeadTableProps> = ({
                   {result}
                 </TableResultContainer>
               )}
+              fsdd
             </TableContainer>
           </AccordionDetails>
         </Accordion>
       ) : (
         <>
           <TitleStyled>{title}</TitleStyled>
-          <TableContainer sx={{ maxHeight: "70vh", width: "100%" }}>
+          <TableContainer sx={{ maxHeight: "70vh", width: "100%", whiteSpace: "nowrap" }}>
             <Tables
               columns={columns}
               rows={rows}
@@ -70,8 +71,9 @@ const StickyTable: React.FC<StickyHeadTableProps> = ({
             )}
           </TableContainer>
         </>
-      )}
-    </Paper>
+      )
+      }
+    </Paper >
   );
 };
 

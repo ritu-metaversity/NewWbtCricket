@@ -71,6 +71,8 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
       setPasswordError(
         "Password should contain atleast one number and one lower case and one upper case."
       );
+    } else if (passData === confirmPassword) {
+      setConfirmPasswordError("")
     } else {
       setPasswordError("")
     }

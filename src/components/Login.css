@@ -10,6 +10,8 @@
     display: flex;
     gap: 20%;
     flex-wrap: wrap;
+    overflow: scroll;
+
 }
 
 input::-webkit-outer-spin-button,
@@ -147,6 +149,7 @@ input::-webkit-inner-spin-button {
         display: flex;
         gap: 7%;
         flex-wrap: wrap;
+        overflow: scroll;
     }
 
     .sign-Input {
