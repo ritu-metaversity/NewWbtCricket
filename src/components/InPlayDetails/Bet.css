@@ -848,7 +848,8 @@ fieldset[disabled] .btn {
 
 .css-vubbuv {
     fill: currentcolor;
-    color: #fff;
+    /* ye maine (sushant ) hataya hai pagination ka color theek karne ke liye\ */
+    /* color: #fff; */
     display: inline-block;
     flex-shrink: 0;
     font-size: 1.5rem;

@@ -161,7 +161,6 @@ const CurrentBet = () => {
         <br />
       </form>
 
-
       <StickyTable
         rows={accountStatement.map((value: any) => {
           value.color = value.isback ? "#b3d9f5" : "#f5bad0";
@@ -176,8 +175,6 @@ const CurrentBet = () => {
         totalPage={countPage}
       />
       <TablePagination
-        nextIconButtonProps={{ sx: { color: "black" } }}
-        backIconButtonProps={{ sx: { color: "black" } }}
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={countPage ? countPage * formData.noOfRecords : -1}
