@@ -58,13 +58,18 @@ const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
             <TitleStyled>{title}</TitleStyled>
           </AccordionSummary>
           <AccordionDetails>
-            <TableContainer sx={{ maxHeight: "70vh", width: "100%" }}>
+            <TableContainer
+              sx={{
+                // maxHeight: "70vh",
+                width: "100%",
+              }}
+            >
               <Tables
                 columns={columns}
                 rows={rows}
                 page={page}
                 rowsPerPage={rowsPerPage}
-              // value={value}
+                // value={value}
               />
               {result && (
                 <TableResultContainer textAlign={"center"}>
@@ -77,13 +82,18 @@ const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
       ) : (
         <>
           <TitleStyled>{title}</TitleStyled>
-          <TableContainer sx={{ maxHeight: "70vh", width: "100%" }}>
+          <TableContainer
+            sx={{
+              // maxHeight: "70vh",
+              width: "100%",
+            }}
+          >
             <Tables
               columns={columns}
               rows={rows}
               page={page}
               rowsPerPage={rowsPerPage}
-            // value={value}
+              // value={value}
             />
             {result && (
               <TableResultContainer textAlign={"center"}>
@@ -96,7 +106,6 @@ const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
