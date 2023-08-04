@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import DepositManually from "./DepositManually";
 import { columns } from "./columns";
 import ImageModal from "./ImageModal";
 import StickyHeaderTable from "../custom/Table";
 import { selfServices } from "../../utils/api/selfWithrawDeposit/service";
+import { LoaderContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 interface DepositListInterface {
   image: string;
@@ -21,7 +23,14 @@ const colorStatus = {
 
 const Deposit = () => {
   const [depositList, setDepositList] = useState<DepositListInterface[]>([]);
+  const nav = useNavigate();
+  const { appData } = useContext(LoaderContext);
 
+  useEffect(() => {
+    if (appData && appData?.selfAllowed === false) {
+      nav("/");
+    }
+  }, [appData]);
   const getDepositList = async () => {
     const { response } = await selfServices?.getDepositList();
     console.log(response, "deposit data");

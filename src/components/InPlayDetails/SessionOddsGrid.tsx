@@ -138,7 +138,7 @@ export const SessionOddsGrid: FC<Props> = ({
                       {item?.nation}
                     </div>
                     <div style={{ fontSize: 10 }}>Session Limit : {item?.maxBet}</div>
-                    <div style={{ fontSize: 10 }} onClick={() =>
+                    <div style={{ fontSize: 10, cursor: "pointer" }} onClick={() =>
                       (FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl ||
                         0) &&
                       setMarketId(item.sid)

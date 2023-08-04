@@ -6,6 +6,7 @@ import {
   Button,
   Dialog,
   DialogContent,
+  DialogTitle,
   Grid,
   Modal,
   TextField,
@@ -34,6 +35,7 @@ import Marquee from "react-fast-marquee";
 import AllMatch from "./AllMatch";
 import { useParams } from "react-router-dom";
 import inplaytv from "./tv_for_inplay.png"
+import { RxCross2 } from "react-icons/rx";
 
 const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
   const [amount, setAmount] = useState(10);
@@ -230,6 +232,8 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
       setActiveFancy(newResponse);
     }
   };
+  console.log(preMatchOdds, "runners");
+
   useEffect(() => {
     setLoading && setLoading((prev) => ({ ...prev, fancyOdds: true }));
     getFancyOdds()
@@ -307,12 +311,40 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
         title="Run Amount"
         open={Boolean(selectedPnlMarketId)}
         onClose={() => setSelectedPnlMarketId("")}
-        style={{ width: "100%" }}
+        fullWidth
+
+        sx={{
+          '& .MuiDialog-paper': {
+            overflow: 'unset !important'
+          }
+        }}
       >
-        <DialogContent style={{ width: "100%" }}>
+        <DialogTitle>
+          <span onClick={() => setSelectedPnlMarketId("")} style={{ cursor: "pointer" }}>
+            <RxCross2 onClick={() => setSelectedPnlMarketId("")} style={{
+              position: "absolute",
+              right: '7px',
+              top: "1px"
+            }} /></span>
+          <div className="main_RunandAmount">
+            <span >Run and Amount</span>
+
+
+
+          </div>
+
+        </DialogTitle>
+        <DialogContent sx={{
+          width: '100%',
+          // '&.MuiDialogContent-root': {
+          //   overflowY: 'hidden !important'
+          // }
+        }}>
+
           <PnlModal
             fancyId={selectedPnlMarketId}
             matchId={props.event.toString()}
+            dadadada={() => setSelectedPnlMarketId("")}
           />
         </DialogContent>
       </Dialog>
@@ -436,33 +468,31 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
           </div> : ""
         }
         <div className="container">
-          {matchOdd
-            ?.filter((i) => i.Name === "Match Odds")
-            .map((match, index) => (
-              <>
-                {" "}
-                {/* <Accordion key={"matchodd" + index} defaultExpanded>
+          {matchOdd.map((match, index) => (
+            <>
+              {" "}
+              {/* <Accordion key={"matchodd" + index} defaultExpanded>
               <AccordionSummary expandIcon={<ExpandCircleDown />}>
                 {match.Name}
               </AccordionSummary>
               <AccordionDetails sx={{ p: 0 }}> */}
-                <MatchOddsGrid
-                  bet={bet}
-                  setBet={setBet}
-                  CurrentOdd={match}
-                  PrevOdds={preMatchOdds[index]}
-                  matchId={props.event}
-                  OddsPnl={profits.Odds[match?.marketId]}
-                />
-                {/* </AccordionDetails>
+              <MatchOddsGrid
+                bet={bet}
+                setBet={setBet}
+                CurrentOdd={match}
+                PrevOdds={preMatchOdds[index]}
+                matchId={props.event}
+                OddsPnl={profits.Odds[match?.marketId]}
+              />
+              {/* </AccordionDetails>
             </Accordion> */}
-                <Marquee speed={50} gradient={false}>
-                  <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
-                    {match.display_message}
-                  </Typography>
-                </Marquee>
-              </>
-            ))}
+              <Marquee speed={50} gradient={false}>
+                <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
+                  {match.display_message}
+                </Typography>
+              </Marquee>
+            </>
+          ))}
 
 
           {originBookMaker?.length > 0 && (

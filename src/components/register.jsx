@@ -335,7 +335,7 @@ const Register = () => {
           </Typography>
         </DialogContent>
       </Dialog>
-      <div className="loginBackground new-login-content ">
+      <div className="loginBackground new-login-content" style={{ overflow: "scroll" }}>
         <div className="logo-img">
           <img src="logogogogog.png" alt="" className="logoimgggggg" />
         </div>

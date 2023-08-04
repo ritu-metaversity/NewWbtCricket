@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { columns } from "./columns";
 import { Box } from "@mui/material";
-import { StatusTypography } from "../Deposit";
+import { StatusTypography } from "../Deposit/Deposit";
 import StickyHeadTable from "../custom/Table";
 import { LoaderContext } from "../../App";
 import { useNavigate } from "react-router-dom";

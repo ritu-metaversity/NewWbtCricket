@@ -6,8 +6,9 @@ import "./pnlll.css"
 interface Props {
   fancyId: string;
   matchId: string;
+  dadadada: any
 }
-const PnlModal: FC<Props> = ({ fancyId, matchId }) => {
+const PnlModal: FC<Props> = ({ fancyId, matchId, dadadada }) => {
   const [pnlBook, setPnlBook] = useState<{ odds: number; pnl: any }[]>([]);
 
   useEffect(() => {
@@ -30,39 +31,50 @@ const PnlModal: FC<Props> = ({ fancyId, matchId }) => {
   return (
 
     <div className="main_for_pnl">
-      <span className="RunandAmount">Run and Amount</span>
-      <table className="" style={{ width: "300px ", border: "1px solid" }}>
-        <tbody>
-          <>
+      {pnlBook.length <= 0 ?
+        <div style={{ height: "30vh" }}>
 
-            <tr >
+        </div>
+        :
+        <>
+       
+          <div style={{ overflow: 'hidden', width: '100%' }}>
+            <table className="" style={{ width: "100% ", border: "1px solid", overflowY: 'scroll' }}>
+              <tbody>
+                <>
 
-              <td className="headerrunname">
-                Run
-              </td>
-              <td className="headerrunname">
-                Amount
-              </td>
-            </tr>
-            {pnlBook?.map((item) => {
-              return (
+                  <tr >
 
-                <tr>
-                  <td className="headerrunnamedata">
-                    {item?.odds}
-                  </td>
-                  <td className="headerrunnamedata" >
-                    <span style={{ color: item.pnl >= 0 ? "green" : "red" }}>
-                      {item.pnl}
-                    </span>
-                  </td>
-                </tr>)
-            })}
+                    <td className="headerrunname">
+                      Run
+                    </td>
+                    <td className="headerrunname">
+                      Amount
+                    </td>
+                  </tr>
+                  {pnlBook?.map((item) => {
+                    return (
 
-          </>
-        </tbody>
+                      <tr>
+                        <td className="headerrunnamedata">
+                          {item?.odds}
+                        </td>
+                        <td className="headerrunnamedata" >
+                          <span style={{ color: item.pnl >= 0 ? "green" : "red" }}>
+                            {item.pnl}
+                          </span>
+                        </td>
+                      </tr>)
+                  })}
 
-      </table>
+                </>
+              </tbody>
+
+            </table>
+          </div>
+        </>
+      }
+
       {/* <StickyHeadTable
       title={"Run and Amount"}
       columns={[

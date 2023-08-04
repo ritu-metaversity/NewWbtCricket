@@ -26,8 +26,8 @@ import CurrentBet from "./Pages/CurrnetBet";
 import BetHistory from "./Pages/BetHistory";
 import LoginDashboard from "./components/loginDashboard";
 import Register from "./components/register";
-import Deposit from "./Pages/deposit/Deposit";
-import Withdraw from "./Pages/withdraw/withdraw";
+import Deposit from "../src/components/Deposit/Deposit";
+import Withdraw from "../src/components/Withdraw/Withdraw";
 import { CircularProgress } from "@mui/material";
 import OldChangePassword from "./components/Terms/OldChangePassword";
 import Casino from "./components/casino/Casino";
@@ -147,7 +147,7 @@ function App() {
         </div>
       )}
       {/* <div className={`App ${window.location.pathname.includes("sign-in") || window.location.pathname.includes("sign-up") ? "" : "padding_for_desktop"}`} > */}
-      <div className="App padding_for_desktop"
+      <div className="App"
         style={{
           paddingBottom: window.location.pathname.includes("sign-in") || window.location.pathname.includes("sign-up") ? "" : "50px"
         }}>

@@ -819,7 +819,6 @@ const WithDraw1 = () => {
                         <div className="headdddd">
                             Do you want to save the Bank Details?
                         </div>
-
                         <div className="Bet-succccccc">
 
                             <button

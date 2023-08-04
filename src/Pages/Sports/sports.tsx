@@ -80,7 +80,10 @@ const Sports = () => {
   // console.log(activeEventList, "sporasdftid");
 
   return (
-    <Box maxWidth={900} mx="auto" >
+    <Box maxWidth={900} mx="auto"
+      style={{ border: "0.5px solid black" }}
+      
+    >
       {/* <BacktoMenuButton /> */}
       <Tabs
         sx={{ backgroundColor: '#dddddd' }}
@@ -90,6 +93,7 @@ const Sports = () => {
         aria-label="basic tabs example"
         scrollButtons
         variant="scrollable"
+        style={{ border: "0.5px solid black" }}
       >
         {activeSportList.map((s: any, index: any) => (
           <Tab sx={{ [`&.${tabClasses.selected}`]: { color: "white" }, bgcolor: tabValue === index ? "#7b7c7f" : "" }} key={s.sportId + "tab"} label={s?.sportName} {...a11yProps(0)} />
@@ -103,6 +107,7 @@ const Sports = () => {
         p={{ xs: "15px", lg: "15px" }}
         // sx={{ cursor: "pointer" }}
         m={{ lg: 0 }}
+      // border="0.5px solid black"
       // gap={{ xs: 0.5, lg: 0 }}
       // borderBottom={{ xs: "", lg: "1px solid rgba(60,68,75)" }}
       >

@@ -102,6 +102,7 @@ export const MatchOddsGrid: FC<Props> = ({
       setShow(true)
     }
   }
+  console.log(runners, "runners");
 
   useEffect(() => {
     if ((searchParams.get("Sports-id") === "4")) {

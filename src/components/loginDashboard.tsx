@@ -69,7 +69,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
 
       </div>
 
-      <Box flex={1} height={"max-content"}>
+      <Box flex={1} height={"max-content"} paddingBottom="50px" overflow={"scroll"}>
         <Sports />
       </Box>
       {/* <Footer isSignedIn={isSignedIn} /> */}
