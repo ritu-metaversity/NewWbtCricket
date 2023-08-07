@@ -80,9 +80,9 @@ const Sports = () => {
   // console.log(activeEventList, "sporasdftid");
 
   return (
-    <Box maxWidth={900} mx="auto"
+    <Box sx={{ marginBottom: '40px' }} maxWidth={900} mx="auto"
       style={{ border: "0.5px solid black" }}
-      
+
     >
       {/* <BacktoMenuButton /> */}
       <Tabs

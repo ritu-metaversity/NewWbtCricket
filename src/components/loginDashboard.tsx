@@ -32,7 +32,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
       });
   }, []);
   return (
-    <Box height={"100vh"} display="flex" flexDirection={"column"}>
+    <Box display="flex" flexDirection={"column"}>
       <div className="main_header"
         style={{ backgroundColor: colorHex.bg2, position: "sticky" }}>
 
@@ -69,7 +69,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
 
       </div>
 
-      <Box flex={1} height={"max-content"} paddingBottom="50px" overflow={"scroll"}>
+      <Box flex={1} height={"max-content"} >
         <Sports />
       </Box>
       {/* <Footer isSignedIn={isSignedIn} /> */}

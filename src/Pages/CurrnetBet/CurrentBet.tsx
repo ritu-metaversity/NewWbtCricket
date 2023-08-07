@@ -9,14 +9,14 @@ import { log } from "console";
 
 export interface Column {
   id:
-    | "sportName"
-    | "eventName"
-    | "marketname"
-    | "nation"
-    | "rate"
-    | "amount"
-    | "time"
-    | string;
+  | "sportName"
+  | "eventName"
+  | "marketname"
+  | "nation"
+  | "rate"
+  | "amount"
+  | "time"
+  | string;
   label: string;
   minWidth?: number;
   align?: "right" | "center";
@@ -100,6 +100,7 @@ const CurrentBet = () => {
     setFormData((preState) => {
       return {
         ...preState,
+        index: 0,
         [event.target.name]: event.target.value,
       };
     });
@@ -179,7 +180,7 @@ const CurrentBet = () => {
         totalPage={countPage}
       />
       <TablePagination
-        rowsPerPageOptions={[ 10, 25, 100]}
+        rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={countPage ? countPage * formData.noOfRecords : 0}
         rowsPerPage={formData.noOfRecords}

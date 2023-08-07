@@ -40,7 +40,7 @@ const columns: readonly Column[] = [
     label: "Market Name",
     minWidth: 20,
     align: "center",
-    
+
   },
   {
     id: "nation",
@@ -97,6 +97,7 @@ const BetHistory = () => {
     setFormData((preState) => {
       return {
         ...preState,
+        index: 0,
         [event.target.name]: event.target.value,
       };
     });

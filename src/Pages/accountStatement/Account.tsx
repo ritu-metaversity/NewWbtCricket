@@ -211,7 +211,7 @@ const Account = () => {
                         className="ldg-tbl-td match-value-box-color"
                         style={{ textAlign: "center" }}
                       >
-                        {item?.pnl > 0 ? 0 : item?.pnl}
+                        {item?.pnl > 0 ? 0 : item?.pnl.toFixed(2)}
                       </td>
                       {item?.pnl < 0 ?
 

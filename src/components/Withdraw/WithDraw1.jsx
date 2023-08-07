@@ -43,7 +43,7 @@ const WithDraw1 = () => {
     const [bankID, setBankId] = useState();
     const [stackValue, setStackValue] = useState();
     const [openForm, setOpenForm] = useState(false);
-    const [withdrawType, setWithdrawType] = useState();
+    const [withdrawType, setWithdrawType] = useState("Normal");
     const [getAccountData, setGetAccountData] = useState();
     const [userBalance, setuserBalance] = useState();
     const [savedBankdetailsName, setSavedBankdetailsName] = useState("")
@@ -390,6 +390,7 @@ const WithDraw1 = () => {
                         setIFSC("");
                         setBankName("");
                         setwithCoinValue(0);
+                        setAccountType("")
                         setRadioButton(false)
                         snackBarUtil.success(res?.data?.message)
 
@@ -486,8 +487,7 @@ const WithDraw1 = () => {
                 <div
                     className="withdrow_type"
                     style={{ marginBottom: "12px", width: "100%" }}>
-                    <select onChange={(e) => setWithdrawType(e.target.value)} style={{ with: "50%" }}>
-                        <option value="">Select Withdraw Type</option>
+                    <select value={withdrawType} onChange={(e) => setWithdrawType(e.target.value)} style={{ with: "50%" }}>
                         <option value="Normal">Normal</option>
                         <option value="Instant">Instant</option>
                     </select>
@@ -536,8 +536,13 @@ const WithDraw1 = () => {
                                     <input
                                         // type="number"
                                         className="account-input"
-                                        value={accountNumber?.toString().replace(".", "")}
-                                        onChange={(e) => e.target.value.match(/^[0-9]{0,18}$/) && setAccountNumber(e.target.value)}
+                                        value={accountNumber}
+                                        onChange={(e) => {
+                                            e.preventDefault()
+                                            // alert(e.target.value + "e.target.value")
+                                            console.log(e.target.value, "e.target.value");
+                                            e.target.value.match(/^[0-9]{0,18}$/) && setAccountNumber(e.target.value)
+                                        }}
 
                                     // onChange={(e) =>
                                     //     e.target.value.match(/^[0-9]*$/) &&
@@ -585,7 +590,7 @@ const WithDraw1 = () => {
                                         className="account-input"
                                         value={ifsc}
                                         onChange={(e) =>
-                                            setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, " ").toUpperCase())
+                                            setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, "").toUpperCase())
                                         }
                                     />
                                 </div>
@@ -595,6 +600,7 @@ const WithDraw1 = () => {
                                     <select
                                         name="reportType"
                                         // style={{ width: "100%" }}
+                                        value={AccountType}
                                         className="custom-select select-type accounttype"
                                         onChange={(e) => setAccountType(e.target.value)}>
                                         <option value="Saving">Saving</option>
@@ -626,12 +632,17 @@ const WithDraw1 = () => {
                                             type="text"
                                             className="account-input"
                                             value={accountNumber}
+                                            // onChange={(e) => e.target.value.match(/[^a-zA-Z0-9.-]{1, 256}@[^a-zA-Z][a-zA-Z]{1, 64}+$/, "") && setAccountNumber(e.target.value)}
+
                                             onChange={(e) =>
                                                 setAccountNumber(
                                                     e.target.value.replace(
                                                         /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/, ""
                                                     )
                                                 )
+                                            }
+                                            onKeyDown={(e) =>
+                                                symbolsArrMail.includes(e.key) && e.preventDefault()
                                             }
                                         />
                                     )}
@@ -753,7 +764,7 @@ const WithDraw1 = () => {
                                                             aria-colindex="5"
                                                             className={`text-left withdraw-data ${withType === "BANK" ? "" : "d-none"
                                                                 }`}>
-                                                            {item?.accountType}fsdfd
+                                                            {item?.accountType}
                                                         </td>
                                                         {console.log(item, "jhgfds")}
                                                         <td
@@ -771,7 +782,6 @@ const WithDraw1 = () => {
                                                                         item?.accountType,
                                                                         item?.withdrawType,
                                                                         item?.id
-
                                                                     )
                                                                 }
                                                                     style={{ cursor: "pointer" }} type="radio" checked={radioButton === item.accountNumber ? true : false} name="radio_btn"
