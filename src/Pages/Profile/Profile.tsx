@@ -93,9 +93,9 @@ const Profile = () => {
         <Grid {...gridItemProps}>Chips:</Grid>
         <Grid {...gridItemProps}>{prolile?.balance}</Grid>{" "}
         <Grid {...gridItemProps}>Win:</Grid>
-        <Grid {...gridItemProps}>{prolile?.win}</Grid>{" "}
+        <Grid {...gridItemProps}>{Number(prolile?.win).toFixed(2)}</Grid>{" "}
         <Grid {...gridItemProps}>Exposure:</Grid>
-        <Grid {...gridItemProps}>{prolile?.exposure}</Grid>
+        <Grid {...gridItemProps}>{Number(prolile?.exposure).toFixed(2)}</Grid>
         <Typography component='p' textTransform={'uppercase'} padding="2px" width={"100%"} className="personalinfo" ><div className="conmanybtn_profile">COMPANY INFORMATION</div></Typography>
         <Grid {...gridItemProps}>HELP LINE NO :</Grid>
         <Grid {...gridItemProps}>	+91-1234567890</Grid>

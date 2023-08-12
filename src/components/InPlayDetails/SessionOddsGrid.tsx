@@ -83,7 +83,7 @@ export const SessionOddsGrid: FC<Props> = ({
               {/* <svg data-testid="ArrowDropUpIcon"></svg>/ */}
               <div className="bookmakerheader">
 
-                <ArrowDropUpIcon onClick={handleChange} style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)" }} />
+                <ArrowDropUpIcon onClick={handleChange} style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)", cursor: "pointer" }} />
 
                 <div className="_child">
 
@@ -138,13 +138,14 @@ export const SessionOddsGrid: FC<Props> = ({
                       {item?.nation}
                     </div>
                     <div style={{ fontSize: 10 }}>Session Limit : {item?.maxBet}</div>
-                    <div style={{ fontSize: 10, cursor: "pointer" }} onClick={() =>
-                      (FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl ||
-                        0) &&
-                      setMarketId(item.sid)
-                    }> {redGreenComponent(
-                      FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl || 0
-                    )}</div>
+                    <div style={{ fontSize: 10, cursor: "pointer" }}
+                      onClick={() =>
+                        // (FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl ||
+                        // 0) &&
+                        setMarketId(item.sid)
+                      }> {redGreenComponent(
+                        FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl || 0
+                      )}</div>
                   </div>
                 </td>
 
@@ -156,6 +157,7 @@ export const SessionOddsGrid: FC<Props> = ({
                       : ""}`}
                   style={{}}
                   onClick={() =>
+                    item.l1 &&
                     updateBet(
                       false,
                       +item.l1,
@@ -184,6 +186,7 @@ export const SessionOddsGrid: FC<Props> = ({
                     }`}
                   style={{}}
                   onClick={() =>
+                    item.b1 &&
                     updateBet(
                       true,
                       +item.b1,
@@ -207,7 +210,7 @@ export const SessionOddsGrid: FC<Props> = ({
             ))}
           </tbody>}
       </table>
-    </div>
+    </div >
 
 
   );

@@ -33,7 +33,7 @@ const PnlModal: FC<Props> = ({ fancyId, matchId, dadadada }) => {
     <div className="main_for_pnl">
       {pnlBook.length <= 0 ?
         <div style={{ height: "30vh" }}>
-
+          <div style={{ color: "red" }}>No bet found</div>
         </div>
         :
         <>

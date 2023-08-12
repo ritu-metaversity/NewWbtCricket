@@ -299,8 +299,8 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
         <div className="inner_chips" style={{ fontWeight: "600" }}>
           <span>Chips: {Number(wallet.balance).toFixed(2)}</span>
           {" "}
-          <span>Expo : <span style={{ color: "red" }}>{Number(wallet.libality).toFixed(2)}</span>
-          </span>
+          <Link to="/current-bet" style={{ padding: "0px 0px 0px 14px" }}>   <span>Expo : <span style={{ color: "red" }}>{Number(wallet.libality).toFixed(2)}</span>
+          </span></Link>
         </div>
       </div>
       {matches && <Menu

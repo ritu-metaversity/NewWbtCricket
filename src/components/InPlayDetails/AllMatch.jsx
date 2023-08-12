@@ -51,7 +51,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
     const [Show, setShow] = useState(false);
     const [errorShow, setErrorShow] = useState(true);
     const [betResultMessage, setBetResultMessage] = useState({});
-    console.log(sportsId, "betRecordbetRecord")
+    // console.log(sportsId, "betRecordbetRecord")
     const [userIp, setUserIp] = useState("");
     const [timer, setTimer] = useState(0)
     const handleClose = () => {
@@ -87,6 +87,15 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
             }, 1000)
         return () => clearInterval(timers)
     }, [timer])
+    useEffect(() => {
+        if (bet?.selectionId || bet?.marketId) {
+            setTimer(10)
+        }
+
+        return () => {
+
+        }
+    }, [bet?.selectionId, bet?.isBack])
 
     useEffect(() => {
         if (bet?.marketId) { setTimer(10) }
@@ -138,66 +147,66 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
 
     console.log(betResultMessage, "betResultMessage")
 
-    useEffect(() => {
-        const getList = async () => {
-            const { response } = await inPlayDetailServices.betListByMatchId(
-                event
-            );
-            if (response?.data) {
+    // useEffect(() => {
+    //     const getList = async () => {
+    //         const { response } = await inPlayDetailServices.betListByMatchId(
+    //             event
+    //         );
+    //         if (response?.data) {
 
-                setBetRecord(response.data);
-            }
-        };
-        setTimeout(() => { getList() }, 5000)
-    }, [event, betRecord]);
+    //             setBetRecord(response.data);
+    //         }
+    //     };
+    //     setTimeout(() => { getList() }, 5000)
+    // }, [event, betRecord]);
 
     const [allGame, setAllGames] = useState({})
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const getList = async () => {
-            // setLoading && setLoading((prev) => ({ ...prev, getListdata: true }));
-            const { response } = await sportServices.activeEventFromSport(sportsId);
-            if (response?.data) {
-                console.log(response, "dasdsdasd")
-                console.log(response, "dasdfdfd")
-                setAllGames(response);
-                //   setCount(response.data.totalRecord);
-            }
-            // setLoading && setLoading((prev) => ({ ...prev, getListdata: false }));
-        };
-        getList();
-        // const response = sportServices.activeEventFromSport(sportsId);
+    //     const getList = async () => {
+    //         // setLoading && setLoading((prev) => ({ ...prev, getListdata: true }));
+    //         const { response } = await sportServices.activeEventFromSport(sportsId);
+    //         if (response?.data) {
+    //             console.log(response, "dasdsdasd")
+    //             console.log(response, "dasdfdfd")
+    //             setAllGames(response);
+    //             //   setCount(response.data.totalRecord);
+    //         }
+    //         // setLoading && setLoading((prev) => ({ ...prev, getListdata: false }));
+    //     };
+    //     getList();
+    //     // const response = sportServices.activeEventFromSport(sportsId);
 
-        //     .then((response) => {
+    //     //     .then((response) => {
 
-        // });
-        // if (response?.data?.length > 0) {
-        // setActiveEventList(response.data);
-        // setShow(false);
-        // }
-        // } else {
-        // setActiveEventList([]);
-        // setShow(true);
-        // }
-    }, [sportsId])
+    //     // });
+    //     // if (response?.data?.length > 0) {
+    //     // setActiveEventList(response.data);
+    //     // setShow(false);
+    //     // }
+    //     // } else {
+    //     // setActiveEventList([]);
+    //     // setShow(true);
+    //     // }
+    // }, [sportsId])
 
 
     const [completedMatches, setCompletedMatches] = useState({})
 
-    useEffect(() => {
-        const getList = async () => {
-            // setLoading && setLoading((prev) => ({ ...prev, getListdata: true }));
-            const { response } = await inPlayDetailServices.betListHistory(
-                { "sportId": sportsId, "fromDate": "2023-06-07", "toDate": "2023-06-21", "index": 0, "noOfRecords": 100, "isdeleted": false }
-            );
-            if (response?.data) {
-                setCompletedMatches(response.data?.dataList?.filter(item => item.matchId === event))
-                // setCompletedMatches(response.data?.dataList)
-            }
-        };
-        getList();
-    }, [sportsId])
+    // useEffect(() => {
+    //     const getList = async () => {
+    //         // setLoading && setLoading((prev) => ({ ...prev, getListdata: true }));
+    //         const { response } = await inPlayDetailServices.betListHistory(
+    //             { "sportId": sportsId, "fromDate": "2023-06-07", "toDate": "2023-06-21", "index": 0, "noOfRecords": 100, "isdeleted": false }
+    //         );
+    //         if (response?.data) {
+    //             setCompletedMatches(response.data?.dataList?.filter(item => item.matchId === event))
+    //             // setCompletedMatches(response.data?.dataList)
+    //         }
+    //     };
+    //     getList();
+    // }, [sportsId])
     console.log(bet, "dushyant")
     useEffect(() => { console.log("huihiu"); if (bet?.placeTime) { setInputFocus() } }, [bet?.placeTime])
     useEffect(() => { console.log("huihiu"); if (bet?.placeTime) { setInputFocusForDesktop() } }, [bet?.placeTime])
@@ -370,45 +379,6 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
                     </div>
                 </div>
 
-
-                <UnSeletdBets betRecord={betRecord} completedMatches={completedMatches} />
-
-
-                {allGame?.data && Object.values(allGame?.data).map((item) => {
-                    if (item.matchId !== event) {
-
-                        return (
-                            <div>
-                                <a href={`/in-play-details/?event-id=${item.matchId}&Sports-id=${searchParams.get("Sports-id")}`}>
-                                    <div
-                                        className="row"
-                                        style={{
-                                            color: "1px solid #575a61",
-                                            marginBottom: 10,
-                                            borderTop: "1px solid #575a61"
-                                        }}
-                                    >
-                                        <div
-                                            className="col-12 col-sm-12 col-md-12 col-lg-12"
-                                            style={{ textAlign: "left" }}
-                                        >
-                                            <div className="moreMatch" style={{ color: "rgb(39, 137, 206)", fontWeight: "700" }}>
-                                                {item?.matchName}{" "}
-                                            </div>
-                                            <span
-                                                style={{ color: "rgb(119, 119, 119)", fontWeight: 900, fontSize: 10 }}
-                                            >
-                                                {item?.openDate}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        )
-                    }
-
-                })
-                }
 
 
 

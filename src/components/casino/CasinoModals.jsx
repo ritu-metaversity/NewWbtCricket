@@ -18,10 +18,9 @@ const CasinoModals = () => {
     return (
         <>
             <div className="main_casino_modals">
-                <div className="casino_images_modals">
-                    <img src={cassionimg} alt="" />
-                </div>
+
                 <div className="casino_message">
+                    <img src={cassionimg} alt="" className="casion_alt_popup" />
                     <p className="please_note">Please Note</p>
                     <p className="points">(1 Points = ₹1)</p>
                     <div className="casino_dis">

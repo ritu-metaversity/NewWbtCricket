@@ -20,6 +20,7 @@ export interface ProfitLossPayload {
   index: number;
   noOfRecords: number;
   totalPages: number;
+  tabId:0|1
 }
 
 interface OldChangePasswordPayload {

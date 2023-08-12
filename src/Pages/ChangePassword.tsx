@@ -26,6 +26,8 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
   const [confirmpassword, setConfirmPasswordError] = useState("")
   const { setLoading } = useContext(LoaderContext);
   const handleClick = async (e: any) => {
+    e.preventDefault();
+
     if (confirmPassword !== newPassword) {
       return snackBarUtil.error("New Password And Confirm Password does not match!");
     } else if (oldPassword === "" && confirmPassword === "" && newPassword === "") {
@@ -71,10 +73,14 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
       setPasswordError(
         "Password should contain atleast one number and one lower case and one upper case."
       );
-    } else if (passData === confirmPassword) {
-      setConfirmPasswordError("")
     } else {
-      setPasswordError("")
+      setPasswordError("");
+
+    }
+    if (passData !== confirmPassword) {
+      setConfirmPasswordError("Password must be equal.");
+    } else {
+      setConfirmPasswordError("")
     }
   };
   const handleConfirmPasswordsValidation = (e: any) => {
@@ -100,42 +106,45 @@ const ChangePassword: FC<Props> = ({ setIsSignedIn }) => {
 
     <div className="outer_body_pass">
       <div className="inner_body_pass">
-        <div className="main_div">
+        <form onSubmit={handleClick}>
 
-          <span className="change_pass">
-            Change Password
+          <div className="main_div">
 
-          </span>
-          <input className="login_text_field"
-            placeholder="OLD PASSWORD"
-            name="oldPassword"
-            type="password"
-            value={oldPassword}
-            onChange={handleChange}
+            <span className="change_pass">
+              Change Password
 
-          />
-          <input className="login_text_field"
-            placeholder="NEW PASSWORD"
-            name="newPassword"
-            type="password"
-            value={newPassword}
-            onChange={handlePassWordsValidation}
-          />
-          <label style={{ color: "red" }}>{passworderror}</label>
+            </span>
+            <input className="login_text_field"
+              placeholder="OLD PASSWORD"
+              name="oldPassword"
+              type="password"
+              value={oldPassword}
+              onChange={handleChange}
 
-          <input className="login_text_field"
-            placeholder="CONFIRM PASSWORD"
-            name="confirmPassword"
-            type="password"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordsValidation}
-          />
-          <label style={{ color: "red" }}>{confirmpassword}</label>
+            />
+            <input className="login_text_field"
+              placeholder="NEW PASSWORD"
+              name="newPassword"
+              type="password"
+              value={newPassword}
+              onChange={handlePassWordsValidation}
+            />
+            <label style={{ color: "red" }}>{passworderror}</label>
 
-          <button className="wwwpurp_btn" onClick={handleClick}>
-            Done
-          </button>
-        </div>
+            <input className="login_text_field"
+              placeholder="CONFIRM PASSWORD"
+              name="confirmPassword"
+              type="password"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordsValidation}
+            />
+            <label style={{ color: "red" }}>{confirmpassword}</label>
+
+            <button className="wwwpurp_btn" type="submit" style={{ cursor: "pointer" }}>
+              Done
+            </button>
+          </div>
+        </form>
 
       </div>
     </div>

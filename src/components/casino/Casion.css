@@ -115,6 +115,17 @@
 .casino_modals_body {
     background-color: #fff;
     padding: 10px;
+    /* overflow-y: scroll;
+    height: 450px; */
+}
+
+@media screen and (min-width:500px) and (max-width:800px) {
+    .casino_modals_body {
+        background-color: #fff;
+        padding: 10px;
+        overflow-y: scroll;
+        height: 270px;
+    }
 }
 
 @media screen and (min-width:1024px) {

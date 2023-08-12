@@ -131,6 +131,7 @@ const BetHistory = () => {
           name="betType"
           value="1"
           onChange={handleChange}
+          style={{ cursor: "pointer" }}
         />
         <label htmlFor="all">All</label>
         <br />
@@ -141,6 +142,7 @@ const BetHistory = () => {
           value="2"
           checked={formData.betType === "2"}
           onChange={handleChange}
+          style={{ cursor: "pointer" }}
         />
         <label htmlFor="back">Lagai</label>
         <br />
@@ -151,6 +153,7 @@ const BetHistory = () => {
           value="3"
           checked={formData.betType === "3"}
           onChange={handleChange}
+          style={{ cursor: "pointer" }}
         />
         <label htmlFor="lay">Khayi</label>
         <br />

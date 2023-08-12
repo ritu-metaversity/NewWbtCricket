@@ -36,6 +36,7 @@ import AllMatch from "./AllMatch";
 import { useParams } from "react-router-dom";
 import inplaytv from "./tv_for_inplay.png"
 import { RxCross2 } from "react-icons/rx";
+import Completedandlivematch from "./Completedandlivematch";
 
 const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
   const [amount, setAmount] = useState(10);
@@ -294,11 +295,11 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
       fancyOdds: activeFancy,
       fancyPnl,
       pnl: oddPnl,
-      betDetails: bet,
+      betDetails: null,
       profits,
       setProfits,
     });
-  }, [bet?.stake]);
+  }, [oddPnl, fancyPnl, activeFancy]);
 
   if (loading.fancyOdds || !(Object.values(activeFancy)?.length > 0)) {
     return <></>
@@ -323,7 +324,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
           <span onClick={() => setSelectedPnlMarketId("")} style={{ cursor: "pointer" }}>
             <RxCross2 onClick={() => setSelectedPnlMarketId("")} style={{
               position: "absolute",
-              right: '7px',
+              right: '4px',
               top: "1px"
             }} /></span>
           <div className="main_RunandAmount">
@@ -491,6 +492,13 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
                   {match.display_message}
                 </Typography>
               </Marquee>
+              {bet?.marketId && bet?.marketId === match.marketId && <AllMatch
+                setBet={setBet}
+                bet={bet}
+                buttonData={buttonData}
+                event={props.event}
+                sportsId={props.sportsId}
+              />}
             </>
           ))}
 
@@ -525,6 +533,13 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
               </Marquee>
             </>
           )}
+          {bet?.marketId && bet?.marketId === originBookMaker[0]?.mid && <AllMatch
+            setBet={setBet}
+            bet={bet}
+            buttonData={buttonData}
+            event={props.event}
+            sportsId={props.sportsId}
+          />}
           {/* {matchOdd
         ?.filter((i) => i.Name !== "Match Odds")
         .map((match, index) => (
@@ -611,19 +626,34 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
                       title={keys}
                       FancyPnl={fancyPnl}
                     />
+                    {bet?.marketId && activeFancy[keys].find((item: FancyOddsInterface) => item.sid === bet?.marketId) && <AllMatch
+                      setBet={setBet}
+                      bet={bet}
+                      buttonData={buttonData}
+                      event={props.event}
+                      sportsId={props.sportsId}
+                    />}
                   </>
                   //   </AccordionDetails>
                   // </Accordion>
                 );
               } else return "";
             })}
-          <AllMatch
+
+          <Completedandlivematch
+            event={props.event}
+            sportsId={props.sportsId}
+
+          />
+          {/* <AllMatch
             setBet={setBet}
             bet={bet}
             buttonData={buttonData}
             event={props.event}
+
             sportsId={props.sportsId}
-          />
+          /> */}
+
         </div>
       </div>
       {/* <Box

@@ -22,6 +22,7 @@ const WithDraw1 = () => {
         upivalid: "Enter Valid UPI ID",
     };
     const [symbolsArrMail] = useState(["e", "E", "+", "-", "."]);
+    const [symbolsArrUpiId] = useState(["."]);
 
     let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
     const [withdrawData, setWithdrawData] = useState();
@@ -473,10 +474,10 @@ const WithDraw1 = () => {
                             style={{ marginLeft: "0px", marginBottom: "10px" }}>
                             Choose From your Favourite transaction{" "}
                         </p>
-                        <div className="coin_value">
+                        <div className="coin_value" style={{ cursor: "pointer" }}>
                             {stackValue?.map((res) => {
                                 return (
-                                    <button onClick={() => handleBtnValue(res?.value)}>
+                                    <button onClick={() => handleBtnValue(res?.value)} style={{ cursor: "pointer" }}>
                                         {res?.key}
                                     </button>
                                 );
@@ -487,9 +488,9 @@ const WithDraw1 = () => {
                 <div
                     className="withdrow_type"
                     style={{ marginBottom: "12px", width: "100%" }}>
-                    <select value={withdrawType} onChange={(e) => setWithdrawType(e.target.value)} style={{ with: "50%" }}>
-                        <option value="Normal">Normal</option>
-                        <option value="Instant">Instant</option>
+                    <select value={withdrawType} onChange={(e) => setWithdrawType(e.target.value)} style={{ with: "50%", cursor: "pointer" }} >
+                        <option value="Normal" style={{ cursor: "pointer" }}>Normal</option>
+                        <option value="Instant" style={{ cursor: "pointer" }}>Instant</option>
                     </select>
                 </div>
                 <div className="with_paymethod">
@@ -506,7 +507,7 @@ const WithDraw1 = () => {
                                                         res?.withdrawType,
                                                         res?.id
                                                     )}
-                                                style={{ backgroundColor: (bankID === res?.id) ? "#7b7c7f" : "" }}
+                                                style={{ backgroundColor: (bankID === res?.id) ? "#7b7c7f" : "", cursor: "pointer" }}
                                             >
                                                 <div className="css-1502y4u">
                                                     <img
@@ -543,7 +544,9 @@ const WithDraw1 = () => {
                                             console.log(e.target.value, "e.target.value");
                                             e.target.value.match(/^[0-9]{0,18}$/) && setAccountNumber(e.target.value)
                                         }}
-
+                                        onKeyDown={(e) =>
+                                            symbolsArrUpiId.includes(e.key) && e.preventDefault()
+                                        }
                                     // onChange={(e) =>
                                     //     e.target.value.match(/^[0-9]*$/) &&
                                     //     setAccountNumber(Number(e.target.value))}
@@ -565,6 +568,9 @@ const WithDraw1 = () => {
                                                 e.target.value
                                             )
                                         }
+                                        onKeyDown={(e) =>
+                                            symbolsArrUpiId.includes(e.key) && e.preventDefault()
+                                        }
                                     />
                                 </div>
                                 <div className="mx-input-wrapper account-field">
@@ -580,6 +586,9 @@ const WithDraw1 = () => {
                                                 e.target.value
                                             )
                                         }
+                                        onKeyDown={(e) =>
+                                            symbolsArrUpiId.includes(e.key) && e.preventDefault()
+                                        }
                                     />
                                 </div>
                                 <div className="mx-input-wrapper account-field">
@@ -591,6 +600,9 @@ const WithDraw1 = () => {
                                         value={ifsc}
                                         onChange={(e) =>
                                             setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, "").toUpperCase())
+                                        }
+                                        onKeyDown={(e) =>
+                                            symbolsArrUpiId.includes(e.key) && e.preventDefault()
                                         }
                                     />
                                 </div>
@@ -609,9 +621,9 @@ const WithDraw1 = () => {
                                 </div>
                             </div>
                         ) : (
-                            <div
-                                className={`mainAccount main_withdrow ${openForm === true ? "" : "d-none"
-                                    } accountWith`}>
+                            <div className="mainAccount main_withdrow accountWith"
+                                style={{ display: openForm === true ? "" : "none" }}
+                            >
                                 <div className="mx-input-wrapper account-field asdfghjkl">
                                     <label className="account-lable">
                                         {withType === "PAYTM" ? "Mobile No" : "UPI ID"}
@@ -623,26 +635,31 @@ const WithDraw1 = () => {
                                             className="account-input"
                                             value={accountNumber}
                                             onChange={(e) => e.target.value.match(/^[0-9]{0,10}$/) && setAccountNumber(e.target.value)}
-                                        // onKeyDown={(e) =>
-                                        //     symbolsArrMail.includes(e.key) && e.preventDefault()
-                                        // }
+                                            // onKeyDown={(e) =>
+                                            //     symbolsArrMail.includes(e.key) && e.preventDefault()
+                                            // }
+                                            onKeyDown={(e) =>
+                                                symbolsArrMail.includes(e.key) && e.preventDefault()
+                                            }
                                         />
                                     ) : (
                                         <input
-                                            type="text"
+                                            // type="text"
                                             className="account-input"
                                             value={accountNumber}
-                                            // onChange={(e) => e.target.value.match(/[^a-zA-Z0-9.-]{1, 256}@[^a-zA-Z][a-zA-Z]{1, 64}+$/, "") && setAccountNumber(e.target.value)}
-
                                             onChange={(e) =>
-                                                setAccountNumber(
-                                                    e.target.value.replace(
-                                                        /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/, ""
-                                                    )
-                                                )
-                                            }
+                                                e.target.value.match(/^[a-zA-Z0-9@]*$/) &&
+                                                setAccountNumber(e.target.value)}
+
+                                            // onChange={(e) =>
+                                            //     setAccountNumber(
+                                            //         e.target.value.replace(
+                                            //             /[^a-zA-Z0-9.-]{2, 256}@[^a-zA-Z][a-zA-Z]{2, 64}+$/, ""
+                                            //         )
+                                            //     )
+                                            // }
                                             onKeyDown={(e) =>
-                                                symbolsArrMail.includes(e.key) && e.preventDefault()
+                                                symbolsArrUpiId.includes(e.key) && e.preventDefault()
                                             }
                                         />
                                     )}
@@ -661,6 +678,9 @@ const WithDraw1 = () => {
                                             setAccountHolderName(
                                                 e.target.value
                                             )
+                                        }
+                                        onKeyDown={(e) =>
+                                            symbolsArrUpiId.includes(e.key) && e.preventDefault()
                                         }
                                     />
                                 </div>
@@ -805,7 +825,8 @@ const WithDraw1 = () => {
                                     </p>
                                 )}
                                 <button onClick={handleClick}
-                                //   disabled={!openForm}
+                                    //   disabled={!openForm}
+                                    style={{ cursor: "pointer" }}
                                 >
                                     Withdraw Coins
                                 </button>

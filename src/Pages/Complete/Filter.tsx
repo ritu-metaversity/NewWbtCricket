@@ -32,7 +32,8 @@ const inputStyle1 = {
   padding: "10px",
   borderRadius: "5px",
   width: "100%",
-  color: "#000"
+  color: "#000",
+  cursor: "pointer"
 }
 
 interface Props {
@@ -98,11 +99,18 @@ const Filter: FC<Props> = ({
         setFormData((i) => ({
           ...i,
           sportId: activeSportList[0].sportId.toString(),
+          matchId: "",
+          tabId: 0
         }));
       }
     } else {
       if (casinoTypes[0]) {
-        setFormData((i) => ({ ...i, sportId: casinoTypes[0].id.toString() }));
+        setFormData((i) => ({
+          ...i, sportId: casinoTypes[0].id.toString(),
+          matchId: "",
+
+          tabId: 1
+        }));
       }
     }
   }, [tab]);
@@ -150,26 +158,26 @@ const Filter: FC<Props> = ({
     getList();
   }, [setFormData, setLoading]);
 
-  useEffect(() => {
-    const getNewEvent = async () => {
+  // useEffect(() => {
+  //   const getNewEvent = async () => {
 
 
-      setLoading && setLoading((prev) => ({ ...prev, getNewEvent: true }));
-      const { response } = await sportServices.activeEventFromSport(4);
-      console.log(formData.sportId, "jhygtfds")
-      if (response?.data) {
-        if (response?.data?.length > 0) {
-          setActiveEventList(response.data);
-          // setFormData((o) => ({ ...o, matchId: response.data[0].matchId }));
-        }
-      } else {
-        setActiveEventList([]);
-      }
-      setLoading && setLoading((prev) => ({ ...prev, getNewEvent: false }));
+  //     setLoading && setLoading((prev) => ({ ...prev, getNewEvent: true }));
+  //     const { response } = await sportServices.activeEventFromSport(4);
+  //     console.log(formData.sportId, "jhygtfds")
+  //     if (response?.data) {
+  //       if (response?.data?.length > 0) {
+  //         setActiveEventList(response.data);
+  //         // setFormData((o) => ({ ...o, matchId: response.data[0].matchId }));
+  //       }
+  //     } else {
+  //       setActiveEventList([]);
+  //     }
+  //     setLoading && setLoading((prev) => ({ ...prev, getNewEvent: false }));
 
-    };
-    getNewEvent();
-  }, []);
+  //   };
+  //   getNewEvent();
+  // }, []);
   useEffect(() => {
     const getNewEvent = async () => {
       console.log(activeSportList);
@@ -244,7 +252,7 @@ const Filter: FC<Props> = ({
               {tab === 1 ? "Select Casino Type" : "Select Sport"}
             </label>
             <select
-              value={formData.sportId}
+              value={Number(formData.sportId)}
               style={inputStyle1}
               onChange={handleChange}
               name="sportId">

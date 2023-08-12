@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import TablePagination from "@mui/material/TablePagination";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import StickyTable from "../../components/custom/TableWithoutPagination";
 import { ProfitLossPayload, userServices } from "../../utils/api/user/services";
 import { LoaderContext } from "../../App";
@@ -76,12 +76,13 @@ const Account = () => {
   const [formData, setFormData] = React.useState<ProfitLossPayload>({
     fromDate: defaultValue,
     toDate: currentValue,
-    sportId: "1",
+    sportId: "4",
     matchId: "",
     index: 0,
     noOfRecords: 25,
     totalPages: 1,
     userId: "",
+    tabId: 0,
   });
 
   function handleChange(event: { target: { name: any; value: any } }) {
@@ -132,6 +133,11 @@ const Account = () => {
         return { ...preState, index: newPage };
       });
   };
+
+  useEffect(() => {
+    handleClick()
+  }, [formData.tabId])
+
   console.log(accountStatement, "accountStatementaccountStatement")
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }} style={{ padding: "0px 0px 50px 0px" }}>
@@ -204,20 +210,20 @@ const Account = () => {
                         className="ldg-tbl-td match-value-box-color"
                         style={{ textAlign: "center" }}
                       >
-                        {item?.pnl < 0 ? 0 : item?.pnl}
+                        {item?.pnl < 0 ? 0 : JSON.parse(item?.pnl).toFixed(2)}
                       </td>
 
                       <td
                         className="ldg-tbl-td match-value-box-color"
                         style={{ textAlign: "center" }}
                       >
-                        {item?.pnl > 0 ? 0 : item?.pnl.toFixed(2)}
+                        {item?.pnl > 0 ? 0 : JSON.parse(item?.pnl).toFixed(2)}
                       </td>
                       {item?.pnl < 0 ?
 
-                        (<td className="ldg-tbl-td match-value-box-color" style={{ color: "red", textAlign: "center" }}>{item?.pnl}</td>) :
+                        (<td className="ldg-tbl-td match-value-box-color" style={{ color: "red", textAlign: "center" }}>{JSON.parse(item?.pnl).toFixed(2)}</td>) :
 
-                        (<td className="ldg-tbl-td match-value-box-color" style={{ color: "green", textAlign: "center" }}>{item?.pnl}</td>)
+                        (<td className="ldg-tbl-td match-value-box-color" style={{ color: "green", textAlign: "center" }}>{JSON.parse(item?.pnl).toFixed(2)}</td>)
                       }
                       {/* <td className="ldg-tbl-td match-value-box-color">0</td>
                     <td className="ldg-tbl-td match-value-box-color">190</td>

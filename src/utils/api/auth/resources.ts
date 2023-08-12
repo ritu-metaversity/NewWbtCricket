@@ -18,4 +18,8 @@ export const authResourcs: {
     URL: "util/validate-jwt-token",
     METHOD: "POST",
   },
+  SEARCH_BET_MARKET: {
+    URL: "bets/search-bet-market-and-user",
+    METHOD: "POST",
+  },
 };

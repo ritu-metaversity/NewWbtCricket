@@ -79,9 +79,10 @@ const Deposit = () => {
                 // <a target={"_blank"} href={item.image}>
                 <img
                   onClick={() => setImageSelected(item.image)}
-                  style={{ width: 50, height: 50 }}
+                  style={{ width: 50, height: 50, cursor: "pointer" }}
                   src={item.image}
                   alt="deposit_image"
+                // style={{ cursor: "pointer" }}
                 />
                 // </a>
               );
@@ -108,6 +109,7 @@ export function StatusTypography({
         bgcolor: "#dedede",
         borderRadius: 1,
         p: 0.5,
+        margin: "auto",
         width: "min-content",
       }}
       color={colorStatus[status]}

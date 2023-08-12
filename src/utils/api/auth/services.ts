@@ -39,4 +39,10 @@ export const authServices = {
     };
     return await apiHandler(params);
   },
+  searchBetMarketAS: async (data:any) => {
+    const params = {
+      resource: authResources.SEARCH_BET_MARKET,data
+    };
+    return await apiHandler(params);
+  },
 };

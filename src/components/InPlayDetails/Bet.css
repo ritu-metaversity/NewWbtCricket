@@ -789,6 +789,7 @@ fieldset[disabled] .btn {
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    cursor: pointer;
 }
 
 .label_checkbox {}
@@ -813,6 +814,7 @@ fieldset[disabled] .btn {
     background: #fff;
     display: block;
     position: relative;
+    cursor: pointer;
 }
 
 .onoffbtn:after {

@@ -31,6 +31,6 @@ export const columns: ColumnsInterface<columnIds>[] = [
   {
     id: "status",
     label: "Status",
-    align: "center",
+    align: "center"
   },
 ];

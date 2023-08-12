@@ -28,7 +28,8 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
   const [selfAllowedd, SetselfAllowedd] = useState();
   const [selfsignup, Setselfsignup] = useState();
 
-  const handleClick = async () => {
+  const handleClick = async (e: any) => {
+    e.preventDefault();
 
     if (password === "" && userId === "") {
       return snackBarUtil.error("All fields are mandatory");
@@ -90,36 +91,39 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
       </div>
       <div className="login-form">
         <span className="login-text">Please Login To Continue</span>
-        <input className="login-Input"
-          placeholder="Username"
-          value={userId}
-          name="login"
-          onChange={handleChange} />
+        <form onSubmit={handleClick} className="login-form-newww">
 
-        <input className="login-Input"
-          name="password"
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={handleChange} />
-        <div className="login_main" onClick={handleClick}>
-          <button className="login-Button">
-            login
+          <input className="login-Input"
+            placeholder="Username"
+            value={userId}
+            name="login"
+            onChange={handleChange} />
+
+          <input className="login-Input"
+            name="password"
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={handleChange} />
+          {/* <div className="login_main" > */}
+          <button className="login_loginnn" type="submit">
+            <span>
+              login
+            </span>
+            <LoginIcon style={{ fontSize: "18px" }} />
+
           </button>
-          <div>
-            <LoginIcon />
-          </div>
-        </div>
+          {/* </div> */}
+        </form>
+
         {selfsignup === true ?
 
-          <div className="login_main" onClick={handleSign}>
-            <button className="login-Button">
-              Sign up
-            </button>
-            <div>
-              <LoginIcon style={{ rotate: "180deg" }} />
-            </div>
-          </div> : ""
+          // <div className="login_main" onClick={handleSign}>
+          <button className="login_loginnn" onClick={handleSign}>
+            <span> Sign up </span>
+            <LoginIcon style={{ rotate: "180deg", fontSize: "18px" }} />
+          </button>
+          : ""
 
 
         }

@@ -11,6 +11,7 @@ import {
 import "./Bet.css"
 import { TitleStyled } from "../custom/styledComponents";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import AllMatch from "./AllMatch";
 
 const BookMakerOddsgrid: FC<{
   CurrentOdd: FancyOddsInterface[];
@@ -84,7 +85,7 @@ const BookMakerOddsgrid: FC<{
               >
                 <div className="bookmakerheader">
 
-                  <ArrowDropUpIcon style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)" }} onClick={handleChange} />
+                  <ArrowDropUpIcon style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)", cursor: "pointer" }} onClick={handleChange} />
 
                   {/* {/* {CurrentOdd.map((item) => (
                   <> */}
@@ -251,6 +252,7 @@ const BookMakerOddsgrid: FC<{
           </tbody>}
         </table>
       </div>
+     
     </div >
 
 

@@ -54,7 +54,7 @@ const Terms: FC<Props> = ({ show, setShow }) => {
           <div className="maindatatashow">
             <div className="mainheader-popup">
               <h6 className="maintitle" style={{ color: "#fff" }}>Welcome to bmx</h6>
-              <button type="button" className="closecross" aria-label="Close" onClick={() => setShow(false)}>
+              <button type="button" className="closecross" aria-label="Close" onClick={() => setShow(false)} style={{ cursor: "pointer" }}>
                 <span >×</span>
               </button>
             </div>
@@ -74,8 +74,8 @@ const Terms: FC<Props> = ({ show, setShow }) => {
                 site name before you login. Thanks for your support. Team bmx99
               </span>
             </div>
-            <div className="modal-footer">
-              <button type="button" className="cancelbtn" onClick={() => setShow(false)}>
+            <div className="modal-footer" >
+              <button type="button" className="cancelbtn" onClick={() => setShow(false)} style={{ cursor: "pointer" }}>
                 Cancel
               </button>
             </div>

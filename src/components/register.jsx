@@ -167,7 +167,9 @@ const Register = () => {
       setUserNameError("");
     }
   };
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
     setStatusVal(true);
     if (handleValidation()) {
 
@@ -341,71 +343,66 @@ const Register = () => {
         </div>
         <div className="login-form">
           <span className="login-text">Sign up </span>
-          <input className="sign-Input"
-            required
-            placeholder="User Name"
-            name="username"
-            value={UserName}
+          <form onSubmit={handleLogin} className="login-form-newww">
 
-            // value={register?.username}
-            onChange={handleUserName}
-          />
-          <label style={{ color: "red" }}>{userNameError}</label>
-          <input className="sign-Input"
-            required
-            name="mobile"
-            placeholder="Mobile No"
-            // type="number"
-            value={mobileNumber}
-            max="10"
-            onChange={handleMobileNumber}
+            <input className="sign-Input"
+              required
+              placeholder="User Name"
+              name="username"
+              value={UserName}
 
-          // onKeyDown={(e) =>
-          //   symbolsArrMail.includes(e.key) && e.preventDefault()
-          // } 
-          />
-          <label style={{ color: "red" }}>{mobileNumberError}</label>
+              // value={register?.username}
+              onChange={handleUserName}
+            />
+            <label style={{ color: "red" }}>{userNameError}</label>
+            <input className="sign-Input"
+              required
+              name="mobile"
+              placeholder="Mobile No"
+              // type="number"
+              value={mobileNumber}
+              max="10"
+              onChange={handleMobileNumber}
 
-          <input className="sign-Input"
-            required
-            name="password"
-            placeholder="Password"
-            type="password"
-            // value={register?.password}
-            onChange={handlePassWordsValidation}
-          />
-          <label style={{ color: "red" }}>{passwordError}</label>
+            // onKeyDown={(e) =>
+            //   symbolsArrMail.includes(e.key) && e.preventDefault()
+            // } 
+            />
+            <label style={{ color: "red" }}>{mobileNumberError}</label>
 
-          <input className="sign-Input"
-            required
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            type="password"
-            // value={register?.confirmPassword}
-            onChange={handleConfirmPasswordsValidation}
-          />
-          <label style={{ color: "red" }}>{confirmPasswordError}</label>
+            <input className="sign-Input"
+              required
+              name="password"
+              placeholder="Password"
+              type="password"
+              // value={register?.password}
+              onChange={handlePassWordsValidation}
+            />
+            <label style={{ color: "red" }}>{passwordError}</label>
 
-          <div className="login_main" onClick={handleLogin}>
-            <button className="login-Button">
-              Sign Up
+            <input className="sign-Input"
+              required
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              type="password"
+              // value={register?.confirmPassword}
+              onChange={handleConfirmPasswordsValidation}
+            />
+            <label style={{ color: "red" }}>{confirmPasswordError}</label>
+
+            <button className="login_loginnn" type="submit">
+              <span>
+                Sign up
+              </span>
+              <LoginIcon style={{ fontSize: "18px" }} />
+
             </button>
-            {/* <div> */}
+          </form>
 
-            <LoginIcon />
-            {/* </div> */}
-          </div>
-
-          <div className="login_main" onClick={handleClickLogin}>
-            <button className="login-Button">
-              Login
-            </button>
-            {/* <div> */}
-            <LoginIcon style={{ rotate: "180deg" }} />
-
-            {/* </div> */}
-          </div>
-
+          <button className="login_loginnn" onClick={handleClickLogin}>
+            <span> login </span>
+            <LoginIcon style={{ rotate: "180deg", fontSize: "18px" }} />
+          </button>
         </div>
       </div>
     </Box>

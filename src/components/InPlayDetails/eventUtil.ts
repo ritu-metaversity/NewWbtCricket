@@ -39,8 +39,8 @@ export const createProfits = ({
   profits,
   setProfits,
 }: CreateProfitProps) => {
-  if (!fancyOdds || !betDetails) return;
   console.log("hihihi");
+  if (!fancyOdds ) return;
 
   const pnlsOdds = pnl?.find(
     (element) => element?.marketId == betDetails?.marketId
@@ -73,7 +73,7 @@ export const createProfits = ({
         const current = plnBookmakerArray?.find(
           (item: any) => item.selectionId === odd.sid
         );
-        if (odd.sid === betDetails?.selectionId) {
+        if (odd.sid == betDetails?.selectionId) {
           Bookmaker.push({
             title: odd.nation,
             value:
@@ -162,35 +162,35 @@ export const createProfits = ({
         }, {}) || {}),
       },
       Bookmaker: [
-        // ...(fancyOdds?.Bookmaker?.map((element: FancyOddsInterface) => {
-        //   const pnlsBookmaker = pnl?.find(
-        //     (pnl) => pnl?.marketId === element.mid
-        //   );
-        //   if (!pnlsBookmaker) return null;
-        //   const plnBookmakerArray = [
-        //     {
-        //       pnl: pnlsBookmaker.pnl1,
-        //       selectionId: pnlsBookmaker.selection1,
-        //     },
-        //     {
-        //       pnl: pnlsBookmaker.pnl2,
-        //       selectionId: pnlsBookmaker.selection2,
-        //     },
-        //     {
-        //       pnl: pnlsBookmaker.pnl3,
-        //       selectionId: pnlsBookmaker.selection3,
-        //     },
-        //   ];
-        //   const currentProfit: ProfitInterface = {
-        //     title: element.nation,
-        //     sid: element.sid,
-        //     mid: element.mid,
-        //     value:
-        //       plnBookmakerArray.find((item) => item.selectionId == element.sid)
-        //         ?.pnl || 0,
-        //   };
-        //   return currentProfit;
-        // }) || []),
+        ...(fancyOdds?.Bookmaker?.map((element: FancyOddsInterface) => {
+          const pnlsBookmaker = pnl?.find(
+            (pnl) => pnl?.marketId === element.mid
+          );
+          if (!pnlsBookmaker) return null;
+          const plnBookmakerArray = [
+            {
+              pnl: pnlsBookmaker.pnl1,
+              selectionId: pnlsBookmaker.selection1,
+            },
+            {
+              pnl: pnlsBookmaker.pnl2,
+              selectionId: pnlsBookmaker.selection2,
+            },
+            {
+              pnl: pnlsBookmaker.pnl3,
+              selectionId: pnlsBookmaker.selection3,
+            },
+          ];
+          const currentProfit: ProfitInterface = {
+            title: element.nation,
+            sid: element.sid,
+            mid: element.mid,
+            value:
+              plnBookmakerArray.find((item) => item.selectionId == element.sid)
+                ?.pnl || 0,
+          };
+          return currentProfit;
+        }) || []),
       ],
       Fancy:
         fancyPnl?.map((element: FancyPnl) => {

@@ -78,6 +78,7 @@ const SetButtonValue = () => {
       <button
         className="btn_save"
         onClick={handleClick}
+        style={{ cursor: "pointer" }}
       >
         {" "}
         Submit

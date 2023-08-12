@@ -38,6 +38,8 @@ import { Sports } from "./Pages/Sports";
 import { selfServices } from "./utils/api/selfWithrawDeposit/service";
 import { ImCross } from "react-icons/im";
 import { ToastContainer } from "react-toastify";
+import StatusIndicator from "./StatusIndicator";
+
 
 interface LoadingType {
   [x: string]: boolean;
@@ -140,18 +142,22 @@ function App() {
       // icon={<></>}
       // progress={undefined:any}
       />
+      <StatusIndicator />
+
       {!Object.keys(loading).every((key) => loading[key] === false) && (
         <div className="loader-container">
           <CircularProgress />
           {/* <img src={loaderImg} alt="" height={60} width={60} /> */}
         </div>
       )}
+
       {/* <div className={`App ${window.location.pathname.includes("sign-in") || window.location.pathname.includes("sign-up") ? "" : "padding_for_desktop"}`} > */}
       <div className="App"
         style={{
           paddingBottom: window.location.pathname.includes("sign-in") || window.location.pathname.includes("sign-up") ? "" : "50px"
         }}>
         <SnackbarProvider maxSnack={5} autoHideDuration={1000}>
+
           <main >
             <Routes>
 
