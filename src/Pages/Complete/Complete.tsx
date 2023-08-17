@@ -84,6 +84,7 @@ const range = (start: number, end: number) => {
   }
   return result;
 };
+let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 // eslint-disable-next-line arrow-body-style
 const disabledDate: RangePickerProps['disabledDate'] = (current) => {
@@ -176,7 +177,7 @@ const Complete = () => {
       type: vl
     }
 
-    axios.post("https://api.247365.exchange/admin-new-apis/enduser/account-statement",
+    axios.post(`${REACT_APP_API_URL}/enduser/account-statement`,
       data,
       { headers: { Authorization: `Bearer ${token}` } }
     )
@@ -197,7 +198,7 @@ const Complete = () => {
       type: "1"
     }
 
-    axios.post("https://api.247365.exchange/admin-new-apis/enduser/account-statement",
+    axios.post(`${REACT_APP_API_URL}/enduser/account-statement`,
       data,
       { headers: { Authorization: `Bearer ${token}` } }
     )

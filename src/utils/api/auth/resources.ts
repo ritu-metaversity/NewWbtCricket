@@ -22,4 +22,8 @@ export const authResourcs: {
     URL: "bets/search-bet-market-and-user",
     METHOD: "POST",
   },
+  HOME_PAGE_BANNER_LIST: {
+    URL: "enduser/user-banner-list",
+    METHOD: "POST",
+  },
 };

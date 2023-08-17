@@ -16,6 +16,7 @@ interface Props {
 
 const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
   const { appData } = useContext(LoaderContext);
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const [selfAllowedd, SetselfAllowedd] = useState();
   useEffect(() => {
@@ -23,7 +24,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
     // let appUrll = "localhost";
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
         { appUrl: appUrll }
       )
       .then((res) => {

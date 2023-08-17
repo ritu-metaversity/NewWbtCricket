@@ -25,6 +25,7 @@ const Register = () => {
   const [newCredAfterRegister, setNewCredAfterRegister] = useState("");
   const navigate = useNavigate();
   // const [selfAllowedd, SetselfAllowedd] = useState();
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const [password, setPassword] = useState(0);
   const [mobileNumber, setMobileNumber] = useState();
@@ -175,7 +176,7 @@ const Register = () => {
 
       axios
         .post(
-          "https://api.247365.exchange/admin-new-apis/user/self-register",
+          `${REACT_APP_API_URL}/user/self-register`,
           {
             appUrl: window.location.hostname,
             username: UserName,
@@ -272,7 +273,7 @@ const Register = () => {
     // let appUrll = "localhost";
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
         { appUrl: appUrll }
       )
       .then((res) => {

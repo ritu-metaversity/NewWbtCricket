@@ -7,6 +7,7 @@ import SummaryCard, {
 } from "../../components/Inplay/SummaryCard";
 import { sportServices } from "../../utils/api/sport/services";
 import Match from "../../components/Inplay/Match";
+import UpperBanner from "../../components/UpperBanner";
 
 
 function a11yProps(index: number) {
@@ -85,6 +86,8 @@ const Sports = () => {
 
     >
       {/* <BacktoMenuButton /> */}
+      <UpperBanner />
+
       <Tabs
         sx={{ backgroundColor: '#dddddd' }}
         value={tabValue}

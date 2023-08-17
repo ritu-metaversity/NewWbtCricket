@@ -27,6 +27,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
   const host = window.location.hostname;
   const [selfAllowedd, SetselfAllowedd] = useState();
   const [selfsignup, Setselfsignup] = useState();
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const handleClick = async (e: any) => {
     e.preventDefault();
@@ -75,7 +76,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
     // let appUrll = "localhost";
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
         { appUrl: appUrll }
       )
       .then((res: any) => {

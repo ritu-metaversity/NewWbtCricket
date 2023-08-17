@@ -45,4 +45,10 @@ export const authServices = {
     };
     return await apiHandler(params);
   },
+  HOMEPAGEBANNERLISTDATA: async (data:any) => {
+    const params = {
+      resource: authResources.HOME_PAGE_BANNER_LIST,data
+    };
+    return await apiHandler(params);
+  },
 };

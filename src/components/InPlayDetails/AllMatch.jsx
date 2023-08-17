@@ -56,6 +56,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
     const [timer, setTimer] = useState(0)
     const handleClose = () => {
         setShow(false)
+        setBet(null)
     }
     console.log(buttonData, "uytfvbnmuh")
 
@@ -110,6 +111,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
         setLoading && setLoading((prev) => ({ ...prev, ClickButtonValue: true }));
         const { response, error } = await inPlayDetailServices.updateBetPlace({
             ...bet,
+            marketnameid: undefined,
             placeTime: moment(bet?.placeTime).format("YYYY-MM-DD hh:mm:ss.SSS"),
             userIp,
             deviceInfo: {
@@ -124,9 +126,11 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
             },
         });
         if (response) {
-            setBet(null);
-            setTimer(0)
-            setShow(true)
+            // setBet(null);
+            // setTimer(0)
+            if (response?.status === true) {
+                setShow(true)
+            }
             // setBetResultMessage(response?.message, "true")
             setBetResultMessage({
 

@@ -129,9 +129,9 @@ const BetSlip: FC<Props> = ({ bet, setBet, profits, buttonData }) => {
                     ? bet.isFancy
                       ? (bet.stake * bet.priceValue) / 100
                       : (bet.marketName === "Bookmaker"
-                          ? (bet.odds * bet.stake) / 100
-                          : (bet.odds - 1) * bet.stake
-                        ).toFixed(2)
+                        ? (bet.odds * bet.stake) / 100
+                        : (bet.odds - 1) * bet.stake
+                      ).toFixed(2)
                     : bet.stake}
                 </p>
               </Grid>
@@ -162,12 +162,12 @@ const BetSlip: FC<Props> = ({ bet, setBet, profits, buttonData }) => {
           </Box>
           {bet?.marketName === "Bookmaker"
             ? profits.Bookmaker?.filter(
-                (item) => item?.mid === bet?.marketId
-              ).map((profit) => <BetResult {...profit} />)
+              (item) => item?.mid === bet?.marketId
+            ).map((profit) => <BetResult {...profit} />)
             : bet?.marketName &&
-              profits.Odds[bet?.marketId]?.map((profit) => (
-                <BetResult {...profit} />
-              ))}
+            profits.Odds[bet?.marketId]?.map((profit) => (
+              <BetResult {...profit} />
+            ))}
         </Box>
       ) : (
         <h1>"No Bet Selected"</h1>
