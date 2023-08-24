@@ -21,7 +21,7 @@
 }
 
 .desktop_logogogo {
-    width: 40%;
+    width: 120px;
 }
 
 /* padding: 0px 42px; */
@@ -31,7 +31,7 @@
     }
 
     .desktop_logogogo {
-        width: 100%;
+        width: 140px;
     }
 
 }

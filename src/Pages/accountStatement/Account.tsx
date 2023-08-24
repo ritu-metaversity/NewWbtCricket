@@ -195,10 +195,9 @@ const Account = () => {
                         className="ldg-tbl-td match-value-box-color"
                         style={{ textAlign: "left" }}
                       >
-                        <a href="/">
-
-                          {item?.matchName}
-                        </a>
+                        {/* <a href="/"> */}
+                        {item?.matchName}
+                        {/* </a> */}
                       </td>
                       <td
                         className="ldg-tbl-td match-value-box-color"
@@ -256,7 +255,7 @@ const Account = () => {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={countPage ? countPage * formData.noOfRecords : -1}
+          count={countPage ? countPage : -1}
           rowsPerPage={formData.noOfRecords}
           page={formData.index}
           onPageChange={handleChangePage}

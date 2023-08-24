@@ -194,7 +194,7 @@ const Casino = () => {
             <RxCross2 onClick={() => setTrueee(false)} />
           </div>
           <iframe
-            src={`https://d2.fawk.app/#/splash-screen/${token}/9482/?opentable=${casionId}`}
+            src={`https://d.fawk.app/#/splash-screen/${token}/9482/?opentable=${casionId}`}
             // height="82vh"
             // className="mobile_if"
             width="100%"
@@ -204,7 +204,7 @@ const Casino = () => {
             allowFullScreen={true}
           ></iframe>
           <iframe
-            src={`https://m2.fawk.app/#/splash-screen/${token}/9482/?opentable=${casionId}`}
+            src={`https://m.fawk.app/#/splash-screen/${token}/9482/?opentable=${casionId}`}
             // height="82vh"
             // className="mobile_if"
             width="100%"

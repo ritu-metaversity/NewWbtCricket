@@ -40,7 +40,7 @@ const CasinoGame = () => {
               bgcolor="#0f2327"
             ></Box>
             <iframe
-              src={`https://m2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+              src={`https://m.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
               height="calc(100vh - 100px)"
               className="mobile_if"
               width="100%"
@@ -59,7 +59,7 @@ const CasinoGame = () => {
             bgcolor="#0f2327"
           ></Box> */}
             <iframe
-              src={`https://d2.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
+              src={`https://d.fawk.app/#/splash-screen/${token}/9482?opentable=${id}`}
               className="desktop_if"
               width="100%"
               title="desktop"

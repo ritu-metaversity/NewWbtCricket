@@ -148,6 +148,8 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
     setAnchorEl(null)
 
   }, [matches])
+  console.log(appData, "appData");
+
   return (
     <>
       <AppBar
@@ -174,7 +176,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
                 <div className="logo-name">
 
 
-                  <img src="logogogogog.png" alt="Logo" className="desktop_logogogo" style={{ height: "54px" }} />
+                  <img src={appData?.logo} alt="Logo" className="desktop_logogogo" style={{ height: "50px" }} />
 
                   {/* <span className="mobile_logogoggo" style={{ color: "white" }}>
 

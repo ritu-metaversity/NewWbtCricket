@@ -36,6 +36,8 @@ const Register = () => {
   const [StatusCode, setStatusCode] = useState();
   const [logo, setLogo] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [loadinLogin, setLoadingLogin] = useState(false)
+
   // const [message, setMessage] = useState("");
   // const [isLoading1, setIsLoading1] = useState(false);
   // const [alertBtnColor, setAlertBtnColor] = useState();
@@ -170,6 +172,7 @@ const Register = () => {
   };
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoadingLogin(true)
 
     setStatusVal(true);
     if (handleValidation()) {
@@ -189,6 +192,8 @@ const Register = () => {
         .then((res) => {
           if (res?.status) {
             setOpen(true)
+            setLoadingLogin(false)
+
             snackBarUtil.success(res?.data?.message);
             console.log(res?.data)
             setNewCredAfterRegister(res?.data);
@@ -278,6 +283,7 @@ const Register = () => {
       )
       .then((res) => {
         console.log(res, "dadasdas")
+
         // SetselfAllowedd(res?.data?.data?.logo);
         setLogo(res?.data?.data?.logo);
         // setStatusBtn(res?.data?.data?.selfAllowed);
@@ -340,7 +346,7 @@ const Register = () => {
       </Dialog>
       <div className="loginBackground new-login-content" style={{ overflow: "scroll" }}>
         <div className="logo-img">
-          <img src="logogogogog.png" alt="" className="logoimgggggg" />
+          <img src={logo} alt="" className="logoimgggggg" />
         </div>
         <div className="login-form">
           <span className="login-text">Sign up </span>
@@ -392,11 +398,19 @@ const Register = () => {
             <label style={{ color: "red" }}>{confirmPasswordError}</label>
 
             <button className="login_loginnn" type="submit">
-              <span>
-                Sign up
-              </span>
-              <LoginIcon style={{ fontSize: "18px" }} />
 
+              {
+                loadinLogin === true ?
+
+                  <span className="loading-login">Loading...</span>
+                  :
+                  <>
+                    <span>
+                      Sign up
+                    </span>
+                    <LoginIcon style={{ fontSize: "18px" }} />
+                  </>
+              }
             </button>
           </form>
 
