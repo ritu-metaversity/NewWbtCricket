@@ -37,7 +37,7 @@ const Register = () => {
   const [logo, setLogo] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [loadinLogin, setLoadingLogin] = useState(false)
-
+  console.log(loadinLogin, "loadinLogin")
   // const [message, setMessage] = useState("");
   // const [isLoading1, setIsLoading1] = useState(false);
   // const [alertBtnColor, setAlertBtnColor] = useState();
@@ -199,9 +199,16 @@ const Register = () => {
             setNewCredAfterRegister(res?.data);
           } else {
             snackBarUtil.error(res?.data?.message);
+            console.log("loadinLogin")
+            setLoadingLogin(false)
+
+
           }
         })
         .catch((error) => {
+          console.log(error, "loadinLogin")
+          setLoadingLogin(false)
+
           snackBarUtil.error(error.response.data.message);
           // setStatusCode(error.response.status);
           // setErrorMsg(error.response.data.message);

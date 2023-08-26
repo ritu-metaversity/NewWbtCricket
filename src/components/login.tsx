@@ -29,6 +29,8 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
   const [selfsignup, Setselfsignup] = useState();
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
   const [loadinLogin, setLoadingLogin] = useState(false)
+
+  console.log(loadinLogin, "loadinLogin")
   const handleClick = async (e: any) => {
     e.preventDefault();
     setLoadingLogin(true)
@@ -60,6 +62,9 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
 
           navigate("/terms", { replace: true });
         }
+      } else {
+        setLoadingLogin(false)
+
       }
     }
   };
