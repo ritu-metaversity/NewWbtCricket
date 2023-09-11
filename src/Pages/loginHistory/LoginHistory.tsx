@@ -1,8 +1,6 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import { Box, Tab, Tabs } from "@mui/material";
+import React from "react";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
-import StickyHeadTable from "../../components/custom/Table";
-import { userServices } from "../../utils/api/user/services";
 import { LoginhistoryData } from "./LoginHistoryDetails";
 import { ChnagePasswordHistory } from "./ChangePasswordHistory";
 
@@ -56,6 +54,7 @@ const LoginHistory = () => {
   return (
     <Box maxWidth={900} mx="auto">
       <BacktoMenuButton />
+
       <Tabs
         value={selectedTab}
         textColor="primary"
@@ -65,7 +64,7 @@ const LoginHistory = () => {
         }}
       >
         <Tab label="Login History" />
-        <Tab label="User Password Change History" />
+        <Tab label="Change Password History" />
       </Tabs>
       {selectedTab.toString() === "0" ? (
         <LoginhistoryData />

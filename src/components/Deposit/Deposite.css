@@ -1,0 +1,54 @@
+.stack_valuee {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.stack_buttnn_value {
+    width: 30%;
+}
+
+/* .css-k008qs {
+    display: flex;
+    flex-wrap: wrap;
+} */
+
+.css-1ax291u {
+    background: #e0ddddfb;
+    border: none;
+    outline: none;
+    color: black;
+    width: calc(40% - 50px);
+}
+
+@media screen and (min-width:700px) and (max-width: 1024px) {
+    .lkjhgfdsa {
+        width: 25% !important;
+    }
+}
+
+@media screen and (min-width:300px) and (max-width: 700px) {
+    .lkjhgfdsa {
+        width: 35% !important;
+    }
+}
+
+.main_for_enter_amount {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.field_for_enter_amount {
+    display: flex;
+    flex-direction: row;
+}
+
+.add_btnnnnn {}
+
+.name_enter_amount {
+
+}

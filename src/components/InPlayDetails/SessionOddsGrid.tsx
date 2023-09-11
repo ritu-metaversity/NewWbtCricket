@@ -1,10 +1,13 @@
 import { FancyPnl } from "./Bet";
 import { Box, Grid } from "@mui/material";
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import { BetGridItem, redGreenComponent } from "./Bet";
 import { BetText, BetTextMedium, BetTextSmall } from "./styledComponents";
 import { BetDetailsInterface, FancyOddsInterface } from "./types";
-
+import "./Bet.css"
+// import { IoMdArrowDropdown } from "react-icons/fa";
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import "./common.css"
 interface Props {
   CurrentOdd: FancyOddsInterface[];
   PrevOdds: FancyOddsInterface[];
@@ -38,14 +41,17 @@ export const SessionOddsGrid: FC<Props> = ({
     placeTime: Date,
     priceValue: number,
     isFancy: boolean,
-    t: string
+    t: string,
+    marketName: string,
+    marketnameid: string
   ) => {
     if (odds > 0) {
       setBet(null);
     }
     setBet({
       ...bet,
-      marketName: t,
+      marketName,
+      name: t,
       isBack: isBack,
       odds: odds,
       stake,
@@ -55,94 +61,157 @@ export const SessionOddsGrid: FC<Props> = ({
       placeTime: placeTime,
       priceValue: priceValue,
       isFancy: isFancy,
+      marketnameid: marketnameid
     });
   };
+  const [show, setShow] = useState(true)
+  const handleChange = () => {
+    if (show === true) {
+      setShow(false)
+    } else {
+      setShow(true)
+    }
+  }
   return (
-    <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
-      <BetGridItem title values={["SESSION", "NOT", "YES"]} />
-      {CurrentOdd.map((item, index) => (
-        <BetGridItem
-          suspended={["suspended", "ball running"].includes(
-            item.gstatus.toLowerCase()
-          )}
-          values={[
-            <>
-              <BetTextMedium>{item?.nation}</BetTextMedium>
-              <BetTextSmall>Session Limit: 50k</BetTextSmall>
-              <Box
-                onClick={() =>
-                  (FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl ||
-                    0) &&
-                  setMarketId(item.sid)
-                }
-              >
-                {redGreenComponent(
-                  FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl || 0
-                )}
-              </Box>
-            </>,
-            <Box
-              className={
-                PrevOdds[index].b1 < item.b1
-                  ? "odds-up"
-                  : PrevOdds[index].b1 > item.b1
-                  ? "odds-down"
-                  : ""
-              }
+
+    <div className="scroll-form row">
+      <table className="table-bordered" style={{ width: "100%" }}>
+        <thead className="sessions-thead">
+          <tr className="sessions-header">
+
+            <th className="bet-place-tbl-th run-pos-rate-amt-run-mod-color sess_row_head1">
+              {/* <svg data-testid="ArrowDropUpIcon"></svg>/ */}
+              <div className="bookmakerheader">
+
+                <ArrowDropUpIcon onClick={handleChange} style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)", cursor: "pointer" }} />
+
+                <div className="_child">
+
+                  SESSION
+
+
+                </div>
+
+                {/* <a href="/terms">
+                  <span
+                    style={{
+                      float: "right",
+                      background: "rgb(255, 255, 255)",
+                      borderRadius: 15,
+                      padding: "0px 6px",
+                      color: "rgb(8, 131, 148)"
+                    }}
+                  >
+                    𝓲
+                  </span>
+                </a> */}
+              </div>
+            </th>
+            <th
+              className="bet-place-tbl-th not-box-color"
+              style={{ width: "22%" }}
             >
-              <BetText
-                onClick={() =>
-                  updateBet(
-                    true,
-                    +item.b1,
-                    0,
-                    0,
-                    item.sid,
-                    matchId.toString(),
-                    date,
-                    +item.bs1,
-                    true,
-                    item.nation
-                  )
-                }
-                color="red"
-              >
-                {item.b1}
-                <BetTextSmall>{item.bs1}</BetTextSmall>
-              </BetText>
-            </Box>,
-            <Box
-              className={
-                PrevOdds[index].l1 < item.l1
-                  ? "odds-up"
-                  : PrevOdds[index].l1 > item.l1
-                  ? "odds-down"
-                  : ""
-              }
+              NOT
+            </th>
+            <th
+              className="bet-place-tbl-th yes-box-color"
+              style={{ width: "23%" }}
             >
-              <BetText
-                onClick={() =>
-                  updateBet(
-                    false,
-                    +item.l1,
-                    0,
-                    0,
-                    item.sid,
-                    matchId.toString(),
-                    date,
-                    +item.ls1,
-                    true,
-                    item.nation
-                  )
-                }
-                color="blue"
-              >
-                {item.l1} <BetTextSmall>{item.ls1}</BetTextSmall>
-              </BetText>
-            </Box>,
-          ]}
-        />
-      ))}
-    </Grid>
+              YES
+            </th>
+          </tr>
+        </thead>
+        {show &&
+
+
+          <tbody>
+
+            {CurrentOdd.map((item, index) => (
+              <tr>
+
+
+                <td className="bet-place-tbl-td" style={{ textAlign: "left" }}>
+                  <div>
+                    <div
+                      style={{ fontWeight: 750, overflow: "hidden", fontSize: "14px" }}
+                    >
+                      {item?.nation}
+                    </div>
+                    <div style={{ fontSize: 10 }}>Session Limit : {item?.maxBet}</div>
+                    <div style={{ fontSize: 10, cursor: "pointer" }}
+                      onClick={() =>
+                        // (FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl ||
+                        // 0) &&
+                        setMarketId(item.sid)
+                      }> {redGreenComponent(
+                        FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl || 0
+                      )}</div>
+                  </div>
+                </td>
+
+                <td
+                  className={`first-runner-bet-odds-no-value cursor-pointer ${PrevOdds[index].l1 < item.l1
+                    ? "odds-up"
+                    : PrevOdds[index].l1 > item.l1
+                      ? "odds-down"
+                      : ""}`}
+                  style={{}}
+                  onClick={() =>
+                    item.l1 &&
+                    updateBet(
+                      false,
+                      +item.l1,
+                      0,
+                      0,
+                      item.sid,
+                      matchId.toString(),
+                      date,
+                      +item.ls1,
+                      true,
+                      item.nation,
+                      "Session",
+                      "NO"
+                    )
+                  }
+                >
+                  <div style={{ fontWeight: 750, fontSize: 16 }}>{item.l1}</div>
+                  <div style={{ fontSize: 10 }}>{item.ls1}</div>
+                </td>
+                <td
+                  className={`first-runner-bet-odds-yes-value cursor-pointer ${PrevOdds[index].b1 < item.b1
+                    ? "odds-up"
+                    : PrevOdds[index].b1 > item.b1
+                      ? "odds-down"
+                      : ""
+                    }`}
+                  style={{}}
+                  onClick={() =>
+                    item.b1 &&
+                    updateBet(
+                      true,
+                      +item.b1,
+                      0,
+                      0,
+                      item.sid,
+                      matchId.toString(),
+                      date,
+                      +item.bs1,
+                      true,
+                      item.nation,
+                      "Session",
+                      "YES"
+                    )
+                  }
+                >
+                  <div style={{ fontWeight: 750, fontSize: 16 }}>{item.b1}</div>
+                  <div style={{ fontSize: 10 }}>{item.bs1}</div>
+                </td>
+              </tr>
+            ))}
+          </tbody>}
+      </table>
+    </div >
+
+
   );
 };

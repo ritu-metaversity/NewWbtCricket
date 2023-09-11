@@ -2,67 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { TitleStyled } from "../../components/custom/styledComponents";
 import { userServices } from "../../utils/api/user/services";
-import { isTemplateMiddleOrTemplateTail } from "typescript";
 import { LoaderContext } from "../../App";
-
+import "./setButtonValue.css"
 const GridItemProps = {
   item: true,
   xs: 6,
   md: 3,
   sx: { textAlign: "center" },
 };
-const GridValue = [
-  {
-    title: "Button Value 1",
-    key: "stack1",
-    value: 10,
-  },
-  {
-    title: "Button Value 2",
-    key: "stack2",
-    value: 10,
-  },
-  {
-    title: "Button Value 3",
-    key: "stack3",
-    value: 10,
-  },
-  {
-    title: "Button Value 4",
-    key: "stack4",
-    value: 10,
-  },
-  {
-    title: "Button Value 5",
-    key: "stack5",
-    value: 10,
-  },
-  {
-    title: "Button Value 6",
-    key: "stack6",
-    value: 10,
-  },
-  {
-    title: "Button Value 7",
-    key: "stack7",
-    value: 10,
-  },
-  {
-    title: "Button Value 8",
-    key: "stack8",
-    value: 10,
-  },
-  {
-    title: "Button Value 9",
-    key: "stack9",
-    value: 10,
-  },
-  {
-    title: "Button Value 10",
-    key: "stack10",
-    value: 10,
-  },
-];
 const SetButtonValue = () => {
   const [buttonValue, setButtonValue] = useState<{ [x: string]: number }>({
     stack1: 0,
@@ -82,7 +29,7 @@ const SetButtonValue = () => {
     if (e.target.value < 100000000)
       setButtonValue({ ...buttons, [e.target.name]: e.target.value });
   };
-  const { loading, setLoading } = useContext(LoaderContext);
+  const { setLoading } = useContext(LoaderContext);
   useEffect(() => {
     const getButtonValue = async () => {
       setLoading && setLoading((prev) => ({ ...prev, getButtonValue: true }));
@@ -93,8 +40,8 @@ const SetButtonValue = () => {
       setLoading && setLoading((prev) => ({ ...prev, getButtonValue: false }));
     };
     getButtonValue();
-    return () => {};
-  }, []);
+    return () => { };
+  }, [setLoading]);
 
   const handleClick = async (e: any) => {
     setLoading && setLoading((prev) => ({ ...prev, SubmitButtonValue: true }));
@@ -103,34 +50,39 @@ const SetButtonValue = () => {
   };
   return (
     <Box mx="auto" my={{ sx: 0, md: 4 }}>
-      <TitleStyled variant="h4">Change Button Value</TitleStyled>
-      <Grid container rowGap={3} my={3}>
+      <TitleStyled variant="h6">Change Button Value</TitleStyled>
+      <Grid container rowGap={3} my={3} style={{
+        padding: "0px 40px 0px 0px", display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "10px",
+        flexDirection: "column"
+      }}>
         {Object.keys(buttonValue).map((item, index) => {
           return (
-            <>
-              <Grid {...GridItemProps}>
-                <Typography my={2}>{"Button Value " + (index + 1)}</Typography>
-              </Grid>
-              <Grid {...GridItemProps}>
-                <TextField
-                  onChange={handleChange}
-                  name={item}
-                  value={buttonValue[item]}
-                />
-              </Grid>
-            </>
+            <div className="main_stack">
+
+              <button className="btn_stack">{"Stack " + (index + 1)}</button>
+
+
+              <input
+                onChange={handleChange}
+                name={item}
+                value={buttonValue[item]}
+              />
+
+            </div>
           );
         })}
       </Grid>
-      <Button
-        variant="contained"
-        fullWidth
-        sx={{ p: 2, my: 2 }}
+      <button
+        className="btn_save"
         onClick={handleClick}
+        style={{ cursor: "pointer" }}
       >
         {" "}
-        Save and Submit
-      </Button>
+        Submit
+      </button>
     </Box>
   );
 };

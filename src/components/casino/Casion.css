@@ -1,0 +1,161 @@
+@media screen and (min-width: 870px) {
+    .slot_game .modal-dialog {
+        width: 100%;
+        min-width: 100% !important;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .for_Desktop {
+        display: none;
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 700px) {
+
+    .For_mobile {
+        display: none;
+    }
+}
+
+.modal_CrosssIcon {
+    position: absolute;
+    top: 14px;
+    right: 15px;
+    color: white;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.casinoName {
+    background-color: rgb(123, 124, 127);
+    margin-top: -4px;
+    border-radius: 0px 0px 3px 3px;
+    font-weight: 600;
+    color: whitesmoke;
+}
+
+.casino_main_list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    gap: 5%;
+    margin: auto;
+    row-gap: 15px;
+    justify-content: center;
+}
+
+/* .casino_inner_list {
+    width: 25%;
+} */
+
+@media screen and (min-width: 300px) and (max-width: 600px) {
+
+    .casino_inner_list {
+        width: 45% !important;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+
+    .casino_inner_list {
+        width: 20% !important;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 1024px) {
+
+    .casino_inner_list {
+        width: 28% !important;
+    }
+}
+
+.casinoGameNAame {
+    /* background-color: #0088cc; */
+    width: 100%;
+    background-image: linear-gradient(#0088cc, #2c3e50);
+    /* color: #fff;
+    padding: 5px;
+
+    width: 100%;
+
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 8px; */
+}
+
+.casino_inner_list {
+    border-radius: 4px;
+    box-shadow: 0 12px 8px -10px;
+    color: #007bff;
+    cursor: pointer;
+    margin-bottom: 25px;
+    position: relative;
+    width: 100%;
+}
+
+.casinoGameNAame {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    padding: 2px;
+    word-wrap: break-word;
+}
+
+.MuiTableContainer-root.css-nmqc57-MuiTableContainer-root {
+    height: unset !important;
+    max-height: unset;
+}
+
+.casino_modals_body {
+    background-color: #fff;
+    padding: 10px;
+    /* overflow-y: scroll;
+    height: 450px; */
+}
+
+@media screen and (min-width:500px) and (max-width:800px) {
+    .casino_modals_body {
+        background-color: #fff;
+        padding: 10px;
+        overflow-y: scroll;
+        height: 270px;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .casino_modals_body {
+        background-color: #fff;
+        padding: 10px;
+        width: 30%;
+    }
+}
+
+.modal_CrosssIcon {
+    position: absolute;
+    top: 19px;
+    right: 19px;
+    color: white;
+    font-size: 21px;
+    padding: 0px 0px 28px 60px;
+    background-color: #0f2227;
+
+}
+
+@media screen and (min-width: 870px) {
+
+    .modal_CrosssIcon {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: black !important;
+        font-size: 21px;
+        padding: unset !important;
+        background-color: unset !important;
+    }
+}

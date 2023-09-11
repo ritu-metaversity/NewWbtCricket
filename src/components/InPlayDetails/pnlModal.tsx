@@ -1,30 +1,81 @@
 import { Typography } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
-import { userServices } from "../../utils/api/user/services";
+import { inPlayDetailServices } from "../../utils/api/inplayDetails/services";
 import StickyHeadTable from "../custom/Table";
-
+import "./pnlll.css"
 interface Props {
   fancyId: string;
   matchId: string;
+  dadadada: any
 }
-const PnlModal: FC<Props> = ({ fancyId, matchId }) => {
+const PnlModal: FC<Props> = ({ fancyId, matchId, dadadada }) => {
   const [pnlBook, setPnlBook] = useState<{ odds: number; pnl: any }[]>([]);
-  const getPnlBook = async () => {
-    if (!fancyId) return;
-    const { response } = await userServices.fancyPnlBook({ fancyId, matchId });
-    if (response?.data) {
-      setPnlBook(response.data);
-    }
-  };
+
   useEffect(() => {
+    const getPnlBook = async () => {
+      if (!fancyId) return;
+      const { response } = await inPlayDetailServices.fancyPnlBook({
+        fancyId,
+        matchId,
+      });
+      if (response?.data) {
+        setPnlBook(response.data);
+      }
+    };
     getPnlBook();
     return () => {
       setPnlBook([]);
     };
-  }, [fancyId]);
+  }, [fancyId, matchId]);
 
   return (
-    <StickyHeadTable
+
+    <div className="main_for_pnl">
+      {pnlBook.length <= 0 ?
+        <div style={{ height: "30vh" }}>
+          <div style={{ color: "red" }}>No bet found</div>
+        </div>
+        :
+        <>
+       
+          <div style={{ overflow: 'hidden', width: '100%' }}>
+            <table className="" style={{ width: "100% ", border: "1px solid", overflowY: 'scroll' }}>
+              <tbody>
+                <>
+
+                  <tr >
+
+                    <td className="headerrunname">
+                      Run
+                    </td>
+                    <td className="headerrunname">
+                      Amount
+                    </td>
+                  </tr>
+                  {pnlBook?.map((item) => {
+                    return (
+
+                      <tr>
+                        <td className="headerrunnamedata">
+                          {item?.odds}
+                        </td>
+                        <td className="headerrunnamedata" >
+                          <span style={{ color: item.pnl >= 0 ? "green" : "red" }}>
+                            {item.pnl}
+                          </span>
+                        </td>
+                      </tr>)
+                  })}
+
+                </>
+              </tbody>
+
+            </table>
+          </div>
+        </>
+      }
+
+      {/* <StickyHeadTable
       title={"Run and Amount"}
       columns={[
         { id: "odds", label: "Run" },
@@ -43,7 +94,9 @@ const PnlModal: FC<Props> = ({ fancyId, matchId }) => {
         );
         return newItem;
       })}
-    />
+    /> */}
+    </div>
+
   );
 };
 

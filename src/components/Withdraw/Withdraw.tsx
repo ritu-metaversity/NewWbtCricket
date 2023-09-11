@@ -1,18 +1,18 @@
-import { WithdrawForm } from "./WithdrawForm";
 import React, { useContext, useEffect, useState } from "react";
 import { columns } from "./columns";
 import { Box } from "@mui/material";
-import { userServices } from "../../utils/api/user/services";
-import { StatusTypography } from "../Deposit";
+import { StatusTypography } from "../Deposit/Deposit";
 import StickyHeadTable from "../custom/Table";
 import { LoaderContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { selfServices } from "../../utils/api/selfWithrawDeposit/service";
+import WithDraw1 from "./WithDraw1";
 
 const Withdraw = () => {
   const nav = useNavigate();
   const [withdrawList, setWithdrawList] = useState([]);
   const getWithdrawList = async () => {
-    const { response } = await userServices.getWithdrawList();
+    const { response } = await selfServices?.getWithdrawList();
     if (response.data) {
       setWithdrawList(response.data);
     }
@@ -42,9 +42,9 @@ const Withdraw = () => {
         // backgroundColor: ,
       }}
     >
-      <Box mx={2}>
-        <WithdrawForm getWithdrawList={getWithdrawList} />
-      </Box>
+
+      <WithDraw1 />
+
 
       <StickyHeadTable
         columns={columns}

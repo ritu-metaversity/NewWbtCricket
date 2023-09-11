@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
-// import HomeLayout from "../layout/homeLayout";
 import DepositManually from "./DepositManually";
-import { userServices } from "../../utils/api/user/services";
-// import ActivityTable from "../activityLog/activityLogTable";
 import { columns } from "./columns";
-// import { colorHex } from "../../utils/constants";
 import ImageModal from "./ImageModal";
 import StickyHeaderTable from "../custom/Table";
+import { selfServices } from "../../utils/api/selfWithrawDeposit/service";
+import { LoaderContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 interface DepositListInterface {
   image: string;
@@ -24,12 +23,19 @@ const colorStatus = {
 
 const Deposit = () => {
   const [depositList, setDepositList] = useState<DepositListInterface[]>([]);
+  const nav = useNavigate();
+  const { appData } = useContext(LoaderContext);
 
+  useEffect(() => {
+    if (appData && appData?.selfAllowed === false) {
+      nav("/");
+    }
+  }, [appData]);
   const getDepositList = async () => {
-    const { response } = await userServices.getDepositList();
+    const { response } = await selfServices?.getDepositList();
     console.log(response, "deposit data");
-    if (response.data) {
-      setDepositList(response.data);
+    if (response?.data) {
+      setDepositList(response?.data);
     }
   };
   const [imageSelected, setImageSelected] = useState("");
@@ -73,9 +79,10 @@ const Deposit = () => {
                 // <a target={"_blank"} href={item.image}>
                 <img
                   onClick={() => setImageSelected(item.image)}
-                  style={{ width: 50, height: 50 }}
+                  style={{ width: 50, height: 50, cursor: "pointer" }}
                   src={item.image}
                   alt="deposit_image"
+                // style={{ cursor: "pointer" }}
                 />
                 // </a>
               );
@@ -102,6 +109,7 @@ export function StatusTypography({
         bgcolor: "#dedede",
         borderRadius: 1,
         p: 0.5,
+        margin: "auto",
         width: "min-content",
       }}
       color={colorStatus[status]}

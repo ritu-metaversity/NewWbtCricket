@@ -14,15 +14,27 @@ import { CasinoList } from "../../components/casino/Casino";
 import { SummaryCardProps } from "../../components/Inplay/SummaryCard";
 import { LoaderContext } from "../../App";
 import { sportServices } from "../../utils/api/sport/services";
+import { DatePicker, Input } from "antd";
+import moment from "moment";
+import dayjs from "dayjs";
+
 const style = {
   padding: "10px",
+
 };
 
 const inputStyle = {
   padding: "10px",
   borderRadius: "5px",
-  width: "calc(100% - 20px)",
+  width: "100%",
 };
+const inputStyle1 = {
+  padding: "10px",
+  borderRadius: "5px",
+  width: "100%",
+  color: "#000",
+  cursor: "pointer"
+}
 
 interface Props {
   formData: ProfitLossPayload;
@@ -31,7 +43,10 @@ interface Props {
   setFormData: Dispatch<SetStateAction<ProfitLossPayload>>;
 }
 
-const lableStyle = { alignSelf: "center" };
+const lableStyle = {
+  alignSelf: "center",
+  color: "#000"
+};
 
 const Filter: FC<Props> = ({
   formData,
@@ -50,7 +65,6 @@ const Filter: FC<Props> = ({
   >([]);
 
   const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
-
   const nav = useNavigate();
   const getCasinoList = async () => {
     const isSignedIn = localStorage.getItem("token");
@@ -82,11 +96,21 @@ const Filter: FC<Props> = ({
   useEffect(() => {
     if (tab === 0) {
       if (activeSportList[0]) {
-        setFormData((i) => ({ ...i, sportId: activeSportList[0].sportId }));
+        setFormData((i) => ({
+          ...i,
+          sportId: activeSportList[0].sportId.toString(),
+          matchId: "",
+          tabId: 0
+        }));
       }
     } else {
       if (casinoTypes[0]) {
-        setFormData((i) => ({ ...i, sportId: casinoTypes[0].id }));
+        setFormData((i) => ({
+          ...i, sportId: casinoTypes[0].id.toString(),
+          matchId: "",
+
+          tabId: 1
+        }));
       }
     }
   }, [tab]);
@@ -134,6 +158,26 @@ const Filter: FC<Props> = ({
     getList();
   }, [setFormData, setLoading]);
 
+  // useEffect(() => {
+  //   const getNewEvent = async () => {
+
+
+  //     setLoading && setLoading((prev) => ({ ...prev, getNewEvent: true }));
+  //     const { response } = await sportServices.activeEventFromSport(4);
+  //     console.log(formData.sportId, "jhygtfds")
+  //     if (response?.data) {
+  //       if (response?.data?.length > 0) {
+  //         setActiveEventList(response.data);
+  //         // setFormData((o) => ({ ...o, matchId: response.data[0].matchId }));
+  //       }
+  //     } else {
+  //       setActiveEventList([]);
+  //     }
+  //     setLoading && setLoading((prev) => ({ ...prev, getNewEvent: false }));
+
+  //   };
+  //   getNewEvent();
+  // }, []);
   useEffect(() => {
     const getNewEvent = async () => {
       console.log(activeSportList);
@@ -143,6 +187,7 @@ const Filter: FC<Props> = ({
       const { response } = await sportServices.activeEventFromSport(
         Number(formData.sportId)
       );
+      console.log(formData.sportId, "jhygtfds")
       if (response?.data) {
         if (response?.data?.length > 0) {
           setActiveEventList(response.data);
@@ -160,9 +205,9 @@ const Filter: FC<Props> = ({
 
   useEffect(() => {
     if (tab === 0) {
-      setFormData((o) => ({ ...o, sportId: 4 }));
+      setFormData((o) => ({ ...o, sportId: "4" }));
     } else if (tab === 1) {
-      setFormData((o) => ({ ...o, sportId: 323334 }));
+      setFormData((o) => ({ ...o, sportId: "323334" }));
     }
   }, [tab, setFormData]);
   return (
@@ -177,27 +222,29 @@ const Filter: FC<Props> = ({
             <label style={lableStyle} htmlFor="fromDate">
               From Date
             </label>
-            <input
+            <DatePicker
               style={inputStyle}
-              type="date"
-              defaultValue={formData.fromDate}
+              // type="date"
+              defaultValue={dayjs(formData?.fromDate)}
               placeholder="YYYY-MM-DD"
-              onChange={handleChange}
+              onChange={(e, v) => setFormData((prev) => ({ ...prev, fromDate: v }))}
               name="fromDate"
             />
           </Grid>
+
           <Grid item xs={6} md={2} style={style}>
             {" "}
             <label style={lableStyle} htmlFor="toDate">
               To Date
             </label>
-            <input
+            <DatePicker
               style={inputStyle}
-              type="date"
-              defaultValue={formData.toDate}
+              // type="date"
+              defaultValue={dayjs(formData.toDate)}
               placeholder="YYYY-MM-DD"
-              onChange={handleChange}
+              onChange={(e, v) => setFormData((prev) => ({ ...prev, toDate: v }))}
               name="toDate"
+
             />
           </Grid>
           <Grid item xs={6} md={2} style={style}>
@@ -205,20 +252,19 @@ const Filter: FC<Props> = ({
               {tab === 1 ? "Select Casino Type" : "Select Sport"}
             </label>
             <select
-              value={formData.sportId}
-              style={inputStyle}
+              value={Number(formData.sportId)}
+              style={inputStyle1}
               onChange={handleChange}
-              name="sportId"
-            >
-              <option value={""}>ALL</option>
+              name="sportId">
+              {/* <option value={""}> Select</option> */}
 
               {tab === 1
                 ? casinoTypes.map((casino) => (
-                    <option value={casino.id}>{casino.name}</option>
-                  ))
+                  <option value={casino.id}>{casino.name}</option>
+                ))
                 : activeSportList.map((sport) => (
-                    <option value={sport.sportId}>{sport.sportName}</option>
-                  ))}
+                  <option value={sport.sportId}>{sport.sportName}</option>
+                ))}
             </select>
           </Grid>
           <Grid item xs={6} md={2} style={style}>
@@ -227,26 +273,27 @@ const Filter: FC<Props> = ({
               {tab === 1 ? "Select Casino" : "Select Match"}
             </label>
             <select
+
               value={formData.matchId}
-              style={inputStyle}
+              style={inputStyle1}
               onChange={handleChange}
               name="matchId"
             >
-              <option value={""}>ALL</option>
+              <option value={""} style={{ color: "#000" }}>Select</option>
               {tab === 1
                 ? casinoList.map((casino) => (
-                    <option
-                      key={casino.gameId + casino.gameCode}
-                      value={casino.gameId}
-                    >
-                      {casino.gameName}
-                    </option>
-                  ))
+                  <option
+                    key={casino.gameId + casino.gameCode}
+                    value={casino.gameId}
+                    style={{ color: "#000" }}>
+                    {casino.gameName}
+                  </option>
+                ))
                 : activeEventList.map((event) => (
-                    <option key={event.matchId} value={event.matchId}>
-                      {event.matchName}
-                    </option>
-                  ))}
+                  <option key={event.matchId} value={event.matchId}>
+                    {event.matchName}
+                  </option>
+                ))}
             </select>
           </Grid>
           <Grid

@@ -47,6 +47,7 @@ export interface BetDetailsInterface {
   isFancy: boolean;
   name?: string;
   t?: string;
+  marketnameid?:string;
 }
 export interface FancyOddsInterface {
   mid: string;
@@ -58,6 +59,11 @@ export interface FancyOddsInterface {
   l1: number;
   ls1: number;
   gstatus: string;
+  maxBetRate: number;
+  minBetRate: number;
+  betDelay: number;
+  maxBet: number;
+  minBet: number;
 }
 
 export interface ProfitInterface {

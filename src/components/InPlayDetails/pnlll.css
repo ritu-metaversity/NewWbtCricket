@@ -1,0 +1,45 @@
+.main_for_pnl {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.amount_and_number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.RunandAmount {
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: gainsboro;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.headerrunname {
+    padding: 10px;
+    border: 1px solid;
+    font-weight: 500;
+}
+
+.headerrunnamedata {
+    padding: 6px;
+    border: 1px solid;
+}
+
+.main_RunandAmount {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: gainsboro;
+    width: 100%;
+    margin-bottom: 10px;
+}

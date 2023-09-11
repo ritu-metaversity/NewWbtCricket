@@ -4,11 +4,8 @@ import React, { FC, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { ImageUploadContainer } from "./styledComponents";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-
-import { userServices } from "../../utils/api/user/services";
+import { selfServices } from "../../utils/api/selfWithrawDeposit/service";
 import snackBarUtil from "../Layout/snackBarUtil";
-// import Loading from "../layout/loading";
-// import snackBarUtil from "../layout/snackBarUtil";
 
 interface Props {
   getDepositList: () => Promise<void>;
@@ -27,7 +24,7 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
 
     data.append("image", files || "");
     setLoading(true);
-    const { response } = await userServices.selfDeposit(data);
+    const { response } = await selfServices.selfDeposit(data);
     if (response) {
       setAmount(0);
       setFiles(null);
@@ -62,14 +59,24 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
               />
             ) : (
               <ImageUploadContainer>
-                <AddCircleIcon htmlColor="blue" />
+                <AddCircleIcon style={{ color: "black" }} />
                 <Typography>Click here to upload payment screenshot</Typography>
               </ImageUploadContainer>
             )}
             <input
-              onChange={(e) => e.target.files && setFiles(e.target.files[0])}
+              onChange={(e) => {
+                if (e.target.files?.length) {
+                  if (e.target.files[0]?.type.includes("image")) {
+                    setFiles(e.target.files[0]);
+                  } else {
+                    snackBarUtil.error("Only image files allowed.");
+                  }
+                }
+              }}
+              // onChange={(e) => e.target.files && setFiles(e.target.files[0])}
               type="file"
               style={{ display: "none" }}
+              accept="image/*"
             />
           </label>
           {files && (
@@ -80,6 +87,7 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
               onClick={handleSubmit}
               variant="contained"
               color="secondary"
+              style={{ backgroundColor: "#7b7c7f" }}
             >
               Submit
             </Button>

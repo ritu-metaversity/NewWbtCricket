@@ -6,8 +6,6 @@ import {
   Grid,
 } from "@mui/material";
 import React, { FC, useState } from "react";
-//   import { colorHex } from "../../utils/constants";
-//   import { AccordianSummaryTitle, TitleStyled } from "./styledComponents";
 
 interface Props {
   bets: {
@@ -28,7 +26,6 @@ const MyBet: FC<Props> = ({ bets }) => {
 
   return (
     <>
-      {/* <TitleStyled>My Bets</TitleStyled> */}
       {Object.keys(bets).map((betCategory) => (
         <Accordion
           expanded={open === betCategory}

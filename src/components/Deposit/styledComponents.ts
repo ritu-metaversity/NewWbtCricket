@@ -100,8 +100,11 @@ export const PaymentDetailContainer = emotionStyled.div`
   border: 1px solid gray;
   margin-block: 16px;
   padding: 16px;
+  width: 100%;
+
   @media (max-width: 768px) {
     padding: 8px;
+    width: 100%;
   }
 `;
 
@@ -111,7 +114,7 @@ export const SpacedBetween = emotionStyled.div`
   align-items: center;
   @media (max-width: 580px) {
 
-    font-size: 0.8rem;
+    // font-size: 0.8rem;
   } 
   
   `;

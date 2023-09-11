@@ -1,12 +1,5 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Grid,
-  Modal,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
+import moment from "moment";
 import React, {
   Dispatch,
   FC,
@@ -16,11 +9,11 @@ import React, {
   useState,
 } from "react";
 import { LoaderContext } from "../../App";
-import { sportServices } from "../../utils/api/sport/services";
+import { inPlayDetailServices } from "../../utils/api/inplayDetails/services";
 import { userServices } from "../../utils/api/user/services";
 import { BetDetailsInterface, ProfitObjectInterface } from "./types";
 
-const getDeviceType = () => {
+export const getDeviceType = () => {
   const ua = navigator.userAgent;
   if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
     return "tablet";
@@ -66,8 +59,9 @@ const BetSlip: FC<Props> = ({ bet, setBet, profits, buttonData }) => {
   const { setLoading, loading } = useContext(LoaderContext);
   async function clickHandler() {
     setLoading && setLoading((prev) => ({ ...prev, ClickButtonValue: true }));
-    const { response } = await sportServices.updateBetPlace({
+    const { response } = await inPlayDetailServices.updateBetPlace({
       ...bet,
+      placeTime: moment(bet?.placeTime).format("YYYY-MM-DD hh:mm:ss.SSS"),
       userIp,
       deviceInfo: {
         userAgent: window.navigator.userAgent,
@@ -81,6 +75,7 @@ const BetSlip: FC<Props> = ({ bet, setBet, profits, buttonData }) => {
       },
     });
     if (response) {
+      
       setBet(null);
     }
     setLoading && setLoading((prev) => ({ ...prev, ClickButtonValue: false }));
@@ -129,7 +124,15 @@ const BetSlip: FC<Props> = ({ bet, setBet, profits, buttonData }) => {
                   style={{ marginLeft: "20px" }}
                   className="MuiTypography-root MuiTypography-body1 css-33qhfi"
                 >
-                  Profit: {((bet.odds - 1) * bet.stake).toFixed(2)}
+                  Profit:
+                  {bet.isBack
+                    ? bet.isFancy
+                      ? (bet.stake * bet.priceValue) / 100
+                      : (bet.marketName === "Bookmaker"
+                        ? (bet.odds * bet.stake) / 100
+                        : (bet.odds - 1) * bet.stake
+                      ).toFixed(2)
+                    : bet.stake}
                 </p>
               </Grid>
             </Grid>
@@ -159,12 +162,12 @@ const BetSlip: FC<Props> = ({ bet, setBet, profits, buttonData }) => {
           </Box>
           {bet?.marketName === "Bookmaker"
             ? profits.Bookmaker?.filter(
-                (item) => item?.mid === bet?.marketId
-              ).map((profit) => <BetResult {...profit} />)
+              (item) => item?.mid === bet?.marketId
+            ).map((profit) => <BetResult {...profit} />)
             : bet?.marketName &&
-              profits.Odds[bet?.marketId]?.map((profit) => (
-                <BetResult {...profit} />
-              ))}
+            profits.Odds[bet?.marketId]?.map((profit) => (
+              <BetResult {...profit} />
+            ))}
         </Box>
       ) : (
         <h1>"No Bet Selected"</h1>

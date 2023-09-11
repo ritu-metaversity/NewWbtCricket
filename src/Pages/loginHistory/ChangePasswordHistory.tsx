@@ -1,22 +1,22 @@
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import moment from "moment";
-import React, { FC, useContext, useEffect } from "react";
+import React, { FC, useCallback, useContext, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { LoaderContext } from "../../App";
-import BacktoMenuButton from "../../components/BacktoMenuButton";
 import StickyHeadTable from "../../components/custom/Table";
 import { userServices } from "../../utils/api/user/services";
+import "./LoginHistory.css"
 
 export interface Column {
   id:
-    | "byUser"
-    | "action"
-    | "createdOn"
-    | "deviceInfo"
-    | "userId"
-    | "ipAddress"
-    | string;
+  | "byUser"
+  | "action"
+  | "createdOn"
+  | "deviceInfo"
+  | "userId"
+  | "ipAddress"
+  | string;
   label: string;
   minWidth?: number;
   colorCoded?: boolean;
@@ -53,25 +53,6 @@ const columns: readonly Column[] = [
   },
 ];
 
-interface Data {
-  ipAddress: string;
-  byUser: string;
-  userId: string;
-  deviceInfo: string;
-  action: string;
-  createdOn: string;
-}
-
-// function createData(
-//     ipAddress: string,
-//   lastLogin: string,
-//   userid: string,
-//   deviceInfo: string,
-// ): Data {
-
-//   return { ipAddress, lastLogin, userid, deviceInfo};
-// }
-
 const style = {
   display: "flex",
   alignItems: "center",
@@ -86,15 +67,12 @@ const inputStyle = {
   maxWidth: "200px",
 };
 export const ChnagePasswordHistory: FC<any> = () => {
-  //    let data:LoginHistoryResponse[]=logindata.logindata;
-
   const [changePasswordData, setChangePasswordData] = React.useState([]);
   const { loading, setLoading } = useContext(LoaderContext);
   const date = new Date();
   const futureDate = date.getDate() - 60;
   date.setDate(futureDate);
   const defaultValue = moment().subtract(7, "days").format("YYYY-MM-DD");
-  const current = new Date();
   const currentValue = moment().format("YYYY-MM-DD");
   const lableStyle = { alignSelf: "center" };
   const [formData, setFormData] = React.useState({
@@ -105,7 +83,7 @@ export const ChnagePasswordHistory: FC<any> = () => {
     userId: "",
   });
 
-  const getNewEvent = async () => {
+  const getNewEvent = useCallback(async () => {
     // if (changePasswordData.length) return;
     setLoading &&
       setLoading((prev) => ({ ...prev, getNewEventChangePassword: true }));
@@ -119,11 +97,11 @@ export const ChnagePasswordHistory: FC<any> = () => {
     } else {
       return;
     }
-  };
+  }, [formData, setLoading]);
 
   useEffect(() => {
     getNewEvent();
-  }, [formData]);
+  }, [getNewEvent]);
   function handleChange(event: { target: { name: any; value: any } }) {
     setFormData((preState) => {
       return {
@@ -138,60 +116,51 @@ export const ChnagePasswordHistory: FC<any> = () => {
         <>
           <form style={style}>
             <Grid container>
-              <Grid item xs={6} md={3} style={style}>
-                <label style={lableStyle} htmlFor="fromDate">
-                  From Date
-                </label>
-                <input
-                  style={inputStyle}
-                  type="date"
-                  defaultValue={formData.fromDate}
-                  placeholder="YYYY-MM-DD"
-                  onChange={handleChange}
-                  name="fromDate"
-                />
-              </Grid>
-              <Grid item xs={6} md={3} style={style}>
-                {" "}
-                <label style={lableStyle} htmlFor="toDate">
-                  To Date
-                </label>
-                <input
-                  style={inputStyle}
-                  type="date"
-                  defaultValue={formData.toDate}
-                  placeholder="YYYY-MM-DD"
-                  onChange={handleChange}
-                  name="toDate"
-                />
-              </Grid>
-              {/* <Grid item xs={6} md={3} style={style}>
-                {" "}
-                <label style={lableStyle} htmlFor="type">
-                  Type
-                </label>
-                <select style={inputStyle} onChange={getNewEvent} name="type">
-                  <option selected value="1">
-                    ALL
-                  </option>
-                  <option value="2">Deposit/Withdarw Report</option>
-                  <option value="3">Game Report</option>
-                </select>
-              </Grid> */}
-              {/* <button type="button" onClick={getNewEvent} style={{}}>
-                Search
-              </button> */}
+              <div className="date_time">
+                <div className="time_input">
+                  <div className="from_date">
 
-              <Grid item xs={6} md={3} style={style}>
-                <Button
+                    <label style={lableStyle} htmlFor="fromDate">
+                      From Date
+                    </label>
+                    <input
+                      style={inputStyle}
+                      type="date"
+                      defaultValue={formData.fromDate}
+                      placeholder="YYYY-MM-DD"
+                      onChange={handleChange}
+                      name="fromDate"
+                    />
+                  </div>
+
+                  {" "}
+                  <div className="from_date">
+
+                    <label style={lableStyle} htmlFor="toDate">
+                      To Date
+                    </label>
+                    <input
+                      style={inputStyle}
+                      type="date"
+                      defaultValue={formData.toDate}
+                      placeholder="YYYY-MM-DD"
+                      onChange={handleChange}
+                      name="toDate"
+                    />
+                  </div>
+                </div>
+
+                <button
                   // fullWidth
+                  className="button_datetime"
                   type="button"
-                  variant="contained"
+                  // variant="contained"
                   onClick={getNewEvent}
                 >
                   search
-                </Button>
-              </Grid>
+                </button>
+              </div>
+
               {/* <label style={lableStyle} htmlFor="noOfRecords">No Of Rows</label>
         <select style={inputStyle} onChange={handleChange} name="noOfRecords">
           <option selected value="1">10</option>
@@ -209,9 +178,11 @@ export const ChnagePasswordHistory: FC<any> = () => {
           />
         </>
       ) : (
-        <Typography mt="15vh" variant="h4" color="error">
-          {"No Data Found"}
-        </Typography>
+        !loading.getNewEventChangePassword && (
+          <Typography mt="15vh" variant="h4" color="error">
+            {"No Data Found"}
+          </Typography>
+        )
       )}
     </Box>
   );

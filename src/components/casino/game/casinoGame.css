@@ -3,7 +3,7 @@
 }
 
 .mobile_if {
-  height: calc(100vh - 10px);
+  height: calc(100vh - 110px);
   /* position: absolute; */
   top: 0;
   left: 0;
@@ -23,15 +23,17 @@
   /* height: 2000px; */
   /* margin-top: -9rem; */
 }
+
 @media (min-width: 900px) {
   .desktop_if {
     /* margin-top: -8.5rem; */
     height: calc(100vh - 1rem);
   }
 }
+
 @media (min-width: 1024px) {
   .desktop_if {
     /* margin-top: -6.9rem; */
-    height: calc(100vh - 3rem);
+    height: calc(100vh - 110px);
   }
 }

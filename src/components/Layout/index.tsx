@@ -1,9 +1,14 @@
 import { Box } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { Dispatch, FC, SetStateAction, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 import Headers from "./Headers";
 
-const Layout = () => {
+interface Props {
+  isSignedIn: boolean;
+  setIsSignedIn: Dispatch<SetStateAction<boolean>>;
+}
+const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -12,14 +17,30 @@ const Layout = () => {
     }
   }, []);
   return (
-    <div>
-      <header>
-        <Headers />
+    <Box
+      // height={"100vh"}
+      width={"100vw"}
+      sx={{ overflowX: "hidden" }}
+      display="flex"
+      flexDirection={"column"}
+    >
+      <header >
+        <Headers setIsSignedIn={setIsSignedIn} />
       </header>
-      <Box py={2} m="auto" boxSizing={"content-box"} maxWidth={{ xs:"100vw", sm: "lg" }}>
-        <Outlet />
+      <Box
+        py={2}
+        flex={1}
+        m="auto"
+        boxSizing={"content-box"}
+        width="100%"
+        bgcolor="#e9e9e9"
+        paddingBottom={{ xs: "50px", sm: "50px", }}
+        maxWidth={{ xs: "100vw", sm: "lg", }}
+
+      >
+        {(isSignedIn || localStorage.getItem("passwordType") === "old") && <Outlet />}
       </Box>
-    </div>
+    </Box>
   );
 };
 

@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material";
 import React, { useState } from "react";
 import Dialog from "../custom/Dialog";
 import {
@@ -9,8 +8,8 @@ import {
 
 const titleComponent = (
   <>
-    <HeaderStyle>Welcome to</HeaderStyle>
-    <HeaderStyle>Bet95</HeaderStyle>
+    <HeaderStyle>Welcome to {window.location.hostname}</HeaderStyle>
+
   </>
 );
 
@@ -24,7 +23,7 @@ const WelcomeDialog = () => {
     <Dialog
       sx={{ mt: "-280px" }}
       titlSD={titleComponent}
-      actions={actionComponent}
+      // actions={actionComponent}
       // sx={{ bgcolor:  }}
       open={open}
       PaperProps={{ sx: { maxWidth: "80%" } }}

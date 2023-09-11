@@ -1,0 +1,134 @@
+.home_icon {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.logoimg {
+    width: 100px;
+    display: flex;
+}
+
+.logo-name {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px;
+    width: 100%;
+    /* margin-left: -10px; */
+}
+
+.desktop_logogogo {
+    width: 120px;
+}
+
+/* padding: 0px 42px; */
+@media screen and (min-width: 900px) {
+    .mobile_logogoggo {
+        display: none;
+    }
+
+    .desktop_logogogo {
+        width: 140px;
+    }
+
+}
+
+.css-c7k0wg {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    margin-right: 20px;
+    width: 60%;
+}
+
+@media screen and (min-width: 900px) and (max-width: 1200px) {
+    .desktop_logogogo {
+        width: 100px;
+    }
+
+}
+
+.css-1yo9slo-MuiToolbar-root {
+    padding-left: unset;
+
+}
+
+.home_btn {
+
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+    padding: 12px;
+
+}
+
+.home_lable {
+    font-weight: 600;
+}
+
+.header_chips_expo {
+    /* padding: 4px; */
+    background: rgb(255, 255, 255);
+    text-align: center;
+    /* margin: 12px 0px; */
+    font-size: 13px;
+}
+
+@media (min-width: 800px) {
+
+    .css-1yo9slo-MuiToolbar-root {
+        min-height: unset !important;
+    }
+
+    .header_chips_expo {
+        padding: 4px;
+        background: rgb(255, 255, 255);
+        text-align: center;
+        /* margin: 12px 0px; */
+        font-size: 13px;
+    }
+
+    .main_header {
+        margin: 0px 0px 21px;
+    }
+}
+
+
+.header_inner {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0px 5px 0px 0px;
+}
+
+.inner_chips {
+    padding: 4px;
+}
+
+.css-7e0s21-MuiPaper-root-MuiAppBar-root {
+
+    box-shadow: unset !important
+}
+
+.Username_chip {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+}

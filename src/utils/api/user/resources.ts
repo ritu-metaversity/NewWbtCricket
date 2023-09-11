@@ -1,30 +1,14 @@
 import { ApiResource } from "../apiService";
-type resourceKeys = "LOGIN" | "SIGN_UP";
+
 export const userResources: {
   [x: string]: ApiResource;
 } = {
   GET_IP_ADDRESS: {
-    URL: "https://api.ipify.org/?format=json",
+    URL: "https://oddsapi.247idhub.com/betfair_api/my-ip",
     METHOD: "GET",
-  },
-  USER_INFO: {
-    URL: "user/full-user",
-    METHOD: "GET",
-  },
-  USER: {
-    URL: "user/:id",
-    METHOD: "GET",
-  },
-  USER_UPDATE: {
-    URL: "user",
-    METHOD: "PUT",
   },
   GET_WALLET: {
     URL: "enduser/get-user-balance",
-    METHOD: "POST",
-  },
-  MAKE_TRANSACTION: {
-    URL: "transaction",
     METHOD: "POST",
   },
   UPDATE_BUTTON_VALUE: {
@@ -55,7 +39,6 @@ export const userResources: {
     URL: "/enduser/profile",
     METHOD: "POST",
   },
-
   USER_STATEMENT: {
     URL: "/enduser/account-statement",
     METHOD: "POST",
@@ -68,48 +51,8 @@ export const userResources: {
     URL: "/enduser/settled-bet",
     METHOD: "POST",
   },
-  BET_SPORTS_FOR_LIST: {
-    URL: "/sport/active-sport-list",
-    METHOD: "POST",
-  },
-  BET_MATCH_FOR_LIST: {
-    URL: "/sport/event-detail-sport-wise",
-    METHOD: "POST",
-  },
-  TEST_API: {
-    URL: "http://89.39.105.69:9001/betfairodds/1.207796438",
-    METHOD: "GET",
-  },
-  SELF_WITHDRAW: {
-    URL: "enduser/self-withdraw-app",
-    METHOD: "POST",
-  },
-  SELF_DEPOSIT: {
-    URL: "enduser/self-deposit-app",
-    METHOD: "POST",
-  },
-  PAYMENT_DETAILS: {
-    URL: "enduser/get-paymnet-detail-app-id-wise",
-    METHOD: "POST",
-  },
-  WITHDRAW_LIST: {
-    URL: "enduser/withdraw-request-client",
-    METHOD: "POST",
-  },
-  DEPOSIT_LIST: {
-    URL: "enduser/depsosit-request-client",
-    METHOD: "POST",
-  },
-  IS_SELF: {
-    URL: "login/is-self-by-app-url",
-    METHOD: "POST",
-  },
   PROFIT_LOSS: {
     URL: "report/profit-loss-match-wise",
-    METHOD: "POST",
-  },
-  PNL_BOOK: {
-    URL: "enduser/user-fancy-book",
     METHOD: "POST",
   },
 };

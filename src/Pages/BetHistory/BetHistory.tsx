@@ -1,21 +1,20 @@
 import { Box } from "@mui/system";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { userServices } from "../../utils/api/user/services";
 import StickyTable from "../../components/custom/TableWithoutPagination";
 import TablePagination from "@mui/material/TablePagination";
-import { getValue } from "@testing-library/user-event/dist/utils";
 import { LoaderContext } from "../../App";
-
+import "./BetHistory.css"
 export interface Column {
   id:
-    | "sportName"
-    | "eventName"
-    | "marketname"
-    | "nation"
-    | "rate"
-    | "amount"
-    | "time"
-    | string;
+  | "sportName"
+  | "eventName"
+  | "marketname"
+  | "nation"
+  | "rate"
+  | "amount"
+  | "time"
+  | string;
   label: string;
   minWidth?: number;
   align?: "right" | "center";
@@ -41,6 +40,7 @@ const columns: readonly Column[] = [
     label: "Market Name",
     minWidth: 20,
     align: "center",
+
   },
   {
     id: "nation",
@@ -52,16 +52,14 @@ const columns: readonly Column[] = [
     id: "rate",
     label: "User Rate",
     minWidth: 20,
-    align: "right",
+    align: "center",
   },
-  { id: "amount", label: "Amount", align: "right", minWidth: 120 },
+  { id: "amount", label: "Amount", align: "center", minWidth: 120 },
   { id: "time", label: "Place Date", align: "center", minWidth: 120 },
 ];
 
 const BetHistory = () => {
-  const [index, setPage] = React.useState(0);
   const [countPage, setCount] = React.useState();
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const [formData, setFormData] = React.useState({
     sportType: 1,
@@ -77,7 +75,7 @@ const BetHistory = () => {
   // const [matchList, setMatchList]= React.useState<MatchListResponse[]>([]);
 
   const [accountStatement, setAccountStatement] = React.useState([]);
-  const { loading, setLoading } = useContext(LoaderContext);
+  const { setLoading } = useContext(LoaderContext);
 
   useEffect(() => {
     const getList = async () => {
@@ -92,33 +90,14 @@ const BetHistory = () => {
       setLoading && setLoading((prev) => ({ ...prev, bethistory: false }));
     };
     getList();
-  }, [formData]);
-
-  // useEffect(() => {
-  //   const getSportList = async () => {
-  //     const { response } = await userServices.getSportsForList();
-  //     if (response?.data) {
-  //       setSportsList(response.data)
-  //     }
-  //   };
-  //   getSportList();
-  // }, []);
-
-  // useEffect(() => {
-  //   if(!sportsId) return;
-  //   const getMatchList = async () => {
-  //     const { response } = await userServices.getMatchForList(sportsId!);
-  //     if (response?.data) {
-  //       setMatchList(response.data)
-  //     }
-  //   };
-  //   getMatchList();
-  // }, [sportsId]);
+  }, [formData, setLoading]);
+  console.log(accountStatement, "iuyghuy");
 
   function handleChange(event: { target: { name: any; value: any } }) {
     setFormData((preState) => {
       return {
         ...preState,
+        index: 0,
         [event.target.name]: event.target.value,
       };
     });
@@ -142,17 +121,9 @@ const BetHistory = () => {
     });
   };
 
-  const inputStyle = {
-    padding: "10px",
-    borderRadius: "5px",
-    marginRight: " 8px",
-    width: "100%",
-    maxWidth: "200px",
-    minWidth: "100px",
-  };
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
-      <form style={{ display: "inline-flex", padding: "10px" }}>
+      <form style={{ display: "inline-flex", padding: "10px", gap: "3px" }}>
         <input
           type="radio"
           id="all"
@@ -160,6 +131,7 @@ const BetHistory = () => {
           name="betType"
           value="1"
           onChange={handleChange}
+          style={{ cursor: "pointer" }}
         />
         <label htmlFor="all">All</label>
         <br />
@@ -170,6 +142,7 @@ const BetHistory = () => {
           value="2"
           checked={formData.betType === "2"}
           onChange={handleChange}
+          style={{ cursor: "pointer" }}
         />
         <label htmlFor="back">Lagai</label>
         <br />
@@ -180,17 +153,19 @@ const BetHistory = () => {
           value="3"
           checked={formData.betType === "3"}
           onChange={handleChange}
+          style={{ cursor: "pointer" }}
         />
         <label htmlFor="lay">Khayi</label>
         <br />
 
-        <input
-          style={{ marginLeft: "30px" }}
+        {/* <input
+
           type="radio"
           id="all"
           checked={formData.isDeleted === "false"}
           name="isDeleted"
           value="false"
+          className="seprate_data"
           onChange={handleChange}
         />
         <label htmlFor="all">Matched</label>
@@ -204,7 +179,7 @@ const BetHistory = () => {
           onChange={handleChange}
         />
         <label htmlFor="back">Deleted</label>
-        <br />
+        <br /> */}
       </form>
       <StickyTable
         // rows={accountStatement}
@@ -216,14 +191,14 @@ const BetHistory = () => {
           return value;
         })}
         columns={columns}
-        title={"Current Bets"}
+        title={"Bet History"}
         noOfRecords={formData.noOfRecords}
         totalPage={countPage}
       />
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={countPage ? countPage * formData.noOfRecords : -1}
+        count={countPage ? countPage * formData.noOfRecords : 0}
         rowsPerPage={formData.noOfRecords}
         page={formData.index}
         onPageChange={handleChangePage}

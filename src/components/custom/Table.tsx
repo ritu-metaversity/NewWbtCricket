@@ -7,13 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Typography,
-} from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { Column } from "../../Pages/Ledger/Ledger";
 import {
   TableCellText,
@@ -30,8 +24,8 @@ interface StickyHeadTableProps {
   columns: readonly Column[];
   result?: string | React.ReactElement;
   accordion?: boolean;
-  noOfRecords?:number;
-  
+  noOfRecords?: number;
+
 }
 const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
   title,
@@ -40,7 +34,7 @@ const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
   result,
   accordion,
   noOfRecords,
-  
+
 }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(noOfRecords ? noOfRecords : 10);
@@ -64,7 +58,12 @@ const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
             <TitleStyled>{title}</TitleStyled>
           </AccordionSummary>
           <AccordionDetails>
-            <TableContainer sx={{ maxHeight: "70vh", width: "100%" }}>
+            <TableContainer
+              sx={{
+                // maxHeight: "70vh",
+                width: "100%",
+              }}
+            >
               <Tables
                 columns={columns}
                 rows={rows}
@@ -83,7 +82,12 @@ const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
       ) : (
         <>
           <TitleStyled>{title}</TitleStyled>
-          <TableContainer sx={{ maxHeight: "70vh", width: "100%" }}>
+          <TableContainer
+            sx={{
+              // maxHeight: "70vh",
+              width: "100%",
+            }}
+          >
             <Tables
               columns={columns}
               rows={rows}
@@ -125,6 +129,8 @@ export function Tables({
   page: number;
   rowsPerPage: number;
 }) {
+  console.log(rows, "row");
+
   return (
     <Table
       stickyHeader
@@ -138,7 +144,7 @@ export function Tables({
       <TableHead>
         <TableRow
           sx={{
-           
+
             width: "100%",
           }}
         >
@@ -163,15 +169,15 @@ export function Tables({
       <TableBody>
         {rows
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-          .map((row: any,index:number) => {
+          .map((row: any, index: number) => {
             return (
               <TableRow
                 // hover
                 style={{
-                  borderLeft:row.border
+                  borderLeft: row.border
                 }}
                 sx={{
-                  bgcolor:row.color,
+                  bgcolor: row.color,
                   width: "100%",
                 }}
                 role="checkbox"
@@ -184,6 +190,7 @@ export function Tables({
                     <TableCell
                       key={column.id}
                       align={column.align}
+
                       sx={{
                         // border: "0.01px solid #d9d9d9",
                         p: 1,
@@ -206,6 +213,28 @@ export function Tables({
               </TableRow>
             );
           })}
+        {
+          rows
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)?.length <= 0 &&
+
+          <TableRow
+            // hover
+
+            sx={{
+
+              width: "100%",
+            }}
+            role="checkbox"
+            tabIndex={-1}
+
+          >
+            <TableCell colSpan={7}>
+              <TableCellText textAlign="center" color="red">
+                No Data Found
+              </TableCellText>
+            </TableCell>
+          </TableRow>
+        }
       </TableBody>
     </Table>
   );

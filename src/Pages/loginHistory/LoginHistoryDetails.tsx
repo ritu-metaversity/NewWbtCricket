@@ -1,13 +1,13 @@
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { FC, useContext, useEffect } from "react";
-import BacktoMenuButton from "../../components/BacktoMenuButton";
+import React, { FC, useCallback, useContext, useEffect } from "react";
 import StickyHeadTable from "../../components/custom/Table";
 import { LoginHistoryResponse } from "./LoginHistory";
 import { userServices } from "../../utils/api/user/services";
 import { LoaderContext } from "../../App";
 import moment from "moment";
 import { Button } from "react-bootstrap";
+import "./LoginHistory.css"
 
 export interface Column {
   id: "ip" | "lastLogin" | "user" | "deviceInfo" | string;
@@ -34,23 +34,6 @@ const columns: readonly Column[] = [
     align: "center",
   },
 ];
-
-interface Data {
-  ip: string;
-  lastLogin: Date;
-  userid: string;
-  deviceInfo: string;
-}
-
-function createData(
-  ip: string,
-  lastLogin1: string,
-  userid: string,
-  deviceInfo: string
-): Data {
-  var lastLogin = new Date(lastLogin1);
-  return { ip, lastLogin, userid, deviceInfo };
-}
 
 export interface HistoryPayload {
   fromDate: string;
@@ -84,7 +67,6 @@ export const LoginhistoryData: FC<any> = () => {
   const futureDate = date.getDate() - 60;
   date.setDate(futureDate);
   const defaultValue = moment().subtract(7, "days").format("YYYY-MM-DD");
-  const current = new Date();
   const currentValue = moment().format("YYYY-MM-DD");
 
   const [formData, setFormData] = React.useState({
@@ -95,7 +77,7 @@ export const LoginhistoryData: FC<any> = () => {
     userId: "",
   });
 
-  const getNewEvent = async () => {
+  const getNewEvent = useCallback(async () => {
     setLoading && setLoading((prev) => ({ ...prev, loginHistory: true }));
     const formDAta: any = { ...formData };
     formDAta.fromDate = moment(formData.fromDate).format("DD-MM-YYYY");
@@ -110,19 +92,12 @@ export const LoginhistoryData: FC<any> = () => {
       setLoginHistory([]);
     }
     setLoading && setLoading((prev) => ({ ...prev, loginHistory: false }));
-  };
+  }, [formData, setLoading]);
 
   useEffect(() => {
     getNewEvent();
-  }, [formData]);
+  }, [getNewEvent]);
 
-  // const dateChange = loginHistory.filter((c) =>{
-  //   c.lastLogin === new Date(c.lastLogin);
-  //   return {
-  //     ...loginHistory,
-  //     loginHistory.lastLogin=dateChange
-  //   }
-  // }
   function handleChange(event: { target: { name: any; value: any } }) {
     setFormData((preState) => {
       return {
@@ -138,60 +113,51 @@ export const LoginhistoryData: FC<any> = () => {
         <>
           <form style={style}>
             <Grid container>
-              <Grid item xs={6} md={3} style={style}>
-                <label style={lableStyle} htmlFor="fromDate">
-                  From Date
-                </label>
-                <input
-                  style={inputStyle}
-                  type="date"
-                  defaultValue={formData.fromDate}
-                  placeholder="YYYY-MM-DD"
-                  onChange={handleChange}
-                  name="fromDate"
-                />
-              </Grid>
-              <Grid item xs={6} md={3} style={style}>
-                {" "}
-                <label style={lableStyle} htmlFor="toDate">
-                  To Date
-                </label>
-                <input
-                  style={inputStyle}
-                  type="date"
-                  defaultValue={formData.toDate}
-                  placeholder="YYYY-MM-DD"
-                  onChange={handleChange}
-                  name="toDate"
-                />
-              </Grid>
-              {/* <Grid item xs={6} md={3} style={style}>
-                {" "}
-                <label style={lableStyle} htmlFor="type">
-                  Type
-                </label>
-                <select style={inputStyle} onChange={getNewEvent} name="type">
-                  <option selected value="1">
-                    ALL
-                  </option>
-                  <option value="2">Deposit/Withdarw Report</option>
-                  <option value="3">Game Report</option>
-                </select>
-              </Grid> */}
-              {/* <button type="button" onClick={getNewEvent} style={{}}>
-                Search
-              </button> */}
+              <div className="date_time">
+                <div className="time_input">
+                  <div className="from_date">
 
-              <Grid item xs={6} md={3} style={style}>
-                <Button
+                    <label style={lableStyle} htmlFor="fromDate">
+                      From Date
+                    </label>
+                    <input
+                      style={inputStyle}
+                      type="date"
+                      defaultValue={formData.fromDate}
+                      placeholder="YYYY-MM-DD"
+                      onChange={handleChange}
+                      name="fromDate"
+                    />
+                  </div>
+
+                  {" "}
+                  <div className="from_date">
+
+                    <label style={lableStyle} htmlFor="toDate">
+                      To Date
+                    </label>
+                    <input
+                      style={inputStyle}
+                      type="date"
+                      defaultValue={formData.toDate}
+                      placeholder="YYYY-MM-DD"
+                      onChange={handleChange}
+                      name="toDate"
+                    />
+                  </div>
+                </div>
+
+                <button
                   // fullWidth
+                  className="button_datetime"
                   type="button"
-                  variant="contained"
+                  // variant="contained"
                   onClick={getNewEvent}
                 >
                   search
-                </Button>
-              </Grid>
+                </button>
+              </div>
+
               {/* <label style={lableStyle} htmlFor="noOfRecords">No Of Rows</label>
         <select style={inputStyle} onChange={handleChange} name="noOfRecords">
           <option selected value="1">10</option>
@@ -209,14 +175,11 @@ export const LoginhistoryData: FC<any> = () => {
           />
         </>
       ) : (
-        <Typography mt="15vh" variant="h4" color="error">
-          {"No Data Found"}
-        </Typography>
-        // <StickyHeadTable
-        //   rows={loginHistory}
-        //   columns={columns}
-        //   title={"Login History"}
-        // />
+        !loading.loginHistory && (
+          <Typography mt="15vh" variant="h4" color="error">
+            {"No Data Found"}
+          </Typography>
+        )
       )}
     </Box>
   );

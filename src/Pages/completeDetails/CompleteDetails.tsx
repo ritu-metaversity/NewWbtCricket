@@ -1,5 +1,4 @@
 import { Typography } from "@mui/material";
-import { blue } from "@mui/material/colors";
 import { Box } from "@mui/system";
 import React from "react";
 import BetRecord from "../../components/completedDetails/BetRecord";

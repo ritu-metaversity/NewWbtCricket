@@ -1,12 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  Button,
-  Paper,
-  Theme,
-  Typography,
-  TypographyProps,
-  TypographyTypeMap,
-} from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 const HeaderStyleProps: any = {

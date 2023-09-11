@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import { BetText, BetTextMedium, BetTextSmall } from "./styledComponents";
 import "./custom.css";
 import { BetGridItem, redGreenComponent } from "./Bet";
@@ -8,6 +8,10 @@ import {
   FancyOddsInterface,
   ProfitInterface,
 } from "./types";
+import "./Bet.css"
+import { TitleStyled } from "../custom/styledComponents";
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import AllMatch from "./AllMatch";
 
 const BookMakerOddsgrid: FC<{
   CurrentOdd: FancyOddsInterface[];
@@ -31,7 +35,9 @@ const BookMakerOddsgrid: FC<{
     priceValue: number,
     isFancy: boolean,
     marketName: string,
-    name: string
+    name: string,
+    marketnameid: string,
+
   ) => {
     if (odds <= 0) {
       setBet(null);
@@ -49,50 +55,155 @@ const BookMakerOddsgrid: FC<{
       placeTime: placeTime,
       priceValue: priceValue,
       isFancy: isFancy,
-      name,
+      marketnameid: marketnameid
+
     });
   };
-
+  const [show, setShow] = useState(true)
+  const handleChange = () => {
+    if (show === true) {
+      setShow(false)
+    } else {
+      setShow(true)
+    }
+  }
   return (
-    <>
-      <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
-        <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
-        {CurrentOdd.map((item) => (
-          <BetGridItem
-            suspended={["suspended", "ball running"].includes(
-              item.gstatus.toLowerCase()
-            )}
-            values={[
-              <>
-                <BetTextMedium>{item?.nation}</BetTextMedium>
-                <BetTextSmall>Session Limit: 50k</BetTextSmall>
-                {redGreenComponent(
-                  profits?.find((profit) => profit?.sid === item.sid)?.value
-                )}
-              </>,
-              <BetText
-                onClick={() =>
-                  updateBet(
-                    true,
-                    +item.b1,
 
-                    item.sid,
-                    item.mid,
-                    matchId,
-                    date,
-                    +item.b1,
-                    false,
-                    item.t,
-                    item.nation
-                  )
-                }
-                color="red"
+
+
+
+
+    <div>
+      <div className="scroll-form oddsTable row" style={{ fontSize: 14 }}>
+        <table className="table-bordered" style={{ width: "100%" }}>
+          <thead>
+            <tr>
+
+              <th
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktoptableheadSize"
+
               >
-                {item.b1}
-                <BetTextSmall>{item.bs1}</BetTextSmall>
-              </BetText>,
-              <BetText
-                onClick={() =>
+                <div className="bookmakerheader">
+
+                  <ArrowDropUpIcon style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)", cursor: "pointer" }} onClick={handleChange} />
+
+                  {/* {/* {CurrentOdd.map((item) => (
+                  <> */}
+                  <div className="_child">
+                    Min:{CurrentOdd[0]?.minBet}{" "}
+                    Max:{CurrentOdd[0]?.maxBet}
+                  </div>
+                </div>
+
+              </th>
+              <th
+                className="bet-place-tbl-th lagai-box-color desktop desktopSize"
+
+              >
+
+              </th>
+              <th
+                className="bet-place-tbl-th lagai-box-color desktop desktopSize"
+
+              >
+
+              </th>
+              <th
+                className="bet-place-tbl-th lagai-box-color desktopSize"
+
+              >
+                LAGAI
+              </th>
+              <th
+                className="bet-place-tbl-th khai-box-color desktopSize"
+
+              >
+                KHAI
+              </th>
+              <th
+                className="bet-place-tbl-th khai-box-color desktop desktopSize"
+
+              >
+
+              </th>
+              <th
+                className="bet-place-tbl-th khai-box-color desktop desktopSize"
+
+              >
+
+              </th>
+              <th
+                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktopSize"
+
+              >
+                POS.
+              </th>
+            </tr>
+          </thead>
+
+          {show && <tbody>
+            {CurrentOdd.map((item: any) => (
+              <tr>
+
+                <td
+                  className="bet-place-tbl-td "
+                  style={{ textAlign: "left", padding: 10, fontWeight: 750 }}
+                >
+                  {item?.nation}
+                  {/* <div>
+                    <span>{redGreenComponent(
+                      profits?.find((profit) => profit?.sid === item.sid)?.value
+                    )}</span>
+                  </div> */}
+                  {console.log(item, "kuhgbjkiuytfgcvbnj")}
+                </td>
+
+                <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
+                  fontSize: "16px",
+                  fontWeight: 750,
+                  color: "#5957ff"
+                }}
+                >
+                  <span>0</span>
+                </td>
+                <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
+                  fontSize: "16px",
+                  fontWeight: 750,
+                  color: "#5957ff"
+                }}
+                >
+                  <span>0</span>
+                </td>
+                <td className="bet-place-tbl-td cursor-pointer desktopSize" style={{
+                  fontSize: "16px",
+                  fontWeight: 750,
+                  color: "#5957ff"
+                }}
+
+                  onClick={() =>
+                    updateBet(
+                      true,
+                      +item.b1,
+
+                      item.sid,
+                      item.mid,
+                      matchId,
+                      date,
+                      +item.b1,
+                      false,
+                      item.t,
+                      item.nation,
+                      "LAGAI"
+
+                    )
+                  }>
+                  <span>{item.b1}</span>
+                </td>
+                <td className="bet-place-tbl-td cursor-pointer desktopSize" style={{
+                  fontSize: "16px",
+                  fontWeight: 750,
+                  color: "#ff5c72"
+                }} onClick={() =>
                   updateBet(
                     false,
                     +item.l1,
@@ -104,18 +215,49 @@ const BookMakerOddsgrid: FC<{
                     +item.l1,
                     false,
                     item.t,
-                    item.nation
+                    item.nation,
+                    "KHAI"
                   )
-                }
-                color="blue"
-              >
-                {item.l1} <BetTextSmall>{item.ls1}</BetTextSmall>
-              </BetText>,
-            ]}
-          />
-        ))}
-      </Grid>
-    </>
+                }>
+                  <span>{item.l1}</span>
+                </td>
+                <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
+                  fontSize: "16px",
+                  fontWeight: 750,
+                  color: "#ff5c72"
+                }} >
+                  <span>0</span>
+                </td>
+                <td className="bet-place-tbl-td cursor-pointer desktopSize desktop" style={{
+                  fontSize: "16px",
+                  fontWeight: 750,
+                  color: "#ff5c72"
+                }} >
+                  <span>0</span>
+                </td>
+                <td
+                  className="bet-place-tbl-td desktopSize"
+                  // style={{ color: "rgb(81, 153, 230)" }}
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: 750
+                  }}
+                >
+                  {redGreenComponent(
+                    profits?.find((profit) => profit?.sid === item.sid)?.value
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>}
+        </table>
+      </div>
+
+    </div >
+
+
+
+
   );
 };
 
