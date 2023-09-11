@@ -104,7 +104,7 @@ const Casino = () => {
       // navigate(`/m/casino/${val}`);
     } else {
       // navigate("/m/login");
-      // setCasionId(val)
+      // setCasionId(val) 
       // setTrueee(true)
     }
   };
