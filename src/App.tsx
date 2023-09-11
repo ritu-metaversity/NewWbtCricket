@@ -39,6 +39,7 @@ import { selfServices } from "./utils/api/selfWithrawDeposit/service";
 import { ImCross } from "react-icons/im";
 import { ToastContainer } from "react-toastify";
 import StatusIndicator from "./StatusIndicator";
+import axios from "axios";
 
 
 interface LoadingType {
@@ -119,7 +120,22 @@ function App() {
     getSelfAllowed();
   }, [isSignedIn]);
   console.log(window.location.pathname.includes("sign-in"), "gdhsdtgfas");
+  useEffect(() => {
+    let appUrll = window.location.hostname;
 
+    axios
+      .post(
+        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        { appUrl: appUrll }
+      )
+      .then((res) => {
+        var link: any = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        link.href = res.data.data.favicon;
+        document.getElementsByTagName('head')[0].appendChild(link);
+      })
+  }, []);
   return (
     <LoaderContext.Provider
       value={{ loading, appData, isSignedIn, setLoading }}
