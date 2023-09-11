@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { inPlayDetailServices } from '../../utils/api/inplayDetails/services';
 import "./UnSeletdBets.css"
 
-const UnSeletdBets = ({ betRecord, completedMatches }) => {
-    console.log(completedMatches, "completedMatches")
+const UnSeletdBets = ({ betRecord, completedMatches, completedDetallll }) => {
+    console.log(completedDetallll[0]?.netpnl, "completedMatches")
 
     // useEffect(() => {
     //     const getList = async () => {
@@ -105,6 +105,7 @@ const UnSeletdBets = ({ betRecord, completedMatches }) => {
                                                     <td className="bet-place-tbl-td runs-2-value-box-color">{item?.amount}</td>
                                                     <td className="bet-place-tbl-td runs-2-value-box-color">{item?.back === true ? "YES" : "NO"}</td>
                                                 </tr>
+
                                             </>
                                         )
                                     )}
@@ -124,7 +125,7 @@ const UnSeletdBets = ({ betRecord, completedMatches }) => {
                         className="bet-place-tbl-th"
                         style={{ background: "rgb(42, 54, 59)", width: "100%" }}
                     >
-                        COMPLETED FANCY BETS
+                        COMPLETED BETS
                     </div>
                     <table
                         className="table table-responsive table-bordered table_COMPLETED"
@@ -144,58 +145,66 @@ const UnSeletdBets = ({ betRecord, completedMatches }) => {
                         </thead>
                         <tbody>
                             {completedMatches?.length > 0 ?
-                                Object.values(completedMatches).map((item) => {
-                                    return (
+                                <>
+                                    {completedMatches.map((item) => {
+                                        return (
+                                            <>
 
-                                        <tr style={{ width: "100%" }}>
-                                            <td className="bet-place-tbl-td">
-                                                1
-                                            </td>
-                                            <td className="bet-place-tbl-td">
-                                                {item?.time}
-                                                {console.log(item, "dkiuygvbnk")}
-                                            </td>
-                                            <td className="bet-place-tbl-td">
-                                                1
-                                            </td>
-                                            <td className="bet-place-tbl-td">
-                                                {item?.rate}
-                                            </td>
-                                            <td className="bet-place-tbl-td">
-                                                1
-                                            </td>
-                                            <td className="bet-place-tbl-td">
-                                                {item?.price}
-                                            </td>
-                                            <td className="bet-place-tbl-td">
-                                                1
-                                            </td>
-                                            <td className="bet-place-tbl-td" style={{ color: item?.pnl > 0 ? "green" : "red" }}>
-                                                {item?.pnl}
-                                            </td>
+                                                <tr style={{ width: "100%" }}>
+                                                    <td className="bet-place-tbl-td">
+                                                        {item?.runner
+                                                        }
+                                                    </td>
+                                                    <td className="bet-place-tbl-td">
+                                                        {item?.date}
+                                                        {console.log(item, "dkiuygvbnk")}
+                                                    </td>
+                                                    <td className="bet-place-tbl-td">
+                                                        {item?.run}
+                                                    </td>
+                                                    <td className="bet-place-tbl-td">
+                                                        {item?.rate}
+                                                    </td>
+                                                    <td className="bet-place-tbl-td">
+                                                        {item?.result}
+                                                    </td>
+                                                    <td className="bet-place-tbl-td">
+                                                        {item?.amount}
+                                                    </td>
+                                                    <td className="bet-place-tbl-td">
+                                                        {item?.isback === true ? "YES" : "NO"}
+                                                    </td>
+                                                    <td className="bet-place-tbl-td" style={{ color: item?.netpnl > 0 ? "green" : "red" }}>
+                                                        {item?.pnl}
+                                                    </td>
 
-                                        </tr>
+                                                </tr>
 
-                                    )
-                                }
-                                )
+                                            </>
+                                        )
+                                    }
+                                    )}
+                                    < tr colSpan={7}>
+                                        <td colSpan={6} className="bet-place-tbl-td">
+                                            Total Plus Minus
+                                        </td>
+                                        <td colSpan={1} className="bet-place-tbl-td" style={{ color: completedDetallll[0]?.netpnl > 0 ? "green" : "red" }}>
+                                            {completedDetallll[0]?.netpnl}
+                                        </td>
+
+                                    </tr>
+                                </>
                                 :
 
                                 <tr style={{ width: "100%", fontWeight: 650 }}><td class="bet-place-tbl-td" colspan="8">No Bets Available</td></tr>
                             }
-
-
-
-
-
-
 
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        </div>
+        </div >
     </>
 
     )

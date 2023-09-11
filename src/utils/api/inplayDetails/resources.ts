@@ -27,5 +27,9 @@ export const inPlayDetailResources: { [x: string]: ApiResource } = {
     URL: "enduser/bet-list-history",
     METHOD: "POST",
   },
+  fetch_client_completed_fancy: {
+    URL: "bmx/fetch-client-completed-fancy",
+    METHOD: "POST",
+  },
 
 };

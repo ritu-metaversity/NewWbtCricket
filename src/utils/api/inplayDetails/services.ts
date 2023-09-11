@@ -21,6 +21,13 @@ export const inPlayDetailServices = {
     };
     return apiHandler(params);
   },
+  CompletedBetsonBetpage: (data: any) => {
+    const params: ApiServiceInterface = {
+      resource: inPlayDetailResources.fetch_client_completed_fancy,
+      data
+    };
+    return apiHandler(params);
+  },
   updateBetPlace: (data: any) => {
     const params: ApiServiceInterface = {
       resource: inPlayDetailResources.PLACE_BET,

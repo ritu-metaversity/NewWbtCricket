@@ -11,21 +11,24 @@ const Completedandlivematch = ({ event, sportsId }) => {
     const [allGame, setAllGames] = useState({})
     const [searchParams] = useSearchParams();
     const [completedMatches, setCompletedMatches] = useState({})
+    const [completedDetallll, setCompletedDetalll] = useState({})
     const date = new Date();
     const futureDate = date.getDate() - 60;
     date.setDate(futureDate);
     const defaultValue = moment().subtract(7, "days").format("YYYY-MM-DD");
     const currentValue = moment().format("YYYY-MM-DD");
-    console.log(defaultValue, currentValue, "iuytfvbhjuytfvb")
+
+    const eventId = searchParams.get("event-id");
+    console.log(eventId, "iuytfvbhjuytfvb")
     useEffect(() => {
         const getList = async () => {
             // setLoading && setLoading((prev) => ({ ...prev, getListdata: true }));
-            const { response } = await inPlayDetailServices.betListHistory(
-                { "sportId": sportsId, "fromDate": defaultValue, "toDate": currentValue, "index": 0, "noOfRecords": 100, "isdeleted": false }
+            const { response } = await inPlayDetailServices.CompletedBetsonBetpage(
+                { "matchId": eventId }
             );
             if (response?.data) {
-                setCompletedMatches(response.data?.dataList?.filter(item => item.matchId === event))
-                // setCompletedMatches(response.data?.dataList)
+                setCompletedMatches(response.data?.data)
+                setCompletedDetalll(response.data?.totalplusminus)
             }
         };
         getList();
@@ -74,9 +77,7 @@ const Completedandlivematch = ({ event, sportsId }) => {
 
     return (
         <>
-            <UnSeletdBets betRecord={betRecord} completedMatches={completedMatches} />
-
-
+            <UnSeletdBets betRecord={betRecord} completedMatches={completedMatches} completedDetallll={completedDetallll} />
             {allGame?.data && Object.values(allGame?.data).map((item) => {
                 if (item.matchId !== event) {
 

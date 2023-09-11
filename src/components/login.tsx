@@ -45,6 +45,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
         password,
         // appUrl: host === "localhost" ? "localhost" : "localhost",
         appUrl: host === "localhost" ? "localhost" : host,
+        // appUrl: "247idhub.com",
       };
       const { response } = await authServices.login(data);
       console.log(response, "loadinggg")
