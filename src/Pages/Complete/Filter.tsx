@@ -199,9 +199,11 @@ const Filter: FC<Props> = ({
       setLoading && setLoading((prev) => ({ ...prev, getNewEvent: false }));
     };
     if (tab === 0) {
+      console.log("huihiuhiu");
+
       getNewEvent();
     }
-  }, [formData.sportId, setFormData, setLoading]);
+  }, [formData.sportId, activeSportList.length, setFormData, setLoading]);
 
   useEffect(() => {
     if (tab === 0) {
@@ -210,6 +212,7 @@ const Filter: FC<Props> = ({
       setFormData((o) => ({ ...o, sportId: "323334" }));
     }
   }, [tab, setFormData]);
+
   return (
     <>
       <Tabs value={tab} sx={{ m: 2 }} onChange={(e, value) => setTab(value)}>
