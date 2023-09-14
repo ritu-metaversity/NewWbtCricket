@@ -125,7 +125,8 @@ const UnSeletdBets = ({ betRecord, completedMatches, completedDetallll }) => {
                         className="bet-place-tbl-th"
                         style={{ background: "rgb(42, 54, 59)", width: "100%" }}
                     >
-                        COMPLETED BETS
+                        <span>COMPLETED BETS</span>
+
                     </div>
                     <table
                         className="table table-responsive table-bordered table_COMPLETED"
@@ -134,12 +135,12 @@ const UnSeletdBets = ({ betRecord, completedMatches, completedDetallll }) => {
                         <thead>
                             <tr>
                                 <th className="bet-place-tbl-th">RUNNER</th>
-                                <th className="bet-place-tbl-th">DATE</th>
-                                <th className="bet-place-tbl-th">RUN</th>
-                                <th className="bet-place-tbl-th">RATE</th>
+                                {/*<th className="bet-place-tbl-th">DATE</th> */}
+                                {/* <th className="bet-place-tbl-th">RUN</th> */}
+                                {/*<th className="bet-place-tbl-th">RATE</th> */}
                                 <th className="bet-place-tbl-th">RESULT</th>
                                 <th className="bet-place-tbl-th">AMOUNT</th>
-                                <th className="bet-place-tbl-th">MODE</th>
+                                {/*<th className="bet-place-tbl-th">MODE</th> */}
                                 <th className="bet-place-tbl-th">P&amp;L</th>
                             </tr>
                         </thead>
@@ -155,25 +156,30 @@ const UnSeletdBets = ({ betRecord, completedMatches, completedDetallll }) => {
                                                         {item?.runner
                                                         }
                                                     </td>
-                                                    <td className="bet-place-tbl-td">
-                                                        {item?.date}
-                                                        {console.log(item, "dkiuygvbnk")}
-                                                    </td>
-                                                    <td className="bet-place-tbl-td">
+                                                    {/* 
+                                                    // <td className="bet-place-tbl-td">
+                                                       // {item?.date}
+                                                     //   {console.log(item, "dkiuygvbnk")}
+                                                   // </td>
+                                                */}
+                                                    {/*   <td className="bet-place-tbl-td">
                                                         {item?.run}
                                                     </td>
+                                                     
                                                     <td className="bet-place-tbl-td">
                                                         {item?.rate}
                                                     </td>
+                                                 */}
                                                     <td className="bet-place-tbl-td">
                                                         {item?.result}
                                                     </td>
                                                     <td className="bet-place-tbl-td">
                                                         {item?.amount}
                                                     </td>
-                                                    <td className="bet-place-tbl-td">
+                                                    {/*  <td className="bet-place-tbl-td">
                                                         {item?.isback === true ? "YES" : "NO"}
                                                     </td>
+                                                     */}
                                                     <td className="bet-place-tbl-td" style={{ color: item?.netpnl > 0 ? "green" : "red" }}>
                                                         {item?.pnl}
                                                     </td>
@@ -184,8 +190,8 @@ const UnSeletdBets = ({ betRecord, completedMatches, completedDetallll }) => {
                                         )
                                     }
                                     )}
-                                    < tr colSpan={7}>
-                                        <td colSpan={6} className="bet-place-tbl-td">
+                                    < tr colSpan={4}>
+                                        <td colSpan={3} className="bet-place-tbl-td">
                                             Total Plus Minus
                                         </td>
                                         <td colSpan={1} className="bet-place-tbl-td" style={{ color: completedDetallll[0]?.netpnl > 0 ? "green" : "red" }}>

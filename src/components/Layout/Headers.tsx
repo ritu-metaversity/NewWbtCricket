@@ -281,7 +281,9 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
 
               }
 
-              <li > <Link to="/account-summary" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>MY LEDGER</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/profit-and-loss" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>PROFIT AND LOSS</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/Account_Statement_Page" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>ACCOUNT STATEMENT</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/my-ledger-Page" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>MY LEDGER</p>  <span><FaArrowRight /></span>   </Link></li>
               {/* <li > <Link to="/login-history" onClick={() => setDrawerOpen(false)}><p><span><AiOutlineHistory /></span>LOGIN HISTORY</p>  <span><FaArrowRight /></span>   </Link></li> */}
               <li > <Link to="/current-bet" onClick={() => setDrawerOpen(false)}><p><span><MdSportsScore /></span>CURRENT BET</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/bet-history" onClick={() => setDrawerOpen(false)}><p><span><MdWorkHistory /></span>BET HISTORY</p>  <span><FaArrowRight /></span>   </Link></li>
@@ -373,7 +375,17 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
             <Avatar /> Profile
           </MenuItem>
         </Link>
-        <Link to="/account-summary">
+        <Link to="/profit-and-loss">
+          <MenuItem>
+            <AttachMoneyIcon /> Profit and loss
+          </MenuItem>
+        </Link>
+        <Link to="/my-ledger-Page">
+          <MenuItem>
+            <AttachMoneyIcon /> My ladger
+          </MenuItem>
+        </Link>
+        <Link to="/Account_Statement_Page">
           <MenuItem>
             <AttachMoneyIcon /> Account Statement
           </MenuItem>

@@ -1,5 +1,5 @@
 import { Grid, GridProps } from "@mui/material";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import './Home.css'
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { Link, Outlet } from "react-router-dom";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import axios from "axios";
 
 interface ActionCardProps {
   cardTitle: string;
@@ -90,10 +91,10 @@ const ActionCardPropsList = [
     cardForwardHref: "/current-bet",
   },
   {
-    cardTitle: "My Ledger",
+    cardTitle: "Profit and Loss",
     cardDesc: "check your history, wins and rewards",
     cardImageSrc: "/myledger6.png",
-    cardForwardHref: "/account-summary",
+    cardForwardHref: "/profit-and-loss",
   },
 
 
@@ -115,6 +116,27 @@ const Home = () => {
     justifyContent: "center",
     display: "flex",
   };
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   let data = {
+  //     startDate: "2023-08-14",
+  //     endDate: "2023-09-13",
+  //     index: 0,
+  //     noOfRecords: 100
+  //   }
+  //   axios.post(
+  //     'https://api.247365.exchange/admin-new-apis/bmx/report/get-my-ledger', data,
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+
+  //     }
+  //   ).then((res) => {
+  //     console.log(res?.data, "sdfsdfsdfsd");
+  //   })
+  // }, [])
 
   return (
     <div className="main_container" >

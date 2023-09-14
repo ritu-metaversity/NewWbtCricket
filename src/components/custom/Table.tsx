@@ -69,7 +69,7 @@ const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
                 rows={rows}
                 page={page}
                 rowsPerPage={rowsPerPage}
-                // value={value}
+              // value={value}
               />
               {result && (
                 <TableResultContainer textAlign={"center"}>
@@ -93,7 +93,7 @@ const StickyHeadTable: React.FC<StickyHeadTableProps> = ({
               rows={rows}
               page={page}
               rowsPerPage={rowsPerPage}
-              // value={value}
+            // value={value}
             />
             {result && (
               <TableResultContainer textAlign={"center"}>

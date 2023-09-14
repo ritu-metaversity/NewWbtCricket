@@ -55,4 +55,8 @@ export const userResources: {
     URL: "report/profit-loss-match-wise",
     METHOD: "POST",
   },
+  ACCOUNT_STATEMENT: {
+    URL: "enduser/account-statement",
+    METHOD: "POST",
+  }
 };

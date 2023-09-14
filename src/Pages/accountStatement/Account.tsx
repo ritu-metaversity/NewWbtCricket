@@ -164,7 +164,7 @@ const Account = () => {
           <thead>
             <tr>
               <th colSpan={5} className="bet-place-tbl-th market_type_row ">
-                MY LEDGER
+                PROFIT AND LOSS
               </th>
             </tr>
           </thead>
