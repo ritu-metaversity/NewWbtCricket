@@ -1,0 +1,85 @@
+.pandloss_maindiv {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.pandloss_maindivDate_contamer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.padddddd {
+    padding: 10px !important;
+    font-size: 14px;
+}
+
+.pandloss_maindiv_Date {}
+
+.bttnttttntntn {
+    border-radius: 5px;
+    padding: 5px 40px;
+    background-color: #babbbd;
+    border: 1px solid;
+    /* color: white; */
+}
+
+.content-top-padding.row {
+    overflow: scroll;
+}
+
+.content-top-padding {
+    width: 100%;
+}
+
+.Account_statement_type_and_search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0px 13px;
+}
+
+
+.Account_statement_Selector {
+    padding: 6px;
+    border-radius: 5px;
+    width: 85%;
+    color: rgb(81, 79, 79);
+    font-size: 15px;
+    width: 47%;
+}
+
+.Account_statement_Selector_search {
+    padding: 6px;
+    border-radius: 5px;
+    width: 85%;
+    color: rgb(81, 79, 79);
+    font-size: 15px;
+    width: 42%;
+}
+
+.search_new_datatatat {
+    padding: 7px 75px;
+    border-radius: 5px;
+    width: 85%;
+    color: #514f4f;
+    font-size: 15px;
+}
+
+@media screen and (max-width :1024px) {
+    .search_new_datatatat {
+        padding: 7px 57px;
+        border-radius: 5px;
+        width: 85%;
+        color: #514f4f;
+        font-size: 15px;
+    }
+}

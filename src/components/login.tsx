@@ -96,6 +96,31 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
         Setselfsignup(res?.data?.data?.selfAllowed);
       });
   }, []);
+
+  const handleDemoAccount = () => {
+    // setLoadingLogin(true)
+
+    axios
+      .post(
+        "https://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
+        { appUrl: window.location.hostname }
+      )
+      .then((response) => {
+        if (response?.data?.token) {
+          axios.defaults.headers.common.Authorization = `Bearer ${response?.data?.token}`
+          localStorage.setItem("token", response?.data?.token);
+          localStorage.setItem("userid", response?.data?.userId);
+          localStorage.setItem("passwordType", response?.data?.passwordtype);
+          localStorage.setItem("userTypeInfo", response?.data?.userTypeInfo);
+
+          setIsSignedIn(true);
+          setShow(true)
+          // setLoadingLogin(false)
+          navigate("/terms", { replace: true });
+        } else {
+        }
+      })
+  }
   return (
     <div className="loginBackground new-login-content ">
       <div className="logo-img">
@@ -138,6 +163,10 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
           {/* </div> */}
         </form>
 
+        <button className="login_loginnn" onClick={handleDemoAccount}>
+          <span> Login with demo ID</span>
+          <LoginIcon style={{ rotate: "180deg", fontSize: "18px" }} />
+        </button>
         {selfsignup === true ?
 
           // <div className="login_main" onClick={handleSign}>

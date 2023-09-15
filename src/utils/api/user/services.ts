@@ -123,4 +123,11 @@ export const userServices = {
     };
     return await apiWithErrorSnackbar(params);
   },
+  AccountStatement: async (data: ProfitLossPayload) => {
+    const params = {
+      resource: userResources.ACCOUNT_STATEMENT,
+      data,
+    };
+    return await apiWithErrorSnackbar(params);
+  },
 };

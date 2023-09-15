@@ -40,6 +40,8 @@ import { ImCross } from "react-icons/im";
 import { ToastContainer } from "react-toastify";
 import StatusIndicator from "./StatusIndicator";
 import axios from "axios";
+import ProfitAndLossPageeee from "./Pages/profitAndLoss/ProfitAndLossPageeee";
+import AccountStatementNewDushyant from "./Pages/accountStatementNewDushyant/AccountStatementNewDushyant";
 
 
 interface LoadingType {
@@ -210,7 +212,9 @@ function App() {
                 <Route path="my-ledger" element={<Ledger />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="set-button-value" element={<SetButtonValue />} />
-                <Route path="account-summary" element={<Account />} />
+                <Route path="profit-and-loss" element={<Account />} />
+                <Route path="my-ledger-Page" element={<ProfitAndLossPageeee />} />
+                <Route path="Account_Statement_Page" element={<AccountStatementNewDushyant />} />
                 <Route path="login-history" element={<LoginHistory />} />
                 <Route path="bet-history" element={<BetHistory />} />
                 <Route path="current-bet" element={<CurrentBet />} />
