@@ -98,7 +98,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
   }, []);
 
   const handleDemoAccount = () => {
-    setLoadingLogin(true)
+    // setLoadingLogin(true)
 
     axios
       .post(
@@ -115,7 +115,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
 
           setIsSignedIn(true);
           setShow(true)
-          setLoadingLogin(false)
+          // setLoadingLogin(false)
           navigate("/terms", { replace: true });
         } else {
         }
