@@ -70,7 +70,7 @@ const ActionCardPropsList = [
     cardTitle: "Statement",
     cardDesc: "matches that are completed and the results are declared",
     cardImageSrc: "/complete2.png",
-    cardForwardHref: "/complete-games",
+    cardForwardHref: "/Account_Statement_Page",
   },
   {
     cardTitle: "Change Password",

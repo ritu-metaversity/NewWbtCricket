@@ -46,6 +46,7 @@ import Virtualcasino from "./components/casino/VirtualCasino/Virtualcasino";
 import VirtualCasinoPage from "./components/casino/VirtualCasino/VirtualCasinoPage";
 import LiveCasionList from "./components/casino/LiveCasino/LiveCasionList";
 import LiveCasionGamePage from "./components/casino/LiveCasino/LiveCasionGamePage";
+import IndianCasinoPage from "./components/casino/IndianCasinoPage";
 
 
 interface LoadingType {
@@ -231,6 +232,7 @@ function App() {
               </Route>
               <Route path="virtual-casino-game" element={<VirtualCasinoPage />} />
               <Route path="Live-casino-game" element={<LiveCasionGamePage />} />
+              <Route path="india-casino-game" element={<IndianCasinoPage />} />
 
             </Routes>
           </main>

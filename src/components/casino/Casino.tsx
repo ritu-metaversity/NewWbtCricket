@@ -36,9 +36,10 @@ const Casino = () => {
       name: string;
     }[]
   >([]);
+  // const navigate = useNavigate();
 
   const [casinoList, setCasinoList] = useState<CasinoList[]>([]);
-  const [trueee, setTrueee] = useState(false);
+  // const [trueee, setTrueee] = useState(false);
   const [casionId, setCasionId] = useState("")
   const nav = useNavigate();
   const getCasinoList = async () => {
@@ -89,7 +90,8 @@ const Casino = () => {
   const handleClose = () => setConfirmPopup(false);
 
   const handleAgree = () => {
-    setTrueee(true)
+    nav("/india-casino-game", { state: casionId })
+    // setTrueee(true)
     setConfirmPopup(false)
 
   }
@@ -180,43 +182,7 @@ const Casino = () => {
           </div>
         </Box>
       </Modal>
-      <Modal
-        open={trueee}
-        onClose={() => setTrueee(false)}
-        style={{ padding: "17px", overflow: "scroll" }}
-        // m="xl"
-        className="slot_game"
-      >
-        {/* <Box className="bet-box"> */}
 
-        <>
-          <div className="modal_CrosssIcon">
-            <RxCross2 onClick={() => setTrueee(false)} />
-          </div>
-          <iframe
-            src={`https://d.fawk.app/#/splash-screen/${token}/9482/?opentable=${casionId}`}
-            // height="82vh"
-            // className="mobile_if"
-            width="100%"
-            style={{ minHeight: "100vh" }}
-            title="mobile"
-            className="for_Desktop"
-            allowFullScreen={true}
-          ></iframe>
-          <iframe
-            src={`https://m.fawk.app/#/splash-screen/${token}/9482/?opentable=${casionId}`}
-            // height="82vh"
-            // className="mobile_if"
-            width="100%"
-            style={{ minHeight: "90vh" }}
-            title="mobile"
-            className="For_mobile"
-            allowFullScreen={true}
-
-          ></iframe>
-        </>
-        {/* </Box> */}
-      </Modal>
     </>
   );
 };

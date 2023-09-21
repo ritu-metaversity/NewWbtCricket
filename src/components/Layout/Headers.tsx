@@ -377,12 +377,12 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
         </Link>
         <Link to="/profit-and-loss">
           <MenuItem>
-            <AttachMoneyIcon /> Profit and loss
+            <AttachMoneyIcon /> Profit and Loss
           </MenuItem>
         </Link>
         <Link to="/my-ledger-Page">
           <MenuItem>
-            <AttachMoneyIcon /> My ladger
+            <AttachMoneyIcon /> My Ledger
           </MenuItem>
         </Link>
         <Link to="/Account_Statement_Page">

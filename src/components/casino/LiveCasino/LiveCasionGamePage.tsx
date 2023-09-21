@@ -5,11 +5,29 @@ import { IoMdArrowRoundBack } from 'react-icons/io'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { isMobile, isBrowser } from "react-device-detect";
 import "./LiveCasionGamePage.css"
+import { userServices } from '../../../utils/api/user/services';
 const LiveCasionGamePage = () => {
   const { state } = useLocation()
   const TokenId = localStorage.getItem("token");
   let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
   const [gameLobbyUrl, setGameLobbyUrl] = useState("")
+  const [walletBalance, setWalletbalance] = useState();
+  const [walletLibality, setWalletlibality] = useState();
+
+  useEffect(() => {
+    const getWallet = async () => {
+      const { response } = await userServices.wallet();
+      if (response?.data) {
+
+        setWalletbalance(response.data?.balance);
+        setWalletlibality(response.data?.libality);
+      }
+    };
+    localStorage.getItem("passwordType") === "new" && getWallet();
+    const timer = setInterval(() => localStorage.getItem("passwordType") === "new" && getWallet(), 5000);
+
+    return () => clearInterval(timer);
+  }, []);
 
 
   const navigate = useNavigate();
@@ -123,6 +141,8 @@ const LiveCasionGamePage = () => {
             Back
           </span>
         </button>
+        <span>Chips: {Number(walletBalance).toFixed(2)}</span>
+        <span>Expo : <span style={{ color: "red" }}>{Number(walletLibality).toFixed(2)}</span></span>
       </div>
 
       <iframe
