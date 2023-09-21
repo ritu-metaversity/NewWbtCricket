@@ -5,37 +5,37 @@ import "./LiveCasionList.css"
 import cassionimg from "../casino.png"
 import { useEffect } from "react";
 import axios from "axios";
-
+import Qtech from "./qtechlogo.png"
 
 export const casinoProviderList = [
   {
     name: "EVOLUTION",
     logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/5.png",
-    gameCode: "Qtech",
+    gameCode: "EVO-dhp",
     filterType: "EVO",
   },
   {
     name: "VIVO GAMING",
     logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/21.png",
-    gameCode: "Qtech",
+    gameCode: "VGL-bulgariaroulette",
     filterType: "VGL",
   },
   {
     name: "EZUGI",
     logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/1.png",
-    gameCode: "Qtech",
+    gameCode: "EZU-32cards",
     filterType: "EZU",
   },
-  {
-    name: "BGAMING",
-    logo: "https://global-uploads.webflow.com/63b2c230b49fa188ad86ffec/63f4c9689497e0d7c32f4a31_BGaming_logo.svg",
-    gameCode: "Qtech",
-    filterType: "BGM",
-  },
+  // {
+  //   name: "BGAMING",
+  //   logo: "https://global-uploads.webflow.com/63b2c230b49fa188ad86ffec/63f4c9689497e0d7c32f4a31_BGaming_logo.svg",
+  //   gameCode: "Qtech",
+  //   filterType: "BGM",
+  // },
   {
     name: "SKY WIND",
     logo: "https://skywindgroup.com/assets/site/images/skywind_white.svg",
-    gameCode: "Qtech",
+    gameCode: "SWL-atomroulette",
 
     filterType: "SWL",
   },
@@ -66,7 +66,7 @@ export const casinoProviderList = [
   {
     name: " EBET",
     logo: "https://ebet.gg/wp-content/uploads/2022/05/EBET-logo.png",
-    gameCode: "Qtech",
+    gameCode: "EBT-fortunewheel",
     filterType: "EBT",
   },
   {
@@ -77,7 +77,7 @@ export const casinoProviderList = [
   },
   {
     name: "Q Tech",
-    logo: "https://agbrief.com/wp-content/uploads/2021/11/qtech-games.jpg",
+    logo: Qtech,
     gameCode: "Qtech",
     filterType: "SPB",
   }

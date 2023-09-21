@@ -1,35 +1,36 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { RxCross2 } from 'react-icons/rx'
-import "./Virtualcasino.css"
+import "./IndianCasinoPage.css"
 import { IoMdArrowRoundBack } from 'react-icons/io'
-import { userServices } from '../../../utils/api/user/services'
+import { userServices } from '../../utils/api/user/services'
 
-const VirtualCasinoPage = () => {
+const IndianCasinoPage = () => {
     const { state } = useLocation()
-    const TokenId = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
+
     const navigate = useNavigate();
     const handleBackToVCasion = () => {
-        navigate("/virtual-casino")
+        navigate("/casino")
     }
     const [walletBalance, setWalletbalance] = useState();
     const [walletLibality, setWalletlibality] = useState();
-  
+
     useEffect(() => {
-      const getWallet = async () => {
-        const { response } = await userServices.wallet();
-        if (response?.data) {
-  
-          setWalletbalance(response.data?.balance);
-          setWalletlibality(response.data?.libality);
-        }
-      };
-      localStorage.getItem("passwordType") === "new" && getWallet();
-      const timer = setInterval(() => localStorage.getItem("passwordType") === "new" && getWallet(), 5000);
-  
-      return () => clearInterval(timer);
+        const getWallet = async () => {
+            const { response } = await userServices.wallet();
+            if (response?.data) {
+
+                setWalletbalance(response.data?.balance);
+                setWalletlibality(response.data?.libality);
+            }
+        };
+        localStorage.getItem("passwordType") === "new" && getWallet();
+        const timer = setInterval(() => localStorage.getItem("passwordType") === "new" && getWallet(), 5000);
+
+        return () => clearInterval(timer);
     }, []);
-    console.log(state, "dsfdfdsf");
+    console.log(state, "dasdasdasdasdasd");
     return (
         <div className='main_div_for_back_and_game'>
             <div className='main_back'>
@@ -46,7 +47,7 @@ const VirtualCasinoPage = () => {
             </div>
 
             <iframe
-                src={`${state?.desktopIframe}?id=${TokenId}`}
+                src={`https://d.fawk.app/#/splash-screen/${token}/9482/?opentable=${state}`}
                 // height="82vh"
                 // className="mobile_if"
                 width="100%"
@@ -56,11 +57,11 @@ const VirtualCasinoPage = () => {
                 allowFullScreen={true}
             ></iframe>
             <iframe
-                src={`${state?.mobIframe}?id=${TokenId}`}
+                src={`https://m.fawk.app/#/splash-screen/${token}/9482/?opentable=${state}`}
                 // height="82vh"
                 // className="mobile_if"
                 width="100%"
-                style={{ minHeight: "100vh" }}
+                style={{ minHeight: "90vh" }}
                 title="mobile"
                 className="For_mobile"
                 allowFullScreen={true}
@@ -70,4 +71,4 @@ const VirtualCasinoPage = () => {
     )
 }
 
-export default VirtualCasinoPage
+export default IndianCasinoPage
