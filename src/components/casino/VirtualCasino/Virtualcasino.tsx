@@ -28,7 +28,6 @@ const Virtualcasino = () => {
     axios
       .post(
 
-
         "http://13.250.53.81/VirtualCasinoBetPlacer/vc/casino-game-list",
         data,
         {

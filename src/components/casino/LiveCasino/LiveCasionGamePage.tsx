@@ -8,7 +8,7 @@ import "./LiveCasionGamePage.css"
 const LiveCasionGamePage = () => {
   const { state } = useLocation()
   const TokenId = localStorage.getItem("token");
-  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+  let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
   const [gameLobbyUrl, setGameLobbyUrl] = useState("")
 
 
@@ -40,7 +40,7 @@ const LiveCasionGamePage = () => {
       axios
 
         .post(
-          `${REACT_APP_API_URL}/api/qtech/gamelobby`,
+          `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelobby`,
           data,
           {
             headers: {
@@ -81,7 +81,7 @@ const LiveCasionGamePage = () => {
       axios
 
         .post(
-          `${REACT_APP_API_URL}/api/qtech/gamelink`,
+          `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelink`,
           data,
           {
             headers: {

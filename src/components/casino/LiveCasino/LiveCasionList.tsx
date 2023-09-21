@@ -89,7 +89,7 @@ export const casinoProviderList = [
 const LiveCasionList = () => {
   const navigate = useNavigate();
   const TokenId = localStorage.getItem("token");
-  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+  let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
   const handleChangeaa = (val: any) => {
     console.log(val, "djfisfsd");
 
@@ -105,7 +105,7 @@ const LiveCasionList = () => {
     ) {
       axios
         .post(
-          `${REACT_APP_API_URL}/api/qtech/authentication`,
+          `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
           {},
           {
             headers: {
@@ -139,7 +139,7 @@ const LiveCasionList = () => {
   useEffect(() => {
     axios
       .post(
-        `${REACT_APP_API_URL}/api/qtech/authentication`,
+        `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
         {},
         {
           headers: {

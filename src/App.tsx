@@ -224,7 +224,7 @@ function App() {
                 <Route path="current-bet" element={<CurrentBet />} />
                 <Route path="casino" element={<Casino />} />
                 <Route path="live-casino" element={<LiveCasionList />} />
-                <Route path="virtual-casino" element={<Virtualcasino />} />
+                {/* <Route path="virtual-casino" element={<Virtualcasino />} /> */}
                 <Route path="casino/:id" element={<CasinoGame />} />
                 <Route path="terms" element={<Terms show={welcomePopup} setShow={setWelcomePopup} />} />
                 <Route path="password-change" element={<ChangePassword setIsSignedIn={setIsSignedIn} />} />

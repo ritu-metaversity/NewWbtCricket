@@ -104,12 +104,12 @@ const ActionCardPropsList = [
     cardImageSrc: "/casionnewlogo.png",
     cardForwardHref: "/casino",
   },
-  {
-    cardTitle: "Our Casino",
-    cardDesc: "Play online Our casino",
-    cardImageSrc: "/casionnewlogo.png",
-    cardForwardHref: "/virtual-casino",
-  },
+  // {
+  //   cardTitle: "Our Casino",
+  //   cardDesc: "Play online Our casino",
+  //   cardImageSrc: "/casionnewlogo.png",
+  //   cardForwardHref: "/virtual-casino",
+  // },
   {
     cardTitle: "International Casino",
     cardDesc: "Play online international casino",
