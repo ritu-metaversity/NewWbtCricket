@@ -91,7 +91,7 @@ const LiveCasionGamePage = () => {
         lang: "en_IN",
         mode: "real",
         device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
-        returnUrl: "https://playindia.app",
+        returnUrl: `${window.location.hostname}/Live-casino`,
         token: state?.item2,
         walletSessionId: TokenId
       }
