@@ -5,6 +5,38 @@
     }
 }
 
+.back_icon path {
+    /* stroke-width: 80px; */
+}
+
+.back_icon {
+    font-size: 15px;
+}
+
+.bacnk-btn-v-ca {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    background-color: #dc143c;
+    border: unset;
+    border-radius: 5px;
+    color: white;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.main_back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2px 0px;
+    background-color: #7b7c7f;
+}
+
+.main_div_for_back_and_game {}
+
 @media screen and (max-width:700px) {
     .for_Desktop {
         display: none;

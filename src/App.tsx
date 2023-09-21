@@ -42,6 +42,10 @@ import StatusIndicator from "./StatusIndicator";
 import axios from "axios";
 import ProfitAndLossPageeee from "./Pages/profitAndLoss/ProfitAndLossPageeee";
 import AccountStatementNewDushyant from "./Pages/accountStatementNewDushyant/AccountStatementNewDushyant";
+import Virtualcasino from "./components/casino/VirtualCasino/Virtualcasino";
+import VirtualCasinoPage from "./components/casino/VirtualCasino/VirtualCasinoPage";
+import LiveCasionList from "./components/casino/LiveCasino/LiveCasionList";
+import LiveCasionGamePage from "./components/casino/LiveCasino/LiveCasionGamePage";
 
 
 interface LoadingType {
@@ -72,6 +76,7 @@ interface AppDataInterface {
 function App() {
   const [loading, setLoading] = useState<LoadingType>({});
   const [appData, setAppData] = useState<AppDataInterface | null>(null);
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
   const [welcomePopup, setWelcomePopup] = useState<boolean | null>(null);
@@ -127,7 +132,7 @@ function App() {
 
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url",
+        `${REACT_APP_API_URL}/login/is-self-by-app-url`,
         { appUrl: appUrll }
       )
       .then((res) => {
@@ -172,7 +177,7 @@ function App() {
       {/* <div className={`App ${window.location.pathname.includes("sign-in") || window.location.pathname.includes("sign-up") ? "" : "padding_for_desktop"}`} > */}
       <div className="App"
         style={{
-          paddingBottom: window.location.pathname.includes("sign-in") || window.location.pathname.includes("sign-up") ? "" : "50px"
+          paddingBottom: window.location.pathname.includes("sign-in") || window.location.pathname.includes("sign-up") || window.location.pathname.includes("virtual-casino-game") ? "" : "50px"
         }}>
         <SnackbarProvider maxSnack={5} autoHideDuration={1000}>
 
@@ -195,8 +200,7 @@ function App() {
                 element={
                   <Layout
                     setIsSignedIn={setIsSignedIn}
-                    isSignedIn={isSignedIn}
-                  />
+                    isSignedIn={isSignedIn} />
                 }
               >
                 <Route path="OldChangePassword" element={<OldChangePassword setIsSignedIn={setIsSignedIn} />} />
@@ -219,10 +223,14 @@ function App() {
                 <Route path="bet-history" element={<BetHistory />} />
                 <Route path="current-bet" element={<CurrentBet />} />
                 <Route path="casino" element={<Casino />} />
+                <Route path="live-casino" element={<LiveCasionList />} />
+                {/* <Route path="virtual-casino" element={<Virtualcasino />} /> */}
                 <Route path="casino/:id" element={<CasinoGame />} />
                 <Route path="terms" element={<Terms show={welcomePopup} setShow={setWelcomePopup} />} />
                 <Route path="password-change" element={<ChangePassword setIsSignedIn={setIsSignedIn} />} />
               </Route>
+              <Route path="virtual-casino-game" element={<VirtualCasinoPage />} />
+              <Route path="Live-casino-game" element={<LiveCasionGamePage />} />
 
             </Routes>
           </main>

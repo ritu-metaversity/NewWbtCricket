@@ -7,6 +7,7 @@ import axios from "axios";
 const CasinoModals = () => {
     const [singleUserValue, setSingleUserValue] = useState()
     const [casionValue, setCasionValue] = useState()
+    let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
     // const { psotbetsingleusevalueData } = useSelector((state) => state.auth);
 
@@ -15,7 +16,7 @@ const CasinoModals = () => {
         const token = localStorage.getItem("token");
 
         axios.post(
-            'https://api.247365.exchange/admin-new-apis/bet-modifier/single-user-value', {},
+            `${REACT_APP_API_URL}/bet-modifier/single-user-value`, {},
             {
                 headers: {
                     "Content-Type": "multipart/form-data",
