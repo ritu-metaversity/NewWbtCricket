@@ -6,6 +6,7 @@ import cassionimg from "../casino.png"
 import { useEffect } from "react";
 import axios from "axios";
 import Qtech from "./qtechlogo.png"
+import snackBarUtil from "../../Layout/snackBarUtil";
 
 export const casinoProviderList = [
   {
@@ -126,6 +127,7 @@ const LiveCasionList = () => {
             }
 
           } else {
+            snackBarUtil.error("Error")
 
           }
         })

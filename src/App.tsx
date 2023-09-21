@@ -47,6 +47,8 @@ import VirtualCasinoPage from "./components/casino/VirtualCasino/VirtualCasinoPa
 import LiveCasionList from "./components/casino/LiveCasino/LiveCasionList";
 import LiveCasionGamePage from "./components/casino/LiveCasino/LiveCasionGamePage";
 import IndianCasinoPage from "./components/casino/IndianCasinoPage";
+import LotteryCasionList from "./components/casino/Lottery/LotteryCasionProvider";
+import LotteryCasionListPage from "./components/casino/Lottery/LotteryCasionListPage";
 
 
 interface LoadingType {
@@ -225,6 +227,8 @@ function App() {
                 <Route path="current-bet" element={<CurrentBet />} />
                 <Route path="casino" element={<Casino />} />
                 <Route path="live-casino" element={<LiveCasionList />} />
+                <Route path="lottery-casino" element={<LotteryCasionList />} />
+                <Route path="lottery-Game-list" element={<LotteryCasionListPage />} />
                 {/* <Route path="virtual-casino" element={<Virtualcasino />} /> */}
                 <Route path="casino/:id" element={<CasinoGame />} />
                 <Route path="terms" element={<Terms show={welcomePopup} setShow={setWelcomePopup} />} />

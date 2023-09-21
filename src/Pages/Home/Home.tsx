@@ -116,6 +116,12 @@ const ActionCardPropsList = [
     cardImageSrc: "/casionnewlogo.png",
     cardForwardHref: "/Live-casino",
   },
+  // {
+  //   cardTitle: "Lottery Casino",
+  //   cardDesc: "Play online international casino",
+  //   cardImageSrc: "/casionnewlogo.png",
+  //   cardForwardHref: "/lottery-casino",
+  // },
 
 
 ]
