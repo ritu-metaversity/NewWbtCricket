@@ -64,13 +64,13 @@ const Terms: FC<Props> = ({ show, setShow }) => {
                 {" "}
                 आपसे अनुरोध है हमारी कोई डुप्लीकेट साइट नही है हमारी आधिकारिक साइट
                 <b>{window.location.hostname} </b>से लॉगिन करें। लॉगइन करने से पहले साइट
-                का नाम जरूर देख लें। आपके समर्थन के लिए धन्यवाद। टीम <b> bmx99</b>
+                का नाम जरूर देख लें। आपके समर्थन के लिए धन्यवाद। टीम <b> {window.location.hostname}</b>
               </span>
               <span className="namehead2">Dear Client,</span>
               <span className="namehead_data2">
                 {" "}
                 We don't have any duplicate site , You are requested to login with our
-                official site {window.location.hostname} I only. Please check the
+                official site <b>{window.location.hostname} </b>I only. Please check the
                 site name before you login. Thanks for your support.<b>{window.location.hostname}</b>
               </span>
             </div>
