@@ -1,19 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom"
-
+import { useLocation, useNavigate } from "react-router-dom"
+import "./LotteryCasionListPage.css"
 
 const LotteryCasionListPage = () => {
     const { state } = useLocation()
     const TokenId = localStorage.getItem("token");
-    console.log(state, "statestatestatestate");
+    console.log(state?.filterType, "statestatestatestate");
     let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
     const [gameFilter, setGameFilter] = useState([])
+    const navigate = useNavigate();
+
+
 
     useEffect(() => {
-        let data = {
-            "token": "26b735ae-d59e-3350-8a88-dee00feb9166", "provider": "", "gameCategory": "LOTTERY"
-        }
+
         if (
             TokenId
         ) {
@@ -30,8 +31,10 @@ const LotteryCasionListPage = () => {
                 )
                 .then((response) => {
                     if (response) {
+                        localStorage.setItem("tokenCasion", response?.data?.data?.access_token);
+
                         let data = {
-                            token: response?.data?.data?.access_token, provider: "", gameCategory: "LOTTERY"
+                            token: response?.data?.data?.access_token, provider: state?.filterType, gameCategory: "LOTTERY"
 
                         }
                         axios.post(
@@ -55,33 +58,30 @@ const LotteryCasionListPage = () => {
 
         }
     }, [])
+
+    const handleChangeaa = (val: any) => {
+        console.log(val, "dafusiyhbdchuwdb");
+        navigate("/Lottery-Game", { state: val, })
+    }
     console.log(gameFilter, "statestatestatestate");
 
     // Object.keys(betRecord).map((key) => (
     return (
-        <div className="main_wrap_live-casion">
-            {Object.keys(gameFilter).map((key: any) => (
-                <>
+        <div className="main_wrap_game_logog_lottery">
 
-                    {
-                        Object.keys(gameFilter[key]).map(
-                            (item: any) => (
-                                <div className="MainBtn_warp" style={{ border: "0.5px solid" }}>
-                                    <img
-                                        className="complany-logo-warp"
-                                        // src={item?.images[1] && item?.images[1]?.url}
-                                        alt="" />
 
-                                    <span className="complany-name-wrap">
+            {gameFilter.map((key: any) => (
 
-                                        <>
-                                            {console.log(item, "dsfsdfsd")}
-                                        </>
-                                    </span>
-                                </div>
-                            ))
-                    }
-                </>
+
+
+                <img
+                    onClick={() => handleChangeaa(key?.id)}
+
+                    className="game_logog_lottery"
+                    src={key?.images[1]?.url}
+                    alt="" />
+
+
 
             ))
             }
