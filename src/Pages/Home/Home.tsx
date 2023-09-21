@@ -99,10 +99,22 @@ const ActionCardPropsList = [
 
 
   {
-    cardTitle: "Casino",
-    cardDesc: "Play online live casino",
+    cardTitle: "Indian Casino",
+    cardDesc: "Play online Indian casino",
     cardImageSrc: "/casionnewlogo.png",
     cardForwardHref: "/casino",
+  },
+  {
+    cardTitle: "Our Casino",
+    cardDesc: "Play online Our casino",
+    cardImageSrc: "/casionnewlogo.png",
+    cardForwardHref: "/virtual-casino",
+  },
+  {
+    cardTitle: "Live Casino",
+    cardDesc: "Play online Live casino",
+    cardImageSrc: "/casionnewlogo.png",
+    cardForwardHref: "/Live-casino",
   },
 
 

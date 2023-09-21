@@ -102,7 +102,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
 
     axios
       .post(
-        "https://api.247365.exchange/admin-new-apis/login/demo-user-creation-login",
+        `${REACT_APP_API_URL}/login/demo-user-creation-login`,
         { appUrl: window.location.hostname }
       )
       .then((response) => {
@@ -118,7 +118,14 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
           // setLoadingLogin(false)
           navigate("/terms", { replace: true });
         } else {
+          if (response?.data?.status === false) {
+            snackBarUtil.error(response?.data?.message)
+          }
         }
+      })
+      .catch((err) => {
+        console.log(err, "fsdsdfsdfsd");
+
       })
   }
   return (
