@@ -111,8 +111,8 @@ const ActionCardPropsList = [
     cardForwardHref: "/virtual-casino",
   },
   {
-    cardTitle: "Live Casino",
-    cardDesc: "Play online Live casino",
+    cardTitle: "International Casino",
+    cardDesc: "Play online international casino",
     cardImageSrc: "/casionnewlogo.png",
     cardForwardHref: "/Live-casino",
   },
