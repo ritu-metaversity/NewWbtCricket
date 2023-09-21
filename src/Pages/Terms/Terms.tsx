@@ -63,15 +63,15 @@ const Terms: FC<Props> = ({ show, setShow }) => {
               <span className="namehead_data">
                 {" "}
                 आपसे अनुरोध है हमारी कोई डुप्लीकेट साइट नही है हमारी आधिकारिक साइट
-                <b>'bmx99.in, bmxBET99.IN , bmxPRO.IN' </b>से लॉगिन करें। लॉगइन करने से पहले साइट
+                <b>{window.location.hostname} </b>से लॉगिन करें। लॉगइन करने से पहले साइट
                 का नाम जरूर देख लें। आपके समर्थन के लिए धन्यवाद। टीम <b> bmx99</b>
               </span>
               <span className="namehead2">Dear Client,</span>
               <span className="namehead_data2">
                 {" "}
                 We don't have any duplicate site , You are requested to login with our
-                official site 'bmx99.in, bmxBET99.IN , bmxPRO.I only. Please check the
-                site name before you login. Thanks for your support. Team bmx99
+                official site {window.location.hostname} I only. Please check the
+                site name before you login. Thanks for your support.<b>{window.location.hostname}</b>
               </span>
             </div>
             <div className="modal-footer" >
