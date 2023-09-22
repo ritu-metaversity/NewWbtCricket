@@ -50,6 +50,12 @@ import IndianCasinoPage from "./components/casino/IndianCasinoPage";
 import LotteryCasionList from "./components/casino/Lottery/LotteryCasionProvider";
 import LotteryCasionListPage from "./components/casino/Lottery/LotteryCasionListPage";
 import LotteryCasionListGamePage from "./components/casino/Lottery/LotteryCasionListGamePage";
+import SlotsGamesPage from "./components/casino/SlotsGames/SlotsGamesPage";
+import SlotsGamesProviderGameList from "./components/casino/SlotsGames/SlotsGamesProviderGameList";
+import SlotsGamesProvider from "./components/casino/SlotsGames/SlotsGamesProvider";
+import FantasyGameProvider from "./components/casino/FantasyGame/FantasyGameProvider";
+import FantasyGameList from "./components/casino/FantasyGame/FantasyGameList";
+import FantasyGamePage from "./components/casino/FantasyGame/FantasyGamePage";
 
 
 interface LoadingType {
@@ -230,15 +236,23 @@ function App() {
                 <Route path="live-casino" element={<LiveCasionList />} />
                 <Route path="lottery-casino" element={<LotteryCasionList />} />
                 <Route path="lottery-Game-list" element={<LotteryCasionListPage />} />
-                {/* <Route path="virtual-casino" element={<Virtualcasino />} /> */}
+                <Route path="Slot-Game-details" element={<SlotsGamesProvider />} />
+                <Route path="Slot-Game-list" element={<SlotsGamesProviderGameList />} />
+                <Route path="Fantasy-Game" element={<FantasyGameProvider />} />
+                <Route path="Fantasy-Game-list" element={<FantasyGameList />} />
+                <Route path="virtual-casino" element={<Virtualcasino />} />
                 <Route path="casino/:id" element={<CasinoGame />} />
                 <Route path="terms" element={<Terms show={welcomePopup} setShow={setWelcomePopup} />} />
                 <Route path="password-change" element={<ChangePassword setIsSignedIn={setIsSignedIn} />} />
+
+
               </Route>
               <Route path="virtual-casino-game" element={<VirtualCasinoPage />} />
               <Route path="Live-casino-game" element={<LiveCasionGamePage />} />
               <Route path="india-casino-game" element={<IndianCasinoPage />} />
               <Route path="Lottery-Game" element={<LotteryCasionListGamePage />} />
+              <Route path="Slots-Game-page" element={<SlotsGamesPage />} />
+              <Route path="Fantasy-Game-page" element={<FantasyGamePage />} />
 
             </Routes>
           </main>

@@ -59,19 +59,56 @@ const ActionCardPropsList = [
     cardImageSrc: "/inplay1.png",
     cardForwardHref: "/in-play",
   },
-
-  {
-    cardTitle: "Profile",
-    cardDesc: "View your profile and edit your information",
-    cardImageSrc: "/profile2.png",
-    cardForwardHref: "/profile",
-  },
   {
     cardTitle: "Statement",
     cardDesc: "matches that are completed and the results are declared",
     cardImageSrc: "/complete2.png",
     cardForwardHref: "/Account_Statement_Page",
   },
+
+  {
+    cardTitle: "Indian Casino",
+    cardDesc: "Play online Indian casino",
+    cardImageSrc: "/casionnewlogo.png",
+    cardForwardHref: "/casino",
+  },
+  // {
+  //   cardTitle: "Our Casino",
+  //   cardDesc: "Play online Our casino",
+  //   cardImageSrc: "/casionnewlogo.png",
+  //   cardForwardHref: "/virtual-casino",
+  // },
+  {
+    cardTitle: "International Casino",
+    cardDesc: "Play online international casino",
+    cardImageSrc: "/casionnewlogo.png",
+    cardForwardHref: "/Live-casino",
+  },
+  {
+    cardTitle: "Lottery",
+    cardDesc: "Play online international casino",
+    cardImageSrc: "/casionnewlogo.png",
+    cardForwardHref: "/lottery-casino",
+  },
+  {
+    cardTitle: "Slots",
+    cardDesc: "Play online international casino",
+    cardImageSrc: "/casionnewlogo.png",
+    cardForwardHref: "/Slot-Game-details",
+  },
+  {
+    cardTitle: "Fantasy Game",
+    cardDesc: "Play online international casino",
+    cardImageSrc: "/casionnewlogo.png",
+    cardForwardHref: "/Fantasy-Game",
+  },
+  {
+    cardTitle: "Profile",
+    cardDesc: "View your profile and edit your information",
+    cardImageSrc: "/profile2.png",
+    cardForwardHref: "/profile",
+  },
+
   {
     cardTitle: "Change Password",
     cardDesc: "change your mybet password",
@@ -98,30 +135,6 @@ const ActionCardPropsList = [
   },
 
 
-  {
-    cardTitle: "Indian Casino",
-    cardDesc: "Play online Indian casino",
-    cardImageSrc: "/casionnewlogo.png",
-    cardForwardHref: "/casino",
-  },
-  // {
-  //   cardTitle: "Our Casino",
-  //   cardDesc: "Play online Our casino",
-  //   cardImageSrc: "/casionnewlogo.png",
-  //   cardForwardHref: "/virtual-casino",
-  // },
-  {
-    cardTitle: "International Casino",
-    cardDesc: "Play online international casino",
-    cardImageSrc: "/casionnewlogo.png",
-    cardForwardHref: "/Live-casino",
-  },
-  {
-    cardTitle: "Lottery",
-    cardDesc: "Play online international casino",
-    cardImageSrc: "/casionnewlogo.png",
-    cardForwardHref: "/lottery-casino",
-  },
 
 
 ]

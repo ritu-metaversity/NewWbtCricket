@@ -308,7 +308,7 @@ const Filter: FC<Props> = ({
           >
             <Button
               fullWidth
-              sx={{ mb: "5px" }}
+              sx={{ mb: "5px", bgcolor: "#babbbd", "& :hover": { background: "#babbbd" }, color: "black" }}
               type="button"
               variant="contained"
               onClick={handleClick}

@@ -86,6 +86,10 @@
     text-align: center;
     /* margin: 12px 0px; */
     font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 @media (min-width: 800px) {
@@ -119,6 +123,10 @@
 
 .inner_chips {
     padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
 }
 
 .css-7e0s21-MuiPaper-root-MuiAppBar-root {
@@ -131,4 +139,17 @@
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
+}
+
+.banck_btn_for_home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    background-color: #dc143c;
+    border: unset;
+    border-radius: 5px;
+    color: white;
+    gap: 5px;
+    cursor: pointer;
 }
