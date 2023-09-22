@@ -9,48 +9,33 @@ const SlotsGamesProviderGameList = () => {
   let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
   const [gameFilter, setGameFilter] = useState([])
   const navigate = useNavigate();
+  const TokenGame = localStorage.getItem("GameToken");
 
 
   useEffect(() => {
 
     if (
-      TokenId
+      TokenGame
     ) {
-      axios
-        .post(
-          `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
-          {},
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${TokenId}`,
-            },
-          }
-        )
+      let data = {
+        token: TokenGame, provider: state?.filterType, gameCategory: "SLOT"
+
+      }
+      axios.post(
+        `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelist`, data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${TokenId}`,
+          },
+        }
+      )
         .then((response) => {
-          if (response) {
-            localStorage.setItem("tokenCasion", response?.data?.data?.access_token);
+          setGameFilter(response?.data?.data?.items)
+          // console.log(response?.data?.data?.items, "statestatestatestate");
 
-            let data = {
-              token: response?.data?.data?.access_token, provider: state?.filterType, gameCategory: "SLOT"
-
-            }
-            axios.post(
-              `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelist`, data,
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${TokenId}`,
-                },
-              }
-            )
-              .then((response) => {
-                setGameFilter(response?.data?.data?.items)
-                // console.log(response?.data?.data?.items, "statestatestatestate");
-
-              })
-          }
         })
+
 
     } else {
 

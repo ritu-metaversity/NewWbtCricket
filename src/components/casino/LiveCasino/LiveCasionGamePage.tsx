@@ -31,16 +31,16 @@ const LiveCasionGamePage = () => {
 
 
   const navigate = useNavigate();
+
+
   const handleBackToVCasion = () => {
     navigate("/live-casino")
   }
-  console.log(state?.item?.gameCode, "sdfsdfnksjfnksdj");
 
-  // `${REACT_APP_API_URL}/api/qtech/gamelobby`,
 
   useEffect(() => {
+    const TokenGame = localStorage.getItem("GameToken");
     if (state?.item?.gameCode === "Qtech") {
-
       let data = {
         playerId: "121212",
         currency: "INR",
@@ -51,63 +51,51 @@ const LiveCasionGamePage = () => {
         mode: "real",
         device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
         returnUrl: `${window.location.protocol}//${window.location.hostname}/Live-casino`,
-        token: state?.item2,
+        token: TokenGame,
         walletSessionId: TokenId
       }
       // https://api.playindia.app/api/qtech/gamelink
-      axios
-
-        .post(
-          `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelobby`,
-          data,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${TokenId}`,
-            },
-          }
-        )
+      axios.post(
+        `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelobby`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${TokenId}`,
+          },
+        }
+      )
         .then((response) => {
           if (response) {
             console.log(response?.data?.data?.url, "sdfsdfsdfsdfsdfsdfsd")
             setGameLobbyUrl(response?.data?.data?.url)
-          } else {
-
           }
         })
-
-
-
     } else {
-
-
       let data = {
         playerId: "121212",
         currency: "INR",
         country: "IN",
         gender: "M",
-        gameName: state?.item?.gameCode,
+        gameName: state?.gameCode,
         birthDate: "1986-01-01",
         lang: "en_IN",
         mode: "real",
         device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
         returnUrl: `${window.location.protocol}//${window.location.hostname}/Live-casino`,
-        token: state?.item2,
+        token: TokenGame,
         walletSessionId: TokenId
       }
-      // https://api.playindia.app/api/qtech/gamelink
-      axios
-
-        .post(
-          `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelink`,
-          data,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${TokenId}`,
-            },
-          }
-        )
+      axios.post(
+        `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelink`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${TokenId}`,
+          },
+        }
+      )
         .then((response) => {
           if (response) {
             console.log(response?.data?.data?.url, "sdfsdfsdfsdfsdfsdfsd")

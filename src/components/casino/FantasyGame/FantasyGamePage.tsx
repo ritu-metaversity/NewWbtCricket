@@ -10,13 +10,13 @@ import { userServices } from '../../../utils/api/user/services';
 
 const FantasyGamePage = () => {
   const { state } = useLocation()
-  const TokenId = localStorage.getItem("token");
-  const TokenCasion = localStorage.getItem("tokenCasion");
-  let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
   const [gameLobbyUrl, setGameLobbyUrl] = useState("")
   const [walletBalance, setWalletbalance] = useState();
   const [walletLibality, setWalletlibality] = useState();
-  console.log(state, "bnjuygvbhygfcb");
+
+  let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
+  const TokenId = localStorage.getItem("token");
+  const TokenGame = localStorage.getItem("GameToken");
 
   useEffect(() => {
     const getWallet = async () => {
@@ -43,48 +43,6 @@ const FantasyGamePage = () => {
   // `${REACT_APP_API_URL}/api/qtech/gamelobby`,
 
   useEffect(() => {
-    // if (state?.item?.gameCode === "Qtech") {
-
-    //   let data = {
-    //     playerId: "121212",
-    //     currency: "INR",
-    //     country: "IN",
-    //     gender: "M",
-    //     birthDate: "1986-01-01",
-    //     lang: "en_IN",
-    //     mode: "real",
-    //     device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
-    //     returnUrl: `${window.location.protocol}//${window.location.hostname}/Live-casino`,
-    //     token: state?.item2,
-    //     walletSessionId: TokenId
-    //   }
-    //   // https://api.playindia.app/api/qtech/gamelink
-    //   axios
-
-    //     .post(
-    //       `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelobby`,
-    //       data,
-    //       {
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //           Authorization: `Bearer ${TokenId}`,
-    //         },
-    //       }
-    //     )
-    //     .then((response) => {
-    //       if (response) {
-    //         console.log(response?.data?.data?.url, "sdfsdfsdfsdfsdfsdfsd")
-    //         setGameLobbyUrl(response?.data?.data?.url)
-    //       } else {
-
-    //       }
-    //     })
-
-
-
-    // } else {
-
-
     let data = {
       playerId: "121212",
       currency: "INR",
@@ -96,22 +54,19 @@ const FantasyGamePage = () => {
       mode: "real",
       device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
       returnUrl: `${window.location.protocol}//${window.location.hostname}/Fantasy-Game`,
-      token: TokenCasion,
+      token: TokenGame,
       walletSessionId: TokenId
     }
-    // https://api.playindia.app/api/qtech/gamelink
-    axios
-
-      .post(
-        `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelink`,
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${TokenId}`,
-          },
-        }
-      )
+    axios.post(
+      `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelink`,
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${TokenId}`,
+        },
+      }
+    )
       .then((response) => {
         if (response) {
           console.log(response?.data?.data?.url, "sdfsdfsdfsdfsdfsdfsd")
@@ -120,9 +75,6 @@ const FantasyGamePage = () => {
 
         }
       })
-
-    // }
-
   }, [])
 
 
