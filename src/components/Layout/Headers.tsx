@@ -48,6 +48,7 @@ import { BsTrophyFill, BsFillMenuButtonFill, BsKey, BsFileEarmarkRuled } from "r
 import { BiMoneyWithdraw } from "react-icons/bi"
 import { MdOutlineRealEstateAgent, MdWorkHistory, MdSportsScore, MdLegendToggle } from "react-icons/md"
 import { HiOutlineLogout } from "react-icons/hi"
+import { IoMdArrowRoundBack } from 'react-icons/io'
 
 const data = {
   balance: 0,
@@ -62,6 +63,8 @@ interface Props {
 const Headers: FC<Props> = ({ setIsSignedIn }) => {
   const [wallet, setWallet] = useState(data);
   const navigation = useNavigate();
+  // const navigate = useNavigate();
+
   const { appData } = useContext(LoaderContext)
   const userid = localStorage.getItem("userid");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -148,7 +151,12 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
     setAnchorEl(null)
 
   }, [matches])
-  console.log(appData, "appData");
+  console.log(window.location.pathname, "appData");
+
+
+  const handleBackBtn = () => {
+    navigation(-1)
+  }
 
   return (
     <>
@@ -301,10 +309,23 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
       </AppBar>
       <div className="header_chips_expo">
         <div className="inner_chips" style={{ fontWeight: "600" }}>
+          {window.location.pathname === "/" ?
+            "" :
+
+            <button className="banck_btn_for_home" onClick={handleBackBtn}>
+              <IoMdArrowRoundBack color="white" className="back_icon" />
+              <span>
+                Back
+              </span>
+            </button>
+          }
           <span>Chips: {Number(wallet.balance).toFixed(2)}</span>
           {" "}
-          <Link to="/current-bet" style={{ padding: "0px 0px 0px 14px" }}>   <span>Expo : <span style={{ color: "red" }}>{Number(wallet.libality).toFixed(2)}</span>
-          </span></Link>
+          <Link to="/current-bet" style={{ padding: "0px 0px 0px 14px" }}>
+            <span>Expo : <span style={{ color: "red" }}>
+              {Number(wallet.libality).toFixed(2)}
+            </span>
+            </span></Link>
         </div>
       </div>
       {matches && <Menu

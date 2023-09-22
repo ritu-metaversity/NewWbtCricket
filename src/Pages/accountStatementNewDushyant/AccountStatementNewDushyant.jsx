@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { Box, Dialog, DialogTitle, IconButton, Tooltip, Typography } from "@mui/material";
+
 import "./AccountStatementNewDushyant.css"
 import TablePagination from "@mui/material/TablePagination";
 import moment from 'moment';
 import { Padding } from '@mui/icons-material';
 import { userServices } from '../../utils/api/user/services';
+import { authServices } from '../../utils/api/auth/services';
 
 const lableStyleeeeee = {
     alignSelf: "center",
@@ -50,6 +53,44 @@ const AccountStatementNewDushyant = () => {
     console.log(dataType, "qewwdwdwe");
     // AccountStateme
 
+
+    const [open, setOpen] = useState(false);
+    const [radiobtnnnn, setRadiobtnnnn] = useState("1")
+    const [accountResultMatchId, setAccountResultMatchId] = useState()
+    const [accountResult, setAccountResult] = useState([])
+    const [accountResultDetails, setAccountResultDetails] = useState({ vl1: "", vl2: "" })
+    const [accountResultDatatotalWin, setAccountResultDatatotalWin] = useState()
+    const [accountResultDatatotalBets, setAccountResultDatatotalBets] = useState()
+
+    const handleradiobtn = async (vl) => {
+        setRadiobtnnnn(vl)
+        const { response } = await authServices.searchBetMarketAS({
+            betType: vl,
+            marketId: accountResultMatchId,
+            userId: ""
+        });
+        if (response) {
+            setAccountResult(response?.data?.betList)
+        }
+    }
+
+    const handleChangeesss = async (vl, vl1, vl2) => {
+        setOpen(true)
+        setAccountResultMatchId(vl)
+        const { response } = await authServices.searchBetMarketAS({
+            betType: 1,
+            marketId: vl,
+            userId: ""
+        });
+        if (response) {
+            console.log(response?.data, "dfsdffasdfa");
+
+            setAccountResult(response?.data?.betList)
+            setAccountResultDatatotalBets(response?.data?.totalBets)
+            setAccountResultDatatotalWin(response?.data?.totalStake)
+        }
+        setAccountResultDetails({ vl1: vl1, vl2: vl2 })
+    }
 
     useEffect(() => {
         let data = {
@@ -202,7 +243,8 @@ const AccountStatementNewDushyant = () => {
                 <div className='pandloss_maindiv_Date'>
 
                     <button className='search_new_datatatat' onClick={handleClick}>
-                        Search
+                        <sapn>Search
+                        </sapn>
                     </button>
                 </div>
 
@@ -228,7 +270,7 @@ const AccountStatementNewDushyant = () => {
                         <tbody style={{ fontSize: 12 }}>
                             {accountStatement?.length > 0 ?
                                 (accountStatement.map((item) =>
-                                    <tr>
+                                    <tr onClick={() => handleChangeesss(item?.marketid, item?.remark, item?.date)}>
                                         <td
                                             className="ldg-tbl-td match-value-box-color"
                                             style={{ textAlign: "center" }}
@@ -308,6 +350,106 @@ const AccountStatementNewDushyant = () => {
                     return `Page : ${page + 1}`;
                 }}
             />
+            <Dialog
+                onClose={() => {
+                    setOpen(false)
+                }}
+                open={open}
+                fullWidth
+                maxWidth={"md"}
+            >
+                <div className="modall_pageeee">
+
+                    <div className="modalll_title" >
+                        <span>Result</span>
+                        <span onClick={() => {
+                            setOpen(false)
+                        }} style={{ cursor: "pointer" }}>X</span>
+
+                    </div>
+                    <div className="modalll_bodyyy">
+                        <div className="modalll_bodyyy_title">{accountResultDetails?.vl1}</div>
+                        <div className="modalll_bodyyy_title"><b >Game Time:</b> <span>{accountResultDetails?.vl2}</span></div>
+                        <div className="modalll_bodyyy_title">
+                            <input type="radio" onChange={() => handleradiobtn("1")} checked={radiobtnnnn === "1" ? true : false} />
+                            <label>All</label>
+                            <input type="radio" onChange={() => handleradiobtn("2")} checked={radiobtnnnn === "2" ? true : false} />
+                            <label>Back</label>
+                            <input type="radio" onChange={() => handleradiobtn("3")} checked={radiobtnnnn === "3" ? true : false} />
+                            <label>Lay</label>
+                            {/* <input type="radio" onChange={() => handleradiobtn("4")} />
+              <label>Deleted</label> */}
+                        </div>
+                        <div className="modalll_bodyyy_title">
+                            <span>Total Bets: <span style={{ color: "green" }}>{accountResultDatatotalBets}</span></span>
+                            <span>Total wins: <span style={{ color: "green" }}>{accountResultDatatotalWin}</span></span>
+                        </div>
+                    </div>
+                    <div className="modal_table_container">
+
+                        <table style={{ width: "100%", border: "1px solid" }}>
+                            <thead>
+                                <tr className="modal_table_header_title">
+                                    <th className="modal_table_head">Nation</th>
+                                    <th className="modal_table_head width_for_head">Rate</th>
+                                    <th className="modal_table_head width_for_head">Bhav</th>
+                                    <th className="modal_table_head width_for_head">Amount</th>
+                                    <th className="modal_table_head width_for_head">Win</th>
+                                    <th className="modal_table_head width_for_head">Date</th>
+                                    <th className="modal_table_head width_for_head">Ip Address</th>
+                                    <th className="modal_table_head width_for_head">Browser Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {accountResult?.length > 0 ?
+
+                                    accountResult?.map((item) => {
+                                        return (<tr onClick={() => setOpen(true)}>
+                                            <>
+                                                {item?.isback === true ?
+                                                    <td className="modal_table_headdddddblck" >{item?.selectionname}</td>
+                                                    :
+
+                                                    <td className="modal_table_headdddddlay" >{item?.selectionname}</td>
+                                                }
+                                                <td className="modal_table_head" >{item?.pricevalue}</td>
+                                                <td className="modal_table_head" >{item?.odds}</td>
+                                                <td className="modal_table_head" >{item?.stack}</td>
+                                                <td className="modal_table_head" ><span style={{ color: item?.netpnl <= 0 ? "red" : "green" }}>{item?.netpnl}</span></td>
+                                                <td className="modal_table_head" >{item?.matchedtime}</td>
+                                                <td className="modal_table_head" >{item?.ipAddress}</td>
+                                                <td className="modal_table_head" >
+                                                    <Tooltip title={item?.deviceInfo}>
+                                                        <IconButton style={{
+                                                            fontSize: "18px",
+                                                            color: "black"
+                                                        }}>
+                                                            Detail
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </td>
+                                            </>
+                                        </tr>
+                                        )
+                                    }) :
+                                    <tr>
+                                        <td colSpan={8} className="ldg-tbl-td match-value-box-color" style={{ color: "red" }}>
+
+                                            No data found
+                                        </td>
+                                    </tr>
+
+
+                                }
+                            </tbody>
+
+
+
+                        </table>
+                    </div>
+
+                </div>
+            </Dialog>
         </div>
 
 

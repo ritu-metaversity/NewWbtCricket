@@ -14,6 +14,15 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    width: 100%;
+
+}
+
+@media screen and (min-width:1024px) {
+    .pandloss_maindivDate_contamer {
+        width: 35%;
+
+    }
 }
 
 .padddddd {
@@ -21,13 +30,19 @@
     font-size: 14px;
 }
 
-.pandloss_maindiv_Date {}
+.pandloss_maindiv_Date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
 
 .bttnttttntntn {
     border-radius: 5px;
     padding: 5px 40px;
     background-color: #babbbd;
-    border: 1px solid;
+    border: unset;
     /* color: white; */
 }
 
@@ -70,8 +85,13 @@
     padding: 7px 75px;
     border-radius: 5px;
     width: 85%;
-    color: #514f4f;
+    color: black;
+    background-color: #c9c9c9;
     font-size: 15px;
+    border: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media screen and (max-width :1024px) {
@@ -79,7 +99,12 @@
         padding: 7px 57px;
         border-radius: 5px;
         width: 85%;
-        color: #514f4f;
+        color: black;
+        background-color: #c9c9c9;
         font-size: 15px;
+        border: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

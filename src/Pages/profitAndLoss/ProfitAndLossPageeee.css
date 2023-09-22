@@ -27,7 +27,7 @@
     border-radius: 5px;
     padding: 5px 40px;
     background-color: #babbbd;
-    border: 1px solid;
+    border: unset;
     /* color: white; */
 }
 

@@ -97,6 +97,14 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
       });
   }, []);
 
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+
+    }
+  }, [])
+
   const handleDemoAccount = () => {
     // setLoadingLogin(true)
 
