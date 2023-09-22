@@ -60,11 +60,12 @@ const ActionCardPropsList = [
     cardForwardHref: "/in-play",
   },
   {
-    cardTitle: "Statement",
-    cardDesc: "matches that are completed and the results are declared",
-    cardImageSrc: "/complete2.png",
-    cardForwardHref: "/Account_Statement_Page",
+    cardTitle: "Sports",
+    // cardDesc: "Sports list",
+    cardImageSrc: '/spotssssss.png',
+    cardForwardHref: "/sports",
   },
+
 
   {
     cardTitle: "Indian Casino",
@@ -116,10 +117,10 @@ const ActionCardPropsList = [
     cardForwardHref: "/password-change",
   },
   {
-    cardTitle: "Sports",
-    // cardDesc: "Sports list",
-    cardImageSrc: '/spotssssss.png',
-    cardForwardHref: "/sports",
+    cardTitle: "Statement",
+    cardDesc: "matches that are completed and the results are declared",
+    cardImageSrc: "/complete2.png",
+    cardForwardHref: "/Account_Statement_Page",
   },
   {
     cardTitle: "Current Bet",

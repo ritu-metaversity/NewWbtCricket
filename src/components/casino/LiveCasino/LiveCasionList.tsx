@@ -3,7 +3,7 @@ import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "./LiveCasionList.css"
 import cassionimg from "../casino.png"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Qtech from "./qtechlogo.png"
 import snackBarUtil from "../../Layout/snackBarUtil";
@@ -89,8 +89,13 @@ export const casinoProviderList = [
 
 const LiveCasionList = () => {
   const navigate = useNavigate();
-  const TokenId = localStorage.getItem("token");
+  // const TokenId = localStorage.getItem("token");
+  const TokenGame = localStorage.getItem("GameToken");
   let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
+
+  // const [newToken, setNewToken] = useState("")
+
+
   const handleChangeaa = (val: any) => {
     console.log(val, "djfisfsd");
 
@@ -102,64 +107,37 @@ const LiveCasionList = () => {
 
     // } else {
     if (
-      TokenId
+      TokenGame
     ) {
-      axios
-        .post(
-          `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
-          {},
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${TokenId}`,
-            },
-          }
-        )
-        .then((response) => {
-          if (response) {
-            let data = {
-              item: val,
-              item2: response?.data?.data?.access_token
-            }
-            if (response?.data?.data?.access_token) {
-
-              navigate("/live-casino-game", { state: data, })
-            }
-
-          } else {
-            snackBarUtil.error("Error")
-
-          }
-        })
-
+      navigate("/live-casino-game", { state: val, })
     } else {
+      snackBarUtil.error("Tokeen Error")
 
     }
-    // }
 
   };
-  useEffect(() => {
-    axios
-      .post(
-        `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${TokenId}`,
-          },
-        }
-      )
-      .then((response) => {
-        if (response) {
-          console.log(response?.data?.data, "dsfsdfdfsd");
+  // useEffect(() => {
+  //   axios
+  //     .post(
+  //       `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
+  //       {},
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${TokenId}`,
+  //         },
+  //       }
+  //     )
+  //     .then((response) => {
+  //       if (response) {
+  //         console.log(response?.data?.data, "dsfsdfdfsd");
 
-          // setCasinoList(response?.data?.data || []);
-        } else {
-          // setCasinoList([]);
-        }
-      })
-  })
+  //         // setCasinoList(response?.data?.data || []);
+  //       } else {
+  //         // setCasinoList([]);
+  //       }
+  //     })
+  // })
 
 
   return (

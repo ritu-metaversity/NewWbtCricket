@@ -86,11 +86,12 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   // const handleClick = async (e: any) =>  await authServices.logout();
   async function clickHandler() {
     await authServices.logout();
-    localStorage.removeItem("token");
+    localStorage.clear();
     navigation("/welcome");
     setIsSignedIn(false);
     setDrawerOpen(false)
   }
+
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -309,9 +310,8 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
       </AppBar>
       <div className="header_chips_expo">
         <div className="inner_chips" style={{ fontWeight: "600" }}>
-          {window.location.pathname === "/" ?
+          {window.location.pathname === "/" || window.location.pathname === "/terms" ?
             "" :
-
             <button className="banck_btn_for_home" onClick={handleBackBtn}>
               <IoMdArrowRoundBack color="white" className="back_icon" />
               <span>

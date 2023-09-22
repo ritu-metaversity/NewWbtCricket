@@ -28,6 +28,9 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
   const [selfAllowedd, SetselfAllowedd] = useState();
   const [selfsignup, Setselfsignup] = useState();
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+  let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
+
+
   const [loadinLogin, setLoadingLogin] = useState(false)
 
   console.log(loadinLogin, "loadinLogin")
@@ -53,6 +56,20 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
         localStorage.setItem("token", response?.token);
         localStorage.setItem("userid", response?.userId);
         localStorage.setItem("passwordType", response?.passwordtype);
+        axios
+          .post(
+            `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
+            {},
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${response?.data?.token}`,
+              },
+            }
+          )
+          .then((response) => {
+            localStorage.setItem("GameToken", response?.data?.data?.access_token);
+          })
         if (response.passwordtype === "old") {
           setLoadingLogin(false)
           navigate("/OldChangePassword", { replace: true });
@@ -120,7 +137,20 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
           localStorage.setItem("userid", response?.data?.userId);
           localStorage.setItem("passwordType", response?.data?.passwordtype);
           localStorage.setItem("userTypeInfo", response?.data?.userTypeInfo);
-
+          axios
+            .post(
+              `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
+              {},
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${response?.data?.token}`,
+                },
+              }
+            )
+            .then((response) => {
+              localStorage.setItem("GameToken", response?.data?.data?.access_token);
+            })
           setIsSignedIn(true);
           setShow(true)
           // setLoadingLogin(false)
