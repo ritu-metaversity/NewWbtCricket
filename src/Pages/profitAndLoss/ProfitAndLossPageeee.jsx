@@ -250,7 +250,7 @@ const ProfitAndLossPageeee = () => {
                       {item?.debit}
                     </td>
 
-                    <td className="ldg-tbl-td match-value-box-color" style={{ color: "red" }}>{item?.balance}</td>
+                    <td className="ldg-tbl-td match-value-box-color">{item?.balance}</td>
 
                   </tr>))
                 :
