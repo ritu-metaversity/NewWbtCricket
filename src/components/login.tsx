@@ -63,7 +63,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
             {
               headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${response?.data?.token}`,
+                Authorization: `Bearer ${response?.token}`,
               },
             }
           )
