@@ -37,10 +37,9 @@ const LiveCasionGamePage = () => {
     navigate("/live-casino")
   }
 
-
   useEffect(() => {
     const TokenGame = localStorage.getItem("GameToken");
-    if (state?.item?.gameCode === "Qtech") {
+    if (state?.gameCode === "Qtech") {
       let data = {
         playerId: "121212",
         currency: "INR",
@@ -49,7 +48,8 @@ const LiveCasionGamePage = () => {
         birthDate: "1986-01-01",
         lang: "en_IN",
         mode: "real",
-        device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
+        // device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
+        device: window.innerWidth > 1024 ? "desktop" : "mobile",
         returnUrl: `${window.location.protocol}//${window.location.hostname}/Live-casino`,
         token: TokenGame,
         walletSessionId: TokenId
@@ -81,7 +81,8 @@ const LiveCasionGamePage = () => {
         birthDate: "1986-01-01",
         lang: "en_IN",
         mode: "real",
-        device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
+        device: window.innerWidth > 1024 ? "desktop" : "mobile",
+
         returnUrl: `${window.location.protocol}//${window.location.hostname}/Live-casino`,
         token: TokenGame,
         walletSessionId: TokenId
