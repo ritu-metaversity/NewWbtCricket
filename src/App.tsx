@@ -133,9 +133,8 @@ function App() {
     return () => clearInterval(timer);
   }, [pathname, validateJwt]);
 
-  let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
+  // let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
 
-  const TokenId = localStorage.getItem("token");
 
   // useEffect(() => {
   //   const TokenId = localStorage.getItem("token");
@@ -159,33 +158,7 @@ function App() {
 
   // }, [])
 
-  // useEffect(() => {
-  //   if (TokenId) {
-
-
-  //     // const timers = setInterval(
-  //     //   () => {
-  //     axios
-  //       .post(
-  //         `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
-  //         {},
-  //         {
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             Authorization: `Bearer ${TokenId}`,
-  //           },
-  //         }
-  //       )
-  //       .then((response) => {
-  //         localStorage.setItem("GameToken", response?.data?.data?.access_token);
-  //       })
-
-
-  //     // }, 3000)
-  //     // return () => clearInterval(timers)
-  //   }
-
-  // }, [])
+  
 
   useEffect(() => {
     getSelfAllowed();

@@ -64,12 +64,12 @@ export const casinoProviderList = [
     gameCode: "BTV-lobby",
     filterType: "BTV",
   },
-  {
-    name: " EBET",
-    logo: "https://ebet.gg/wp-content/uploads/2022/05/EBET-logo.png",
-    gameCode: "EBT-fortunewheel",
-    filterType: "EBT",
-  },
+  // {
+  //   name: " EBET",
+  //   logo: "https://ebet.gg/wp-content/uploads/2022/05/EBET-logo.png",
+  //   gameCode: "EBT-sicbo",
+  //   filterType: "EBT",
+  // },
   {
     name: "AVIATOR",
     logo: "https://sitethemedata.com/casino_icons/fantasy/aviator.png",
@@ -139,6 +139,8 @@ const LiveCasionList = () => {
   //     })
   // })
 
+  // let width = window.innerWidth < 1024px
+  console.log(window.innerWidth > 1024, "loiuytrewqasxcvbn");
 
   return (
 
