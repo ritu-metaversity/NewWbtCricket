@@ -30,7 +30,7 @@ import Deposit from "../src/components/Deposit/Deposit";
 import Withdraw from "../src/components/Withdraw/Withdraw";
 import { CircularProgress } from "@mui/material";
 import OldChangePassword from "./components/Terms/OldChangePassword";
-import Casino from "./components/casino/Casino";
+import Casino from "./components/casino/indianCasion/Aura/Casino";
 import CasinoGame from "./components/casino/game/CasinoGame";
 import { authServices } from "./utils/api/auth/services";
 import Inplay from "./Pages/InPlay/Inplay";
@@ -46,7 +46,7 @@ import Virtualcasino from "./components/casino/VirtualCasino/Virtualcasino";
 import VirtualCasinoPage from "./components/casino/VirtualCasino/VirtualCasinoPage";
 import LiveCasionList from "./components/casino/LiveCasino/LiveCasionList";
 import LiveCasionGamePage from "./components/casino/LiveCasino/LiveCasionGamePage";
-import IndianCasinoPage from "./components/casino/IndianCasinoPage";
+import IndianCasinoPage from "./components/casino/indianCasion/Aura/IndianCasinoPage";
 import LotteryCasionList from "./components/casino/Lottery/LotteryCasionProvider";
 import LotteryCasionListPage from "./components/casino/Lottery/LotteryCasionListPage";
 import LotteryCasionListGamePage from "./components/casino/Lottery/LotteryCasionListGamePage";
@@ -56,6 +56,9 @@ import SlotsGamesProvider from "./components/casino/SlotsGames/SlotsGamesProvide
 import FantasyGameProvider from "./components/casino/FantasyGame/FantasyGameProvider";
 import FantasyGameList from "./components/casino/FantasyGame/FantasyGameList";
 import FantasyGamePage from "./components/casino/FantasyGame/FantasyGamePage";
+import IndianCasion from "./components/casino/indianCasion/IndianCasion";
+import SuperNowa from "./components/casino/indianCasion/SuperNowa/SuperNowa";
+import SuperNowaPage from "./components/casino/indianCasion/SuperNowa/SuperNowaPage";
 
 
 interface LoadingType {
@@ -158,7 +161,7 @@ function App() {
 
   // }, [])
 
-  
+
 
   useEffect(() => {
     getSelfAllowed();
@@ -260,6 +263,8 @@ function App() {
                 <Route path="bet-history" element={<BetHistory />} />
                 <Route path="current-bet" element={<CurrentBet />} />
                 <Route path="casino" element={<Casino />} />
+                <Route path="india_casion" element={<IndianCasion />} />
+                <Route path="SuperNowa_casion" element={<SuperNowa />} />
                 <Route path="live-casino" element={<LiveCasionList />} />
                 <Route path="lottery-casino" element={<LotteryCasionList />} />
                 <Route path="lottery-Game-list" element={<LotteryCasionListPage />} />
@@ -280,6 +285,7 @@ function App() {
               <Route path="Lottery-Game" element={<LotteryCasionListGamePage />} />
               <Route path="Slots-Game-page" element={<SlotsGamesPage />} />
               <Route path="Fantasy-Game-page" element={<FantasyGamePage />} />
+              <Route path="SuperNowa-Game-page" element={<SuperNowaPage />} />
 
             </Routes>
           </main>

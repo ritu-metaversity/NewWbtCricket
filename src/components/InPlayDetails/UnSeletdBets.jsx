@@ -2,10 +2,43 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { inPlayDetailServices } from '../../utils/api/inplayDetails/services';
 import "./UnSeletdBets.css"
-
-const UnSeletdBets = ({ betRecord, completedMatches, completedDetallll }) => {
+import { useSearchParams } from 'react-router-dom';
+import CachedIcon from '@mui/icons-material/Cached';
+const UnSeletdBets = ({ betRecord, sportsId }) => {
+    const [searchParams] = useSearchParams();
+    const [completedMatches, setCompletedMatches] = useState({})
+    const [completedDetallll, setCompletedDetalll] = useState({})
+    const eventId = searchParams.get("event-id");
     console.log(completedDetallll[0]?.netpnl, "completedMatches")
 
+    useEffect(() => {
+        const getList = async () => {
+            // setLoading && setLoading((prev) => ({ ...prev, getListdata: true }));
+            const { response } = await inPlayDetailServices.CompletedBetsonBetpage(
+                { "matchId": eventId }
+            );
+            if (response?.data) {
+                setCompletedMatches(response.data?.data)
+                setCompletedDetalll(response.data?.totalplusminus)
+            }
+        };
+        getList();
+    }, [sportsId])
+    console.log(sportsId, eventId, ":sportsId");
+    const handleRefresh = () => {
+        const getList = async () => {
+            // setLoading && setLoading((prev) => ({ ...prev, getListdata: true }));
+            const { response } = await inPlayDetailServices.CompletedBetsonBetpage(
+                { "matchId": eventId }
+            );
+            if (response?.data) {
+                setCompletedMatches(response.data?.data)
+                setCompletedDetalll(response.data?.totalplusminus)
+            }
+        };
+        getList();
+
+    }
     // useEffect(() => {
     //     const getList = async () => {
     //         const { response } = await inPlayDetailServices.betListHistory();
@@ -126,8 +159,10 @@ const UnSeletdBets = ({ betRecord, completedMatches, completedDetallll }) => {
                 className="bet-place-tbl-th"
                 style={{ background: "rgb(42, 54, 59)", width: "100%" }}
             >
-                <span>COMPLETED BETS</span>
-
+                <div className='main_div_completebet'>
+                    <span>COMPLETED BETS</span>
+                    <button className='main_div_completebet_Refesh' onClick={handleRefresh}> <CachedIcon style={{ fontSize: "17px" }} />Refesh</button>
+                </div>
             </div>
             <table
                 // className="table table-responsive table-bordered table_COMPLETED"
@@ -135,10 +170,10 @@ const UnSeletdBets = ({ betRecord, completedMatches, completedDetallll }) => {
             >
                 <thead>
                     <tr>
-                        <th className="bet-place-tbl-th" style={{ width: "22.5%" }}>RUNNER</th>
-                        <th className="bet-place-tbl-th" style={{ width: "22.5%" }}>RESULT</th>
-                        <th className="bet-place-tbl-th" style={{ width: "22.5%" }}>AMOUNT</th>
-                        <th className="bet-place-tbl-th" style={{ width: "22.5%" }}>P&amp;L</th>
+                        <th className="bet-place-tbl-th" style={{ width: "22.5%", border: "1.3px solid" }}>RUNNER</th>
+                        <th className="bet-place-tbl-th" style={{ width: "22.5%", border: "1.3px solid" }}>RESULT</th>
+                        <th className="bet-place-tbl-th" style={{ width: "22.5%", border: "1.3px solid" }}>AMOUNT</th>
+                        <th className="bet-place-tbl-th" style={{ width: "22.5%", border: "1.3px solid" }}>P&amp;L</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -149,19 +184,19 @@ const UnSeletdBets = ({ betRecord, completedMatches, completedDetallll }) => {
                                     <>
 
                                         <tr style={{ width: "100%" }}>
-                                            <td className="bet-place-tbl-td" style={{ width: "22.5%" }}>
+                                            <td className="bet-place-tbl-td" style={{ width: "22.5%", border: "1.3px solid" }}>
                                                 {item?.runner
                                                 }
                                             </td>
-                                            <td className="bet-place-tbl-td" style={{ width: "22.5%" }}>
+                                            <td className="bet-place-tbl-td" style={{ width: "22.5%", border: "1.3px solid" }}>
                                                 {item?.result}
                                             </td>
-                                            <td className="bet-place-tbl-td" style={{ width: "22.5%" }}>
+                                            <td className="bet-place-tbl-td" style={{ width: "22.5%", border: "1.3px solid" }}>
                                                 {item?.amount}
                                             </td>
 
                                             <td className="bet-place-tbl-td"
-                                            // style={{ color: item?.netpnl > 0 ? "green" : "red", width: "22.5%" }}
+                                                style={{ color: item?.pnl > 0 ? "green" : "red", width: "22.5%", border: "1.3px solid black" }}
                                             >
                                                 {item?.pnl}
                                             </td>
@@ -173,11 +208,11 @@ const UnSeletdBets = ({ betRecord, completedMatches, completedDetallll }) => {
                             }
                             )}
                             < tr colSpan={4}>
-                                <td colSpan={3} className="bet-place-tbl-td">
+                                <td colSpan={3} className="bet-place-tbl-td" style={{ border: "1.3px solid black" }}>
                                     Total Plus Minus
                                 </td>
                                 <td colSpan={1} className="bet-place-tbl-td"
-                                // style={{ color: completedDetallll[0]?.netpnl > 0 ? "green" : "red" }}
+                                    style={{ color: completedDetallll[0]?.netpnl > 0 ? "green" : "red", border: "1.3px solid black" }}
                                 >
                                     {completedDetallll[0]?.netpnl}
                                 </td>

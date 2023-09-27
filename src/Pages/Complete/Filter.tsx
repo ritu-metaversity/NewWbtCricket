@@ -10,7 +10,7 @@ import React, {
 import { useNavigate } from "react-router-dom";
 import { casinoService } from "../../utils/api/casino/service";
 import { ProfitLossPayload } from "../../utils/api/user/services";
-import { CasinoList } from "../../components/casino/Casino";
+import { CasinoList } from "../../components/casino/indianCasion/Aura/Casino";
 import { SummaryCardProps } from "../../components/Inplay/SummaryCard";
 import { LoaderContext } from "../../App";
 import { sportServices } from "../../utils/api/sport/services";

@@ -50,7 +50,7 @@ const LotteryCasionListGamePage = () => {
       birthDate: "1986-01-01",
       lang: "en_IN",
       mode: "real",
-      device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
+      device: window.innerWidth > 1024 ? "desktop" : "mobile",
       returnUrl: `${window.location.protocol}//${window.location.hostname}/lottery-casino`,
       token: TokenGame,
       walletSessionId: TokenId

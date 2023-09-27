@@ -14,7 +14,7 @@ import "./Login.css"
 import LoginIcon from '@mui/icons-material/Login';
 import snackBarUtil from "./Layout/snackBarUtil";
 import axios from "axios";
-
+import NewLogog from "./NewLoginLogo.png"
 interface Props {
   setIsSignedIn: Dispatch<SetStateAction<boolean>>;
   setShow: Dispatch<SetStateAction<boolean | null>>;
@@ -169,7 +169,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
   return (
     <div className="loginBackground new-login-content ">
       <div className="logo-img">
-        <img src={selfAllowedd} alt="" className="logoimgggggg" />
+        <img src={NewLogog} alt="" className="logoimgggggg" />
       </div>
       <div className="login-form">
         <span className="login-text">Please Login To Continue</span>

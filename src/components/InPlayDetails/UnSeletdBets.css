@@ -303,3 +303,21 @@ html {
 .table {
     width: 100% !important;
 }
+
+.main_div_completebet {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12%;
+}
+
+.main_div_completebet_Refesh {
+    border: unset;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}

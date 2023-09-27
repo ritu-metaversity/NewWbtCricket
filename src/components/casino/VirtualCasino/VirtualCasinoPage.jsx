@@ -14,20 +14,20 @@ const VirtualCasinoPage = () => {
     }
     const [walletBalance, setWalletbalance] = useState();
     const [walletLibality, setWalletlibality] = useState();
-  
+
     useEffect(() => {
-      const getWallet = async () => {
-        const { response } = await userServices.wallet();
-        if (response?.data) {
-  
-          setWalletbalance(response.data?.balance);
-          setWalletlibality(response.data?.libality);
-        }
-      };
-      localStorage.getItem("passwordType") === "new" && getWallet();
-      const timer = setInterval(() => localStorage.getItem("passwordType") === "new" && getWallet(), 5000);
-  
-      return () => clearInterval(timer);
+        const getWallet = async () => {
+            const { response } = await userServices.wallet();
+            if (response?.data) {
+
+                setWalletbalance(response.data?.balance);
+                setWalletlibality(response.data?.libality);
+            }
+        };
+        localStorage.getItem("passwordType") === "new" && getWallet();
+        const timer = setInterval(() => localStorage.getItem("passwordType") === "new" && getWallet(), 5000);
+
+        return () => clearInterval(timer);
     }, []);
     console.log(state, "dsfdfdsf");
     return (

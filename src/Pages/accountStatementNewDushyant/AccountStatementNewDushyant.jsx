@@ -145,12 +145,14 @@ const AccountStatementNewDushyant = () => {
             toDate: toDate
 
         }
+        if (newPage) {
 
-        const { response } = await userServices.AccountStatement(data);
-        console.log(response?.data?.totalPages, "fsdfsdfdfs");
-        setAccountStatement(response?.data?.dataList)
-        setCount(response.data?.totalPages);
+            const { response } = await userServices.AccountStatement(data);
+            console.log(response?.data?.totalPages, "fsdfsdfdfs");
+            setAccountStatement(response?.data?.dataList)
+            setCount(response.data?.totalPages);
 
+        }
 
     };
 
@@ -162,7 +164,7 @@ const AccountStatementNewDushyant = () => {
 
         let data = {
             type: dataType,
-            noOfRecords: 25,
+            noOfRecords: e.target.value,
 
             index: newPages,
             fromDate: formData,
@@ -286,21 +288,24 @@ const AccountStatementNewDushyant = () => {
                                         </td>
                                         <td
                                             className="ldg-tbl-td match-value-box-color"
-                                            style={{ textAlign: "center", color: "green" }}
+                                            style={{ textAlign: "center" }}
                                         >
                                             {item?.credit}
                                         </td>
 
                                         <td
                                             className="ldg-tbl-td match-value-box-color"
-                                            style={{ textAlign: "center", color: "red" }}
+                                            style={{ textAlign: "center" }}
                                         >
                                             {item?.debit}
                                         </td>
 
+                                        {item?.debit >= 0 ?
+                                            <td className="ldg-tbl-td match-value-box-color" style={{ color: "green" }}>{item?.pts}</td>
+                                            :
+                                            <td className="ldg-tbl-td match-value-box-color" style={{ color: "red" }}>{item?.pts}</td>
 
-                                        <td className="ldg-tbl-td match-value-box-color">{item?.pts}</td>
-
+                                        }
 
                                         <td
                                             className="ldg-tbl-td match-value-box-color"

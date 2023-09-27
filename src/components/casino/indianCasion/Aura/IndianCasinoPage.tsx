@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { RxCross2 } from 'react-icons/rx'
 import "./IndianCasinoPage.css"
 import { IoMdArrowRoundBack } from 'react-icons/io'
-import { userServices } from '../../utils/api/user/services'
+import { userServices } from '../../../../utils/api/user/services'
 
 const IndianCasinoPage = () => {
     const { state } = useLocation()
