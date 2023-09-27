@@ -2,8 +2,8 @@ import { styled, Tab, Tabs, tabClasses, Typography, Modal } from "@mui/material"
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { casinoService } from "../../utils/api/casino/service";
-import BacktoMenuButton from "../BacktoMenuButton";
+import { casinoService } from "../../../../utils/api/casino/service";
+import BacktoMenuButton from "../../../BacktoMenuButton";
 import { CasinoIcon, StyledGameThumb } from "./StyledComponent";
 import { RxCross2 } from 'react-icons/rx'
 import "./Casion.css"
@@ -113,43 +113,7 @@ const Casino = () => {
 
   return (
     <>
-      <BacktoMenuButton />
-      {/* {casinoTypes?.length > 0 && (
-        <Tabs
-          variant="scrollable"
-          scrollButtons={true}
-          TabScrollButtonProps={{
-            sx: {
-              opacity: "1 !important",
-              borderRadius: "50%",
-              width: "40px",
-              margin: "auto",
-              height: "40px",
-              marginRight: "10px",
-            },
-          }}
-          TabIndicatorProps={{ sx: { display: "none" } }}
-          sx={{
-            paddingY: "0.8rem",
-          }}
-          value={value}
-          onChange={(e, value) => {
-            setValue(value);
-          }}
-        >
-          {casinoTypes.map((item) => (
-            <StyledTab
-              icon={<CasinoIcon src={item.logo} />}
-              iconPosition="start"
-              value={item.id}
-              label={item.name}
-            />
-          ))}
-        </Tabs>
-      )} */}
-      <Box
-      // bgcolor={colorHex.bg1}
-      >
+      <Box>
         <Box className="casino_main_list">
           {!(casinoList?.length > 0) && (
             <Typography
@@ -182,7 +146,6 @@ const Casino = () => {
           </div>
         </Box>
       </Modal>
-
     </>
   );
 };

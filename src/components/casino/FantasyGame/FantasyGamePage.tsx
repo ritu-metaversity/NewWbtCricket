@@ -52,7 +52,7 @@ const FantasyGamePage = () => {
       birthDate: "1986-01-01",
       lang: "en_IN",
       mode: "real",
-      device: `${(isMobile && "mobile") || (isBrowser && "desktop")}`,
+      device: window.innerWidth > 1024 ? "desktop" : "mobile",
       returnUrl: `${window.location.protocol}//${window.location.hostname}/Fantasy-Game`,
       token: TokenGame,
       walletSessionId: TokenId
@@ -60,6 +60,7 @@ const FantasyGamePage = () => {
     axios.post(
       `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelink`,
       data,
+
       {
         headers: {
           "Content-Type": "application/json",

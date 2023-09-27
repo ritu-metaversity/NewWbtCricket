@@ -10,8 +10,7 @@ const Completedandlivematch = ({ event, sportsId }) => {
     const [betRecord, setBetRecord] = useState("");
     const [allGame, setAllGames] = useState({})
     const [searchParams] = useSearchParams();
-    const [completedMatches, setCompletedMatches] = useState({})
-    const [completedDetallll, setCompletedDetalll] = useState({})
+ 
     const date = new Date();
     const futureDate = date.getDate() - 60;
     date.setDate(futureDate);
@@ -20,19 +19,7 @@ const Completedandlivematch = ({ event, sportsId }) => {
 
     const eventId = searchParams.get("event-id");
     console.log(eventId, "iuytfvbhjuytfvb")
-    useEffect(() => {
-        const getList = async () => {
-            // setLoading && setLoading((prev) => ({ ...prev, getListdata: true }));
-            const { response } = await inPlayDetailServices.CompletedBetsonBetpage(
-                { "matchId": eventId }
-            );
-            if (response?.data) {
-                setCompletedMatches(response.data?.data)
-                setCompletedDetalll(response.data?.totalplusminus)
-            }
-        };
-        getList();
-    }, [sportsId])
+
 
     useEffect(() => {
 
@@ -77,7 +64,7 @@ const Completedandlivematch = ({ event, sportsId }) => {
 
     return (
         <>
-            <UnSeletdBets betRecord={betRecord} completedMatches={completedMatches} completedDetallll={completedDetallll} />
+            <UnSeletdBets betRecord={betRecord} sportsId={sportsId}/>
             {allGame?.data && Object.values(allGame?.data).map((item) => {
                 if (item.matchId !== event) {
 

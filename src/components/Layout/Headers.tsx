@@ -120,34 +120,34 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   const TokenId = localStorage.getItem("token");
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (TokenId !== "") {
-
-
-      const timers = setInterval(
-        () => {
-          axios
-            .post(
-              `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
-              {},
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${TokenId}`,
-                },
-              }
-            )
-            .then((response) => {
-              localStorage.setItem("GameToken", response?.data?.data?.access_token);
-            })
+  //   if (TokenId !== "") {
 
 
-        }, 3000)
-      return () => clearInterval(timers)
-    }
+  //     const timers = setInterval(
+  //       () => {
+  //         axios
+  //           .post(
+  //             `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
+  //             {},
+  //             {
+  //               headers: {
+  //                 "Content-Type": "application/json",
+  //                 Authorization: `Bearer ${TokenId}`,
+  //               },
+  //             }
+  //           )
+  //           .then((response) => {
+  //             localStorage.setItem("GameToken", response?.data?.data?.access_token);
+  //           })
 
-  }, [])
+
+  //       }, 3000)
+  //     return () => clearInterval(timers)
+  //   }
+
+  // }, [])
 
 
   const open = Boolean(anchorEl);
@@ -344,15 +344,24 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
       </AppBar>
       <div className="header_chips_expo">
         <div className="inner_chips" style={{ fontWeight: "600" }}>
-          {window.location.pathname === "/" || window.location.pathname === "/terms" ?
+          {/* {window.location.pathname === "/" || window.location.pathname === "/terms" ?
             "" :
-            <button className="banck_btn_for_home" onClick={handleBackBtn}>
-              <IoMdArrowRoundBack color="white" className="back_icon" />
-              <span>
-                Back
-              </span>
-            </button>
-          }
+            window.location.pathname === "/" || window.location.pathname === "/terms" ?
+
+              (<button className="banck_btn_for_home" onClick={handleBackBtn}>
+                <IoMdArrowRoundBack color="white" className="back_icon" />
+                <span>
+                  Back
+                </span>
+              </button>)
+              :
+              (<button className="banck_btn_for_home" onClick={handleBackBtn}>
+                <IoMdArrowRoundBack color="white" className="back_icon" />
+                <span>
+                  Back
+                </span>
+              </button>)
+          } */}
           <span>Chips: {Number(wallet.balance).toFixed(2)}</span>
           {" "}
           <Link to="/current-bet" style={{ padding: "0px 0px 0px 14px" }}>

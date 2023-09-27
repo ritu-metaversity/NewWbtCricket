@@ -56,7 +56,7 @@ const ActionCardPropsList = [
   {
     cardTitle: "In Play",
     cardDesc: "matches that are on going or incoming",
-    cardImageSrc: "/inplay1.png",
+    cardImageSrc: "/WBT99-3.png",
     cardForwardHref: "/in-play",
   },
   {
@@ -70,31 +70,31 @@ const ActionCardPropsList = [
   {
     cardTitle: "Indian Casino",
     cardDesc: "Play online Indian casino",
-    cardImageSrc: "/casionnewlogo.png",
-    cardForwardHref: "/casino",
+    cardImageSrc: "/indian-casino.png",
+    cardForwardHref: "/india_casion",
   },
   // {
   //   cardTitle: "Our Casino",
   //   cardDesc: "Play online Our casino",
-  //   cardImageSrc: "/casionnewlogo.png",
+  //   cardImageSrc: "/our-casino.png",
   //   cardForwardHref: "/virtual-casino",
   // },
   {
     cardTitle: "International Casino",
     cardDesc: "Play online international casino",
-    cardImageSrc: "/casionnewlogo.png",
+    cardImageSrc: "/international-casino.png",
     cardForwardHref: "/Live-casino",
   },
   {
     cardTitle: "Lottery",
     cardDesc: "Play online international casino",
-    cardImageSrc: "/casionnewlogo.png",
+    cardImageSrc: "/lottery.png",
     cardForwardHref: "/lottery-casino",
   },
   {
     cardTitle: "Slots",
     cardDesc: "Play online international casino",
-    cardImageSrc: "/casionnewlogo.png",
+    cardImageSrc: "/slots.png",
     cardForwardHref: "/Slot-Game-details",
   },
   {

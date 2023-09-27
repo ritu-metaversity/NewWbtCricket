@@ -249,8 +249,19 @@ const ProfitAndLossPageeee = () => {
                     >
                       {item?.debit}
                     </td>
+                    {item?.balance > 0 ?
 
-                    <td className="ldg-tbl-td match-value-box-color">{item?.balance}</td>
+
+                      (item?.balance === 0 ?
+
+                        <td className="ldg-tbl-td match-value-box-color" style={{ color: "black" }}>{Math.abs(item?.balance)}</td> :
+                        <td className="ldg-tbl-td match-value-box-color" style={{ color: "red" }}>{Math.abs(item?.balance)}</td>)
+
+                      : (item?.balance === 0 ?
+
+                        <td className="ldg-tbl-td match-value-box-color" style={{ color: "black" }}>{Math.abs(item?.balance)}</td> :
+                        <td className="ldg-tbl-td match-value-box-color" style={{ color: "green" }}>{Math.abs(item?.balance)}</td>)
+                    }
 
                   </tr>))
                 :

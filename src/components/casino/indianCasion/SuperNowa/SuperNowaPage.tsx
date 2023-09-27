@@ -1,19 +1,24 @@
-
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { IoMdArrowRoundBack } from 'react-icons/io'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { isMobile, isBrowser } from "react-device-detect";
-import "./SlotGamePage.css"
-import { userServices } from '../../../utils/api/user/services';
-const SlotsGamesPage = () => {
+import { RxCross2 } from 'react-icons/rx'
+import "./SuperNowaPage.css"
+import { IoMdArrowRoundBack } from 'react-icons/io'
+import { userServices } from '../../../../utils/api/user/services'
+import axios from 'axios'
+
+const SuperNowaPage = () => {
   const { state } = useLocation()
-  const TokenId = localStorage.getItem("token");
-  let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
-  const [gameLobbyUrl, setGameLobbyUrl] = useState("")
+  const token = localStorage.getItem("token");
+  console.log(state, "statestatestatestate");
+  let REACT_APP_API_URL_NEW_ANKIT = process.env.REACT_APP_API_URL_NEW_ANKIT;
+
+  const navigate = useNavigate();
+  const handleBackToVCasion = () => {
+    navigate("/SuperNowa_casion")
+  }
   const [walletBalance, setWalletbalance] = useState();
+  const [casionUrl, setCasionUrl] = useState();
   const [walletLibality, setWalletlibality] = useState();
-  console.log(state, "sfskjsd");
 
   useEffect(() => {
     const getWallet = async () => {
@@ -29,39 +34,27 @@ const SlotsGamesPage = () => {
 
     return () => clearInterval(timer);
   }, []);
+  console.log(state, "dasdasdasdasdasd");
 
-
-  const navigate = useNavigate();
-  const handleBackToVCasion = () => {
-    navigate("/Slot-Game-list")
-  }
-  console.log(state, "sdfsdfnksjfnksdj");
-
-  // `${REACT_APP_API_URL}/api/qtech/gamelobby`,
 
   useEffect(() => {
-    const TokenGame = localStorage.getItem("GameToken");
+    const TokenId = localStorage.getItem("token");
 
-    let data = {
-      playerId: "121212",
-      currency: "INR",
-      country: "IN",
-      gender: "M",
-      gameName: state,
-      birthDate: "1986-01-01",
-      lang: "en_IN",
-      mode: "real",
-      device: window.innerWidth > 1024 ? "desktop" : "mobile",
-      returnUrl: `${window.location.protocol}//${window.location.hostname}/Slot-Game-list`,
-      token: TokenGame,
-      walletSessionId: TokenId
+    let dtatata = {
+      "game": {
+        "gameCode": state?.code,
+        "providerCode": state?.providerCode,
+      },
+      "timestamp": new Date().getTime(),
+      user: {
+        currency: "INR",
+        backUrl: `${window.location.protocol}//${window.location.hostname}/Slot-Game-list`,
+      }
     }
-    // https://api.playindia.app/api/qtech/gamelink
     axios
-
       .post(
-        `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/gamelink`,
-        data,
+        `${REACT_APP_API_URL_NEW_ANKIT}/api/supernowa/authentication`, dtatata,
+
         {
           headers: {
             "Content-Type": "application/json",
@@ -71,26 +64,14 @@ const SlotsGamesPage = () => {
       )
       .then((response) => {
         if (response) {
-          console.log(response?.data?.data?.url, "sdfsdfsdfsdfsdfsdfsd")
-          setGameLobbyUrl(response?.data?.data?.url)
+          setCasionUrl(response?.data?.data?.launchURL)
+          console.log(response?.data?.data?.launchURL, "sdfsdfsdfsdfsdfsdfsd")
         } else {
-
         }
       })
-
-    // }
-
   }, [])
 
 
-
-
-  const getCasinoList = async () => {
-    let data: any = { "gameType": "virtual" }
-    // const token = localStorage.getItem("token");
-
-
-  };
   return (
     <div className='main_div_for_back_and_game'>
       <div className='main_back'>
@@ -107,7 +88,7 @@ const SlotsGamesPage = () => {
       </div>
 
       <iframe
-        src={gameLobbyUrl}
+        src={casionUrl}
         // height="82vh"
         // className="mobile_if"
         width="100%"
@@ -117,11 +98,11 @@ const SlotsGamesPage = () => {
         allowFullScreen={true}
       ></iframe>
       <iframe
-        src={gameLobbyUrl}
+        src={casionUrl}
         // height="82vh"
         // className="mobile_if"
         width="100%"
-        style={{ minHeight: "100vh" }}
+        style={{ minHeight: "90vh" }}
         title="mobile"
         className="For_mobile"
         allowFullScreen={true}
@@ -131,4 +112,4 @@ const SlotsGamesPage = () => {
   )
 }
 
-export default SlotsGamesPage
+export default SuperNowaPage

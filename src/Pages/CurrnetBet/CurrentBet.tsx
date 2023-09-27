@@ -1,11 +1,11 @@
 import { Box } from "@mui/system";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { userServices } from "../../utils/api/user/services";
 import StickyTable from "../../components/custom/TableWithoutPagination";
 import TablePagination from "@mui/material/TablePagination";
 import BacktoMenuButton from "../../components/BacktoMenuButton";
 import { LoaderContext } from "../../App";
-import { log } from "console";
+import "./CurrentBettt.css"
 
 export interface Column {
   id:
@@ -70,15 +70,19 @@ const columns: readonly Column[] = [
 ];
 
 const CurrentBet = () => {
+
+  const [typeForSportCasion, setTypeForSportCasion] = useState("1")
+
   const [countPage, setCount] = React.useState();
 
   const [formData, setFormData] = React.useState({
-    sportType: 1,
+    sportType: typeForSportCasion,
     betType: "1",
     noOfRecords: 25,
     index: 0,
     isDeleted: "false",
   });
+
   const [accountStatement, setAccountStatement] = React.useState([]);
   const { setLoading } = useContext(LoaderContext);
   useEffect(() => {
@@ -95,6 +99,18 @@ const CurrentBet = () => {
     };
     getList();
   }, [formData, setLoading]);
+  console.log(formData,);
+
+  useEffect(() => {
+    setFormData({
+      sportType: typeForSportCasion,
+      betType: formData?.betType,
+      noOfRecords: formData?.noOfRecords,
+      index: formData?.index,
+      isDeleted: formData?.isDeleted,
+    })
+
+  }, [typeForSportCasion])
 
   function handleChange(event: { target: { name: any; value: any } }) {
     setFormData((preState) => {
@@ -128,12 +144,19 @@ const CurrentBet = () => {
     console.log(countPage, formData.index, "count");
   }
 
+
   console.log(accountStatement, "accountStatement");
   console.log(accountStatement, "accountStatement");
   return (
     <Box sx={{ m: "auto", maxWidth: "lg" }}>
       <BacktoMenuButton />
+      <div className="Maintypespert">
+
+        <button className="typespert" style={{ backgroundColor: typeForSportCasion === "1" ? "#c4c4c4" : "transparent" }} onClick={() => setTypeForSportCasion("1")}>Sports</button>
+        <button className="typespert" style={{ backgroundColor: typeForSportCasion === "2" ? "#c4c4c4" : "transparent" }} onClick={() => setTypeForSportCasion("2")}>Casion</button>
+      </div >
       <form style={{ display: "inline-flex", padding: "10px", gap: "20px" }}>
+
         <input
           type="radio"
           id="all"
@@ -195,7 +218,7 @@ const CurrentBet = () => {
           return `Page : ${page + 1}`;
         }}
       />
-    </Box>
+    </Box >
   );
 };
 
