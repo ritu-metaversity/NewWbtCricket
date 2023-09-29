@@ -32,6 +32,7 @@ const UnSeletdBets = ({ betRecord, sportsId }) => {
                 { "matchId": eventId }
             );
             if (response?.data) {
+                console.log(response?.data,"response?.data");
                 setCompletedMatches(response.data?.data)
                 setCompletedDetalll(response.data?.totalplusminus)
             }

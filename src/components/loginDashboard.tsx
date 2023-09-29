@@ -3,7 +3,7 @@ import React, { FC, useContext, useEffect, useState } from "react";
 // import { HeaderTextStyle } from "./Layout/styledComponents";
 import "./loginDashboard.css";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoaderContext } from "../App";
 // import Footer from "./Layout/Footer";
 import { Sports } from "../Pages/Sports";
@@ -17,6 +17,7 @@ interface Props {
 const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
   const { appData } = useContext(LoaderContext);
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+  const navigate = useNavigate();
 
   const [selfAllowedd, SetselfAllowedd] = useState();
   useEffect(() => {
@@ -32,6 +33,13 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
         SetselfAllowedd(res?.data?.data?.logo);
       });
   }, []);
+
+  const handleLoginBtn = () => {
+    navigate("/sign-in")
+  }
+  const handleSignUpBtn = () => {
+    navigate("/sign-up")
+  }
   return (
     <Box display="flex" flexDirection={"column"}>
       <div className="main_header"
@@ -42,27 +50,29 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
           alt=""
           src={selfAllowedd}
           className="logo w_logo"
-          style={{ width: "120px", height: "40px" }}
+          style={{ maxWidth: "140px", height: "40px" }}
         />
         {/* </h3> */}
         <div className="Login_btnnnnss">
 
           <div style={{ display: "flex" }}>
             <Button
-              sx={{ fontSize: "0.7rem" }}
+              sx={{ fontSize: "0.7rem", color: "black" }}
               variant="contained"
-              color="primary"
+
+              onClick={handleLoginBtn}
             >
-              <Link to={"/sign-in"}>Login</Link>
+              Login
             </Button>
             {appData?.selfAllowed && (
               <Button
-                sx={{ fontSize: "0.7rem" }}
+                sx={{ fontSize: "0.7rem", color: "black" }}
                 style={{ marginLeft: "10px" }}
                 variant="contained"
                 color="secondary"
+                onClick={handleSignUpBtn}
               >
-                <Link to={"/sign-up"}>Sign Up</Link>
+                Sign Up
               </Button>
             )}
           </div>
@@ -74,7 +84,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
         <Sports />
       </Box>
       {/* <Footer isSignedIn={isSignedIn} /> */}
-    </Box>
+    </Box >
   );
 };
 
