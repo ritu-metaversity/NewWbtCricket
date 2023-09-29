@@ -288,24 +288,20 @@ const AccountStatementNewDushyant = () => {
                                         </td>
                                         <td
                                             className="ldg-tbl-td match-value-box-color"
-                                            style={{ textAlign: "center" }}
+                                            style={{ textAlign: "center", color: "green" }}
                                         >
                                             {item?.credit}
                                         </td>
 
                                         <td
                                             className="ldg-tbl-td match-value-box-color"
-                                            style={{ textAlign: "center" }}
+                                            style={{ textAlign: "center", color: "red" }}
                                         >
                                             {item?.debit}
                                         </td>
 
-                                        {item?.debit >= 0 ?
-                                            <td className="ldg-tbl-td match-value-box-color" style={{ color: "green" }}>{item?.pts}</td>
-                                            :
-                                            <td className="ldg-tbl-td match-value-box-color" style={{ color: "red" }}>{item?.pts}</td>
 
-                                        }
+                                        <td className="ldg-tbl-td match-value-box-color" >{item?.pts}</td>
 
                                         <td
                                             className="ldg-tbl-td match-value-box-color"
