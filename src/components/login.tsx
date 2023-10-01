@@ -40,7 +40,10 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
     setLoadingLogin(true)
 
     if (password === "" && userId === "") {
-      return snackBarUtil.error("All fields are mandatory");
+
+      setLoadingLogin(false)
+      return snackBarUtil.error("All fields are mandatory")
+
     } else {
 
 
@@ -85,6 +88,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
         setLoadingLogin(false)
 
       }
+
     }
   };
   const handleSign = () => {
