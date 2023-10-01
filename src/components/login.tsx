@@ -14,7 +14,8 @@ import "./Login.css"
 import LoginIcon from '@mui/icons-material/Login';
 import snackBarUtil from "./Layout/snackBarUtil";
 import axios from "axios";
-import NewLogog from "./NewLoginLogo.png"
+import NewLogog from "./WBT99-1.png"
+
 interface Props {
   setIsSignedIn: Dispatch<SetStateAction<boolean>>;
   setShow: Dispatch<SetStateAction<boolean | null>>;

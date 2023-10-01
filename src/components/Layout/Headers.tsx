@@ -50,6 +50,7 @@ import { MdOutlineRealEstateAgent, MdWorkHistory, MdSportsScore, MdLegendToggle 
 import { HiOutlineLogout } from "react-icons/hi"
 import { IoMdArrowRoundBack } from 'react-icons/io'
 
+
 const data = {
   balance: 0,
   libality: 0,
@@ -324,8 +325,8 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
 
               }
 
-              <li > <Link to="/profit-and-loss" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>PROFIT AND LOSS</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/Account_Statement_Page" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>ACCOUNT STATEMENT</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/profit-and-loss" onClick={() => setDrawerOpen(false)}><p><span><AttachMoneyIcon /></span>PROFIT AND LOSS</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/Account_Statement_Page" onClick={() => setDrawerOpen(false)}><p><span><MoneyIcon /></span>ACCOUNT STATEMENT</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/my-ledger-Page" onClick={() => setDrawerOpen(false)}><p><span><MdOutlineRealEstateAgent /></span>MY LEDGER</p>  <span><FaArrowRight /></span>   </Link></li>
               {/* <li > <Link to="/login-history" onClick={() => setDrawerOpen(false)}><p><span><AiOutlineHistory /></span>LOGIN HISTORY</p>  <span><FaArrowRight /></span>   </Link></li> */}
               <li > <Link to="/current-bet" onClick={() => setDrawerOpen(false)}><p><span><MdSportsScore /></span>CURRENT BET</p>  <span><FaArrowRight /></span>   </Link></li>
@@ -435,23 +436,23 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
           </Box>
         )}
         <Link to="/profile">
-          <MenuItem>
+          <MenuItem >
             <Avatar /> Profile
           </MenuItem>
         </Link>
         <Link to="/profit-and-loss">
-          <MenuItem>
+          <MenuItem className="profitepopup">
             <AttachMoneyIcon /> Profit and Loss
           </MenuItem>
         </Link>
         <Link to="/my-ledger-Page">
-          <MenuItem>
-            <AttachMoneyIcon /> My Ledger
+          <MenuItem className="profitepopup">
+            <MdOutlineRealEstateAgent /> My Ledger
           </MenuItem>
         </Link>
         <Link to="/Account_Statement_Page">
-          <MenuItem>
-            <AttachMoneyIcon /> Account Statement
+          <MenuItem className="profitepopup">
+            <MoneyIcon /> Account Statement
           </MenuItem>
         </Link>
         {/* <Link to="/login-history">
@@ -460,25 +461,25 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
           </MenuItem>
         </Link> */}
         <Link to="/current-bet">
-          <MenuItem>
-            <AttachMoneyIcon /> Current Bet
+          <MenuItem className="profitepopup">
+            <MdSportsScore /> Current Bet
           </MenuItem>
         </Link>
         <Link to="/bet-history">
-          <MenuItem>
-            <AttachMoneyIcon /> Bet History
+          <MenuItem className="profitepopup">
+            <MdWorkHistory /> Bet History
           </MenuItem>
         </Link>
 
         <Link to="/set-button-value">
-          <MenuItem>
-            <MoneyIcon /> Set button value
+          <MenuItem className="profitepopup">
+            <BsFillMenuButtonFill /> Set button value
           </MenuItem>
         </Link>
         <Divider />
 
         <MenuItem onClick={clickHandler}>
-          <ListItemIcon>
+          <ListItemIcon className="profitepopup">
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout

@@ -10,6 +10,13 @@
     display: flex;
 }
 
+.profitepopup {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
 .logo-name {
     display: flex;
     align-items: center;
@@ -21,7 +28,7 @@
 }
 
 .desktop_logogogo {
-    width: 120px;
+    max-width: 140px;
 }
 
 /* padding: 0px 42px; */

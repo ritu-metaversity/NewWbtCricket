@@ -56,7 +56,7 @@ const ActionCardPropsList = [
   {
     cardTitle: "In Play",
     cardDesc: "matches that are on going or incoming",
-    cardImageSrc: "/WBT99-3.png",
+    cardImageSrc: "/in-playLatest.png",
     cardForwardHref: "/in-play",
   },
   {
@@ -82,7 +82,7 @@ const ActionCardPropsList = [
   {
     cardTitle: "International Casino",
     cardDesc: "Play online international casino",
-    cardImageSrc: "/international-casino.png",
+    cardImageSrc: "/international-casinoletest.png",
     cardForwardHref: "/Live-casino",
   },
   {
@@ -100,7 +100,7 @@ const ActionCardPropsList = [
   {
     cardTitle: "Fantasy Game",
     cardDesc: "Play online international casino",
-    cardImageSrc: "/casionnewlogo.png",
+    cardImageSrc: "/fantasy-game.png",
     cardForwardHref: "/Fantasy-Game",
   },
   {
