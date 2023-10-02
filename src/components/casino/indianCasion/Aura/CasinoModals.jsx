@@ -11,26 +11,23 @@ const CasinoModals = () => {
 
     // const { psotbetsingleusevalueData } = useSelector((state) => state.auth);
 
-    // console.log(psotbetsingleusevalueData, "kjhgfcvbhuytfv")
-    // useEffect(() => {
-    //     const token = localStorage.getItem("token");
+    useEffect(() => {
+        const token = localStorage.getItem("token");
 
-    //     axios.post(
-    //         `${REACT_APP_API_URL}/bet-modifier/single-user-value`, {},
-    //         {
-    //             headers: {
-    //                 "Content-Type": "multipart/form-data",
-    //                 Authorization: `Bearer ${token}`,
-    //             },
+        axios.post(
+            `${REACT_APP_API_URL}/bet-modifier/single-user-value`, {},
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${token}`,
+                },
 
-    //         }
-    //     ).then((res) => {
-    //         setCasionValue(res?.data?.data?.value)
-    //         // console.log(res?.data?.data?.value, "sdfsdfsdfsd");
-    //     })
-    // }, [])
-    // https://api.247365.exchange/admin-new-apis/bet-modifier/single-user-value
-    console.log(casionValue, "sdfsdfsdfsd");
+            }
+        ).then((res) => {
+            setCasionValue(res?.data?.data?.value)
+            // console.log(res?.data?.data?.value, "sdfsdfsdfsd");
+        })
+    }, [])
 
     return (
         <>
