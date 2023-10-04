@@ -87,7 +87,7 @@ export const SessionOddsGrid: FC<Props> = ({
 
                 <div className="_child">
 
-                  SESSION
+                  {title}
 
 
                 </div>

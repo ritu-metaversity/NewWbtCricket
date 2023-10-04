@@ -128,6 +128,7 @@ const Casino = () => {
           {casinoList.map((item) => (
             <Box
               className="casino_inner_list"
+              onClick={() => handleChangeaa(item.gameId)}
             >
               {/* <Link to={"/casino/" + item.gameId}> */}
               <img src={item.imageUrl} alt="thumb" onClick={() => handleChangeaa(item.gameId)} className="csino_img" style={{ width: "100%" }} />{" "}

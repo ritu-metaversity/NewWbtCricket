@@ -602,8 +602,8 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
               if (
                 [
                   "Fancy2",
-                  // "Fancy3",
-                  // "OddEven"
+                  "Fancy3",
+                  "OddEven"
                 ].includes(keys) &&
                 activeFancy[keys]?.length
               ) {
@@ -623,7 +623,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
                       CurrentOdd={activeFancy[keys]}
                       PrevOdds={preFancyOdds[keys]}
                       matchId={props.event}
-                      title={keys}
+                      title={keys === "Fancy2" ? "Session" : keys}
                       FancyPnl={fancyPnl}
                     />
                     {bet?.marketId && activeFancy[keys].find((item: FancyOddsInterface) => item.sid === bet?.marketId) && <AllMatch
