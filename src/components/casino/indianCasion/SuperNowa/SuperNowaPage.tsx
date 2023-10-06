@@ -10,7 +10,7 @@ const SuperNowaPage = () => {
   const { state } = useLocation()
   const token = localStorage.getItem("token");
   console.log(state, "statestatestatestate");
-  let REACT_APP_API_URL_NEW_ANKIT = process.env.REACT_APP_API_URL_NEW_ANKIT;
+  let REACT_APP_API_URL_NEW_ANKIT_SUPERNOWA = process.env.REACT_APP_API_URL_NEW_ANKIT_SUPERNOWA;
 
   const navigate = useNavigate();
   const handleBackToVCasion = () => {
@@ -53,7 +53,7 @@ const SuperNowaPage = () => {
     }
     axios
       .post(
-        `${REACT_APP_API_URL_NEW_ANKIT}/api/supernowa/authentication`, dtatata,
+        `${REACT_APP_API_URL_NEW_ANKIT_SUPERNOWA}/api/supernowa/authentication`, dtatata,
 
         {
           headers: {
@@ -89,24 +89,10 @@ const SuperNowaPage = () => {
 
       <iframe
         src={casionUrl}
-        // height="82vh"
-        // className="mobile_if"
         width="100%"
-        style={{ minHeight: "100vh" }}
+        style={{ height: "calc(100vh - 29px)" }}
         title="mobile"
-        className="for_Desktop"
         allowFullScreen={true}
-      ></iframe>
-      <iframe
-        src={casionUrl}
-        // height="82vh"
-        // className="mobile_if"
-        width="100%"
-        style={{ minHeight: "90vh" }}
-        title="mobile"
-        className="For_mobile"
-        allowFullScreen={true}
-
       ></iframe>
     </div>
   )

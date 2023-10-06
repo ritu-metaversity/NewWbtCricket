@@ -14,6 +14,7 @@ import { authServices } from "../utils/api/auth/services";
 import snackBarUtil from "./Layout/snackBarUtil";
 import "./Login.css"
 import LoginIcon from '@mui/icons-material/Login';
+import NewLogogooo from "./WBT99-2.png"
 
 // interface RegisterInterface {
 //   username?: string;
@@ -353,7 +354,7 @@ const Register = () => {
       </Dialog>
       <div className="loginBackground new-login-content" style={{ overflow: "scroll" }}>
         <div className="logo-img">
-          <img src={logo} alt="" className="logoimgggggg" />
+          <img src={NewLogogooo} alt="" className="logoimgggggg" />
         </div>
         <div className="login-form">
           <span className="login-text">Sign up </span>
