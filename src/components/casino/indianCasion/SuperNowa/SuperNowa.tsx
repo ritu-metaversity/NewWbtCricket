@@ -55,8 +55,7 @@ const SuperNowa = () => {
   useEffect(() => {
     const TokenId = localStorage.getItem("token");
 
-    if (loading?.superNoveGameList) return
-    setLoading && setLoading(prev => ({ ...prev, seperNovaGameList: true }))
+
     axios
       .post(
         `${REACT_APP_API_URL_NEW_ANKIT}/api/supernowa/game-list`, {},
@@ -74,7 +73,7 @@ const SuperNowa = () => {
           // console.log(response?.data?.data?.games, "sdfsdfsdfsdfsdfsdfsd")
         } else {
         }
-        setLoading && setLoading(prev => ({ ...prev, seperNovaGameList: false }))
+
 
       })
 

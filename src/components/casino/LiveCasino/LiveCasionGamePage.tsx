@@ -133,25 +133,11 @@ const LiveCasionGamePage = () => {
         <span>Chips: {Number(walletBalance).toFixed(2)}</span>
         <span>Expo : <span style={{ color: "red" }}>{Number(walletLibality).toFixed(2)}</span></span>
       </div>
-
       <iframe
         src={gameLobbyUrl}
-        // height="82vh"
-        // className="mobile_if"
         width="100%"
-        style={{ minHeight: "100vh" }}
+        style={{ height: "calc(100vh - 29px)" }}
         title="mobile"
-        className="for_Desktop"
-        allowFullScreen={true}
-      ></iframe>
-      <iframe
-        src={gameLobbyUrl}
-        // height="82vh"
-        // className="mobile_if"
-        width="100%"
-        style={{ minHeight: "100vh" }}
-        title="mobile"
-        className="For_mobile"
         allowFullScreen={true}
 
       ></iframe>
