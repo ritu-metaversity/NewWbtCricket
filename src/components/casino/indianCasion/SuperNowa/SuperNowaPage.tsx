@@ -10,7 +10,7 @@ const SuperNowaPage = () => {
   const { state } = useLocation()
   const token = localStorage.getItem("token");
   console.log(state, "statestatestatestate");
-  let REACT_APP_API_URL_NEW_ANKIT_SUPERNOWA = process.env.REACT_APP_API_URL_NEW_ANKIT_SUPERNOWA;
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const navigate = useNavigate();
   const handleBackToVCasion = () => {
@@ -53,7 +53,7 @@ const SuperNowaPage = () => {
     }
     axios
       .post(
-        `${REACT_APP_API_URL_NEW_ANKIT_SUPERNOWA}/api/supernowa/authentication`, dtatata,
+        `${REACT_APP_API_URL}/api/supernowa/v1/authentication`, dtatata,
 
         {
           headers: {
