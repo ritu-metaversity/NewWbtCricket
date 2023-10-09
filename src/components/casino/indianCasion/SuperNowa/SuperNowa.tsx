@@ -31,7 +31,7 @@ const StyledTab = styled(Tab)(({ theme }) => ({
 
 const SuperNowa = () => {
 
-  let REACT_APP_API_URL_NEW_ANKIT_SUPERNOWA = process.env.REACT_APP_API_URL_NEW_ANKIT_SUPERNOWA;
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const [casinoList, setCasinoList] = useState([]);
   // const [trueee, setTrueee] = useState(false);
@@ -55,10 +55,11 @@ const SuperNowa = () => {
   useEffect(() => {
     const TokenId = localStorage.getItem("token");
 
+    setLoading && setLoading((prev) => ({ ...prev, superNowaGameList: true }))
 
     axios
       .post(
-        `${REACT_APP_API_URL_NEW_ANKIT_SUPERNOWA}/api/supernowa/game-list`, {},
+        `${REACT_APP_API_URL}/api/supernowa/game-list`, {},
 
         {
           headers: {
@@ -68,6 +69,7 @@ const SuperNowa = () => {
         }
       )
       .then((response) => {
+        setLoading && setLoading((prev) => ({ ...prev, superNowaGameList: false }))
         if (response) {
           setCasinoList(response?.data?.data?.games)
           // console.log(response?.data?.data?.games, "sdfsdfsdfsdfsdfsdfsd")
