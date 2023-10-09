@@ -76,7 +76,7 @@
     align-items: center;
     gap: 5%;
     margin: auto;
-    row-gap: 15px;
+    /* row-gap: 15px; */
     justify-content: center;
 }
 
@@ -123,8 +123,8 @@
 
 .casino_inner_list {
     border-radius: 4px;
-    box-shadow: 0 12px 8px -10px;
-    color: #007bff;
+    /* box-shadow: 0 12px 8px -10px; */
+    /* color: #007bff; */
     cursor: pointer;
     margin-bottom: 25px;
     position: relative;
