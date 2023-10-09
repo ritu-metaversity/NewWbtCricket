@@ -121,34 +121,45 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   const TokenId = localStorage.getItem("token");
 
 
-  useEffect(() => {
+  // QTECH APIIIIII
 
-    if (TokenId) {
+  // useEffect(() => {
 
-
-      const timers = setInterval(
-        () => {
-          axios
-            .post(
-              `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
-              {},
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${TokenId}`,
-                },
-              }
-            )
-            .then((response) => {
-              localStorage.setItem("GameToken", response?.data?.data?.access_token);
-            })
+  //   if (TokenId) {
 
 
-        }, 5000)
-      return () => clearInterval(timers)
-    }
+  //     const timers = setInterval(
+  //       () => {
+  //         axios
+  //           .post(
+  //             `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
+  //             {},
+  //             {
+  //               headers: {
+  //                 "Content-Type": "application/json",
+  //                 Authorization: `Bearer ${TokenId}`,
+  //               },
+  //             }
+  //           )
+  //           .then((response) => {
+  //             console.log(response, "dfsdfksdjfkuhsdjn");
 
-  }, [])
+  //             localStorage.setItem("GameToken", response?.data?.data?.access_token);
+  //           })
+  //           .catch((error) => {
+  //             if (error?.response?.data?.status === false) {
+  //               navigation("/welcome");
+  //               localStorage.clear();
+
+  //             }
+  //           })
+
+
+  //       }, 5000)
+  //     return () => clearInterval(timers)
+  //   }
+
+  // }, [])
 
 
   const open = Boolean(anchorEl);
@@ -220,7 +231,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
                 <div className="logo-name">
 
 
-                  <img src={appData?.logo} alt="Logo" className="desktop_logogogo" style={{ height: "50px" }} />
+                  <img src={appData?.logo} alt="Logo" className="desktop_logogogo" style={{ height: "40px" }} />
 
                   {/* <span className="mobile_logogoggo" style={{ color: "white" }}>
 

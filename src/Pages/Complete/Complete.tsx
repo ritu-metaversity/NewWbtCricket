@@ -491,7 +491,7 @@ const Complete = () => {
             </div>
             <div className="modalll_bodyyy_title">
               <span>Total Bets: <span style={{ color: "green" }}>{accountResultDatatotalBets}</span></span>
-              <span>Total wins: <span style={{ color: "green" }}>{accountResultDatatotalWin}</span></span>
+              <span>Total Amount: <span style={{ color: "green" }}>{accountResultDatatotalWin}</span></span>
             </div>
           </div>
           <div className="modal_table_container">

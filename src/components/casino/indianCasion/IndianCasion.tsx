@@ -6,11 +6,11 @@ const IndianCasion = () => {
     const navigate = useNavigate();
 
     let gamesName = [
-        // {
-        //     name: "Super nowa",
-        //     url: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
-        //     filterType: "SP-NOWA"
-        // },
+        {
+            name: "Super nowa",
+            url: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
+            filterType: "SP-NOWA"
+        },
         {
             name: "Aura",
             url: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
