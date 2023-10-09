@@ -8,7 +8,7 @@
     justify-content: center;
     flex-direction: row;
     display: flex;
-    gap: 20%;
+    gap: 10%;
     flex-wrap: wrap;
     overflow: scroll;
 
@@ -109,7 +109,7 @@ input::-webkit-inner-spin-button {
 } */
 
 .logo-img {
-    width: 30%;
+    width: 40%;
 }
 
 @media screen and (max-width: 500px) {
@@ -157,8 +157,8 @@ input::-webkit-inner-spin-button {
 }
 
 .logoimgggggg {
-    /* width: 100%; */
-    width: 600px;
+    width: 100%;
+    /* width: 600px; */
 }
 
 @media screen and (min-height: 200px) and (max-height:600px) {

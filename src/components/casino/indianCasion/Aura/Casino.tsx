@@ -132,7 +132,7 @@ const Casino = () => {
             >
               {/* <Link to={"/casino/" + item.gameId}> */}
               <img src={item.imageUrl} alt="thumb" onClick={() => handleChangeaa(item.gameId)} className="csino_img" style={{ width: "100%" }} />{" "}
-              <span style={{ width: "100%" }} className="casinoGameNAame"> {item?.gameCode}</span>
+              {/* <span style={{ width: "100%" }} className="casinoGameNAame"> {item?.gameCode}</span> */}
               {/* </Link> */}
             </Box>
           ))}
