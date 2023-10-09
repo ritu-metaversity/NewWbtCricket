@@ -140,7 +140,7 @@ const Casino = () => {
       </Box>
       <Modal open={confirmPopup} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Box className="casino_modals_body" >
-          <CasinoModals />
+          <CasinoModals type={"aura"} />
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={handleNotAgree}>No, I Don't Agree</button>

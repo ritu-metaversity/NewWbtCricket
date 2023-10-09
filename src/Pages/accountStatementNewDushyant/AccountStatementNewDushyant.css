@@ -44,6 +44,11 @@
     background-color: #babbbd;
     border: unset;
     /* color: white; */
+    cursor: pointer;
+}
+
+.bttnttttntntn:hover {
+    background-color: #1565c0 !important;
 }
 
 .content-top-padding.row {
@@ -92,6 +97,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+
+.search_new_datatatat:hover {
+    background-color: #1565c0 !important;
 }
 
 @media screen and (max-width :1024px) {

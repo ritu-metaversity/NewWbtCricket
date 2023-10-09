@@ -19,7 +19,8 @@ const inputStyle = {
   borderRadius: "5px",
   width: "85%",
   color: "#514f4f",
-  fontSize: "15px"
+  fontSize: "15px",
+  cursor: "pointer"
 };
 const ProfitAndLossPageeee = () => {
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;

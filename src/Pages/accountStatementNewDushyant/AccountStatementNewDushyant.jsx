@@ -19,7 +19,8 @@ const inputStyle = {
     borderRadius: "5px",
     width: "85%",
     color: "#514f4f",
-    fontSize: "15px"
+    fontSize: "15px",
+    cursor: "pointer"
 };
 const inputStylewwwwww = {
     padding: " 7px 75px",
@@ -145,7 +146,7 @@ const AccountStatementNewDushyant = () => {
             toDate: toDate
 
         }
-        if (newPage) {
+        if (newPage != null) {
 
             const { response } = await userServices.AccountStatement(data);
             console.log(response?.data?.totalPages, "fsdfsdfdfs");
@@ -166,7 +167,7 @@ const AccountStatementNewDushyant = () => {
             type: dataType,
             noOfRecords: e.target.value,
 
-            index: newPages,
+            index: 0,
             fromDate: formData,
             toDate: toDate
 
@@ -272,7 +273,7 @@ const AccountStatementNewDushyant = () => {
                         <tbody style={{ fontSize: 12 }}>
                             {accountStatement?.length > 0 ?
                                 (accountStatement.map((item) =>
-                                    <tr onClick={() => handleChangeesss(item?.marketid, item?.remark, item?.date)}>
+                                    <tr onClick={() => handleChangeesss(item?.marketid, item?.remark, item?.date)} style={{ cursor: "pointer" }}>
                                         <td
                                             className="ldg-tbl-td match-value-box-color"
                                             style={{ textAlign: "center" }}
@@ -290,18 +291,18 @@ const AccountStatementNewDushyant = () => {
                                             className="ldg-tbl-td match-value-box-color"
                                             style={{ textAlign: "center", color: "green" }}
                                         >
-                                            {item?.credit}
+                                            {Number(item?.credit).toFixed(2)}
                                         </td>
 
                                         <td
                                             className="ldg-tbl-td match-value-box-color"
                                             style={{ textAlign: "center", color: "red" }}
                                         >
-                                            {item?.debit}
+                                            {Number(item?.debit).toFixed(2)}
                                         </td>
 
 
-                                        <td className="ldg-tbl-td match-value-box-color" >{item?.pts}</td>
+                                        <td className="ldg-tbl-td match-value-box-color" >{Number(item?.pts).toFixed(2)}</td>
 
                                         <td
                                             className="ldg-tbl-td match-value-box-color"
@@ -380,7 +381,7 @@ const AccountStatementNewDushyant = () => {
                         </div>
                         <div className="modalll_bodyyy_title">
                             <span>Total Bets: <span style={{ color: "green" }}>{accountResultDatatotalBets}</span></span>
-                            <span>Total wins: <span style={{ color: "green" }}>{accountResultDatatotalWin}</span></span>
+                            <span>Total Amount: <span style={{ color: "green" }}>{accountResultDatatotalWin}</span></span>
                         </div>
                     </div>
                     <div className="modal_table_container">
@@ -410,21 +411,27 @@ const AccountStatementNewDushyant = () => {
 
                                                     <td className="modal_table_headdddddlay" >{item?.selectionname}</td>
                                                 }
-                                                <td className="modal_table_head" >{item?.pricevalue}</td>
-                                                <td className="modal_table_head" >{item?.odds}</td>
-                                                <td className="modal_table_head" >{item?.stack}</td>
-                                                <td className="modal_table_head" ><span style={{ color: item?.netpnl <= 0 ? "red" : "green" }}>{item?.netpnl}</span></td>
-                                                <td className="modal_table_head" >{item?.matchedtime}</td>
-                                                <td className="modal_table_head" >{item?.ipAddress}</td>
                                                 <td className="modal_table_head" >
-                                                    <Tooltip title={item?.deviceInfo}>
-                                                        <IconButton style={{
-                                                            fontSize: "18px",
-                                                            color: "black"
-                                                        }}>
-                                                            Detail
-                                                        </IconButton>
-                                                    </Tooltip>
+                                                    {Number(item?.pricevalue).toFixed(2)}
+                                                </td>
+                                                <td className="modal_table_head" >{Number(item?.odds).toFixed(2)}</td>
+                                                <td className="modal_table_head" >{item?.stack}</td>
+                                                <td className="modal_table_head" ><span style={{ color: item?.netpnl <= 0 ? "red" : "green" }}>{Number(item?.netpnl).toFixed(2)}</span></td>
+                                                <td className="modal_table_head" >{item?.matchedtime}</td>
+                                                <td className="modal_table_head" >{item?.ipAddress === null ? <span style={{ fontWeight: 600 }}>N/A</span> : item?.ipAddress}</td>
+
+
+                                                <td className="modal_table_head" >
+                                                    {item?.deviceInfo === null ? <span style={{ fontWeight: 600 }}>N/A</span> :
+                                                        <Tooltip title={item?.deviceInfo}>
+                                                            <IconButton style={{
+                                                                fontSize: "18px",
+                                                                color: "black"
+                                                            }}>
+                                                                Detail
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    }
                                                 </td>
                                             </>
                                         </tr>

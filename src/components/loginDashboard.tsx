@@ -50,7 +50,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
           alt=""
           src={selfAllowedd}
           className="logo w_logo"
-          style={{ maxWidth: "140px", height: "40px" }}
+          style={{ maxWidth: "180px", height: "40px" }}
         />
         {/* </h3> */}
         <div className="Login_btnnnnss">

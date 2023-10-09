@@ -31,7 +31,7 @@ const StyledTab = styled(Tab)(({ theme }) => ({
 
 const SuperNowa = () => {
 
-  let REACT_APP_API_URL_NEW_ANKIT = process.env.REACT_APP_API_URL_NEW_ANKIT;
+  let REACT_APP_API_URL_NEW_ANKIT_SUPERNOWA = process.env.REACT_APP_API_URL_NEW_ANKIT_SUPERNOWA;
 
   const [casinoList, setCasinoList] = useState([]);
   // const [trueee, setTrueee] = useState(false);
@@ -58,7 +58,7 @@ const SuperNowa = () => {
 
     axios
       .post(
-        `${REACT_APP_API_URL_NEW_ANKIT}/api/supernowa/game-list`, {},
+        `${REACT_APP_API_URL_NEW_ANKIT_SUPERNOWA}/api/supernowa/game-list`, {},
 
         {
           headers: {
@@ -113,7 +113,9 @@ const SuperNowa = () => {
     if (
       token
     ) {
-      nav("/SuperNowa-Game-page", { state: val })
+      setConfirmPopup(true)
+      setCasionId(val)
+      // nav("/SuperNowa-Game-page", { state: val })
 
       // setCasionId(val)
       // setConfirmPopup(true)
@@ -151,7 +153,7 @@ const SuperNowa = () => {
       </Box>
       <Modal open={confirmPopup} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Box className="casino_modals_body" >
-          <CasinoModals />
+          <CasinoModals type={"supernowa"} />
           <div className="agree_btn">
             <button onClick={handleAgree}>Ok I Agree</button>
             <button onClick={handleNotAgree}>No, I Don't Agree</button>

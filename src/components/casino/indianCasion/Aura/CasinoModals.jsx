@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import "./casionmodal.css"
 import cassionimg from "./casino.png"
 import axios from "axios";
-const CasinoModals = () => {
+const CasinoModals = (type) => {
+    console.log(type?.type, ("type"));
     const [singleUserValue, setSingleUserValue] = useState()
     const [casionValue, setCasionValue] = useState()
     let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
@@ -13,9 +14,8 @@ const CasinoModals = () => {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-
         axios.post(
-            `${REACT_APP_API_URL}/bet-modifier/single-user-value`, {},
+            `${REACT_APP_API_URL}/api/getOneUserBetResult`, {},
             {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -24,8 +24,8 @@ const CasinoModals = () => {
 
             }
         ).then((res) => {
-            setCasionValue(res?.data?.data?.value)
-            // console.log(res?.data?.data?.value, "sdfsdfsdfsd");
+            setCasionValue(res?.data?.data[type?.type])
+            console.log(res?.data?.data[type?.type], "sdfsdfsdfsd");
         })
     }, [])
 

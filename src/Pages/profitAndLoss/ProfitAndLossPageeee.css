@@ -21,6 +21,7 @@
     font-size: 14px;
 }
 
+
 .pandloss_maindiv_Date {}
 
 .bttnttttntntn {
@@ -31,6 +32,11 @@
     color: black;
 }
 
+.bttnttttntntn :hover {
+    background-color: #1565c0 !important;
+}
+
+/*  */
 .content-top-padding.row {
     overflow: scroll;
 }
