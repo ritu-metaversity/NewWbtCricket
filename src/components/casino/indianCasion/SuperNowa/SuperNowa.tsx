@@ -59,7 +59,7 @@ const SuperNowa = () => {
 
     axios
       .post(
-        `${REACT_APP_API_URL}/api/supernowa/game-list`, {},
+        `${REACT_APP_API_URL}/api/supernowa/game-list`, { providerCode: "SN" },
 
         {
           headers: {
