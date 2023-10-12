@@ -98,7 +98,7 @@ function App() {
   const getSelfAllowed = async () => {
     const { response } = await selfServices.isSelfAllowed({
       // appUrl: "11hub.atozscore1234.com",
-      appUrl: window.location.hostname,
+      appUrl: window.location.hostname.replace("www.", ""),
       // appUrl: "localhost",
     });
 
@@ -168,7 +168,8 @@ function App() {
   }, [isSignedIn]);
   console.log(window.location.pathname.includes("sign-in"), "gdhsdtgfas");
   useEffect(() => {
-    let appUrll = window.location.hostname;
+    let appUrll = window.location.hostname.replace("www.", "");
+
 
     axios
       .post(

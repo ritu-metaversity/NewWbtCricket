@@ -26,7 +26,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
   const navigate = useNavigate();
   const [userId, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const host = window.location.hostname;
+  const host = window.location.hostname.replace("www.", "");
   const [selfAllowedd, SetselfAllowedd] = useState();
   const [selfsignup, Setselfsignup] = useState();
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
@@ -106,7 +106,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
 
 
   useEffect(() => {
-    let appUrll = window.location.hostname;
+    let appUrll = window.location.hostname.replace("www.", "");
     // let appUrll = "localhost";
     axios
       .post(
@@ -134,7 +134,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
     axios
       .post(
         `${REACT_APP_API_URL}/login/demo-user-creation-login`,
-        { appUrl: window.location.hostname }
+        { appUrl: window.location.hostname.replace("www.", "") }
       )
       .then((response) => {
         if (response?.data?.token) {
