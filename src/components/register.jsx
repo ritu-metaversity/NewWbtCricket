@@ -182,7 +182,7 @@ const Register = () => {
         .post(
           `${REACT_APP_API_URL}/user/self-register`,
           {
-            appUrl: window.location.hostname,
+            appUrl: window.location.hostname.replace("www.", ""),
             username: UserName,
             password: password,
             confirmPassword: confirmPassword,
@@ -266,7 +266,7 @@ const Register = () => {
   // const [statusBtn, setStatusBtn] = useState();
   // const [isDemoIdLoginAllowed, setIsDemoIdLoginAllowed] = useState();
   // useEffect(() => {
-  //   let appUrll = window.location.hostname;
+  //   let appUrll = window.location.hostname.replace("www.","");
   //   // let appUrll = "localhost";
   //   axios
   //     .post(
@@ -282,7 +282,7 @@ const Register = () => {
   // }, []);
 
   useEffect(() => {
-    let appUrll = window.location.hostname;
+    let appUrll = window.location.hostname.replace("www.", "");
     // let appUrll = "localhost";
     axios
       .post(
