@@ -128,9 +128,17 @@ export const MatchOddsGrid: FC<Props> = ({
                   <ArrowDropUpIcon onClick={handleChange} style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)", cursor: "pointer" }} />
                   {/* </div> */}
                   <div className="_child">
+                    <span className="_child_max_min_name">
 
-                    Min:{minBet}{" "}
-                    Max:{maxBet}
+                      {Name}
+                    </span>
+                    <span className="_child_max_min">
+                      <span> Min:{minBet}{" "}</span>
+                      <span>Max:{maxBet}</span>
+
+                    </span>
+
+
 
                   </div>
                 </div>

@@ -90,8 +90,16 @@ const BookMakerOddsgrid: FC<{
                   {/* {/* {CurrentOdd.map((item) => (
                   <> */}
                   <div className="_child">
-                    Min:{CurrentOdd[0]?.minBet}{" "}
-                    Max:{CurrentOdd[0]?.maxBet}
+
+                    <span className="_child_max_min_name">
+
+                      Bookmaker
+                    </span>
+                    <span className="_child_max_min">
+                      <span> Min:{CurrentOdd[0]?.minBet}{" "}</span>
+                      <span> Max:{CurrentOdd[0]?.maxBet}</span>
+
+                    </span>
                   </div>
                 </div>
 
