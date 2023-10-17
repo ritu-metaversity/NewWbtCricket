@@ -41,8 +41,23 @@
 ._child {
     margin-left: 19px;
     font-weight: bold;
-    font-size: 14px;
+    /* font-size: 14px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
 }
+
+._child_max_min {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 9px;
+}
+
+._child_max_min_name {}
 
 @media screen and (max-width:580px) {
     .sessionPart {
