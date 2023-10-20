@@ -79,12 +79,12 @@ const ActionCardPropsList = [
   //   cardImageSrc: "/our-casino.png",
   //   cardForwardHref: "/virtual-casino",
   // },
-  // {
-  //   cardTitle: "International Casino",
-  //   cardDesc: "Play online international casino",
-  //   cardImageSrc: "/international-casinoletest.png",
-  //   cardForwardHref: "/Live-casino",
-  // },
+  {
+    cardTitle: "International Casino",
+    cardDesc: "Play online international casino",
+    cardImageSrc: "/international-casinoletest.png",
+    cardForwardHref: "/Live-casino",
+  },
   // {
   //   cardTitle: "Lottery",
   //   cardDesc: "Play online international casino",
