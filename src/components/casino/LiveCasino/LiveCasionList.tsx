@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import { Typography } from "@mui/material";
+import { Typography, Modal } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "./LiveCasionList.css"
 import cassionimg from "../casino.png"
@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Qtech from "./qtechlogo.png"
 import snackBarUtil from "../../Layout/snackBarUtil";
+import CasinoModals from "../indianCasion/Aura/CasinoModals";
+// import { styled, Tab, Tabs, tabClasses, Typography, } from "@mui/material";
 
 export const casinoProviderList = [
   {
@@ -18,7 +20,7 @@ export const casinoProviderList = [
   {
     name: "VIVO GAMING",
     logo: "https://wver.sprintstaticdata.com/v14/static/front/img/icons/21.png",
-    gameCode: "VGL-bulgariaroulette",
+    gameCode: "VGL-europeanroulette",
     filterType: "VGL",
   },
   {
@@ -94,24 +96,30 @@ const LiveCasionList = () => {
   let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
 
   // const [newToken, setNewToken] = useState("")
+  const [confirmPopup, setConfirmPopup] = useState(false)
+  const [casionId, setCasionId] = useState("")
 
+  const handleNotAgree = () => {
+    setConfirmPopup(false)
+  }
+  const handleClose = () => setConfirmPopup(false);
+
+  const handleAgree = () => {
+    // nav("/SuperNowa-Game-page", { state: casionId })
+    navigate("/live-casino-game", { state: casionId })
+
+    setConfirmPopup(false)
+  }
 
   const handleChangeaa = (val: any) => {
-    console.log(val, "djfisfsd");
 
-    // let data = {
-    //   item: val,
-    //   item2: ""
-    // }
-    // if (val?.gameCode === "") {
-
-    // } else {
     if (
       TokenGame
     ) {
-      navigate("/live-casino-game", { state: val, })
+      setConfirmPopup(true)
+      setCasionId(val)
     } else {
-      snackBarUtil.error("Tokeen Error")
+      snackBarUtil.error("Token Error")
 
     }
 
@@ -155,7 +163,17 @@ const LiveCasionList = () => {
           <span className="complany-name-wrap">{item?.name}</span>
         </div>
       ))
+
       }
+      <Modal open={confirmPopup} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Box className="casino_modals_body" >
+          <CasinoModals type={"qtech"} />
+          <div className="agree_btn">
+            <button onClick={handleAgree}>Ok I Agree</button>
+            <button onClick={handleNotAgree}>No, I Don't Agree</button>
+          </div>
+        </Box>
+      </Modal>
       {/* <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleChangeaa(Aviatordata[0])}>
         <img
           className="complany-logo-warp"
