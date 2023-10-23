@@ -85,24 +85,24 @@ const ActionCardPropsList = [
     cardImageSrc: "/international-casinoletest.png",
     cardForwardHref: "/Live-casino",
   },
-  // {
-  //   cardTitle: "Lottery",
-  //   cardDesc: "Play online international casino",
-  //   cardImageSrc: "/lottery.png",
-  //   cardForwardHref: "/lottery-casino",
-  // },
-  // {
-  //   cardTitle: "Slots",
-  //   cardDesc: "Play online international casino",
-  //   cardImageSrc: "/slots.png",
-  //   cardForwardHref: "/Slot-Game-details",
-  // },
-  // {
-  //   cardTitle: "Fantasy Game",
-  //   cardDesc: "Play online international casino",
-  //   cardImageSrc: "/fantasy-game.png",
-  //   cardForwardHref: "/Fantasy-Game",
-  // },
+  {
+    cardTitle: "Lottery",
+    cardDesc: "Play online international casino",
+    cardImageSrc: "/lottery.png",
+    cardForwardHref: "/lottery-casino",
+  },
+  {
+    cardTitle: "Slots",
+    cardDesc: "Play online international casino",
+    cardImageSrc: "/slots.png",
+    cardForwardHref: "/Slot-Game-details",
+  },
+  {
+    cardTitle: "Fantasy Game",
+    cardDesc: "Play online international casino",
+    cardImageSrc: "/fantasy-game.png",
+    cardForwardHref: "/Fantasy-Game",
+  },
   {
     cardTitle: "Profile",
     cardDesc: "View your profile and edit your information",
