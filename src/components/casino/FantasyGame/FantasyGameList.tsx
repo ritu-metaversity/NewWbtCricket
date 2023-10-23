@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import {  Modal, Box } from "@mui/material";
+import CasinoModals from "../indianCasion/Aura/CasinoModals";
 
 export const FgameData = [
   {
@@ -201,10 +202,25 @@ const FantasyGameList = () => {
     }
   }, [state?.filterType]);
 
+  const [confirmPopup, setConfirmPopup] = useState(false)
+  const [casionId, setCasionId] = useState("")
+
+  const handleNotAgree = () => {
+      setConfirmPopup(false)
+  }
+  const handleClose = () => setConfirmPopup(false);
+
+  const handleAgree = () => {
+      // nav("/SuperNowa-Game-page", { state: casionId })
+      //   navigate("/live-casino-game", { state: casionId })
+    navigate("/Fantasy-Game-page", { state: {"item":casionId,"item2":state?.filterType} })
+      setConfirmPopup(false)
+  }
 
   const handleChangeaa = (val: any) => {
-    console.log(val, "dafusiyhbdchuwdb");
-    navigate("/Fantasy-Game-page", { state: {"item":val,"item2":state?.filterType} })
+
+    setConfirmPopup(true)
+    setCasionId(val)
   }
 
 
@@ -227,6 +243,15 @@ const FantasyGameList = () => {
 
       ))
       }
+         <Modal open={confirmPopup} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Box className="casino_modals_body" >
+                    <CasinoModals type={"qtech"} />
+                    <div className="agree_btn">
+                        <button onClick={handleAgree}>Ok I Agree</button>
+                        <button onClick={handleNotAgree}>No, I Don't Agree</button>
+                    </div>
+                </Box>
+            </Modal>
     </div>
   )
 }

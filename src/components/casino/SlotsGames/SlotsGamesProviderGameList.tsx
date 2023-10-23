@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
+import { Modal, Box } from "@mui/material";
+import CasinoModals from "../indianCasion/Aura/CasinoModals";
 
 const SlotsGamesProviderGameList = () => {
   const { state } = useLocation()
@@ -42,11 +44,25 @@ const SlotsGamesProviderGameList = () => {
     }
   }, [])
 
-  const handleChangeaa = (val: any) => {
-    console.log(val, "dafusiyhbdchuwdb");
-    navigate("/Slots-Game-page", { state: val, })
+
+  const [confirmPopup, setConfirmPopup] = useState(false)
+  const [casionId, setCasionId] = useState("")
+
+  const handleNotAgree = () => {
+    setConfirmPopup(false)
   }
-  console.log(gameFilter, "statestatestatestate");
+  const handleClose = () => setConfirmPopup(false);
+
+  const handleAgree = () => {
+    navigate("/Slots-Game-page", { state: casionId, })
+    setConfirmPopup(false)
+  }
+
+  const handleChangeaa = (val: any) => {
+
+    setConfirmPopup(true)
+    setCasionId(val)
+  }
 
   return (
     <div className="main_wrap_game_logog_lottery">
@@ -67,6 +83,17 @@ const SlotsGamesProviderGameList = () => {
 
       ))
       }
+
+      <Modal open={confirmPopup} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Box className="casino_modals_body" >
+          <CasinoModals type={"qtech"} />
+          <div className="agree_btn">
+            <button onClick={handleAgree}>Ok I Agree</button>
+            <button onClick={handleNotAgree}>No, I Don't Agree</button>
+          </div>
+        </Box>
+      </Modal>
+
     </div>
   )
 }
