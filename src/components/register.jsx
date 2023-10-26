@@ -38,11 +38,6 @@ const Register = () => {
   const [logo, setLogo] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [loadinLogin, setLoadingLogin] = useState(false)
-  console.log(loadinLogin, "loadinLogin")
-  // const [message, setMessage] = useState("");
-  // const [isLoading1, setIsLoading1] = useState(false);
-  // const [alertBtnColor, setAlertBtnColor] = useState();
-  // const nav = useNavigate();
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [mobileNumberError, setmobileNumberError] = useState("");
@@ -218,68 +213,7 @@ const Register = () => {
         });
     }
   };
-  // const handleLoginDemo = () => {
-  //   setIsLoading1(true);
-  //   AuthorAPI.LOGIN_WITH_DEMO_USER()
-  //     .then((res) => {
-  //       const token = res.data.token;
-  //       setMessage(res.message);
-  //       setIsLoading1(false);
-  //       localStorage.removeItem("UserName");
-  //       localStorage.removeItem("UserPassword");
-  //       api.defaults.headers.common[
-  //         "Authorization"
-  //       ] = `Bearer ${res?.data?.token}`;
-  //       setStatusVal(res?.data.status);
-  //       setMessage("Invalid Username or password");
-  //       localStorage.setItem("UsertypeInfo", res?.data?.userTypeInfo);
-  //       const uId = res.data?.username;
-  //       localStorage.setItem("UserId", uId);
-  //       if (
-  //         res.data?.token !== "" &&
-  //         res?.data?.token !== undefined &&
-  //         res?.data.status !== false
-  //       ) {
-  //         localStorage.setItem("token", token);
-  //         nav("/m/home");
-  //       }
-  //       const pType = res?.data?.passwordtype;
-  //       localStorage.setItem("Password-type", pType);
-  //       if (pType === "old") {
-  //         nav("/m/setting/changepassword");
-  //       }
-  //       if (res?.data.status === false) {
-  //         setStatusVal(false);
-  //         setErrorMsg(res?.data?.message);
-  //         setIsLoading(false);
-  //         setAlertBtnColor("danger");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       setStatusCode(error.response.status);
-  //       setErrorMsg(error.response.data.message);
-  //       setStatusVal(false);
-  //       setAlertBtnColor("danger");
-  //       setIsLoading1(false);
-  //     });
-  // };
-  // const [statusBtn, setStatusBtn] = useState();
-  // const [isDemoIdLoginAllowed, setIsDemoIdLoginAllowed] = useState();
-  // useEffect(() => {
-  //   let appUrll = window.location.hostname.replace("www.","");
-  //   // let appUrll = "localhost";
-  //   axios
-  //     .post(
-  //       "https://api.247365.exchange/admin-new-apis/login/is-self-by-app-url", (appUrll
-  //     ))
-  //     .then((res) => {
-  //       console.log(logo, "logologologo")
 
-  //       setLogo(res?.data?.logo);
-  //       setStatusBtn(res?.data?.selfAllowed);
-  //       setIsDemoIdLoginAllowed(res?.data?.isDemoIdLoginAllowed)
-  //     })
-  // }, []);
 
   useEffect(() => {
     let appUrll = window.location.hostname.replace("www.", "");

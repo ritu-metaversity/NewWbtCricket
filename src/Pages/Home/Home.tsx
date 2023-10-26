@@ -1,12 +1,12 @@
 import { Grid, GridProps } from "@mui/material";
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import './Home.css'
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import axios from "axios";
 
@@ -148,27 +148,43 @@ const Home = () => {
     justifyContent: "center",
     display: "flex",
   };
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   let data = {
-  //     startDate: "2023-08-14",
-  //     endDate: "2023-09-13",
-  //     index: 0,
-  //     noOfRecords: 100
-  //   }
-  //   axios.post(
-  //     'https://api.247365.exchange/admin-new-apis/bmx/report/get-my-ledger', data,
-  //     {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+  const [casinoListData, setCasinoListData] = useState();
+  const [casinoListName, setCasinoListName] = useState();
+  const [casinoListImg, setCasinoListImg] = useState();
+  const nav = useNavigate();
 
-  //     }
-  //   ).then((res) => {
-  //     console.log(res?.data, "sdfsdfsdfsd");
-  //   })
-  // }, [])
+  useEffect(() => {
+    const TokenId = localStorage.getItem("token");
+    axios
+      .post(
+        `${REACT_APP_API_URL}/api/supernowa/game-list`, { providerCode: "BT" },
+
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${TokenId}`,
+          },
+        }
+      )
+      .then((response) => {
+        if (response) {
+          setCasinoListData(response?.data?.data?.games[0])
+          setCasinoListName(response?.data?.data?.games[0]?.name)
+          setCasinoListImg(response?.data?.data?.games[0]?.thumb)
+        } else {
+
+        }
+
+
+      })
+
+  }, [])
+
+  const handleChange = () => {
+    nav("/Sports-Book", { state: casinoListData })
+
+  }
 
   return (
     <div className="main_container" >
@@ -181,7 +197,12 @@ const Home = () => {
 
           </Link>
         ))}
+        <div onClick={() => handleChange()} className="single_container"   >
 
+          <img className="img_container" src={casinoListImg} alt="" />
+          <span>{casinoListName}</span>
+
+        </div>
       </div>
       <Outlet />
     </div >

@@ -59,6 +59,7 @@ import FantasyGamePage from "./components/casino/FantasyGame/FantasyGamePage";
 import IndianCasion from "./components/casino/indianCasion/IndianCasion";
 import SuperNowa from "./components/casino/indianCasion/SuperNowa/SuperNowa";
 import SuperNowaPage from "./components/casino/indianCasion/SuperNowa/SuperNowaPage";
+import SportBook from "./Pages/Home/SportBook";
 
 
 interface LoadingType {
@@ -287,6 +288,7 @@ function App() {
               <Route path="Slots-Game-page" element={<SlotsGamesPage />} />
               <Route path="Fantasy-Game-page" element={<FantasyGamePage />} />
               <Route path="SuperNowa-Game-page" element={<SuperNowaPage />} />
+              <Route path="Sports-Book" element={<SportBook />} />
 
             </Routes>
           </main>

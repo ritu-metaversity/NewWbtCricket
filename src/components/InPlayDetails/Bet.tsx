@@ -600,7 +600,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
             activeFancy &&
             Object.keys(activeFancy).map((keys: any) => {
               if (
-                [
+                ["BallByBall",
                   "Fancy2",
                   "Fancy3",
                   "OddEven"
