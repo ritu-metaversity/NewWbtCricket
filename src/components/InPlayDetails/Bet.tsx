@@ -505,18 +505,38 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
 
           {originBookMaker?.length > 0 && (
             <>
-              {" "}
-              {/* <Accordion defaultExpanded> */}
-              {/* <AccordionSummary expandIcon={<ExpandCircleDown />}>
-                Bookmaker
-              </AccordionSummary> */}
-              {/* <AccordionDetails sx={{ p: 0 }}> */}
+
               <BookMakerOddsgrid
                 setBet={setBet}
                 bet={bet}
                 profits={profits.Bookmaker}
                 buttonData={buttonData}
                 CurrentOdd={originBookMaker}
+                PrevOdds={prvbookmakerOdd}
+                matchId={props.event}
+                OddsPnl={oddPnl}
+              />
+              {/* </AccordionDetails> */}
+              {/* </Accordion> */}
+              <Marquee speed={50} gradient={false}>
+                <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
+                  {
+                    originBookMaker?.find((i: FancyOddsInterface) => i.t !== "TOSS")
+                      ?.display_message
+                  }
+                </Typography>
+              </Marquee>
+            </>
+          )}
+          {bookmakerToss?.length > 0 && (
+            <>
+
+              <BookMakerOddsgrid
+                setBet={setBet}
+                bet={bet}
+                profits={profits.Bookmaker}
+                buttonData={buttonData}
+                CurrentOdd={bookmakerToss}
                 PrevOdds={prvbookmakerOdd}
                 matchId={props.event}
                 OddsPnl={oddPnl}
