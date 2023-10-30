@@ -67,6 +67,9 @@ const BookMakerOddsgrid: FC<{
       setShow(true)
     }
   }
+
+  console.log(CurrentOdd[0]?.t, "awqrewerfcvwevw");
+
   return (
 
 
@@ -92,8 +95,11 @@ const BookMakerOddsgrid: FC<{
                   <div className="_child">
 
                     <span className="_child_max_min_name">
-
-                      Bookmaker
+                      {CurrentOdd[0]?.t === "TOSS" ?
+                        "TOSS"
+                        :
+                        "Bookmaker"
+                      }
                     </span>
                     <span className="_child_max_min">
                       <span> Min:{CurrentOdd[0]?.minBet}{" "}</span>

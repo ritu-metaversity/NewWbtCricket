@@ -153,7 +153,7 @@ const CurrentBet = () => {
       <div className="Maintypespert">
 
         <button className="typespert" style={{ backgroundColor: typeForSportCasion === "1" ? "#c4c4c4" : "transparent" }} onClick={() => setTypeForSportCasion("1")}>Sports</button>
-        <button className="typespert" style={{ backgroundColor: typeForSportCasion === "2" ? "#c4c4c4" : "transparent" }} onClick={() => setTypeForSportCasion("2")}>Casion</button>
+        <button className="typespert" style={{ backgroundColor: typeForSportCasion === "2" ? "#c4c4c4" : "transparent" }} onClick={() => setTypeForSportCasion("2")}>Casino</button>
       </div >
       <form style={{ display: "inline-flex", padding: "10px", gap: "20px" }}>
 
