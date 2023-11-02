@@ -88,7 +88,7 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
   await apiService(args)
     .catch((error) => {
       result = { error: error.response?.data };
-      if (error.response.status === 401) {
+      if (error?.response?.status === 401) {
         localStorage.clear();
         window.location.replace("/welcome");
         result.error = {};

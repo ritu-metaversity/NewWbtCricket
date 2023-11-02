@@ -553,13 +553,14 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
               </Marquee>
             </>
           )}
-          {bet?.marketId && bet?.marketId === originBookMaker[0]?.mid && <AllMatch
-            setBet={setBet}
-            bet={bet}
-            buttonData={buttonData}
-            event={props.event}
-            sportsId={props.sportsId}
-          />}
+          {bet?.marketId && (bet?.marketId === originBookMaker[0]?.mid ||
+            bet?.marketId === bookmakerToss[0]?.mid) && <AllMatch
+              setBet={setBet}
+              bet={bet}
+              buttonData={buttonData}
+              event={props.event}
+              sportsId={props.sportsId}
+            />}
           {/* {matchOdd
         ?.filter((i) => i.Name !== "Match Odds")
         .map((match, index) => (
