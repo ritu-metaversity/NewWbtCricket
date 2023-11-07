@@ -17,6 +17,20 @@
     /* border-top-right-radius: 5px; */
 }
 
+.BallBYball_RoundData {
+    width: 25px;
+    height: 25px;
+    margin: 2px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    color: white;
+    border-radius: 50%;
+    background-color: rgb(53, 94, 59);
+}
+
 .row {
     display: flex;
     flex-wrap: wrap;

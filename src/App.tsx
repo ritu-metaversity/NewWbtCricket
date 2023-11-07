@@ -247,7 +247,7 @@ function App() {
               >
                 <Route path="OldChangePassword" element={<OldChangePassword setIsSignedIn={setIsSignedIn} />} />
 
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home show={welcomePopup} setShow={setWelcomePopup}/>} />
 
                 <Route path="/deposit" element={<Deposit />} />
                 <Route path="/withdraw" element={<Withdraw />} />
@@ -276,7 +276,7 @@ function App() {
                 <Route path="Fantasy-Game-list" element={<FantasyGameList />} />
                 <Route path="virtual-casino" element={<Virtualcasino />} />
                 <Route path="casino/:id" element={<CasinoGame />} />
-                <Route path="terms" element={<Terms show={welcomePopup} setShow={setWelcomePopup} />} />
+                <Route path="terms" element={<Terms  />} />
                 <Route path="password-change" element={<ChangePassword setIsSignedIn={setIsSignedIn} />} />
 
 
