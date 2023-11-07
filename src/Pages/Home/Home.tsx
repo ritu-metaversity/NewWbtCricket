@@ -1,5 +1,5 @@
 import { Grid, GridProps } from "@mui/material";
-import React, { FC, useEffect, useState } from "react";
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import './Home.css'
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -9,7 +9,11 @@ import { CardActionArea } from "@mui/material";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import axios from "axios";
-
+import { Box, Modal } from "@mui/material";
+interface Props {
+  show: boolean | null;
+  setShow: Dispatch<SetStateAction<boolean | null>>
+}
 interface ActionCardProps {
   cardTitle: string;
   cardImageSrc: string;
@@ -140,7 +144,7 @@ const ActionCardPropsList = [
 
 ]
 
-const Home = () => {
+const Home : FC<Props> = ({ show, setShow }) => {
   const gridItemProps: GridProps = {
     xs: 5.5,
     item: true,
@@ -189,6 +193,43 @@ const Home = () => {
   return (
     <div className="main_container" >
       <div className="mid_container">
+      <Modal
+          open={!!show}
+          onClose={() => setShow(false)}
+          aria-labelledby="parent-modal-title"
+          aria-describedby="parent-modal-description"
+        >
+          <div className="maindatatashow">
+            <div className="mainheader-popup">
+              <h6 className="maintitle" style={{ color: "#fff" }}>Welcome to bmx</h6>
+              <button type="button" className="closecross" aria-label="Close" onClick={() => setShow(false)} style={{ cursor: "pointer" }}>
+                <span >×</span>
+              </button>
+            </div>
+            <div className="custom-body" >
+              <span className="namehead"> प्रिय ग्राहक,</span>
+              <span className="namehead_data">
+                {" "}
+                आपसे अनुरोध है हमारी कोई डुप्लीकेट साइट नही है हमारी आधिकारिक साइट
+                <b>{window.location.hostname.replace("www.", "")} </b>से लॉगिन करें। लॉगइन करने से पहले साइट
+                का नाम जरूर देख लें। आपके समर्थन के लिए धन्यवाद। टीम <b> {window.location.hostname.replace("www.", "")}</b>
+              </span>
+              <span className="namehead2">Dear Client,</span>
+              <span className="namehead_data2">
+                {" "}
+                We don't have any duplicate site , You are requested to login with our
+                official site <b>{window.location.hostname.replace("www.", "")} </b>I only. Please check the
+                site name before you login. Thanks for your support.<b>{window.location.hostname.replace("www.", "")}</b>
+              </span>
+            </div>
+            <div className="modal-footer" >
+              <button type="button" className="cancelbtn" onClick={() => setShow(false)} style={{ cursor: "pointer" }}>
+                Cancel
+              </button>
+            </div>
+          </div>
+
+        </Modal>
         {ActionCardPropsList.map((item) => (
           <Link to={item.cardForwardHref} className="single_container"   >
 

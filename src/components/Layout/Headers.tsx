@@ -466,6 +466,11 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
             <MoneyIcon /> Account Statement
           </MenuItem>
         </Link>
+        <Link to="/terms">
+          <MenuItem className="profitepopup">
+            <MdOutlineRealEstateAgent />Rules
+          </MenuItem>
+        </Link>
         {/* <Link to="/login-history">
           <MenuItem>
             <SummarizeIcon /> Login History

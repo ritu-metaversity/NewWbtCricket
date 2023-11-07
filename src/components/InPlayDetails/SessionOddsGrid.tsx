@@ -72,6 +72,9 @@ export const SessionOddsGrid: FC<Props> = ({
       setShow(true)
     }
   }
+  console.log(CurrentOdd, "Sdfsdfsdfsd")
+
+
   return (
 
     <div className="scroll-form row">
@@ -126,15 +129,27 @@ export const SessionOddsGrid: FC<Props> = ({
 
           <tbody>
 
-            {CurrentOdd.map((item, index) => (
+            {CurrentOdd.map((item: any, index) => (
               <tr>
 
 
                 <td className="bet-place-tbl-td" style={{ textAlign: "left" }}>
                   <div>
                     <div
-                      style={{ fontWeight: 750, overflow: "hidden", fontSize: "14px" }}
+                      style={{
+                        fontWeight: 750, overflow: "hidden", fontSize: "14px", display: "flex",
+                        alignItems: "center",
+                        justifyContent: "flex-start"
+                      }}
                     >
+                      {
+                        title === "BallByBall" ?
+                          <span className="BallBYball_RoundData">
+                            {item?.ball}
+                            1
+                          </span>
+                          : ""
+                      }
                       {item?.nation}
                     </div>
                     <div style={{ fontSize: 10 }}>Session Limit : {item?.maxBet}</div>

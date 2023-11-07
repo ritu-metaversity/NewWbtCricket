@@ -31,7 +31,8 @@ interface Props {
   show: boolean | null;
   setShow: Dispatch<SetStateAction<boolean | null>>
 }
-const Terms: FC<Props> = ({ show, setShow }) => {
+const Terms = () => {
+  // const Terms: FC<Props> = ({ show, setShow }) => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/", { replace: true });
@@ -45,7 +46,7 @@ const Terms: FC<Props> = ({ show, setShow }) => {
     <>
       <div className="main-div">
         {/* <WelcomeDialog /> */}
-        <Modal
+        {/* <Modal
           open={!!show}
           onClose={() => setShow(false)}
           aria-labelledby="parent-modal-title"
@@ -81,7 +82,7 @@ const Terms: FC<Props> = ({ show, setShow }) => {
             </div>
           </div>
 
-        </Modal>
+        </Modal> */}
         {/* <div className="lang-switch-btn" style={{ paddingLeft: "0px", paddingRight: "0px" }}> */}
         <div className="main_menu_btn" style={{ textAlign: "center", marginBottom: "-17px" }}>
           <Link className="btn rules-btn" id="create_bets" to="/">

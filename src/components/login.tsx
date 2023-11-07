@@ -83,7 +83,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
           setShow(true)
           setLoadingLogin(false)
 
-          navigate("/terms", { replace: true });
+          navigate("/", { replace: true });
         }
       } else {
         setLoadingLogin(false)
@@ -161,7 +161,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
           setIsSignedIn(true);
           setShow(true)
           // setLoadingLogin(false)
-          navigate("/terms", { replace: true });
+          navigate("/", { replace: true });
         } else {
           if (response?.data?.status === false) {
             snackBarUtil.error(response?.data?.message)
