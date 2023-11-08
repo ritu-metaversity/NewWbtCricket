@@ -305,7 +305,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
     return <></>
   }
 
-  console.log(bet, "liuytgfvbjh")
+  console.log(props.event, "liuytgfvbjhjhygutft")
   return (
     <>
       <Dialog
@@ -423,7 +423,6 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
               <div className="score-inner">
                 <iframe
                   src={`https://100tun.online/web/${props.event}.html`}
-                  // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
                   width="100%"
                   height="290px"
                   className="score-card"
@@ -438,9 +437,8 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
           <div className="scorecard scorecard-mobile">
             <div className="score-inner">
               <iframe
-                src={`http://15.207.182.173:3050/event/${props.event}?theme=dark-wolf`}
-
-                // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${gameIframeId}/${id}`}
+                // src={`http://15.207.182.173:3050/event/${props.event}?theme=dark-wolf`}
+                src={`https://score.247idhub.com/index.html/event/${props.event}?theme=crazy-diamond`}
                 width="100%"
                 height="290px"
                 className="score-card"
@@ -455,9 +453,8 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
             <div className="scorecard scorecard-mobile">
               <div className="score-inner">
                 <iframe
-                  //  src={`http://15.207.182.173:3050/event/${id}`}
-
-                  src={`https://internal-consumer-apis.jmk888.com/go-score/template/${props?.sportsId}/${props.event}`}
+                  // src={`https://internal-consumer-apis.jmk888.com/go-score/template/${props?.sportsId}/${props.event}`}
+                  src={`https://score.247idhub.com/go-score/template/${props?.sportsId}/${props.event}`}
                   width="100%"
                   height="290px"
                   className="score-card"
