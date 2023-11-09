@@ -48,6 +48,7 @@ const IndianCasion = () => {
             logo: "https://11bet24.com/static/media/qtechlogo.97b6c0859adf911c43bb.png",
             gameCode: "Qtech",
             filterType: "SPB",
+            BackUrl: "/india_casion",
         }
         navigate("/live-casino-game", { state: data })
 

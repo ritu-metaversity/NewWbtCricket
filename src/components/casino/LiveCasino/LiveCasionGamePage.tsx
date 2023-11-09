@@ -34,7 +34,7 @@ const LiveCasionGamePage = () => {
 
 
   const handleBackToVCasion = () => {
-    navigate("/live-casino")
+    navigate(state?.BackUrl ? "/india_casion" : "/live-casino")
   }
 
   useEffect(() => {
