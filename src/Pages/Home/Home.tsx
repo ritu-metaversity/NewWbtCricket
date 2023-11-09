@@ -144,7 +144,7 @@ const ActionCardPropsList = [
 
 ]
 
-const Home : FC<Props> = ({ show, setShow }) => {
+const Home: FC<Props> = ({ show, setShow }) => {
   const gridItemProps: GridProps = {
     xs: 5.5,
     item: true,
@@ -158,32 +158,32 @@ const Home : FC<Props> = ({ show, setShow }) => {
   const [casinoListImg, setCasinoListImg] = useState();
   const nav = useNavigate();
 
-  useEffect(() => {
-    const TokenId = localStorage.getItem("token");
-    axios
-      .post(
-        `${REACT_APP_API_URL}/api/supernowa/game-list`, { providerCode: "BT" },
+  // useEffect(() => {
+  //   const TokenId = localStorage.getItem("token");
+  //   axios
+  //     .post(
+  //       `${REACT_APP_API_URL}/api/supernowa/game-list`, { providerCode: "BT" },
 
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${TokenId}`,
-          },
-        }
-      )
-      .then((response) => {
-        if (response) {
-          setCasinoListData(response?.data?.data?.games[0])
-          setCasinoListName(response?.data?.data?.games[0]?.name)
-          setCasinoListImg(response?.data?.data?.games[0]?.thumb)
-        } else {
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${TokenId}`,
+  //         },
+  //       }
+  //     )
+  //     .then((response) => {
+  //       if (response) {
+  //         setCasinoListData(response?.data?.data?.games[0])
+  //         setCasinoListName(response?.data?.data?.games[0]?.name)
+  //         setCasinoListImg(response?.data?.data?.games[0]?.thumb)
+  //       } else {
 
-        }
+  //       }
 
 
-      })
+  //     })
 
-  }, [])
+  // }, [])
 
   const handleChange = () => {
     nav("/Sports-Book", { state: casinoListData })
@@ -193,7 +193,7 @@ const Home : FC<Props> = ({ show, setShow }) => {
   return (
     <div className="main_container" >
       <div className="mid_container">
-      <Modal
+        <Modal
           open={!!show}
           onClose={() => setShow(false)}
           aria-labelledby="parent-modal-title"
@@ -238,12 +238,12 @@ const Home : FC<Props> = ({ show, setShow }) => {
 
           </Link>
         ))}
-        <div onClick={() => handleChange()} className="single_container"   >
+        {/* <div onClick={() => handleChange()} className="single_container"   >
 
           <img className="img_container" src={casinoListImg} alt="" />
           <span>{casinoListName}</span>
 
-        </div>
+        </div> */}
       </div>
       <Outlet />
     </div >
