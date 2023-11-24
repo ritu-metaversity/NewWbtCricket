@@ -33,7 +33,7 @@ const IndianCasion = () => {
 
     }
 
-// qtech
+    // qtech
 
     const [confirmPopup, setConfirmPopup] = useState(false)
 
@@ -76,15 +76,7 @@ const IndianCasion = () => {
 
 
             {/* qtech */}
-            <div className="MainBtn_warp" style={{ border: "0.5px solid" }}
-                onClick={handleChangeQtech}
-            >
-                <img
-                    className="complany-logo-warp"
-                    src="https://11bet24.com/static/media/qtechlogo.97b6c0859adf911c43bb.png"
-                    alt="" />
-                <span className="complany-name-wrap">Qtech</span>
-            </div>
+
 
             <Modal open={confirmPopup} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Box className="casino_modals_body" >
