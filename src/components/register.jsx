@@ -214,10 +214,11 @@ const Register = () => {
     }
   };
 
+  const [allData, setAllData] = useState()
 
   useEffect(() => {
     let appUrll = window.location.hostname.replace("www.", "");
-    // let appUrll = "localhost";
+    // let appUrll = "maggibook.com";
     axios
       .post(
         `${REACT_APP_API_URL}/login/is-self-by-app-url`,
@@ -225,7 +226,7 @@ const Register = () => {
       )
       .then((res) => {
         console.log(res, "dadasdas")
-
+        setAllData(res?.data)
         // SetselfAllowedd(res?.data?.data?.logo);
         setLogo(res?.data?.data?.logo);
         // setStatusBtn(res?.data?.data?.selfAllowed);
@@ -338,7 +339,35 @@ const Register = () => {
               onChange={handleConfirmPasswordsValidation}
             />
             <label style={{ color: "red" }}>{confirmPasswordError}</label>
+            <div className='comm-data-new'>
+              {allData?.data?.fancyComm === 0 ?
 
+                "" :
+                <span>
+                  <label style={{ color: "white", fontSize: "12px", width: "100%", textAlign: "left" }}>Odds Comm..</label>
+                  <input value={allData?.data?.oddsComm} disabled style={{ width: "100%" }} />
+                </span>
+              }
+
+              {allData?.data?.fancyComm === 0 ?
+
+                "" :
+                <span>
+                  <label style={{ color: "white", fontSize: "12px", width: "100%", textAlign: "left" }}>Fancy Comm..</label>
+                  <input placeholder={allData?.data?.fancyComm} disabled style={{ width: "100%" }} />
+                </span>}
+              {allData?.data?.casinoComm === 0 ?
+
+                "" :
+                <span>
+                  <label style={{ color: "white", fontSize: "12px", width: "100%", textAlign: "left" }}>Casino Comm..</label>
+                  <input placeholder={allData?.data?.casinoComm} disabled style={{ width: "100%" }} />
+                </span>
+
+
+              }
+
+            </div>
             <button className="login_loginnn" type="submit">
 
               {
@@ -361,8 +390,8 @@ const Register = () => {
             <LoginIcon style={{ rotate: "180deg", fontSize: "18px" }} />
           </button>
         </div>
-      </div>
-    </Box>
+      </div >
+    </Box >
   );
 };
 
