@@ -21,12 +21,13 @@ import NewLogogooo from "./WBT99-2.png"
 //   password?: string;
 // }
 
-const Register = () => {
+const Register = ({ setShow }) => {
   const [open, setOpen] = useState(false);
   const [newCredAfterRegister, setNewCredAfterRegister] = useState("");
   const navigate = useNavigate();
   // const [selfAllowedd, SetselfAllowedd] = useState();
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+  let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
 
   const [password, setPassword] = useState(0);
   const [mobileNumber, setMobileNumber] = useState();
@@ -183,16 +184,45 @@ const Register = () => {
             confirmPassword: confirmPassword,
             mobile: mobileNumber,
             userId: UserName,
+            casinoComm: allData?.data?.casinoComm,
+            fancyComm: allData?.data?.fancyComm,
+            oddsComm: allData?.data?.oddsComm
           }
         )
         .then((res) => {
           if (res?.status) {
-            setOpen(true)
-            setLoadingLogin(false)
+            console.log(res, "dfsgdshfjgkhfghdgdf");
 
-            snackBarUtil.success(res?.data?.message);
-            console.log(res?.data)
-            setNewCredAfterRegister(res?.data);
+            if (res?.data?.token) {
+              localStorage.setItem("token", res?.data?.token);
+              localStorage.setItem("userid", res?.data?.userId);
+              localStorage.setItem("passwordType", res?.data?.passwordtype);
+              snackBarUtil.success("login successful");
+              navigate("/");
+
+              setShow(true)
+              axios
+                .post(
+                  `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
+                  {},
+                  {
+                    headers: {
+                      "Content-Type": "application/json",
+                      Authorization: `Bearer ${res?.data?.token}`,
+                    },
+                  }
+                )
+                .then((response) => {
+                  localStorage.setItem("GameToken", response?.data?.data?.access_token);
+                })
+
+
+
+            } else {
+              setOpen(true)
+              setLoadingLogin(false)
+              setNewCredAfterRegister(res?.data);
+            }
           } else {
             snackBarUtil.error(res?.data?.message);
             console.log("loadinLogin")
@@ -340,7 +370,7 @@ const Register = () => {
             />
             <label style={{ color: "red" }}>{confirmPasswordError}</label>
             <div className='comm-data-new'>
-              {allData?.data?.fancyComm === 0 ?
+              {allData?.data?.oddsComm === 0 ?
 
                 "" :
                 <span>
