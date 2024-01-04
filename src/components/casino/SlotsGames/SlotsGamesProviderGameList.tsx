@@ -57,11 +57,31 @@ const SlotsGamesProviderGameList = () => {
     navigate("/Slots-Game-page", { state: casionId, })
     setConfirmPopup(false)
   }
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const handleChangeaa = (val: any) => {
 
-    setConfirmPopup(true)
-    setCasionId(val)
+
+    const token = localStorage.getItem("token");
+    axios.post(
+      `${REACT_APP_API_URL}/api/getOneUserBetResult`, {},
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+
+      }
+    ).then((res) => {
+      // setCasionValue(res?.data?.data[type?.type])
+      if (res?.data?.data?.qtech === 1) {
+        navigate("/Slots-Game-page", { state: val, })
+
+      } else {
+        setConfirmPopup(true)
+        setCasionId(val)
+      }
+    })
   }
 
   return (

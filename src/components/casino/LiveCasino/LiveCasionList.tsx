@@ -110,18 +110,43 @@ const LiveCasionList = () => {
 
     setConfirmPopup(false)
   }
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const handleChangeaa = (val: any) => {
 
-    if (
-      TokenGame
-    ) {
-      setConfirmPopup(true)
-      setCasionId(val)
-    } else {
-      snackBarUtil.error("Token Error")
+    const token = localStorage.getItem("token");
+    axios.post(
+      `${REACT_APP_API_URL}/api/getOneUserBetResult`, {},
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
 
-    }
+      }
+    ).then((res) => {
+      // setCasionValue(res?.data?.data[type?.type])
+      if (res?.data?.data?.qtech === 1) {
+
+        navigate("/live-casino-game", { state: val })
+        // navigate("/Lottery-Game", { state: val, })
+
+      } else {
+        setConfirmPopup(true)
+        setCasionId(val)
+      }
+    })
+
+
+    // if (
+    //   TokenGame
+    // ) {
+    //   setConfirmPopup(true)
+    //   setCasionId(val)
+    // } else {
+    //   snackBarUtil.error("Token Error")
+
+    // }
 
   };
   // useEffect(() => {

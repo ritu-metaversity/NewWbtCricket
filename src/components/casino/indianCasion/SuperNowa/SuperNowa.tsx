@@ -111,18 +111,41 @@ const SuperNowa = () => {
   }
   const handleChangeaa = (val: any) => {
     console.log(val, "uygtfvgbhnjuytfrvb");
+    const token = localStorage.getItem("token");
+    axios.post(
+      `${REACT_APP_API_URL}/api/getOneUserBetResult`, {},
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
 
-    if (
-      token
-    ) {
-      setConfirmPopup(true)
-      setCasionId(val)
-      // nav("/SuperNowa-Game-page", { state: val })
+      }
+    ).then((res) => {
+      // setCasionValue(res?.data?.data[type?.type])
+      if (res?.data?.data?.supernowa === 1) {
 
-      // setCasionId(val)
-      // setConfirmPopup(true)
-    } else {
-    }
+        nav("/SuperNowa-Game-page", { state: val })
+      } else {
+        setConfirmPopup(true)
+        setCasionId(val)
+      }
+      // console.log(res?.data?.data?.supernowa === 1, "popupchaes");
+
+
+
+    })
+    // if (
+    //   token
+    // ) {
+    //   setConfirmPopup(true)
+    //   setCasionId(val)
+    //   // nav("/SuperNowa-Game-page", { state: val })
+
+    //   // setCasionId(val)
+    //   // setConfirmPopup(true)
+    // } else {
+    // }
   };
 
   return (

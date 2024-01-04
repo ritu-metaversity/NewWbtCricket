@@ -8,6 +8,7 @@ import { CasinoIcon, StyledGameThumb } from "./StyledComponent";
 import { RxCross2 } from 'react-icons/rx'
 import "./Casion.css"
 import CasinoModals from "./CasinoModals";
+import axios from "axios";
 const StyledTab = styled(Tab)(({ theme }) => ({
   borderRadius: "20px",
   marginRight: "10px",
@@ -95,20 +96,31 @@ const Casino = () => {
     setConfirmPopup(false)
 
   }
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
   const handleChangeaa = (val: any) => {
-    // console.log(val)
-    // /m/casino/:id
-    if (
-      token
-    ) {
-      setCasionId(val)
-      setConfirmPopup(true)
-      // navigate(`/m/casino/${val}`);
-    } else {
-      // navigate("/m/login");
-      // setCasionId(val) 
-      // setTrueee(true)
-    }
+
+
+    const token = localStorage.getItem("token");
+    axios.post(
+      `${REACT_APP_API_URL}/api/getOneUserBetResult`, {},
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+
+      }
+    ).then((res: any) => {
+      if (res?.data?.data?.aura === 1) {
+        nav("/india-casino-game", { state: val })
+
+      } else {
+        setConfirmPopup(true)
+        setCasionId(val)
+      }
+    })
+
   };
 
   return (
@@ -135,8 +147,10 @@ const Casino = () => {
               {/* <span style={{ width: "100%" }} className="casinoGameNAame"> {item?.gameCode}</span> */}
               {/* </Link> */}
             </Box>
+
           ))}
         </Box>
+
       </Box>
       <Modal open={confirmPopup} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Box className="casino_modals_body" >

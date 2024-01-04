@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {  Modal, Box } from "@mui/material";
+import { Modal, Box } from "@mui/material";
 import CasinoModals from "../indianCasion/Aura/CasinoModals";
+import axios from "axios";
 
 export const FgameData = [
   {
@@ -206,21 +207,47 @@ const FantasyGameList = () => {
   const [casionId, setCasionId] = useState("")
 
   const handleNotAgree = () => {
-      setConfirmPopup(false)
+    setConfirmPopup(false)
   }
   const handleClose = () => setConfirmPopup(false);
 
   const handleAgree = () => {
-      // nav("/SuperNowa-Game-page", { state: casionId })
-      //   navigate("/live-casino-game", { state: casionId })
-    navigate("/Fantasy-Game-page", { state: {"item":casionId,"item2":state?.filterType} })
-      setConfirmPopup(false)
+    // nav("/SuperNowa-Game-page", { state: casionId })
+    //   navigate("/live-casino-game", { state: casionId })
+    navigate("/Fantasy-Game-page", { state: { "item": casionId, "item2": state?.filterType } })
+    setConfirmPopup(false)
   }
+
+  let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 
   const handleChangeaa = (val: any) => {
 
-    setConfirmPopup(true)
-    setCasionId(val)
+    const token = localStorage.getItem("token");
+    axios.post(
+      `${REACT_APP_API_URL}/api/getOneUserBetResult`, {},
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+
+      }
+    ).then((res) => {
+      // setCasionValue(res?.data?.data[type?.type])
+      if (res?.data?.data?.qtech === 1) {
+        navigate("/Fantasy-Game-page", { state: { "item": val, "item2": state?.filterType } })
+        // navigate("/live-casino-game", { state: val })
+        // navigate("/Lottery-Game", { state: val, })
+
+      } else {
+        setConfirmPopup(true)
+        setCasionId(val)
+      }
+    })
+
+    // setConfirmPopup(true)
+    // setCasionId(val)
   }
 
 
@@ -243,15 +270,15 @@ const FantasyGameList = () => {
 
       ))
       }
-         <Modal open={confirmPopup} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Box className="casino_modals_body" >
-                    <CasinoModals type={"qtech"} />
-                    <div className="agree_btn">
-                        <button onClick={handleAgree}>Ok I Agree</button>
-                        <button onClick={handleNotAgree}>No, I Don't Agree</button>
-                    </div>
-                </Box>
-            </Modal>
+      <Modal open={confirmPopup} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <Box className="casino_modals_body" >
+          <CasinoModals type={"qtech"} />
+          <div className="agree_btn">
+            <button onClick={handleAgree}>Ok I Agree</button>
+            <button onClick={handleNotAgree}>No, I Don't Agree</button>
+          </div>
+        </Box>
+      </Modal>
     </div>
   )
 }

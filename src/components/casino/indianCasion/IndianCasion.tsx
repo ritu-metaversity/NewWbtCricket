@@ -1,84 +1,84 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Box } from "@mui/system";
 import CasinoModals from './Aura/CasinoModals';
 import { Modal } from "@mui/material";
+import axios from 'axios';
 
 
 const IndianCasion = () => {
     const navigate = useNavigate();
 
-    let gamesName = [
-        {
-            name: "Super nowa",
-            url: "https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png",
-            filterType: "SP-NOWA"
-        },
-        {
-            name: "Aura",
-            url: "https://auragaming.org/images/supercleanaura%20white.png?crc=7159781",
-            filterType: "AURA"
-        },
-    ]
-
-    const handleChangeaa = (val: any) => {
-        console.log(val, "adcnlkscaksdn");
-        if (val?.filterType === "SP-NOWA") {
-            navigate("/SuperNowa_casion")
-        } else {
-            navigate("/casino")
-
-        }
-
-
+    const handleChangeaa = () => {
+        navigate("/casino")
     }
 
-    // qtech
 
-    const [confirmPopup, setConfirmPopup] = useState(false)
 
-    const handleChangeQtech = (val: any) => {
-        setConfirmPopup(true)
+    const handleChangeSupNowa = () => {
+        navigate("/SuperNowa_casion")
     }
-    const handleClose = () => setConfirmPopup(false);
 
-    const handleAgree = () => {
-        let data = {
-            name: "Q Tech",
-            logo: "https://11bet24.com/static/media/qtechlogo.97b6c0859adf911c43bb.png",
-            gameCode: "Qtech",
-            filterType: "SPB",
-            BackUrl: "/india_casion",
-        }
-        navigate("/live-casino-game", { state: data })
 
-        setConfirmPopup(false)
-    }
-    const handleNotAgree = () => {
-        setConfirmPopup(false)
-    }
+    const token = localStorage.getItem("token");
+    // const [gameQtech, setGameQTech] = useState<any>()
+    const [gameAura, setGameAura] = useState<any>()
+    const [gameSuperNova, setGameSuperNova] = useState<any>()
+    useEffect(() => {
+
+        axios.post(
+            "https://api.247365.exchange/admin-new-apis/user/alloted-casino-list", {},
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
+            .then((response: any) => {
+                //   setGameQTech(response?.data?.data.find((item: any) => item?.name === "QTech"))
+                setGameAura(response?.data?.data.find((item: any) => item?.name === "Aura"))
+                setGameSuperNova(response?.data?.data.find((item: any) => item?.name === "Super Nova"))
+            })
+
+    }, [])
+    // let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
+
     return (
 
         <div className="main_wrap_live-casion">
-            {gamesName.map((item: any) => (
-
+            {/* {gamesName.map((item: any) => ( */}
+            {gameSuperNova?.active === true ?
                 <div className="MainBtn_warp" style={{ border: "0.5px solid" }}
-                    onClick={() => handleChangeaa(item)}
+                    onClick={handleChangeSupNowa}
                 >
                     <img
                         className="complany-logo-warp"
-                        src={item?.url}
+                        src="https://supernovagamesstudios.com/wp-content/uploads/2021/06/suxnova.png"
                         alt="" />
-                    <span className="complany-name-wrap">{item?.name}</span>
+                    <span className="complany-name-wrap">Super nowa</span>
                 </div>
-            ))
-            }
+                : ""}
+
+            {gameAura?.active === true ?
+                <div className="MainBtn_warp" style={{ border: "0.5px solid" }}
+                    onClick={handleChangeaa}
+                >
+                    <img
+                        className="complany-logo-warp"
+                        src="https://auragaming.org/images/supercleanaura%20white.png?crc=7159781"
+                        alt="" />
+                    <span className="complany-name-wrap">Aura</span>
+                </div> : ""}
+            {/* ))
+            } */}
 
 
             {/* qtech */}
 
 
-            <Modal open={confirmPopup} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {/* <Modal open={confirmPopup} onClose={handleClose} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Box className="casino_modals_body" >
                     <CasinoModals type={"supernowa"} />
                     <div className="agree_btn">
@@ -86,7 +86,7 @@ const IndianCasion = () => {
                         <button onClick={handleNotAgree}>No, I Don't Agree</button>
                     </div>
                 </Box>
-            </Modal>
+            </Modal> */}
         </div>
 
     )
