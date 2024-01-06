@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const lotteryprovidersList = [
@@ -72,16 +74,37 @@ const LotteryCasionProvider = () => {
 
 
     }
+
+    const token = localStorage.getItem("token");
+
+    const [casionProviderData, setCasinoProviderData] = useState<any>()
+
+    useEffect(() => {
+        axios
+            .post(
+                "https://api.247idhub.com/api/qtech/provider", { gameType: "LOTTERY" },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
+            .then((response: any) => {
+                setCasinoProviderData(response?.data?.data)
+            })
+
+    }, [])
     return (
         <div className="main_wrap_live-casion">
-            {lotteryprovidersList.map((item: any) => (
+            {casionProviderData && casionProviderData.map((item: any) => (
 
                 <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleChangeaa(item)}>
                     <img
                         className="complany-logo-warp"
-                        src={item?.logo}
+                        src={item?.image}
                         alt="" />
-                    <span className="complany-name-wrap">{item?.name}</span>
+                    <span className="complany-name-wrap">{item?.providerName}</span>
                 </div>
             ))
             }

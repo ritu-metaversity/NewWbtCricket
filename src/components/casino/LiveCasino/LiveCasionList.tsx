@@ -136,56 +136,43 @@ const LiveCasionList = () => {
         setCasionId(val)
       }
     })
-
-
-    // if (
-    //   TokenGame
-    // ) {
-    //   setConfirmPopup(true)
-    //   setCasionId(val)
-    // } else {
-    //   snackBarUtil.error("Token Error")
-
-    // }
-
   };
-  // useEffect(() => {
-  //   axios
-  //     .post(
-  //       `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
-  //       {},
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${TokenId}`,
-  //         },
-  //       }
-  //     )
-  //     .then((response) => {
-  //       if (response) {
-  //         console.log(response?.data?.data, "dsfsdfdfsd");
 
-  //         // setCasinoList(response?.data?.data || []);
-  //       } else {
-  //         // setCasinoList([]);
-  //       }
-  //     })
-  // })
 
-  // let width = window.innerWidth < 1024px
+  const token = localStorage.getItem("token");
+
+  const [casionProviderData, setCasinoProviderData] = useState<any>()
+
+  useEffect(() => {
+    axios
+      .post(
+        "https://api.247idhub.com/api/qtech/provider", { gameType: "ALL" },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response: any) => {
+        setCasinoProviderData(response?.data?.data)
+      })
+
+  }, [])
+
   console.log(window.innerWidth > 1024, "loiuytrewqasxcvbn");
 
   return (
 
     <div className="main_wrap_live-casion">
-      {casinoProviderList.map((item: any) => (
+      {casionProviderData?.liveCasino.map((item: any) => (
 
         <div className="MainBtn_warp" style={{ border: "0.5px solid" }} onClick={() => handleChangeaa(item)}>
           <img
             className="complany-logo-warp"
-            src={item?.logo}
+            src={item?.image}
             alt="" />
-          <span className="complany-name-wrap">{item?.name}</span>
+          <span className="complany-name-wrap">{item?.providerName}</span>
         </div>
       ))
 

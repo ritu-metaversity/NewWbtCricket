@@ -20,7 +20,7 @@ const SlotsGamesProviderGameList = () => {
       TokenGame
     ) {
       let data = {
-        token: TokenGame, provider: state?.filterType, gameCategory: "SLOT"
+        token: TokenGame, provider: state?.providerId, gameCategory: "SLOT"
 
       }
       axios.post(

@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const slotProviderList = [
@@ -167,7 +169,26 @@ export const slotProviderList = [
 const SlotsGamesProvider = () => {
 
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
+  const [casionProviderData, setCasinoProviderData] = useState<any>()
+
+  useEffect(() => {
+    axios
+      .post(
+        "https://api.247idhub.com/api/qtech/provider", { gameType: "SLOT" },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((response: any) => {
+        setCasinoProviderData(response?.data?.data)
+      })
+
+  }, [])
   const handleChangeaa = (val: any) => {
     console.log(val);
     navigate("/Slot-Game-list", { state: val, })
@@ -176,16 +197,16 @@ const SlotsGamesProvider = () => {
   }
   return (
     <div className="main_wrap_live-casion">
-      {slotProviderList.map((item: any) => (
+      {casionProviderData && casionProviderData.map((item: any) => (
 
         <div className="MainBtn_warp" style={{ border: "0.5px solid" }}
           onClick={() => handleChangeaa(item)}
         >
           <img
             className="complany-logo-warp"
-            src={item?.logo}
+            src={item?.image}
             alt="" />
-          <span className="complany-name-wrap">{item?.name}</span>
+          <span className="complany-name-wrap">{item?.providerName}</span>
         </div>
       ))
       }

@@ -8,7 +8,7 @@ import CasinoModals from "../indianCasion/Aura/CasinoModals";
 const LotteryCasionListPage = () => {
     const { state } = useLocation()
     const TokenId = localStorage.getItem("token");
-    console.log(state?.filterType, "statestatestatestate");
+
     let REACT_APP_API_URL_PLAY_INDIA = process.env.REACT_APP_API_URL_PLAY_INDIA;
     let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
@@ -39,7 +39,7 @@ const LotteryCasionListPage = () => {
             TokenId
         ) {
             let data = {
-                token: TokenGame, provider: state?.filterType, gameCategory: "LOTTERY"
+                token: TokenGame, provider: state?.providerId, gameCategory: "LOTTERY"
 
             }
             axios.post(
