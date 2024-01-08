@@ -58,5 +58,9 @@ export const userResources: {
   ACCOUNT_STATEMENT: {
     URL: "enduser/account-statement",
     METHOD: "POST",
+  },
+  USER_WINNER_PNL: {
+    URL: "enduser/user-winner-pnl",
+    METHOD: "POST",
   }
 };

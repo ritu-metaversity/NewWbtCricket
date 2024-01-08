@@ -7,6 +7,7 @@ import { BetDetailsInterface, ProfitInterface } from "./types";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import "./common.css"
 import { useSearchParams } from "react-router-dom";
+import { userServices } from "../../utils/api/user/services";
 interface MatchOddsGridProps {
   runners: {
     back1price: number;
@@ -102,7 +103,28 @@ export const MatchOddsGrid: FC<Props> = ({
       setShow(true)
     }
   }
-  console.log(runners, "runners");
+  const [newUserWinnerPnl, setNewUserWinnerPnl] = useState<any>()
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+
+      if (Name.toLowerCase().includes("winner")) {
+
+        const getList = async () => {
+          const { response } = await userServices.UserWinnerPnl({ marketId: marketId });
+          if (response?.data) {
+            setNewUserWinnerPnl(response)
+          }
+        };
+        getList();
+
+      }
+    }, 5000);
+
+    return () => clearInterval(timer);
+
+  }, []);
+
 
   useEffect(() => {
     if ((searchParams.get("Sports-id") === "4")) {
@@ -350,10 +372,21 @@ export const MatchOddsGrid: FC<Props> = ({
                         fontSize: "16px",
                         color: "#ff5c72",
                         fontWeight: "750"
-                      }}> {redGreenComponent(
-                        OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
-                          ?.value || 0
-                      )}</span>
+                      }}>
+
+                        {Name.toLowerCase().includes("winner") ?
+
+                          redGreenComponent(
+                            (newUserWinnerPnl && newUserWinnerPnl?.data?.find((itemmmm: any) => itemmmm?.selctionId == item.selectionId)
+                              ?.liability)
+                          )
+                          :
+                          redGreenComponent(
+                            OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
+                              ?.value || 0
+                          )
+                        }
+                      </span>
                       <div>
 
                         {/* <span style={{

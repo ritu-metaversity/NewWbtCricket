@@ -130,4 +130,11 @@ export const userServices = {
     };
     return await apiWithErrorSnackbar(params);
   },
+  UserWinnerPnl: async (data: any) => {
+    const params = {
+      resource: userResources.USER_WINNER_PNL,
+      data,
+    };
+    return await apiWithErrorSnackbar(params);
+  },
 };
