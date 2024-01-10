@@ -56,6 +56,12 @@ const columns: readonly Column[] = [
     align: "center",
   },
   {
+    id: "price",
+    label: "User Price",
+    minWidth: 20,
+    align: "center",
+  },
+  {
     id: "amount",
     label: "Amount",
     align: "center",

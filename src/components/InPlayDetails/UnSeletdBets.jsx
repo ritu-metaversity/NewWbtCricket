@@ -32,7 +32,7 @@ const UnSeletdBets = ({ betRecord, sportsId }) => {
                 { "matchId": eventId }
             );
             if (response?.data) {
-                console.log(response?.data,"response?.data");
+                console.log(response?.data, "response?.data");
                 setCompletedMatches(response.data?.data)
                 setCompletedDetalll(response.data?.totalplusminus)
             }
@@ -103,6 +103,9 @@ const UnSeletdBets = ({ betRecord, sportsId }) => {
                                             RATE
                                         </th>
                                         <th className="bet-place-tbl-th run-pos-rate-amt-run-mod-color">
+                                            PRICE
+                                        </th>
+                                        <th className="bet-place-tbl-th run-pos-rate-amt-run-mod-color">
                                             AMOUNT
                                         </th>
                                         <th className="bet-place-tbl-th run-pos-rate-amt-run-mod-color">
@@ -128,6 +131,12 @@ const UnSeletdBets = ({ betRecord, sportsId }) => {
                                                             className="bet-place-tbl-td md-trigger runs-2-value-box-color"
                                                         >
                                                             {item?.rate}{" "}
+                                                        </td>
+                                                        <td
+                                                            data-modal="modal-1"
+                                                            className="bet-place-tbl-td md-trigger runs-2-value-box-color"
+                                                        >
+                                                            {item?.priveValue}{" "}
                                                         </td>
                                                         {key.includes("Fancy") && <td
                                                             data-modal="modal-1"

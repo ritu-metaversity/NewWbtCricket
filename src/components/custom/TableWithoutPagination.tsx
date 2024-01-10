@@ -57,7 +57,7 @@ const StickyTable: React.FC<StickyHeadTableProps> = ({
                   {result}
                 </TableResultContainer>
               )}
-              fsdd
+
             </TableContainer>
           </AccordionDetails>
         </Accordion>
