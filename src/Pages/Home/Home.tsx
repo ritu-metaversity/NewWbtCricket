@@ -83,20 +83,28 @@ const Home: FC<Props> = ({ show, setShow }) => {
   const [gameSuperNova, setGameSuperNova] = useState<any>()
   useEffect(() => {
 
-    axios.post(
-      "https://api.247365.exchange/admin-new-apis/user/alloted-casino-list", {},
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    axios
+      .post(
+        "https://adminapi.247idhub.com/admin-new-apis/user/alloted-casino-list",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((response: any) => {
-        setGameQTech(response?.data?.data.find((item: any) => item?.name === "QTech"))
-        setGameAura(response?.data?.data.find((item: any) => item?.name === "Aura"))
-        setGameSuperNova(response?.data?.data.find((item: any) => item?.name === "Super Nova"))
-      })
+        setGameQTech(
+          response?.data?.data.find((item: any) => item?.name === "QTech")
+        );
+        setGameAura(
+          response?.data?.data.find((item: any) => item?.name === "Aura")
+        );
+        setGameSuperNova(
+          response?.data?.data.find((item: any) => item?.name === "Super Nova")
+        );
+      });
 
   }, [])
 
