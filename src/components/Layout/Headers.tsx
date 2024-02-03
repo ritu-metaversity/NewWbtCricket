@@ -126,7 +126,28 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   useEffect(() => {
 
     if (TokenId) {
+axios
+  .post(
+    `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${TokenId}`,
+      },
+    }
+  )
+  .then((response) => {
+    console.log(response, "dfsdfksdjfkuhsdjn");
 
+    localStorage.setItem("GameToken", response?.data?.data?.access_token);
+  })
+  .catch((error) => {
+    if (error?.response?.data?.status === false) {
+      navigation("/welcome");
+      localStorage.clear();
+    }
+  });
 
       const timers = setInterval(
         () => {
@@ -155,7 +176,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
             })
 
 
-        }, 5000)
+        }, 3600000)
       return () => clearInterval(timers)
     }
 
