@@ -274,11 +274,11 @@ const WithDraw1 = () => {
                 setIsLoading(false);
                 return false;
             }
-            else if (ifsc.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) === null) {
-                snackBarUtil.error("Please enter a valid IFSC CODE")
-                setIsLoading(false);
-                return false;
-            }
+            // else if (ifsc.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) === null) {
+            //     snackBarUtil.error("Please enter a valid IFSC CODE")
+            //     setIsLoading(false);
+            //     return false;
+            // }
         } else if (withType === "PAYTM") {
             console.log("heloo");
             if (
