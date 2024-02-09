@@ -265,20 +265,20 @@ const WithDraw1 = () => {
                 snackBarUtil.error(erreeee?.bankName)
                 setIsLoading(false);
                 return false;
-            } else if (ifsc === "") {
-                snackBarUtil.error(erreeee?.infcRequired)
-                setIsLoading(false);
-                return false;
-            } else if (ifsc === "") {
-                snackBarUtil.error(erreeee?.infcRequired)
-                setIsLoading(false);
-                return false;
-            }
+            // } else if (ifsc === "") {
+            //     snackBarUtil.error(erreeee?.infcRequired)
+            //     setIsLoading(false);
+            //     return false;
+            // } else if (ifsc === "") {
+            //     snackBarUtil.error(erreeee?.infcRequired)
+            //     setIsLoading(false);
+            //     return false;
+            // }
             // else if (ifsc.match(/^[A-Za-z]{4}0[A-Za-z0-9]{6}$/) === null) {
             //     snackBarUtil.error("Please enter a valid IFSC CODE")
             //     setIsLoading(false);
             //     return false;
-            // }
+            }
         } else if (withType === "PAYTM") {
             console.log("heloo");
             if (
@@ -599,7 +599,9 @@ const WithDraw1 = () => {
                                         className="account-input"
                                         value={ifsc}
                                         onChange={(e) =>
-                                            setIFSC(e.target.value.replace(/[^A-Z0-9a-z]+$/, "").toUpperCase())
+                                            setIFSC(e.target.value
+                                                // .replace(/[^A-Z0-9a-z]+$/, "")
+                                                .toUpperCase())
                                         }
                                         onKeyDown={(e) =>
                                             symbolsArrUpiId.includes(e.key) && e.preventDefault()

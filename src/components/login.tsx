@@ -61,20 +61,6 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
         localStorage.setItem("token", response?.token);
         localStorage.setItem("userid", response?.userId);
         localStorage.setItem("passwordType", response?.passwordtype);
-        axios
-          .post(
-            `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
-            {},
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${response?.token}`,
-              },
-            }
-          )
-          .then((response) => {
-            localStorage.setItem("GameToken", response?.data?.data?.access_token);
-          })
         if (response.passwordtype === "old") {
           setLoadingLogin(false)
           navigate("/OldChangePassword", { replace: true });
@@ -144,20 +130,6 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
           localStorage.setItem("passwordType", response?.data?.passwordtype);
           localStorage.setItem("userTypeInfo", response?.data?.userTypeInfo);
           // QTECH APPPIIIIIIIIIIIII
-          axios
-            .post(
-              `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
-              {},
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${response?.data?.token}`,
-                },
-              }
-            )
-            .then((response) => {
-              localStorage.setItem("GameToken", response?.data?.data?.access_token);
-            })
           setIsSignedIn(true);
           setShow(true)
           // setLoadingLogin(false)

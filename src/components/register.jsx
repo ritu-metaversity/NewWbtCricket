@@ -201,22 +201,6 @@ const Register = ({ setShow }) => {
               navigate("/");
 
               setShow(true)
-              axios
-                .post(
-                  `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
-                  {},
-                  {
-                    headers: {
-                      "Content-Type": "application/json",
-                      Authorization: `Bearer ${res?.data?.token}`,
-                    },
-                  }
-                )
-                .then((response) => {
-                  localStorage.setItem("GameToken", response?.data?.data?.access_token);
-                })
-
-
 
             } else {
               setOpen(true)
