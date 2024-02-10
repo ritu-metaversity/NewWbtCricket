@@ -230,7 +230,7 @@ const Filter: FC<Props> = ({
               // type="date"
               defaultValue={dayjs(formData?.fromDate)}
               placeholder="YYYY-MM-DD"
-              onChange={(e, v) => setFormData((prev) => ({ ...prev, fromDate: v }))}
+              onChange={(e, v) => setFormData((prev) => ({ ...prev, fromDate: v.toString() }))}
               name="fromDate"
             />
           </Grid>
@@ -245,7 +245,7 @@ const Filter: FC<Props> = ({
               // type="date"
               defaultValue={dayjs(formData.toDate)}
               placeholder="YYYY-MM-DD"
-              onChange={(e, v) => setFormData((prev) => ({ ...prev, toDate: v }))}
+              onChange={(e, v) => setFormData((prev) => ({ ...prev, toDate: v.toString() }))}
               name="toDate"
 
             />

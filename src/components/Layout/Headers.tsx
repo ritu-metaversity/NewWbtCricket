@@ -25,10 +25,9 @@ import React, {
   useState,
 } from "react";
 import "./Header.css"
-import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import { FaHome } from "react-icons/fa";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoneyTwoTone";
 import MoneyIcon from "@mui/icons-material/MoneyTwoTone";
-import { HeaderTextStyle, UserIconImage } from "./styledComponents";
 import { HomeRepairServiceOutlined, Logout } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { userServices } from "../../utils/api/user/services";
@@ -281,7 +280,9 @@ axios
               <Link to={(localStorage.getItem("passwordType") === "new") ? "/" : "OldChangePassword"} className="home_btn">
 
 
-                <img src="https://bmxpro.in/home-page-50.png" alt="" style={{ height: "28px", width: "28px", marginBottom: "0" }} />
+                {/* <img src="https://bmxpro.in/home-page-50.png" alt="" style={{ height: "28px", width: "28px", marginBottom: "0" }} /> */}
+
+                <FaHome style={{fontSize:"28px", color:"#fff" }}/>
 
                 <p className="home_lable" style={{ color: "rgb(255, 255, 255)", marginLeft: "4px", margin: '0' }} >HOME</p>
               </Link>
