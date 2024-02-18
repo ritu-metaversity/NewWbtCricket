@@ -88,15 +88,18 @@
 }
 
 .header_chips_expo {
-    /* padding: 4px; */
-    background: rgb(255, 255, 255);
+    /* background: rgb(255, 255, 255); */
+    background: rgb(1 45 91);
     text-align: center;
-    /* margin: 12px 0px; */
+    color: #fff;
     font-size: 13px;
     display: flex;
     align-items: center;
     justify-content: center;
 
+}
+.inner_chips span{
+    color: #fff;
 }
 
 @media (min-width: 800px) {
@@ -107,14 +110,16 @@
 
     .header_chips_expo {
         padding: 4px;
-        background: rgb(255, 255, 255);
+        /* background: rgb(255, 255, 255); */
+        background: rgb(1 45 91);
         text-align: center;
-        /* margin: 12px 0px; */
         font-size: 13px;
+        color: #fff;
     }
 
     .main_header {
         margin: 0px 0px 21px;
+        background: #012d5b;
     }
 }
 

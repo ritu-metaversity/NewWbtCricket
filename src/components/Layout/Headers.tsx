@@ -231,7 +231,7 @@ axios
 
         enableColorOnDark
         onClick={handleClose}
-        style={{ background: colorHex.bg2, height: "50px", top: "0px", position: "sticky" }}
+        style={{ background: "#002d5b", height: "50px", top: "0px", position: "sticky" }}
         className="main_header"
       >
         <div className="header_inner" >
@@ -332,7 +332,7 @@ axios
             anchor={"left"}
             open={drawerOpen}
             PaperProps={{
-              sx: { width: "100vw", bgcolor: "#7b7c7f" }
+              sx: { width: "100vw", bgcolor: "#002d5b!important" }
             }}
             onClose={() => setDrawerOpen(false)}
             className="sider-drawer"
@@ -370,7 +370,7 @@ axios
 
             </ul>
 
-            {/* #7b7c7f */}
+            {/* #002d5b!important */}
 
           </Drawer>}
         </div>

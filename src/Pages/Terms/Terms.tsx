@@ -64,15 +64,15 @@ const Terms = () => {
               <span className="namehead_data">
                 {" "}
                 आपसे अनुरोध है हमारी कोई डुप्लीकेट साइट नही है हमारी आधिकारिक साइट
-                <b>{window.location.hostname.replace("www.", "")} </b>से लॉगिन करें। लॉगइन करने से पहले साइट
-                का नाम जरूर देख लें। आपके समर्थन के लिए धन्यवाद। टीम <b> {window.location.hostname.replace("www.", "")}</b>
+                <b>{"localhost"} </b>से लॉगिन करें। लॉगइन करने से पहले साइट
+                का नाम जरूर देख लें। आपके समर्थन के लिए धन्यवाद। टीम <b> {"localhost"}</b>
               </span>
               <span className="namehead2">Dear Client,</span>
               <span className="namehead_data2">
                 {" "}
                 We don't have any duplicate site , You are requested to login with our
-                official site <b>{window.location.hostname.replace("www.", "")} </b>I only. Please check the
-                site name before you login. Thanks for your support.<b>{window.location.hostname.replace("www.", "")}</b>
+                official site <b>{"localhost"} </b>I only. Please check the
+                site name before you login. Thanks for your support.<b>{"localhost"}</b>
               </span>
             </div>
             <div className="modal-footer" >
@@ -96,9 +96,9 @@ const Terms = () => {
               <em style={{ boxSizing: "border-box" }}>
                 <strong>
                   <a
-                    style={{ backgroundColor: "#7b7c7f" }}
+                    style={{ backgroundColor: "rgb(132, 179, 50)" }}
                     className="btn btn-secondary btn-lg" href="#">
-                    <span style={{ color: "#000000" }}>Hindi</span>
+                    <span style={{ color: "#fff" }}>Hindi</span>
                   </a>
                 </strong>
               </em>
@@ -108,12 +108,12 @@ const Terms = () => {
               <em>
                 <strong>
                   <a
-                    style={{ backgroundColor: "#7b7c7f" }}
+                    style={{ backgroundColor: "rgb(255, 145, 31)" }}
                     className="btn btn-secondary btn-lg"
                     href="#english-rules-btns"
                     id="hindi-rules-btns"
                   >
-                    <span style={{ color: "#000000" }}>English</span>
+                    <span style={{ color: "#fff" }}>English</span>
                   </a>
                 </strong>
               </em>
@@ -1492,12 +1492,12 @@ const Terms = () => {
               <em>
                 <strong>
                   <a
-                    style={{ backgroundColor: "#7b7c7f" }}
+                    style={{ backgroundColor: "rgb(132, 179, 50)" }}
                     className="btn btn-secondary btn-lg"
                     href="#hindi-rules-btns"
                     id="english-rules-btns"
                   >
-                    <span style={{ color: "#000000" }}>Hindi</span>
+                    <span style={{ color: "#fff" }}>Hindi</span>
                   </a>
                 </strong>
               </em>

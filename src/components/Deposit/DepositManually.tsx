@@ -87,7 +87,7 @@ const DepositManually: FC<Props> = ({ getDepositList }) => {
               onClick={handleSubmit}
               variant="contained"
               color="secondary"
-              style={{ backgroundColor: "#7b7c7f" }}
+              style={{ backgroundColor: "#002d5b!important" }}
             >
               Submit
             </Button>

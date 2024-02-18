@@ -33,11 +33,6 @@
     -webkit-overflow-scrolling: touch;
 }
 
-.table-bordered,
-.table-bordered td,
-.table-bordered th {
-    border: 1px solid #dee2e6;
-}
 
 .table {
     width: 100%;
@@ -73,27 +68,11 @@
     border-bottom-width: 2px;
 }
 
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
-}
 
-.table-bordered,
-.table-bordered td,
-.table-bordered th {
-    border: 1px solid #dee2e6;
-}
-
-.table td,
-.table th {
-    padding: 0.75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-}
 
 .table-bordered>tbody>tr>td,
 .table-bordered th {
-    border: 1px solid #575a61 !important;
+    border: 1px solid #ccc !important;
 }
 
 .table td,
@@ -103,13 +82,14 @@
     text-overflow: ellipsis;
 }
 
-.bet-place-tbl-th {
+.market-name-row-color {
     text-align: center;
-    background: #7b7c7f;
+    background: rgb(255, 145, 31);
     color: #fff;
-    padding: 4px;
+    padding: 7px !important;
     font-weight: bold;
     letter-spacing: 1px;
+    font-size: 14px;
     /* font-family: "Roboto" !important; */
 }
 

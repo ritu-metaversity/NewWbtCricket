@@ -1,5 +1,5 @@
 .css-13fryhb-MuiTypography-root {
-    background-color: #2A363B !important;
+    background-color: #000000 !important;
     /* color: #fff !important; */
 }
 
@@ -10,4 +10,8 @@
 th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-stickyHeader.MuiTableCell-alignCenter {
     background: #b9b9b9 !important;
     color: #000 !important;
+}
+
+.statement-tables tbody td, .statement-tables tbody tr {
+    border-color: grey !important;
 }

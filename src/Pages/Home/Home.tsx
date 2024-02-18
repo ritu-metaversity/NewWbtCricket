@@ -126,7 +126,7 @@ const Home: FC<Props> = ({ show, setShow }) => {
             <div className="mainheader-popup">
               <h6 className="maintitle" style={{ color: "#fff" }}>Welcome to bmx</h6>
               <button type="button" className="closecross" aria-label="Close" onClick={() => setShow(false)} style={{ cursor: "pointer" }}>
-                <span >×</span>
+                <span style={{color:"#fff"}}>×</span>
               </button>
             </div>
             <div className="custom-body" >
@@ -134,15 +134,15 @@ const Home: FC<Props> = ({ show, setShow }) => {
               <span className="namehead_data">
                 {" "}
                 आपसे अनुरोध है हमारी कोई डुप्लीकेट साइट नही है हमारी आधिकारिक साइट
-                <b>{window.location.hostname.replace("www.", "")} </b>से लॉगिन करें। लॉगइन करने से पहले साइट
-                का नाम जरूर देख लें। आपके समर्थन के लिए धन्यवाद। टीम <b> {window.location.hostname.replace("www.", "")}</b>
+                <b>{"localhost"} </b>से लॉगिन करें। लॉगइन करने से पहले साइट
+                का नाम जरूर देख लें। आपके समर्थन के लिए धन्यवाद। टीम <b> {"localhost"}</b>
               </span>
               <span className="namehead2">Dear Client,</span>
               <span className="namehead_data2">
                 {" "}
                 We don't have any duplicate site , You are requested to login with our
-                official site <b>{window.location.hostname.replace("www.", "")} </b>I only. Please check the
-                site name before you login. Thanks for your support.<b>{window.location.hostname.replace("www.", "")}</b>
+                official site <b>{"localhost"} </b>I only. Please check the
+                site name before you login. Thanks for your support.<b>{"localhost"}</b>
               </span>
             </div>
             <div className="modal-footer" >
@@ -168,7 +168,7 @@ const Home: FC<Props> = ({ show, setShow }) => {
 
         </Link>
 
-        {gameAura?.active === true ?
+        {/* {gameAura?.active === true ?
           <Link to={"/india_casion"} className="single_container"   >
 
             <img className="img_container" src="/indian-casino.png" alt="" />
@@ -226,7 +226,7 @@ const Home: FC<Props> = ({ show, setShow }) => {
           </Link>
 
           : ""
-        }
+        } */}
 
 
         <Link to={"/profile"} className="single_container"   >

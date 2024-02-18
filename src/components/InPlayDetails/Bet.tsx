@@ -1,8 +1,8 @@
-import { ExpandCircleDown } from "@mui/icons-material";
+// import { ExpandCircleDown } from "@mui/icons-material";
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
+  // Accordion,
+  // AccordionDetails,
+  // AccordionSummary,
   Button,
   Dialog,
   DialogContent,
@@ -14,8 +14,10 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { FC, useCallback, useContext, useEffect, useState } from "react";
-import { TitleStyled } from "../custom/styledComponents";
+// import { TitleStyled } from "../custom/styledComponents";
 import "./custom.css";
+import "./AllMatch.css";
+import "./Bet.css";
 import BookMakerOddsgrid from "./BookmakerOddsGrid";
 import { LoaderContext } from "../../App";
 import ButtonGroupComponent from "./ButtonGroupComponent";
@@ -37,6 +39,15 @@ import { useParams } from "react-router-dom";
 import inplaytv from "./tv_for_inplay.png"
 import { RxCross2 } from "react-icons/rx";
 import Completedandlivematch from "./Completedandlivematch";
+import NewBookMaker from "./NewBookMaker/NewBookMaker";
+import NewSession from "./NewSession/NewSession";
+import BetModals from "./BetModals/BetModals";
+
+interface BetResultMessageType {
+  data: boolean;
+  message: string;
+  // Add other properties if needed
+}
 
 const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
   const [amount, setAmount] = useState(10);
@@ -65,6 +76,8 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
   const [oddPnl, setOddsPnl] = useState<Pnl[]>([]);
   const { setLoading, loading } = useContext(LoaderContext);
   const [bet, setBet] = useState<BetDetailsInterface | null>(null);
+  const [betResultMessage, setBetResultMessage] = useState<BetResultMessageType | undefined>(undefined);
+  const [Show, setShow] = useState(false);
 
   const [activeFancySlower, setActiveFancySlower] = useState<{
     [x: string]: any[];
@@ -132,6 +145,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
   };
 
   const [open, setOpen] = React.useState(false);
+  const [openBet, setOpenBet] = React.useState(true);
 
   const handleClose = () => setOpen(false);
 
@@ -301,11 +315,22 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
     });
   }, [oddPnl, fancyPnl, activeFancy]);
 
+  useEffect(() => {
+    if (bet !== null) {
+      setOpenBet(true);
+    } else {
+      setOpenBet(false);
+    }
+
+  }, [bet])
+  
+
   if (loading.fancyOdds || !(Object.values(activeFancy)?.length > 0)) {
     return <></>
   }
 
-  console.log(props.event, "liuytgfvbjhjhygutft")
+
+
   return (
     <>
       <Dialog
@@ -337,9 +362,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
         </DialogTitle>
         <DialogContent sx={{
           width: '100%',
-          // '&.MuiDialogContent-root': {
-          //   overflowY: 'hidden !important'
-          // }
+
         }}>
 
           <PnlModal
@@ -349,28 +372,37 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
           />
         </DialogContent>
       </Dialog>
-      {/* {matchOdd && matchOdd[0] && (
-        <TitleStyled>
-          {matchOdd?.length > 0 || bookmakerOdd?.length > 0
-            ? ` ${matchOdd[0]?.matchName ||
-            (bookmakerOdd && bookmakerOdd[0]?.matchName) ||
-            " Name Unavailable "
-            } `
-            : " &nsbp; "}
 
-          <Typography component={"span"} textAlign={"right"}>
-            {matchOdd[0]?.eventTime}
-          </Typography>
-        </TitleStyled>
-      )} */}
-      {/* <BetSlip
-        profits={profits}
-        setBet={setBet}
-        bet={bet}
-        buttonData={buttonData}
-      /> */}
+      <table className="table" style={{ marginBottom: "-4px", marginTop: "-5px" }}>
+        <tbody className="">
+          <tr>
+            <th style={{width:"48%"}} >
+              <div className="toggle-tv-old lgaai" onClick={handleTvShow}>
+                <p className="active text-left text-light m-0" id="tvBtn">
+                  <img
+                    src="data:image/jpeg;base64,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"
+                    alt=""
+                    style={{ width: 23 }}
+                  />
+                  Tv
+                </p>
+              </div>
+            </th>
+            <th style={{width:"48%"}} className="cursor-pointer" onClick={handleOne}>
+              <div className="toggle-tv-old lgaai">
+                <p className="active text-center text-light m-0" id="tvBtn">
+                  Full Score
+                </p>
+              </div>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+
+
       <div>
-        <div className="tvdatatatat">
+
+        {/* <div className="tvdatatatat">
           <div className="scoreCard_icon" onClick={handleTvShow}>
             <img src={inplaytv} alt="Live tv"
               style={{ height: "100%" }} />
@@ -378,11 +410,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
 
               TV
             </span>
-            {/* <img
-              alt=""
-              style={{ height: "100%" }}
-              src="https://d1arlbwbznybm5.cloudfront.net/v1/static/mobile/images/icons/inplay-white.png"
-            /> */}
+
           </div>
           <div className="scoreCard-icon">
             <svg
@@ -416,7 +444,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
               </label>
             </div>
           </div>
-        </div>
+        </div> */}
         {TvShow ? (
           <div id="scoreboard-box">
             <div className="scorecard scorecard-mobile">
@@ -465,8 +493,8 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
             </div>
           </div> : ""
         }
-        <div className="container">
-          {matchOdd.map((match, index) => (
+        <div className="">
+        {matchOdd.map((match, index) => (
             <>
               {" "}
               {/* <Accordion key={"matchodd" + index} defaultExpanded>
@@ -489,32 +517,11 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
                   {match.display_message}
                 </Typography>
               </Marquee>
-              {bet?.marketId && bet?.marketId === match.marketId && <AllMatch
-                setBet={setBet}
-                bet={bet}
-                buttonData={buttonData}
-                event={props.event}
-                sportsId={props.sportsId}
-              />}
             </>
           ))}
 
-
           {originBookMaker?.length > 0 && (
             <>
-
-              <BookMakerOddsgrid
-                setBet={setBet}
-                bet={bet}
-                profits={profits.Bookmaker}
-                buttonData={buttonData}
-                CurrentOdd={originBookMaker}
-                PrevOdds={prvbookmakerOdd}
-                matchId={props.event}
-                OddsPnl={oddPnl}
-              />
-              {/* </AccordionDetails> */}
-              {/* </Accordion> */}
               <Marquee speed={50} gradient={false}>
                 <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
                   {
@@ -525,95 +532,15 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
               </Marquee>
             </>
           )}
-          {bookmakerToss?.length > 0 && (
-            <>
+          <NewBookMaker setBet={setBet}
+            bet={bet}
+            profits={profits.Bookmaker}
+            buttonData={buttonData}
+            CurrentOdd={originBookMaker}
+            PrevOdds={prvbookmakerOdd}
+            matchId={props.event}
+            OddsPnl={oddPnl} />
 
-              <BookMakerOddsgrid
-                setBet={setBet}
-                bet={bet}
-                profits={profits.Bookmaker}
-                buttonData={buttonData}
-                CurrentOdd={bookmakerToss}
-                PrevOdds={prvbookmakerOdd}
-                matchId={props.event}
-                OddsPnl={oddPnl}
-              />
-              {/* </AccordionDetails> */}
-              {/* </Accordion> */}
-              <Marquee speed={50} gradient={false}>
-                <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
-                  {
-                    originBookMaker?.find((i: FancyOddsInterface) => i.t !== "TOSS")
-                      ?.display_message
-                  }
-                </Typography>
-              </Marquee>
-            </>
-          )}
-          {bet?.marketId && (bet?.marketId === originBookMaker[0]?.mid ||
-            bet?.marketId === bookmakerToss[0]?.mid) && <AllMatch
-              setBet={setBet}
-              bet={bet}
-              buttonData={buttonData}
-              event={props.event}
-              sportsId={props.sportsId}
-            />}
-          {/* {matchOdd
-        ?.filter((i) => i.Name !== "Match Odds")
-        .map((match, index) => (
-          <>
-            <Accordion key={"matchodd" + index} defaultExpanded>
-              <AccordionSummary expandIcon={<ExpandCircleDown />}>
-                {match.Name}
-              </AccordionSummary>
-              <AccordionDetails sx={{ p: 0 }}>
-                <MatchOddsGrid
-                  bet={bet}
-                  setBet={setBet}
-                  CurrentOdd={match}
-                  PrevOdds={preMatchOdds[index]}
-                  matchId={props.event}
-                  OddsPnl={profits.Odds[match?.marketId]}
-                />
-              </AccordionDetails>
-            </Accordion>
-            <Marquee speed={50} gradient={false}>
-              <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
-                {match.display_message}
-              </Typography>
-            </Marquee>
-          </>
-        ))} */}
-          {/* {bookmakerToss?.length > 0 && (
-        <>
-          {" "}
-          <Accordion defaultExpanded>
-            <AccordionSummary expandIcon={<ExpandCircleDown />}>
-              Toss
-            </AccordionSummary>
-            <AccordionDetails sx={{ p: 0 }}>
-              <BookMakerOddsgrid
-                setBet={setBet}
-                bet={bet}
-                profits={profits.Bookmaker}
-                buttonData={buttonData}
-                CurrentOdd={bookmakerToss}
-                PrevOdds={preBookmakerToss}
-                matchId={props.event}
-                OddsPnl={oddPnl}
-              />
-            </AccordionDetails>
-          </Accordion>
-          <Marquee speed={50} gradient={false}>
-            <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
-              {
-                bookmakerToss?.find((i: FancyOddsInterface) => i.t !== "TOSS")
-                  ?.display_message
-              }
-            </Typography>
-          </Marquee>
-        </>
-      )} */}
           {Object.keys(activeFancy)?.length > 0 &&
             activeFancy &&
             Object.keys(activeFancy).map((keys: any) => {
@@ -626,15 +553,8 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
                 activeFancy[keys]?.length
               ) {
                 return (
-                  // <Accordion defaultExpanded>
-                  //   <AccordionSummary expandIcon={<ExpandCircleDown />}>
-                  //     {keys}
-                  //   </AccordionSummary>
-                  //   <AccordionDetails sx={{ p: 0 }}>
                   <>
-
-                    < SessionOddsGrid
-                      bet={bet}
+                    <NewSession bet={bet}
                       setMarketId={setSelectedPnlMarketId}
                       setBet={setBet}
                       buttonData={buttonData}
@@ -642,18 +562,9 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
                       PrevOdds={preFancyOdds[keys]}
                       matchId={props.event}
                       title={keys === "Fancy2" ? "Session" : keys}
-                      FancyPnl={fancyPnl}
-                    />
-                    {bet?.marketId && activeFancy[keys].find((item: FancyOddsInterface) => item.sid === bet?.marketId) && <AllMatch
-                      setBet={setBet}
-                      bet={bet}
-                      buttonData={buttonData}
-                      event={props.event}
-                      sportsId={props.sportsId}
-                    />}
+                      FancyPnl={fancyPnl} />
                   </>
-                  //   </AccordionDetails>
-                  // </Accordion>
+
                 );
               } else return "";
             })}
@@ -663,26 +574,11 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
             sportsId={props.sportsId}
 
           />
-          {/* <AllMatch
-            setBet={setBet}
-            bet={bet}
-            buttonData={buttonData}
-            event={props.event}
 
-            sportsId={props.sportsId}
-          /> */}
 
         </div>
       </div>
-      {/* <Box
-        display="flex"
-        flexDirection={"column"}
-        gap={2}
-        my={3}
-        alignItems="center"
-      >
-        <TitleStyled width="100%">Bets</TitleStyled>
-      </Box> */}
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -719,7 +615,41 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
         </Box>
       </Modal>
 
+
+
+      <BetModals setBet={setBet}
+        bet={bet}
+        buttonData={buttonData}
+        event={props.event}
+        sportsId={props.sportsId} setShow={setShow} Show={Show} setBetResultMessage={setBetResultMessage} isOpen={openBet} onClose={handleClose} />
+
+      <Modal
+        open={Show}
+        onClose={handleClose}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description">
+        <Box className="bet-box">
+          <div className="Bet-succ">
+            <h2
+              id="parent-modal-title"
+              style={{
+                color: betResultMessage?.data === false ? "red" : "white",
+              }}>
+              {betResultMessage?.message}
+            </h2>
+            <button className="Bet-SuccBtn" onClick={handleClose}>
+              OK
+            </button>
+          </div>
+        </Box>
+      </Modal>
     </>
+
+
+
+
+
+
   );
 };
 

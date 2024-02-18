@@ -251,7 +251,6 @@ const BookMakerOddsgrid: FC<{
                 </td>
                 <td
                   className="bet-place-tbl-td desktopSize"
-                  // style={{ color: "rgb(81, 153, 230)" }}
                   style={{
                     fontSize: "16px",
                     fontWeight: 750

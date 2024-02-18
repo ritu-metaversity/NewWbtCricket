@@ -99,14 +99,14 @@ const Sports = () => {
         style={{ border: "0.5px solid black" }}
       >
         {activeSportList.map((s: any, index: any) => (
-          <Tab sx={{ [`&.${tabClasses.selected}`]: { color: "white" }, bgcolor: tabValue === index ? "#7b7c7f" : "" }} key={s.sportId + "tab"} label={s?.sportName} {...a11yProps(0)} />
+          <Tab sx={{ [`&.${tabClasses.selected}`]: { color: "white" }, bgcolor: tabValue === index ? "#002d5b!important" : "" }} key={s.sportId + "tab"} label={s?.sportName} {...a11yProps(0)} />
         ))}
       </Tabs>
 
       <Grid
         container
-        // background-color: #7b7c7f;
-        bgcolor="#7b7c7f"
+        // background-color: #002d5b!important;
+        bgcolor="#002d5b!important"
         p={{ xs: "15px", lg: "15px" }}
         // sx={{ cursor: "pointer" }}
         m={{ lg: 0 }}

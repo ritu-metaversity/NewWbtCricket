@@ -149,7 +149,6 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
         setLoading && setLoading((prev) => ({ ...prev, ClickButtonValue: false }));
     }
 
-    console.log(betResultMessage, "betResultMessage")
 
     // useEffect(() => {
     //     const getList = async () => {
@@ -164,7 +163,6 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
     //     setTimeout(() => { getList() }, 5000)
     // }, [event, betRecord]);
 
-    const [allGame, setAllGames] = useState({})
 
     // useEffect(() => {
 

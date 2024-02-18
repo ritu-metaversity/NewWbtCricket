@@ -16,6 +16,9 @@ const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
       navigate("/welcome");
     }
   }, []);
+
+  const pathname = window.location.pathname;
+
   return (
     <Box
       // height={"100vh"}
@@ -33,9 +36,9 @@ const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
         m="auto"
         boxSizing={"content-box"}
         width="100%"
-        bgcolor="#e9e9e9"
+        bgcolor="#fff"
         paddingBottom={{ xs: "50px", sm: "50px", }}
-        maxWidth={{ xs: "100vw", sm: "lg", }}
+        maxWidth={{ xs: "100vw", sm: `${pathname.includes("/in-play")?"xl":"lg"}` }}
 
       >
         {(isSignedIn || localStorage.getItem("passwordType") === "old") && <Outlet />}

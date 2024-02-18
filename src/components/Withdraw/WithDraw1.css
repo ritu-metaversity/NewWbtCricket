@@ -116,7 +116,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* .withdraw_image.col:hover {
-    background-color: #7b7c7f;
+    background-color: #002d5b!important;
 } */
 
 .withdraw_table input {
@@ -161,7 +161,7 @@ input::-webkit-inner-spin-button {
     border: unset;
     color: #fff;
     font-weight: 600;
-    background: #7b7c7f;
+    background: #002d5b!important;
     padding: 14px 63px;
     border-radius: 5px;
     margin-top: 17px;

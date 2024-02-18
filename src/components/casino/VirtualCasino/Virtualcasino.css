@@ -32,7 +32,7 @@
     justify-content: center;
     flex-direction: row;
     padding: 2px 0px;
-    background-color: #7b7c7f;
+    background-color: #002d5b!important;
     gap: 3%;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .casinoName {
-    background-color: rgb(123, 124, 127);
+    background-color: #002d5b;
     margin-top: -4px;
     border-radius: 0px 0px 3px 3px;
     font-weight: 600;

@@ -32,7 +32,7 @@ const InPlayDetails = () => {
   return (
     <Box>
       <Bet event={eventId} sportsId={sportsId} />
-      {/* <BetRecord item={eventId} /> */}
+    
     </Box>
   );
 };

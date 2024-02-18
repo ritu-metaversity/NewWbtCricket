@@ -47,6 +47,7 @@ a {
 
 .main_header {
   height: 50px;
+  background: #012d5b;
   display: flex;
   align-items: center;
   justify-content: space-between;

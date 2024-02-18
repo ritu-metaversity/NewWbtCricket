@@ -1,0 +1,95 @@
+.games-types {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    width: 100%;
+    margin-left: -16px;
+    overflow: scroll;
+    gap: 8px;
+}
+.games-types li.active {
+    box-shadow: 0 0 6px 0 #0000009e;
+}
+.games-types li {
+    align-items: center;
+    box-shadow: 0 0 4px 0 #ccc;
+    color: #002d5b;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    font-size: 11px;
+    font-weight: 800;
+    max-width: 80px;
+    padding: 14px 0;
+    text-align: center;
+    width: 100%;
+    background: #fff;
+}
+ul:not(.browser-default)>li {
+    list-style-type: none;
+}
+.games-types li img {
+    width: 30px;
+}
+.old-matches-list {
+    cursor: pointer;
+    text-align: center;
+}
+.old-matches-list .TeamName {
+    background: #002d5b;
+    display: grid;
+    font-size: 15px;
+    width: 100%;
+}
+.old-matches-list .TeamName a {
+    font-weight: 800;
+    padding: 5px 0;
+    text-decoration: none;
+    color: #fff  !important;
+
+}
+.mx-2 {
+    margin-left: 0.5rem!important;
+    margin-right: 0.5rem!important;
+}
+.align-items-center {
+    align-items: center!important;
+}
+.d-inline-flex {
+    display: inline-flex!important;
+}
+.blink {
+    animation: blink 1s step-end infinite;
+    background-color: #55d18f;
+    border-radius: 100%;
+    height: 10px;
+    width: 10px;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.old-match-details a tr td {
+    color: #000;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.7em;
+}
+.backbtn{
+    font-size: 16px;
+    background-color: rgb(255, 145, 31);
+    color: #fff !important;
+    padding: 6px 12px;
+    border-radius: 5px;
+
+}

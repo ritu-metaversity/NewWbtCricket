@@ -9,7 +9,7 @@ import './profile.css'
 const gridItemProps = {
   item: true,
   xs: 4,
-  border: "1px solid #E9E9E9",
+  border: "1px solid #ccc",
   p: 0.8,
   display: "flex",
   alignItems: "center",

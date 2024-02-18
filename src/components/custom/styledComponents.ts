@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Box, Typography } from "@mui/material";
 
 export const TitleStyled = styled(Typography)({
-  backgroundColor: "#7b7c7f",
+  backgroundColor: "#002d5b!important",
   fontWeight: 700,
   textAlign:'center',
   padding: 8,

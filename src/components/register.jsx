@@ -178,7 +178,7 @@ const Register = ({ setShow }) => {
         .post(
           `${REACT_APP_API_URL}/user/self-register`,
           {
-            appUrl: window.location.hostname.replace("www.", ""),
+            appUrl: "localhost",
             username: UserName,
             password: password,
             confirmPassword: confirmPassword,
@@ -231,7 +231,7 @@ const Register = ({ setShow }) => {
   const [allData, setAllData] = useState()
 
   useEffect(() => {
-    let appUrll = window.location.hostname.replace("www.", "");
+    let appUrll = "localhost";
     // let appUrll = "maggibook.com";
     axios
       .post(

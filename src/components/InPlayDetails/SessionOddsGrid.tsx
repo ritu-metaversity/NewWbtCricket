@@ -4,10 +4,10 @@ import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import { BetGridItem, redGreenComponent } from "./Bet";
 import { BetText, BetTextMedium, BetTextSmall } from "./styledComponents";
 import { BetDetailsInterface, FancyOddsInterface } from "./types";
-import "./Bet.css"
+import "./Bet.css";
 // import { IoMdArrowDropdown } from "react-icons/fa";
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import "./common.css"
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import "./common.css";
 interface Props {
   CurrentOdd: FancyOddsInterface[];
   PrevOdds: FancyOddsInterface[];
@@ -61,39 +61,37 @@ export const SessionOddsGrid: FC<Props> = ({
       placeTime: placeTime,
       priceValue: priceValue,
       isFancy: isFancy,
-      marketnameid: marketnameid
+      marketnameid: marketnameid,
     });
   };
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(true);
   const handleChange = () => {
     if (show === true) {
-      setShow(false)
+      setShow(false);
     } else {
-      setShow(true)
+      setShow(true);
     }
-  }
-  console.log(CurrentOdd, "Sdfsdfsdfsd")
-
+  };
+  console.log(CurrentOdd, "Sdfsdfsdfsd");
 
   return (
-
     <div className="scroll-form row">
       <table className="table-bordered" style={{ width: "100%" }}>
         <thead className="sessions-thead">
           <tr className="sessions-header">
-
             <th className="bet-place-tbl-th run-pos-rate-amt-run-mod-color sess_row_head1">
               {/* <svg data-testid="ArrowDropUpIcon"></svg>/ */}
               <div className="bookmakerheader">
+                <ArrowDropUpIcon
+                  onClick={handleChange}
+                  style={{
+                    fontSize: "30px",
+                    transform: show === true ? "" : "rotate(180deg)",
+                    cursor: "pointer",
+                  }}
+                />
 
-                <ArrowDropUpIcon onClick={handleChange} style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)", cursor: "pointer" }} />
-
-                <div className="_child">
-
-                  {title}
-
-
-                </div>
+                <div className="_child">{title}</div>
 
                 {/* <a href="/terms">
                   <span
@@ -112,64 +110,67 @@ export const SessionOddsGrid: FC<Props> = ({
             </th>
             <th
               className="bet-place-tbl-th not-box-color"
-              style={{ width: "22%" }}
-            >
+              style={{ width: "22%" }}>
               NOT
             </th>
             <th
               className="bet-place-tbl-th yes-box-color"
-              style={{ width: "23%" }}
-            >
+              style={{ width: "23%" }}>
               YES
             </th>
           </tr>
         </thead>
-        {show &&
-
-
+        {show && (
           <tbody>
-
             {CurrentOdd.map((item: any, index) => (
               <tr>
-
-
                 <td className="bet-place-tbl-td" style={{ textAlign: "left" }}>
                   <div>
                     <div
                       style={{
-                        fontWeight: 750, overflow: "hidden", fontSize: "14px", display: "flex",
+                        fontWeight: 750,
+                        overflow: "hidden",
+                        fontSize: "14px",
+                        display: "flex",
                         alignItems: "center",
-                        justifyContent: "flex-start"
-                      }}
-                    >
-                      {
-                        title === "BallByBall" ?
-                          <span className="BallBYball_RoundData">
-                            {item?.ball}
-                            1
-                          </span>
-                          : ""
-                      }
+                        justifyContent: "flex-start",
+                      }}>
+                      {title === "BallByBall" ? (
+                        <span className="BallBYball_RoundData">
+                          {item?.ball}1
+                        </span>
+                      ) : (
+                        ""
+                      )}
                       {item?.nation}
                     </div>
-                    <div style={{ fontSize: 10 }}>Session Limit : {item?.maxBet}</div>
-                    <div style={{ fontSize: 10, cursor: "pointer" }}
+                    <div style={{ fontSize: 10 }}>
+                      Session Limit : {item?.maxBet}
+                    </div>
+                    <div
+                      style={{ fontSize: 10, cursor: "pointer" }}
                       onClick={() =>
                         // (FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl ||
                         // 0) &&
                         setMarketId(item.sid)
-                      }> {redGreenComponent(
-                        FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl || 0
-                      )}</div>
+                      }>
+                      {" "}
+                      {redGreenComponent(
+                        FancyPnl?.find((pnl) => pnl.marketId === item.sid)
+                          ?.pnl || 0
+                      )}
+                    </div>
                   </div>
                 </td>
 
                 <td
-                  className={`first-runner-bet-odds-no-value cursor-pointer ${PrevOdds[index].l1 < item.l1
-                    ? "odds-up"
-                    : PrevOdds[index].l1 > item.l1
+                  className={`first-runner-bet-odds-no-value cursor-pointer ${
+                    PrevOdds[index].l1 < item.l1
+                      ? "odds-up"
+                      : PrevOdds[index].l1 > item.l1
                       ? "odds-down"
-                      : ""}`}
+                      : ""
+                  }`}
                   style={{}}
                   onClick={() =>
                     item.l1 &&
@@ -187,18 +188,18 @@ export const SessionOddsGrid: FC<Props> = ({
                       "Session",
                       "NO"
                     )
-                  }
-                >
+                  }>
                   <div style={{ fontWeight: 750, fontSize: 16 }}>{item.l1}</div>
                   <div style={{ fontSize: 10 }}>{item.ls1}</div>
                 </td>
                 <td
-                  className={`first-runner-bet-odds-yes-value cursor-pointer ${PrevOdds[index].b1 < item.b1
-                    ? "odds-up"
-                    : PrevOdds[index].b1 > item.b1
+                  className={`first-runner-bet-odds-yes-value cursor-pointer ${
+                    PrevOdds[index].b1 < item.b1
+                      ? "odds-up"
+                      : PrevOdds[index].b1 > item.b1
                       ? "odds-down"
                       : ""
-                    }`}
+                  }`}
                   style={{}}
                   onClick={() =>
                     item.b1 &&
@@ -216,17 +217,15 @@ export const SessionOddsGrid: FC<Props> = ({
                       "Session",
                       "YES"
                     )
-                  }
-                >
+                  }>
                   <div style={{ fontWeight: 750, fontSize: 16 }}>{item.b1}</div>
                   <div style={{ fontSize: 10 }}>{item.bs1}</div>
                 </td>
               </tr>
             ))}
-          </tbody>}
+          </tbody>
+        )}
       </table>
-    </div >
-
-
+    </div>
   );
 };

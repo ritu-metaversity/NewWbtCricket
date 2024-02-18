@@ -74,6 +74,8 @@ const UnSeletdBets = ({ betRecord, sportsId }) => {
     // }, [sportsId])
     console.log(betRecord, "betRecord")
 
+   
+
     return (<>
         <div>
             <div className="row">
@@ -85,8 +87,8 @@ const UnSeletdBets = ({ betRecord, sportsId }) => {
                                     <tr>
                                         <th
                                             colSpan={5}
-                                            className="bet-place-tbl-th market-name-row-color"
-                                            style={{ background: "rgb(42, 54, 59)" }}
+                                            className=" market-name-row-color"
+                                           
                                         >
                                             {key}
                                         </th>
@@ -121,9 +123,8 @@ const UnSeletdBets = ({ betRecord, sportsId }) => {
                                                     <tr>
                                                         <td
                                                             className="bet-place-tbl-td mob-col-width-ch runs-2-value-box-color"
-                                                            style={{ textAlign: "left" }}
+                                                            style={{ textAlign: "center" }}
                                                         >
-                                                            {console.log(item, "jhgbvh")}
                                                             {item?.nation}
                                                         </td>
                                                         <td
@@ -166,10 +167,10 @@ const UnSeletdBets = ({ betRecord, sportsId }) => {
 
         <div className="row">
             <div
-                className="bet-place-tbl-th"
-                style={{ background: "rgb(42, 54, 59)", width: "100%" }}
+                className="market-name-row-color"
+                style={{ background: "rgb(255, 145, 31) !important", width: "100%" }}
             >
-                <div className='main_div_completebet'>
+                <div className='main_div_completebet' >
                     <span>COMPLETED BETS</span>
                     <button className='main_div_completebet_Refesh' onClick={handleRefresh}> <CachedIcon style={{ fontSize: "17px" }} />Refesh</button>
                 </div>

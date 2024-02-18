@@ -1,13 +1,10 @@
-import { Box, Grid } from "@mui/material";
 
 import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import { BetGridItem, redGreenComponent } from "./Bet";
-import { BetText, BetTextMedium } from "./styledComponents";
 import { BetDetailsInterface, ProfitInterface } from "./types";
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import "./common.css"
 import { useSearchParams } from "react-router-dom";
 import { userServices } from "../../utils/api/user/services";
+import { redGreenComponent } from "./Bet";
 interface MatchOddsGridProps {
   runners: {
     back1price: number;
@@ -143,122 +140,55 @@ export const MatchOddsGrid: FC<Props> = ({
 
               <th
                 className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktoptableheadSize"
+                style={{ width: "46%", textAlign: "center" }}
 
               >
-                <div className="bookmakerheader">
-                  {/* <div style={{ width: "10%" }}> */}
-                  <ArrowDropUpIcon onClick={handleChange} style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)", cursor: "pointer" }} />
-                  {/* </div> */}
-                  <div className="_child">
+                <div className="">
+                  {/* <ArrowDropUpIcon onClick={handleChange} style={{ fontSize: "30px", transform: show === true ? "" : "rotate(180deg)", cursor: "pointer" }} /> */}
+                  <div className="">
                     <span className="_child_max_min_name">
-
                       {Name}
+                      <p style={{ margin: "0px" }}>Max:{maxBet}</p>
                     </span>
-                    <span className="_child_max_min">
-                      <span> Min:{minBet}{" "}</span>
-                      <span>Max:{maxBet}</span>
-
-                    </span>
-
-
 
                   </div>
                 </div>
-                {/* <ArrowDropUpIcon onClick={handleChange} /> */}
               </th>
-              <th
-                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktop desktopSize"
-
-              >
-
-              </th>
-              <th
-                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktop desktopSize"
-
-              >
-
-              </th>
-
-
-              <th
+              <th style={{ width: "22%" }}
                 className="bet-place-tbl-th lagai-box-color desktopSize"
               >LAGAI</th>
-              <th
+              <th style={{ width: "22%" }}
                 className="bet-place-tbl-th khai-box-color desktopSize"
-
               >
                 KHAI
               </th>
-              <th
-                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktop desktopSize"
-
-              >
-
-              </th>
-              <th
-                className="bet-place-tbl-th run-pos-rate-amt-run-mod-colo desktop desktopSize"
-
-              >
-
-              </th>
-              <th
-                className="bet-place-tbl-th run-pos-rate-amt-run-mod-color desktopSize"
-
-              >
-                POS.
-              </th>
             </tr>
           </thead>
-
           {show && <tbody>
             {runners.map((item, index) => {
               return (
-
                 <tr>
                   <>
-
                     <td
                       className="bet-place-tbl-td "
-                      style={{ textAlign: "left", padding: 10, fontWeight: 750 }}
+                      style={{ padding: 10, fontWeight: 750, width: "46%" }}
                     >
-                      {item.name}
-                      <div>
+                      <span> {item.name}: <b style={{ display: "inline-block" }}>{Name.toLowerCase().includes("winner") ?
 
+                        redGreenComponent(
+                          (newUserWinnerPnl && newUserWinnerPnl?.data?.find((itemmmm: any) => itemmmm?.selctionId == item.selectionId)
+                            ?.liability)
+                        )
+                        :
+                        redGreenComponent(
+                          OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
+                            ?.value || 0
+                        )
+                      }</b></span>
+                      <div>
                       </div>
                     </td>
-                    <td className="bet-place-tbl-td cursor-pointer desktop desktopSize"
-                    >
-                      <span style={{
-                        fontSize: "16px",
-                        color: "#5957ff",
-                        fontWeight: "750"
-                      }}>{item.ex.availableToBack[2].price}</span>
-                      <div>
-
-                        <span style={{
-                          fontSize: "9px",
-                          color: "#5957ff",
-                          fontWeight: "500"
-                        }}>{item.ex.availableToBack[2].size}</span>
-                      </div>
-                    </td>
-                    <td className="bet-place-tbl-td cursor-pointer desktop desktopSize"
-                    >
-                      <span style={{
-                        fontSize: "16px",
-                        color: "#5957ff",
-                        fontWeight: "750"
-                      }}>{item.ex.availableToBack[1].price}</span>
-                      <div>
-
-                        <span style={{
-                          fontSize: "9px",
-                          color: "#5957ff",
-                          fontWeight: "500"
-                        }}>{item.ex.availableToBack[1].size}</span>
-                      </div>
-                    </td>
-                    <td className={`bet-place-tbl-td cursor-pointer desktopSize ${PrevRunner[index].ex.availableToBack[0].price <
+                    <td style={{ width: "22%", background: "rgb(114, 187, 239)", color: "#000" }} className={`bet-place-tbl-td cursor-pointer desktopSize ${PrevRunner[index].ex.availableToBack[0].price <
                       item.ex.availableToBack[0].price
                       ? "odds-up"
                       : PrevRunner[index].ex.availableToBack[0].price >
@@ -283,20 +213,19 @@ export const MatchOddsGrid: FC<Props> = ({
                     >
                       <span style={{
                         fontSize: "16px",
-                        color: "#5957ff",
+                        color: "#000",
                         fontWeight: "750"
                       }}>
                         {item.ex.availableToBack[0].price}</span>
                       <div>
                         <span style={{
                           fontSize: "9px",
-                          color: "#5957ff",
+                          color: "#000",
                           fontWeight: "500"
                         }}>{item.ex.availableToBack[0].size}</span>
                       </div>
-
                     </td>
-                    <td className={`bet-place-tbl-td cursor-pointer desktopSize ${PrevRunner[index].ex.availableToLay[0].price <
+                    <td style={{ width: "22%", background: "rgb(250, 169, 186)", color: "#000" }} className={`bet-place-tbl-td cursor-pointer desktopSize ${PrevRunner[index].ex.availableToLay[0].price <
                       item.ex.availableToLay[0].price
                       ? "odds-up"
                       : PrevRunner[index].ex.availableToLay[0].price >
@@ -321,83 +250,18 @@ export const MatchOddsGrid: FC<Props> = ({
                     >
                       <span style={{
                         fontSize: "16px",
-                        color: "#ff5c72",
+                        color: "#000",
                         fontWeight: "750"
                       }}>{item.ex.availableToLay[0].price}</span>
                       <div>
-
                         <span style={{
                           fontSize: "9px",
-                          color: "#ff5c72",
+                          color: "#000",
                           fontWeight: "500"
                         }}>{item.ex.availableToLay[0].size}</span>
                       </div>
                     </td>
-                    <td className="bet-place-tbl-td cursor-pointer desktop desktopSize"
-                    >
-                      <span style={{
-                        fontSize: "16px",
-                        color: "#ff5c72",
-                        fontWeight: "750"
-                      }}>{item.ex.availableToBack[1].price}</span>
-                      <div>
-
-                        <span style={{
-                          fontSize: "9px",
-                          color: "#ff5c72",
-                          fontWeight: "400"
-                        }}>{item.ex.availableToBack[1].size}</span>
-                      </div>
-                    </td>
-                    <td className="bet-place-tbl-td cursor-pointer desktop desktopSize"
-                    >
-                      <span style={{
-                        fontSize: "16px",
-                        color: "#ff5c72",
-                        fontWeight: "750"
-                      }}>{item.ex.availableToBack[2].price}</span>
-                      <div>
-
-                        <span style={{
-                          fontSize: "9px",
-                          color: "#ff5c72",
-                          fontWeight: "400"
-                        }}>{item.ex.availableToBack[2].size}</span>
-                      </div>
-                    </td>
-                    <td className="bet-place-tbl-td cursor-pointer desktopSize"
-                      style={{ cursor: "unset" }}
-                    >
-                      <span style={{
-                        fontSize: "16px",
-                        color: "#ff5c72",
-                        fontWeight: "750"
-                      }}>
-
-                        {Name.toLowerCase().includes("winner") ?
-
-                          redGreenComponent(
-                            (newUserWinnerPnl && newUserWinnerPnl?.data?.find((itemmmm: any) => itemmmm?.selctionId == item.selectionId)
-                              ?.liability)
-                          )
-                          :
-                          redGreenComponent(
-                            OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
-                              ?.value || 0
-                          )
-                        }
-                      </span>
-                      <div>
-
-                        {/* <span style={{
-                          fontSize: "13px",
-                          color: "#5957ff",
-                          fontWeight: "400"
-                        }}>0</span> */}
-                      </div>
-                    </td>
                   </>
-
                 </tr>
               )
             })}
@@ -406,98 +270,6 @@ export const MatchOddsGrid: FC<Props> = ({
         </table>
       </div>
     </div >
-    // <>
 
-    //   <Box display="flex" justifyContent={"space-evenly"}>
-    //     <BetTextMedium>Max Bet:{maxBet}</BetTextMedium>
-    //     <BetTextMedium>Min Bet:{minBet}</BetTextMedium>
-    //   </Box>
-    //   <Grid container bgcolor="#dfdfdf" gap={0.5} p={0.5}>
-    //     <BetGridItem title values={["TEAM", "LAGAI", "KHAI"]} />
-    //     {runners.map((item, index) => {
-    //       return (
-    //         <>
-    //           <BetGridItem
-    //             suspended={["SUSPENDED", "CLOSED"].includes(status)}
-    //             values={[
-    //               <>
-    //                 {" "}
-    //                 {item.name}
-    //                 {redGreenComponent(
-    //                   OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
-    //                     ?.value || 0
-    //                 )}
-    //               </>,
-    //               <Box
-    //                 className={
-    //                   PrevRunner[index].ex.availableToBack[0].price <
-    //                   item.ex.availableToBack[0].price
-    //                     ? "odds-up"
-    //                     : PrevRunner[index].ex.availableToBack[0].price >
-    //                       item.ex.availableToBack[0].price
-    //                     ? "odds-down"
-    //                     : ""
-    //                 }
-    //               >
-    //                 <BetText
-    //                   onClick={() =>
-    //                     updateBet(
-    //                       true,
-    //                       +item.ex.availableToBack[0].price,
-    //                       0,
-    //                       item.selectionId,
-    //                       marketId,
-    //                       matchId,
-    //                       date,
-    //                       +item.ex.availableToBack[0].price,
-    //                       false,
-    //                       item.name
-    //                     )
-    //                   }
-    //                   color="blue"
-    //                 >
-    //                   {item.ex.availableToBack[0].price}
-    //                 </BetText>
-    //                 {item.ex.availableToBack[0].size}
-    //               </Box>,
-    //               <Box
-    //                 className={
-    //                   PrevRunner[index].ex.availableToLay[0].price <
-    //                   item.ex.availableToLay[0].price
-    //                     ? "odds-up"
-    //                     : PrevRunner[index].ex.availableToLay[0].price >
-    //                       item.ex.availableToLay[0].price
-    //                     ? "odds-down"
-    //                     : ""
-    //                 }
-    //               >
-    //                 <BetText
-    //                   onClick={() =>
-    //                     updateBet(
-    //                       false,
-    //                       +item.ex.availableToLay[0].price,
-    //                       0,
-    //                       item.selectionId,
-    //                       marketId,
-    //                       matchId,
-    //                       date,
-    //                       +item.ex.availableToLay[0].price,
-    //                       false,
-    //                       item.name
-    //                     )
-    //                   }
-    //                   color="red"
-    //                 >
-    //                   {item.ex.availableToLay[0].price}
-    //                 </BetText>
-    //                 {item.ex.availableToLay[0].size}
-    //               </Box>,
-    //             ]}
-    //           />
-    //         </>
-    //       );
-    //     })}
-    //   </Grid>
-    // </>
   );
 };

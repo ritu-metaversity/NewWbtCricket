@@ -66,6 +66,7 @@ const SetButtonValue = () => {
 
 
               <input
+              style={{marginBottom:"0px"}}
                 onChange={handleChange}
                 name={item}
                 value={buttonValue[item]}

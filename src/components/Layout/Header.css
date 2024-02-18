@@ -24,7 +24,7 @@
     left: 0;
     width: 250px;
     height: calc(100vh - 120px);
-    background: #7b7c7f;
+    background: #002d5b!important;
 }
 
 .btn-secondary {
@@ -168,7 +168,7 @@ a {
 
 .sider-drawer {
     position: relative;
-    background-color: #7b7c7f;
+    background-color: #002d5b!important;
 
 }
 

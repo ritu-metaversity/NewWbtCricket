@@ -172,7 +172,7 @@ const Account = () => {
         <div className="content-top-padding" >
           <div style={{ width: "100%", overflow: "scroll" }}>
 
-            <table className="" style={{ width: "100%" }}>
+            <table className="statement-tables" style={{ width: "100%" }}>
               <thead>
                 <tr>
                   <th className="ldg-tbl-th match-box-color" style={{ width: "50%" }}>

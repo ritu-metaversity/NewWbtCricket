@@ -507,7 +507,7 @@ const WithDraw1 = () => {
                                                         res?.withdrawType,
                                                         res?.id
                                                     )}
-                                                style={{ backgroundColor: (bankID === res?.id) ? "#7b7c7f" : "", cursor: "pointer" }}
+                                                style={{ backgroundColor: (bankID === res?.id) ? "#002d5b!important" : "", cursor: "pointer" }}
                                             >
                                                 <div className="css-1502y4u">
                                                     <img

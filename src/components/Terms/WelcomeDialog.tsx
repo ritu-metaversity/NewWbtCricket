@@ -8,7 +8,7 @@ import {
 
 const titleComponent = (
   <>
-    <HeaderStyle>Welcome to {window.location.hostname.replace("www.", "")}</HeaderStyle>
+    <HeaderStyle>Welcome to {"localhost"}</HeaderStyle>
 
   </>
 );
