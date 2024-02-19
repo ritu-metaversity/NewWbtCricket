@@ -52,9 +52,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
       const data = {
         userId,
         password,
-        // appUrl: host === "localhost" ? "localhost" : "localhost",
-        appUrl: host === "localhost" ? "localhost" : host,
-        // appUrl: "247idhub.com",
+        appUrl: window.location.hostname.replace('www.',''),
       };
       const { response } = await authServices.login(data);
       console.log(response, "loadinggg")
@@ -93,7 +91,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
 
 
   useEffect(() => {
-    let appUrll = "localhost";
+    let appUrll = window.location.hostname.replace('www.','')
     // let appUrll = "localhost";
     axios
       .post(
@@ -121,7 +119,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
     axios
       .post(
         `${REACT_APP_API_URL}/login/demo-user-creation-login`,
-        { appUrl: "localhost" }
+        { appUrl: window.location.hostname.replace('www.','') }
       )
       .then((response) => {
         if (response?.data?.token) {

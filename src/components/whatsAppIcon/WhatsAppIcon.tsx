@@ -15,8 +15,7 @@ const WhatsAppIcon = () => {
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
-    let appUrll = "localhost";
-    // let appUrll = "localhost";
+    let appUrll = window.location.hostname.replace('www.','');
     axios
       .post(
         `${REACT_APP_API_URL}/api/admin/getData`,

@@ -21,7 +21,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
 
   const [selfAllowedd, SetselfAllowedd] = useState();
   useEffect(() => {
-    let appUrll = "localhost";
+    let appUrll = window.location.hostname.replace('www.','');
     // let appUrll = "localhost";
     axios
       .post(
