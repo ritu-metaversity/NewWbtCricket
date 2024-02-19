@@ -164,7 +164,7 @@ export const MatchOddsGrid: FC<Props> = ({
               </th>
             </tr>
           </thead>
-          {show && <tbody>
+          <tbody>
             {runners.map((item, index) => {
               return (
                 <tr>
@@ -266,7 +266,7 @@ export const MatchOddsGrid: FC<Props> = ({
               )
             })}
           </tbody>
-          }
+          
         </table>
       </div>
     </div >

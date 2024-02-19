@@ -16,6 +16,7 @@ import snackBarUtil from "./Layout/snackBarUtil";
 import axios from "axios";
 import NewLogog from "./WBT99-1.png"
 import NewLogogooo from "./WBT99-2.png"
+import Fotter from "./Fotter/Fotter";
 
 interface Props {
   setIsSignedIn: Dispatch<SetStateAction<boolean>>;
@@ -146,7 +147,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
       })
   }
   return (
-    <div className="loginBackground new-login-content ">
+    <div className="loginBackground new-login-content log1">
       <div className="logo-img">
         <img src={selfAllowedd} alt="" className="logoimgggggg" />
       </div>
@@ -222,6 +223,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
 
         </div>
       </div>
+      <Fotter />
     </div>
   );
 };

@@ -168,7 +168,6 @@ function App() {
   useEffect(() => {
     getSelfAllowed();
   }, [isSignedIn]);
-  console.log(window.location.pathname.includes("sign-in"), "gdhsdtgfas");
   useEffect(() => {
     let appUrll = "localhost";
 

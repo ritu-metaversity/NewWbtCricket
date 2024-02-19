@@ -38,7 +38,7 @@ const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
         width="100%"
         bgcolor="#fff"
         paddingBottom={{ xs: "50px", sm: "50px", }}
-        maxWidth={{ xs: "100vw", sm: `${pathname.includes("/in-play")?"xl":"lg"}` }}
+        maxWidth={{ xs: "100vw", sm: `${pathname.includes("/in-play") || (pathname === "/sports")?"xl":"lg"}` }}
 
       >
         {(isSignedIn || localStorage.getItem("passwordType") === "old") && <Outlet />}

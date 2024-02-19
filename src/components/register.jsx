@@ -15,6 +15,7 @@ import snackBarUtil from "./Layout/snackBarUtil";
 import "./Login.css"
 import LoginIcon from '@mui/icons-material/Login';
 import NewLogogooo from "./WBT99-2.png"
+import Fotter from "./Fotter/Fotter";
 
 // interface RegisterInterface {
 //   username?: string;
@@ -358,7 +359,7 @@ const Register = ({ setShow }) => {
 
                 "" :
                 <span>
-                  <label style={{ color: "white", fontSize: "12px", width: "100%", textAlign: "left" }}>Odds Comm..</label>
+                  <label style={{ color: "#002776", fontSize: "12px", width: "100%", textAlign: "left" }}>Odds Comm..</label>
                   <input value={allData?.data?.oddsComm} disabled style={{ width: "100%" }} />
                 </span>
               }
@@ -367,14 +368,14 @@ const Register = ({ setShow }) => {
 
                 "" :
                 <span>
-                  <label style={{ color: "white", fontSize: "12px", width: "100%", textAlign: "left" }}>Fancy Comm..</label>
+                  <label style={{ color: "#002776", fontSize: "12px", width: "100%", textAlign: "left" }}>Fancy Comm..</label>
                   <input placeholder={allData?.data?.fancyComm} disabled style={{ width: "100%" }} />
                 </span>}
               {allData?.data?.casinoComm === 0 ?
 
                 "" :
                 <span>
-                  <label style={{ color: "white", fontSize: "12px", width: "100%", textAlign: "left" }}>Casino Comm..</label>
+                  <label style={{ color: "#002776", fontSize: "12px", width: "100%", textAlign: "left" }}>Casino Comm..</label>
                   <input placeholder={allData?.data?.casinoComm} disabled style={{ width: "100%" }} />
                 </span>
 
@@ -405,6 +406,7 @@ const Register = ({ setShow }) => {
           </button>
         </div>
       </div >
+      <Fotter />
     </Box >
   );
 };

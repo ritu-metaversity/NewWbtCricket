@@ -1,5 +1,6 @@
 import React, { Dispatch, FC, SetStateAction, useState } from 'react'
 import { BetDetailsInterface, FancyOddsInterface, FancyPnl } from '../types';
+import { redGreenComponent } from '../Bet';
 
 interface Props {
     CurrentOdd: FancyOddsInterface[];
@@ -64,6 +65,13 @@ const NewSession: FC<Props> = ({ CurrentOdd,
             setShow(true);
         }
     };
+
+    const getValue = (num: number): string => {
+        if ((num / 1000000) >= 1) { return (num / 1000000) + 'M'; }
+        else if ((num / 1000) >= 1) { return (num / 1000) + 'K'; }
+        else { return num.toString(); }
+    }
+
     return (
         <div>
             <table className="match-bets-old table table-bordered">
@@ -108,16 +116,25 @@ const NewSession: FC<Props> = ({ CurrentOdd,
                             return (
                                 <tr>
                                     <th className="" style={{ color: "black", textAlign: "center", width: "46%" }}>
-                                        <p style={{ margin: "0px" }}>{item?.nation}</p>
-                                        <p style={{ marginTop: "2px", color: "#1a8754" }}>{item?.maxBet}</p>
+                                        <p style={{ margin: "0px" }}>{item?.nation}: {" "} <span style={{ display: "inline-block" }}
+                                            onClick={() =>
+                                                // (FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl ||
+                                                // 0) &&
+                                                setMarketId(item.sid)
+                                            }> {redGreenComponent(
+                                                FancyPnl?.find((pnl) => pnl.marketId === item.sid)?.pnl || 0
+                                            )}
+
+                                        </span></p>
+                                        <p style={{ marginTop: "2px", color: "#1a8754" }}>{getValue(item?.maxBet)}</p>
                                     </th>
                                     <th
 
                                         className={`text-dark text-center font-17 ${PrevOdds[index].l1 < item.l1
-                                                ? "odds-up"
-                                                : PrevOdds[index].l1 > item.l1
-                                                    ? "odds-down"
-                                                    : ""
+                                            ? "odds-up"
+                                            : PrevOdds[index].l1 > item.l1
+                                                ? "odds-down"
+                                                : ""
                                             }`}
                                         style={{ backgroundColor: "rgb(250, 169, 186)", textAlign: "center", color: "#000", width: "22%" }} onClick={() =>
                                             item.l1 &&
@@ -142,10 +159,10 @@ const NewSession: FC<Props> = ({ CurrentOdd,
                                     </th>
                                     <th
                                         className={`text-dark text-center font-17 ${PrevOdds[index].b1 < item.b1
-                                                ? "odds-up"
-                                                : PrevOdds[index].b1 > item.b1
-                                                    ? "odds-down"
-                                                    : ""
+                                            ? "odds-up"
+                                            : PrevOdds[index].b1 > item.b1
+                                                ? "odds-down"
+                                                : ""
                                             }`}
                                         style={{ backgroundColor: "rgb(114, 187, 239)", textAlign: "center", color: "#000", width: "22%" }}
                                         onClick={() =>

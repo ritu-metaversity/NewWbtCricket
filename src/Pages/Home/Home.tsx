@@ -10,6 +10,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import axios from "axios";
 import { Box, Modal } from "@mui/material";
+import Fotter from "../../components/Fotter/Fotter";
 interface Props {
   show: boolean | null;
   setShow: Dispatch<SetStateAction<boolean | null>>
@@ -114,6 +115,7 @@ const Home: FC<Props> = ({ show, setShow }) => {
   // }
 
   return (
+    <>
     <div className="main_container" >
       <div className="mid_container">
         <Modal
@@ -157,13 +159,13 @@ const Home: FC<Props> = ({ show, setShow }) => {
 
         <Link to={"/in-play"} className="single_container"   >
 
-          <img className="img_container" src={"/in-playLatest.png"} alt="" />
+          <img className="img_container card_3d" src={"/inplay.gif"} alt="" />
           <span>In Play</span>
 
         </Link>
         <Link to={"/sports"} className="single_container"   >
 
-          <img className="img_container" src={'/spotssssss.png'} alt="" />
+          <img className="img_container card_3d" src={'/sport.gif'} alt=""  style={{backgroundColor:"#061e5e",padding: "10px"}}/>
           <span>Sports</span>
 
         </Link>
@@ -231,19 +233,19 @@ const Home: FC<Props> = ({ show, setShow }) => {
 
         <Link to={"/profile"} className="single_container"   >
 
-          <img className="img_container" src={"/profile2.png"} alt="" />
+          <img className="img_container card_3d" src={"/my_profile.gif"} alt="" />
           <span>Profile</span>
 
         </Link>
         <Link to={"/password-change"} className="single_container"   >
 
-          <img className="img_container" src={"/changespassword4.png"} alt="" />
+          <img className="img_container card_3d" src={"/password.gif"} alt="" />
           <span>Change Password</span>
 
         </Link>
         <Link to={"/Account_Statement_Page"} className="single_container"   >
 
-          <img className="img_container" src={"/complete2.png"} alt="" />
+          <img className="img_container card_3d" src={"/account-statement.gif"} alt=""  style={{backgroundColor:"#061e5e",padding: "27px"}}/>
           <span>Statement</span>
 
         </Link>
@@ -251,25 +253,28 @@ const Home: FC<Props> = ({ show, setShow }) => {
 
         <Link to={"/current-bet"} className="single_container"   >
 
-          <img className="img_container" src={"/now_5579093.png"} alt="" />
+          <img className="img_container card_3d" src={"/now_5579093.png"} alt="" style={{backgroundColor:"#061e5e",padding: "13px"}}/>
           <span>Current Bet</span>
 
         </Link>
         <Link to={"/profit-and-loss"} className="single_container"   >
 
-          <img className="img_container" src={"/myledger6.png"} alt="" />
+          <img className="img_container card_3d" src={"/pandl.gif"} alt=""  style={{backgroundColor:"#061e5e",padding: "13px"}}/>
           <span>Profit and Loss</span>
 
         </Link>
-        {/* <div onClick={() => handleChange()} className="single_container"   >
-
-          <img className="img_container" src={casinoListImg} alt="" />
-          <span>{casinoListName}</span>
-
-        </div> */}
+      
       </div>
+      
       <Outlet />
+
     </div >
+    <div>
+
+      <Fotter/>
+    </div>
+
+    </>
   );
 };
 

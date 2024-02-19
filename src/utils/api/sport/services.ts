@@ -8,10 +8,10 @@ export const sportServices = {
     };
     return apiHandler(params);
   },
-  activeEventFromSport: (sportId: number) => {
+  activeEventFromSport: (gameIdForItemPage: number) => {
     const params: ApiServiceInterface = {
       resource: sportsResourses.GET_EVENT_FROM_SPORTS,
-      pathVars: { sportId },
+      pathVars: { sportId: gameIdForItemPage },
       betfair: true,
     };
     return apiHandler(params);

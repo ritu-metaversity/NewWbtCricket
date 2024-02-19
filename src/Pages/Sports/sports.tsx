@@ -8,6 +8,16 @@ import SummaryCard, {
 import { sportServices } from "../../utils/api/sport/services";
 import Match from "../../components/Inplay/Match";
 import UpperBanner from "../../components/UpperBanner";
+import { Link, useNavigate } from "react-router-dom";
+import BackBtn from "../InPlay/BackBtn/BackBtn";
+
+interface InplayInterface {
+  sportId: string;
+  sportid: number;
+  sportImage: string;
+  sportName:string;
+  matchList: SummaryCardProps[]; // Assuming SummaryCardProps is imported
+}
 
 
 function a11yProps(index: number) {
@@ -22,18 +32,19 @@ const Sports = () => {
   const [activeEventList, setActiveEventList] = useState<SummaryCardProps[]>(
     []
   );
+  const [gameIdForItemPage, setgameIdForItemPage] = useState(4);
+
 
   const [tabValue, setTab] = useState(0);
   const [show, setShow] = useState(false);
-  console.log(activeSportList, "tabValuetabValue")
   const { setLoading } = useContext(LoaderContext);
+  const { isSignedIn } = useContext(LoaderContext);
+
   useEffect(() => {
     const getList = async () => {
       setLoading && setLoading((prev) => ({ ...prev, Inplay: true }));
       const { response } = await sportServices.activeSportList();
-      console.log(JSON.stringify(response));
       if (response?.data) {
-        console.log(response.data, "adklsjhvbhghvbn")
         setActiveSportList(response.data);
       }
       setLoading && setLoading((prev) => ({ ...prev, Inplay: false }));
@@ -48,13 +59,13 @@ const Sports = () => {
       withLoading &&
         setLoading &&
         setLoading((prev) => ({ ...prev, getNewEvent: true }));
-      console.log(activeSportList);
       if (!activeSportList.length) return;
       const { sportId } = activeSportList[tabValue];
-      console.log(sportId, "spoeqweqwrtIdsportIdsportIdsportId")
       if (!sportId) return;
 
-      const { response } = await sportServices.activeEventFromSport(sportId);
+
+      const { response } = await sportServices.activeEventFromSport(gameIdForItemPage);
+
       if (response?.data) {
         if (response?.data?.length > 0) {
           setActiveEventList(response.data);
@@ -76,62 +87,140 @@ const Sports = () => {
 
     const timer = setInterval(() => getNewEvent(false), 60000);
     return () => clearInterval(timer);
-  }, [tabValue, activeSportList, setLoading]);
+  }, [gameIdForItemPage, activeSportList, setLoading]);
 
-  // console.log(activeEventList, "sporasdftid");
+  const handleMatchId = (val: number) => {
+    setgameIdForItemPage(val)
+  }
+
+  const navigate = useNavigate();
+
+
 
   return (
-    <Box sx={{ marginBottom: '40px' }} maxWidth={900} mx="auto"
-      style={{ border: "0.5px solid black" }}
+    <>
+    <UpperBanner />
 
-    >
-      {/* <BacktoMenuButton /> */}
-      <UpperBanner />
-
-      <Tabs
-        sx={{ backgroundColor: '#dddddd' }}
-        value={tabValue}
-        TabIndicatorProps={{ sx: { display: "none" } }}
-        onChange={handleChange}
-        aria-label="basic tabs example"
-        scrollButtons
-        variant="scrollable"
+      {/* <Box sx={{ marginBottom: '40px' }} maxWidth={900} mx="auto"
         style={{ border: "0.5px solid black" }}
+
       >
-        {activeSportList.map((s: any, index: any) => (
-          <Tab sx={{ [`&.${tabClasses.selected}`]: { color: "white" }, bgcolor: tabValue === index ? "#002d5b!important" : "" }} key={s.sportId + "tab"} label={s?.sportName} {...a11yProps(0)} />
-        ))}
-      </Tabs>
+        
 
-      <Grid
-        container
-        // background-color: #002d5b!important;
-        bgcolor="#002d5b!important"
-        p={{ xs: "15px", lg: "15px" }}
-        // sx={{ cursor: "pointer" }}
-        m={{ lg: 0 }}
-      // border="0.5px solid black"
-      // gap={{ xs: 0.5, lg: 0 }}
-      // borderBottom={{ xs: "", lg: "1px solid rgba(60,68,75)" }}
-      >
-        <Grid item xs={0} display={{ xs: "none", lg: "block" }} lg={6.6} color="#fff">Match Name</Grid>
-        <Grid item xs={4} lg={1.8} color="#fff">1</Grid>
-        <Grid item xs={4} lg={1.8} color="#fff">x</Grid>
-        <Grid item xs={4} lg={1.8} color="#fff">2</Grid>
-      </Grid>
-      {activeEventList?.length > 0
-        ? activeEventList.map((item) => (
-          <Match matches={item} sportId={activeSportList[tabValue]?.sportId} />
-          // <SummaryCard key={item.matchId + "summaryCard"} {...item} />
-        ))
-        : show && (
+        <Tabs
+          sx={{ backgroundColor: '#dddddd' }}
+          value={tabValue}
+          TabIndicatorProps={{ sx: { display: "none" } }}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+          scrollButtons
+          variant="scrollable"
+          style={{ border: "0.5px solid black" }}
+        >
+          {activeSportList.map((s: any, index: any) => (
+            <Tab sx={{ [`&.${tabClasses.selected}`]: { color: "white" }, bgcolor: tabValue === index ? "#002d5b!important" : "" }} key={s.sportId + "tab"} label={s?.sportName} {...a11yProps(0)} />
+          ))}
+        </Tabs>
 
-          <Typography variant="h6" color="error" border="1px solid black">
-            {"No active event found"}
-          </Typography>
+        <Grid
+          container
+          // background-color: #002d5b!important;
+          bgcolor="#002d5b!important"
+          p={{ xs: "15px", lg: "15px" }}
+          // sx={{ cursor: "pointer" }}
+          m={{ lg: 0 }}
+       
+        >
+          <Grid item xs={0} display={{ xs: "none", lg: "block" }} lg={6.6} color="#fff">Match Name</Grid>
+          <Grid item xs={4} lg={1.8} color="#fff">1</Grid>
+          <Grid item xs={4} lg={1.8} color="#fff">x</Grid>
+          <Grid item xs={4} lg={1.8} color="#fff">2</Grid>
+        </Grid>
+        {activeEventList?.length > 0
+          ? activeEventList.map((item) => (
+            <Match matches={item} sportId={activeSportList[tabValue]?.sportId} />
+          ))
+          : show && (
 
-        )}
-    </Box>
+            <Typography variant="h6" color="error" border="1px solid black">
+              {"No active event found"}
+            </Typography>
+
+          )}
+      </Box> */}
+
+      <div>
+        <ul className='games-types'>
+          {activeSportList?.map((item: InplayInterface) => {
+            return (
+              <li className={+item?.sportId == gameIdForItemPage ? "active" : ""} key={item.sportId} onClick={() => handleMatchId(+item?.sportId)}>
+
+                <img src={`/${item?.sportName}.png`} alt={item?.sportName} />
+
+                {item?.sportName}
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+      {
+        activeEventList?.map((res) => {
+          return (
+            <div className='old-matches-list live-match' onClick={() =>
+              navigate(
+                isSignedIn
+                  ? "/in-play-details/?event-id=" + res.matchId
+                  : "/sign-in"
+              )
+            }>
+              <div className='TeamName'>
+                <Link to='/'>
+                  {res?.matchName}
+                  {
+                    res?.inPlay && <span className='d-inline-flex align-items-center float-left mx-2'>
+                    <div className='blink'>
+
+                    </div>
+                  </span>
+                  }
+                  
+                </Link>
+              </div>
+              <div className='old-match-details'>
+                <Link to='/'>
+                  <table width="100%">
+                    <tbody>
+                      <tr>
+                        <td width="1%"></td>
+                        <td className='GameList' style={{ verticalAlign: "top" }}>
+                          <table width="99%">
+                            <tbody>
+                              <tr>
+                                <td className="GameList" align="center">{res?.openDate}</td>
+                              </tr>
+                              <tr>
+                                <td className="GameList" align="center">MATCH BETS : <span>0</span></td>
+                              </tr>
+                              <tr>
+                                <td className="GameList" align="center">Session Bets : <span>0</span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                        <td width="1%"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </Link>
+
+              </div>
+            </div>
+          )
+        })
+      }
+ <BackBtn />
+    </>
+
   );
 };
 

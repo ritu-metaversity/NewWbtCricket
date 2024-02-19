@@ -247,7 +247,6 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
       setActiveFancy(newResponse);
     }
   };
-  console.log(preMatchOdds, "runners");
 
   useEffect(() => {
     setLoading && setLoading((prev) => ({ ...prev, fancyOdds: true }));
