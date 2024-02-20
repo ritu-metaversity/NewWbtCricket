@@ -65,7 +65,9 @@ const Inplay = () => {
           {activeEventList?.map((item: InplayInterface) => {
             if(item?.name == "Kabaddi") return <></>
             return (
-              <li className={item?.sportid == gameIdForItemPage ? "active" : ""} key={item.sportId} onClick={() => handleMatchId(item?.sportid)}>
+              <li className={item?.sportid == gameIdForItemPage ? "active" : ""} key={item.sportId} 
+              // onClick={() => handleMatchId(item?.sportid)}
+              >
 
                 <img src={`/${item?.name}.png`} alt={item?.name} />
 
@@ -77,6 +79,8 @@ const Inplay = () => {
       </div>
       {
         activeEventList?.find((item) => item?.sportid === gameIdForItemPage)?.matchList?.map((res) => {
+          // console.log(res?.bm, "xcvhjkl;")
+          if(res?.bm === false) return null
           return (
             <div className='old-matches-list live-match' onClick={() =>
               navigate(

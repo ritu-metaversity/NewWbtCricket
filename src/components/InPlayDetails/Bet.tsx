@@ -60,7 +60,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
   // useEffect(() => {
   //   setEventIdd(props)
   // }, [])
-  console.log(props?.sportsId, "ididididididv")
+  // console.log(props?.sportsId, "ididididididv")
   const [selectedPnlMarketId, setSelectedPnlMarketId] = useState("");
 
   const [activeFancy, setActiveFancy] = useState<any[]>([]);
@@ -401,49 +401,7 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
 
       <div>
 
-        {/* <div className="tvdatatatat">
-          <div className="scoreCard_icon" onClick={handleTvShow}>
-            <img src={inplaytv} alt="Live tv"
-              style={{ height: "100%" }} />
-            <span style={{ color: "#fff" }}>
 
-              TV
-            </span>
-
-          </div>
-          <div className="scoreCard-icon">
-            <svg
-              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
-              focusable="false"
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              data-testid="ScoreboardIcon">
-              <path d="M17.5 13.5H16v-3h1.5v3zM20 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9.5 11.5c0 .55-.45 1-1 1h-2v1h3V15H5v-2.5c0-.55.45-1 1-1h2v-1H5V9h3.5c.55 0 1 .45 1 1v1.5zm3.25 6.5h-1.5v-1.5h1.5V18zm0-3.5h-1.5V13h1.5v1.5zm0-3.5h-1.5V9.5h1.5V11zm0-3.5h-1.5V6h1.5v1.5zM19 14c0 .55-.45 1-1 1h-2.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v4z"></path>
-            </svg>
-            <div>
-              <label
-                className={`onoffbtn ${toggleBtn1 ? "active" : ""}`}
-                onClick={handleOne}>
-                <input type="checkbox" />
-              </label>
-            </div>
-            <svg
-              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium icon-medium css-vubbuv"
-              focusable="false"
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              data-testid="ScoreboardIcon">
-              <path d="M17.5 13.5H16v-3h1.5v3zM20 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM9.5 11.5c0 .55-.45 1-1 1h-2v1h3V15H5v-2.5c0-.55.45-1 1-1h2v-1H5V9h3.5c.55 0 1 .45 1 1v1.5zm3.25 6.5h-1.5v-1.5h1.5V18zm0-3.5h-1.5V13h1.5v1.5zm0-3.5h-1.5V9.5h1.5V11zm0-3.5h-1.5V6h1.5v1.5zM19 14c0 .55-.45 1-1 1h-2.5c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1H18c.55 0 1 .45 1 1v4z"></path>
-            </svg>
-            <div>
-              <label
-                className={`onoffbtn ${toggleBtn2 ? "active" : ""}`}
-                onClick={handleTwo}>
-                <input type="checkbox" />
-              </label>
-            </div>
-          </div>
-        </div> */}
         {TvShow ? (
           <div id="scoreboard-box">
             <div className="scorecard scorecard-mobile">
@@ -493,14 +451,10 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
           </div> : ""
         }
         <div className="">
-        {matchOdd.map((match, index) => (
+        {/* {matchOdd.map((match, index) => (
             <>
               {" "}
-              {/* <Accordion key={"matchodd" + index} defaultExpanded>
-              <AccordionSummary expandIcon={<ExpandCircleDown />}>
-                {match.Name}
-              </AccordionSummary>
-              <AccordionDetails sx={{ p: 0 }}> */}
+             
               <MatchOddsGrid
                 bet={bet}
                 setBet={setBet}
@@ -509,15 +463,14 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
                 matchId={props.event}
                 OddsPnl={profits.Odds[match?.marketId]}
               />
-              {/* </AccordionDetails>
-            </Accordion> */}
+             
               <Marquee speed={50} gradient={false}>
                 <Typography fontSize="0.8rem" fontWeight={600} color="error.main">
                   {match.display_message}
                 </Typography>
               </Marquee>
             </>
-          ))}
+          ))} */}
 
           {originBookMaker?.length > 0 && (
             <>

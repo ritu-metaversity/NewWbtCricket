@@ -154,7 +154,9 @@ const Sports = () => {
           {activeSportList?.map((item: InplayInterface) => {
             if(item?.sportName == "Kabaddi") return null
             return (
-              <li className={+item?.sportId == gameIdForItemPage ? "active" : ""} key={item.sportId} onClick={() => handleMatchId(+item?.sportId)}>
+              <li className={+item?.sportId == gameIdForItemPage ? "active" : ""} key={item.sportId} 
+              // onClick={() => handleMatchId(+item?.sportId)}
+              >
 
                 <img src={`/${item?.sportName}.png`} alt={item?.sportName} />
 
@@ -166,6 +168,7 @@ const Sports = () => {
       </div>
       {
         activeEventList?.map((res) => {
+          if(res?.bm === false) return null
           return (
             <div className='old-matches-list live-match' onClick={() =>
               navigate(

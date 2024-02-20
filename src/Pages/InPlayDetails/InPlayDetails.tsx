@@ -16,7 +16,7 @@ const InPlayDetails = () => {
     };
   }, [searchParams]);
 
-  console.log(sportsId, "sportsId")
+  // console.log(sportsId, "sportsId")
   useEffect(() => {
     const sportsId = searchParams.get("Sports-id");
     if (sportsId && Number(sportsId)) setSportsId(Number(sportsId));
