@@ -22,7 +22,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
   const [selfAllowedd, SetselfAllowedd] = useState();
   useEffect(() => {
     let appUrll = window.location.hostname.replace('www.','');
-    // let appUrll = "localhost";
+    // let appUrll = window.location.hostname.replace("www.", "");
     axios
       .post(
         `${REACT_APP_API_URL}/login/is-self-by-app-url`,

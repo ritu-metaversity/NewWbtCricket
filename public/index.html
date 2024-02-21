@@ -48,7 +48,7 @@
     -->
 </body>
 <script>
-  document.title = "localhost"?.split(".")[0]
+  document.title = window.location.hostname.replace("www.", "")?.split(".")[0]
 </script>
 
 </html>

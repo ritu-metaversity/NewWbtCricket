@@ -52,7 +52,7 @@ export const MatchOddsGrid: FC<Props> = ({
   matchId,
   OddsPnl,
 }) => {
-  const { runners, status, maxBet, minBet, marketId, Name } = CurrentOdd;
+  const { runners, maxBet, marketId, Name } = CurrentOdd;
   const { runners: PrevRunner } = PrevOdds;
 
   const date = new Date();
@@ -167,106 +167,114 @@ export const MatchOddsGrid: FC<Props> = ({
           <tbody>
             {runners.map((item, index) => {
               return (
-                <tr>
-                  <>
-                    <td
-                      className="bet-place-tbl-td "
-                      style={{ padding: 10, fontWeight: 750, width: "46%" }}
-                    >
-                      <span> {item.name}: <b style={{ display: "inline-block" }}>{Name.toLowerCase().includes("winner") ?
+                <>
+                  <tr>
+                    <>
+                      <td
+                        className="bet-place-tbl-td "
+                        style={{ padding: 10, fontWeight: 750, width: "46%" }}
+                      >
+                        <span> {item.name}: <b style={{ display: "inline-block" }}>{Name.toLowerCase().includes("winner") ?
 
-                        redGreenComponent(
-                          (newUserWinnerPnl && newUserWinnerPnl?.data?.find((itemmmm: any) => itemmmm?.selctionId == item.selectionId)
-                            ?.liability)
-                        )
-                        :
-                        redGreenComponent(
-                          OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
-                            ?.value || 0
-                        )
-                      }</b></span>
-                      <div>
-                      </div>
-                    </td>
-                    <td style={{ width: "22%", background: "rgb(114, 187, 239)", color: "#000" }} className={`bet-place-tbl-td cursor-pointer desktopSize ${PrevRunner[index].ex.availableToBack[0].price <
-                      item.ex.availableToBack[0].price
-                      ? "odds-up"
-                      : PrevRunner[index].ex.availableToBack[0].price >
+                          redGreenComponent(
+                            (newUserWinnerPnl && newUserWinnerPnl?.data?.find((itemmmm: any) => itemmmm?.selctionId == item.selectionId)
+                              ?.liability)
+                          )
+                          :
+                          redGreenComponent(
+                            OddsPnl?.find((pnl) => pnl.sid === item.selectionId)
+                              ?.value || 0
+                          )
+                        }</b></span>
+                        <div>
+                        </div>
+                      </td>
+                      <td style={{ width: "22%", background: "rgb(114, 187, 239)", color: "#000" }} className={`bet-place-tbl-td cursor-pointer desktopSize ${PrevRunner[index].ex.availableToBack[0].price <
                         item.ex.availableToBack[0].price
-                        ? "odds-down"
-                        : ""}`}
-                      onClick={() =>
-                        updateBet(
-                          true,
-                          +item.ex.availableToBack[0].price,
-                          0,
-                          item.selectionId,
-                          marketId,
-                          matchId,
-                          date,
-                          +item.ex.availableToBack[0].price,
-                          false,
-                          item.name,
-                          "LAGAI"
-                        )
-                      }
-                    >
-                      <span style={{
-                        fontSize: "16px",
-                        color: "#000",
-                        fontWeight: "750"
-                      }}>
-                        {item.ex.availableToBack[0].price}</span>
-                      <div>
+                        ? "odds-up"
+                        : PrevRunner[index].ex.availableToBack[0].price >
+                          item.ex.availableToBack[0].price
+                          ? "odds-down"
+                          : ""}`}
+                        onClick={() =>
+                          updateBet(
+                            true,
+                            +item.ex.availableToBack[0].price,
+                            0,
+                            item.selectionId,
+                            marketId,
+                            matchId,
+                            date,
+                            +item.ex.availableToBack[0].price,
+                            false,
+                            item.name,
+                            "LAGAI"
+                          )
+                        }
+                      >
                         <span style={{
-                          fontSize: "9px",
+                          fontSize: "16px",
                           color: "#000",
-                          fontWeight: "500"
-                        }}>{item.ex.availableToBack[0].size}</span>
-                      </div>
-                    </td>
-                    <td style={{ width: "22%", background: "rgb(250, 169, 186)", color: "#000" }} className={`bet-place-tbl-td cursor-pointer desktopSize ${PrevRunner[index].ex.availableToLay[0].price <
-                      item.ex.availableToLay[0].price
-                      ? "odds-up"
-                      : PrevRunner[index].ex.availableToLay[0].price >
+                          fontWeight: "750"
+                        }}>
+                          {item.ex.availableToBack[0].price}</span>
+                        <div>
+                          <span style={{
+                            fontSize: "9px",
+                            color: "#000",
+                            fontWeight: "500"
+                          }}>{item.ex.availableToBack[0].size}</span>
+                        </div>
+                      </td>
+                      <td style={{ width: "22%", background: "rgb(250, 169, 186)", color: "#000" }} className={`bet-place-tbl-td cursor-pointer desktopSize ${PrevRunner[index].ex.availableToLay[0].price <
                         item.ex.availableToLay[0].price
-                        ? "odds-down"
-                        : ""}`}
-                      onClick={() =>
-                        updateBet(
-                          false,
-                          +item.ex.availableToLay[0].price,
-                          0,
-                          item.selectionId,
-                          marketId,
-                          matchId,
-                          date,
-                          +item.ex.availableToLay[0].price,
-                          false,
-                          item.name,
-                          "KHAI"
-                        )
-                      }
-                    >
-                      <span style={{
-                        fontSize: "16px",
-                        color: "#000",
-                        fontWeight: "750"
-                      }}>{item.ex.availableToLay[0].price}</span>
-                      <div>
+                        ? "odds-up"
+                        : PrevRunner[index].ex.availableToLay[0].price >
+                          item.ex.availableToLay[0].price
+                          ? "odds-down"
+                          : ""}`}
+                        onClick={() =>
+                          updateBet(
+                            false,
+                            +item.ex.availableToLay[0].price,
+                            0,
+                            item.selectionId,
+                            marketId,
+                            matchId,
+                            date,
+                            +item.ex.availableToLay[0].price,
+                            false,
+                            item.name,
+                            "KHAI"
+                          )
+                        }
+                      >
                         <span style={{
-                          fontSize: "9px",
+                          fontSize: "16px",
                           color: "#000",
-                          fontWeight: "500"
-                        }}>{item.ex.availableToLay[0].size}</span>
-                      </div>
-                    </td>
-                  </>
-                </tr>
+                          fontWeight: "750"
+                        }}>{item.ex.availableToLay[0].price}</span>
+                        <div>
+                          <span style={{
+                            fontSize: "9px",
+                            color: "#000",
+                            fontWeight: "500"
+                          }}>{item.ex.availableToLay[0].size}</span>
+                        </div>
+                      </td>
+                    </>
+                   
+                  </tr>
+                  
+                 
+                </>
+
+
               )
             })}
+
           </tbody>
-          
+
         </table>
       </div>
     </div >

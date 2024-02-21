@@ -128,64 +128,75 @@ const NewSession: FC<Props> = ({ CurrentOdd,
                                         </span></p>
                                         <p style={{ marginTop: "2px", color: "#1a8754" }}>{getValue(item?.maxBet)}</p>
                                     </th>
-                                    <th
 
-                                        className={`text-dark text-center font-17 ${PrevOdds[index].l1 < item.l1
-                                            ? "odds-up"
-                                            : PrevOdds[index].l1 > item.l1
-                                                ? "odds-down"
-                                                : ""
-                                            }`}
-                                        style={{ backgroundColor: "rgb(250, 169, 186)", textAlign: "center", color: "#000", width: "22%" }} onClick={() =>
-                                            item.l1 &&
-                                            updateBet(
-                                                false,
-                                                +item.l1,
-                                                0,
-                                                0,
-                                                item.sid,
-                                                matchId.toString(),
-                                                date,
-                                                +item.ls1,
-                                                true,
-                                                item.nation,
-                                                "Session",
-                                                "NO"
-                                            )
-                                        }
-                                    >
-                                        <p style={{ marginBottom: "2px", fontSize: "17px", marginTop: "2px" }}>{item?.l1}</p>
-                                        <p style={{ marginTop: "2px", marginBottom: "4px" }}>{item?.ls1}</p>
-                                    </th>
-                                    <th
-                                        className={`text-dark text-center font-17 ${PrevOdds[index].b1 < item.b1
-                                            ? "odds-up"
-                                            : PrevOdds[index].b1 > item.b1
-                                                ? "odds-down"
-                                                : ""
-                                            }`}
-                                        style={{ backgroundColor: "rgb(114, 187, 239)", textAlign: "center", color: "#000", width: "22%" }}
-                                        onClick={() =>
-                                            item.b1 &&
-                                            updateBet(
-                                                true,
-                                                +item.b1,
-                                                0,
-                                                0,
-                                                item.sid,
-                                                matchId.toString(),
-                                                date,
-                                                +item.bs1,
-                                                true,
-                                                item.nation,
-                                                "Session",
-                                                "YES"
-                                            )
-                                        }
-                                    >
-                                        <p style={{ marginBottom: "2px", fontSize: "17px", marginTop: "2px" }}>{item?.b1}</p>
-                                        <p style={{ marginTop: "2px", marginBottom: "4px" }}>{item?.bs1}</p>
-                                    </th>
+
+                                    {
+                                        item?.gstatus !== "" ? <th colSpan={2} style={{height:"58px"}}  className="p-0">
+                                            <div className="suspended-bg" style={{ backgroundImage: "url('/suspended-bg.png')" }}>
+                                                <span>{item?.gstatus}</span>
+                                            </div>
+                                        </th> : <>
+                                            <th 
+
+                                                className={`text-dark text-center font-17 ${PrevOdds[index].l1 < item.l1
+                                                    ? "odds-up"
+                                                    : PrevOdds[index].l1 > item.l1
+                                                        ? "odds-down"
+                                                        : ""
+                                                    }`}
+                                                style={{ backgroundColor: "rgb(250, 169, 186)", textAlign: "center", color: "#000", width: "22%", }} onClick={() =>
+                                                    item.l1 &&
+                                                    updateBet(
+                                                        false,
+                                                        +item.l1,
+                                                        0,
+                                                        0,
+                                                        item.sid,
+                                                        matchId.toString(),
+                                                        date,
+                                                        +item.ls1,
+                                                        true,
+                                                        item.nation,
+                                                        "Session",
+                                                        "NO"
+                                                    )
+                                                }
+                                            >
+                                                <p style={{ marginBottom: "2px", fontSize: "17px", marginTop: "2px" }}>{item?.l1}</p>
+                                                <p style={{ marginTop: "2px", marginBottom: "4px" }}>{item?.ls1}</p>
+                                            </th>
+                                            <th
+                                                className={`text-dark text-center font-17 ${PrevOdds[index].b1 < item.b1
+                                                    ? "odds-up"
+                                                    : PrevOdds[index].b1 > item.b1
+                                                        ? "odds-down"
+                                                        : ""
+                                                    }`}
+                                                style={{ backgroundColor: "rgb(114, 187, 239)", textAlign: "center", color: "#000", width: "22%" }}
+                                                onClick={() =>
+                                                    item.b1 &&
+                                                    updateBet(
+                                                        true,
+                                                        +item.b1,
+                                                        0,
+                                                        0,
+                                                        item.sid,
+                                                        matchId.toString(),
+                                                        date,
+                                                        +item.bs1,
+                                                        true,
+                                                        item.nation,
+                                                        "Session",
+                                                        "YES"
+                                                    )
+                                                }
+                                            >
+                                                <p style={{ marginBottom: "2px", fontSize: "17px", marginTop: "2px" }}>{item?.b1}</p>
+                                                <p style={{ marginTop: "2px", marginBottom: "4px" }}>{item?.bs1}</p>
+                                            </th>
+                                        </>
+                                    }
+
                                 </tr>
                             )
                         })

@@ -27,7 +27,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
   const navigate = useNavigate();
   const [userId, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const host = "localhost";
+  // const host = window.location.hostname.replace("www.", "");
   const [selfAllowedd, SetselfAllowedd] = useState();
   const [selfsignup, Setselfsignup] = useState();
   let REACT_APP_API_URL = process.env.REACT_APP_API_URL;
@@ -92,7 +92,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
 
   useEffect(() => {
     let appUrll = window.location.hostname.replace('www.','')
-    // let appUrll = "localhost";
+    // let appUrll = window.location.hostname.replace("www.", "");
     axios
       .post(
         `${REACT_APP_API_URL}/login/is-self-by-app-url`,

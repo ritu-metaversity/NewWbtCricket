@@ -714,3 +714,23 @@ fieldset[disabled] .btn {
     background-color: #002d5b!important;
     color: #fff;
 }
+
+.suspended-bg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    min-width: 150px;
+  }
+.suspended-bg span {
+      display: flex;
+      height: 100%;
+      /* align-items: center; */
+      justify-content: center;
+      background: #ffffffe6;
+      width: 100%;
+      color: #002D5B;
+      font-weight: bold;
+  }
