@@ -32,11 +32,13 @@
     justify-content: center;
     flex-direction: row;
     padding: 2px 0px;
+   color: #fff;
     background-color: #002d5b!important;
     gap: 3%;
 }
 
-.main_div_for_back_and_game {}
+
+
 
 @media screen and (max-width:700px) {
     .for_Desktop {

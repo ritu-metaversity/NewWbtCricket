@@ -170,67 +170,6 @@ const Home: FC<Props> = ({ show, setShow }) => {
 
         </Link>
 
-        {/* {gameAura?.active === true ?
-          <Link to={"/india_casion"} className="single_container"   >
-
-            <img className="img_container" src="/indian-casino.png" alt="" />
-            <span>Indian Casino</span>
-
-          </Link>
-          : gameSuperNova?.active === true ?
-            <Link to={"/india_casion"} className="single_container"   >
-
-              <img className="img_container" src="/indian-casino.png" alt="" />
-              <span>Indian Casino</span>
-
-            </Link> : ""
-
-        }
-
-        {gameQtech?.active === true ?
-
-          <Link to={"/Live-casino"} className="single_container"   >
-
-            <img className="img_container" src={"/international-casinoletest.png"} alt="" />
-            <span>International Casino</span>
-
-          </Link>
-          : ""
-        }
-
-
-        {gameQtech?.active === true ?
-          <Link to={"/lottery-casino"} className="single_container"   >
-
-            <img className="img_container" src={"/lottery.png"} alt="" />
-            <span>Lottery</span>
-
-          </Link>
-
-
-          : ""}
-
-        {gameQtech?.active === true ?
-          <Link to={"/Slot-Game-details"} className="single_container"   >
-
-            <img className="img_container" src={"/slots.png"} alt="" />
-            <span>Slots</span>
-
-          </Link>
-          : ""}
-
-        {gameQtech?.active === true ?
-          <Link to={"/Fantasy-Game"} className="single_container"   >
-
-            <img className="img_container" src={"/fantasy-game.png"} alt="" />
-            <span>Fantasy Game</span>
-
-          </Link>
-
-          : ""
-        } */}
-
-
         <Link to={"/profile"} className="single_container"   >
 
           <img className="img_container card_3d" src={"/my_profile.gif"} alt="" />
@@ -263,6 +202,69 @@ const Home: FC<Props> = ({ show, setShow }) => {
           <span>Profit and Loss</span>
 
         </Link>
+
+        {gameAura?.active === true ?
+          <Link to={"/india_casion"} className="single_container"   >
+
+            <img className="img_container" src="/indian-casino.png" alt=""  style={{backgroundColor:"#061e5e",padding: "13px"}}/>
+            <span>Indian Casino</span>
+
+          </Link>
+          : gameSuperNova?.active === true ?
+            <Link to={"/india_casion"} className="single_container"   >
+
+              <img className="img_container" src="/indian-casino.png" alt="" style={{backgroundColor:"#061e5e",padding: "13px"}}/>
+              <span>Indian Casino</span>
+
+            </Link> : ""
+
+        }
+
+        {gameQtech?.active === true ?
+
+          <Link to={"/Live-casino"} className="single_container"   >
+
+            <img className="img_container" src={"/international-casinoletest.png"} alt="" style={{backgroundColor:"#061e5e",padding: "13px"}}/>
+            <span>International Casino</span>
+
+          </Link>
+          : ""
+        }
+
+
+        {gameQtech?.active === true ?
+          <Link to={"/lottery-casino"} className="single_container"   >
+
+            <img className="img_container" src={"/lottery.png"} alt="" style={{backgroundColor:"#061e5e",padding: "13px"}}/>
+            <span>Lottery</span>
+
+          </Link>
+
+
+          : ""}
+
+        {gameQtech?.active === true ?
+          <Link to={"/Slot-Game-details"} className="single_container"   >
+
+            <img className="img_container" src={"/slots.png"} alt=""style={{backgroundColor:"#061e5e",padding: "13px"}} />
+            <span>Slots</span>
+
+          </Link>
+          : ""}
+
+        {gameQtech?.active === true ?
+          <Link to={"/Fantasy-Game"} className="single_container"   >
+
+            <img className="img_container" src={"/fantasy-game.png"} alt="" style={{backgroundColor:"#061e5e",padding: "13px"}}/>
+            <span>Fantasy Game</span>
+
+          </Link>
+
+          : ""
+        }
+
+
+        
       
       </div>
       
