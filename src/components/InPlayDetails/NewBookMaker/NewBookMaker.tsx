@@ -27,29 +27,29 @@ const NewBookMaker: FC<{
         marketName: string,
         name: string,
         marketnameid: string,
-    
-      ) => {
+
+    ) => {
         if (odds <= 0) {
-          setBet(null);
-          return;
+            setBet(null);
+            return;
         }
         setBet({
-          ...bet,
-          isBack: isBack,
-          marketName: "Bookmaker",
-          odds: odds,
-          stake: 0,
-          selectionId: selectionId,
-          marketId: marketId,
-          matchId: matchId.toString(),
-          placeTime: placeTime,
-          priceValue: priceValue,
-          isFancy: isFancy,
-          name:name,
-          marketnameid: marketnameid
-    
+            ...bet,
+            isBack: isBack,
+            marketName: "Bookmaker",
+            odds: odds,
+            stake: 0,
+            selectionId: selectionId,
+            marketId: marketId,
+            matchId: matchId.toString(),
+            placeTime: placeTime,
+            priceValue: priceValue,
+            isFancy: isFancy,
+            name: name,
+            marketnameid: marketnameid
+
         });
-      };
+    };
     return (
         <div>
             <table className="match-bets-old table table-bordered">
@@ -102,21 +102,21 @@ const NewBookMaker: FC<{
                                         style={{ backgroundColor: "rgb(114, 187, 239)", textAlign: "center", fontSize: "17px", color: "#000" }}
                                         onClick={() =>
                                             updateBet(
-                                              true,
-                                              +res.b1,
-                        
-                                              res.sid,
-                                              res.mid,
-                                              matchId,
-                                              date,
-                                              +res.b1,
-                                              false,
-                                              res.t,
-                                              res.nation,
-                                              "LAGAI"
-                        
+                                                true,
+                                                +res.b1,
+
+                                                res.sid,
+                                                res.mid,
+                                                matchId,
+                                                date,
+                                                +res.b1,
+                                                false,
+                                                res.t,
+                                                res.nation,
+                                                "LAGAI"
+
                                             )
-                                          }
+                                        }
                                     >
                                         <span>{res?.b1}</span>
                                     </th>
@@ -125,19 +125,19 @@ const NewBookMaker: FC<{
                                         style={{ backgroundColor: "rgb(250, 169, 186)", textAlign: "center", fontSize: "17px", color: "#000" }}
                                         onClick={() =>
                                             updateBet(
-                                              false,
-                                              +res.l1,
-                                              res.sid,
-                                              res.mid,
-                                              matchId,
-                                              date,
-                                              +res.l1,
-                                              false,
-                                              res.t,
-                                              res.nation,
-                                              "KHAI"
+                                                false,
+                                                +res.l1,
+                                                res.sid,
+                                                res.mid,
+                                                matchId,
+                                                date,
+                                                +res.l1,
+                                                false,
+                                                res.t,
+                                                res.nation,
+                                                "KHAI"
                                             )
-                                          }
+                                        }
                                     >
                                         <span>{res?.l1}</span>
                                     </th>
