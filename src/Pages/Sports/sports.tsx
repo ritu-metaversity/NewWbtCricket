@@ -152,7 +152,7 @@ const Sports = () => {
       <div>
         <ul className='games-types'>
           {activeSportList?.map((item: InplayInterface) => {
-            if(item?.sportName == "Kabaddi") return null
+            if(item?.sportName == "Kabaddi" || item?.sportName == "Tennis" || item?.sportName == "Football" || item?.sportName == "Horse racing") return <></>
             return (
               <li className={+item?.sportId == gameIdForItemPage ? "active" : ""} key={item.sportId} 
               // onClick={() => handleMatchId(+item?.sportId)}

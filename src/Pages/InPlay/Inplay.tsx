@@ -63,7 +63,7 @@ const Inplay = () => {
             All
           </li> */}
           {activeEventList?.map((item: InplayInterface) => {
-            if(item?.name == "Kabaddi") return <></>
+            if(item?.name == "Kabaddi" || item?.name == "Tennis" || item?.name == "Football") return <></>
             return (
               <li className={item?.sportid == gameIdForItemPage ? "active" : ""} key={item.sportId} 
               // onClick={() => handleMatchId(item?.sportid)}

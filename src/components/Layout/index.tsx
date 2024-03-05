@@ -13,7 +13,7 @@ const Layout: FC<Props> = ({ isSignedIn, setIsSignedIn }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/welcome");
+      navigate("/sign-in");
     }
   }, []);
 

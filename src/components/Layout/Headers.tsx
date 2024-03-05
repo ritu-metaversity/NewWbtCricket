@@ -87,7 +87,7 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   async function clickHandler() {
     await authServices.logout();
     localStorage.clear();
-    navigation("/welcome");
+    navigation("/sign-in");
     setIsSignedIn(false);
     setDrawerOpen(false)
   }
@@ -143,7 +143,7 @@ axios
   })
   .catch((error) => {
     if (error?.response?.data?.status === false) {
-      navigation("/welcome");
+      navigation("/sign-in");
       localStorage.clear();
     }
   });
@@ -168,7 +168,7 @@ axios
             })
             .catch((error) => {
               if (error?.response?.data?.status === false) {
-                navigation("/welcome");
+                navigation("/sign-in");
                 localStorage.clear();
 
               }
@@ -366,7 +366,7 @@ axios
               <li > <Link to="/bet-history" onClick={() => setDrawerOpen(false)}><p><span><MdWorkHistory /></span>BET HISTORY</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/set-button-value" onClick={() => setDrawerOpen(false)}><p><span><BsFillMenuButtonFill /></span>SET BUTTON VALUE</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/terms" onClick={() => setDrawerOpen(false)}><p><span><BsFileEarmarkRuled /></span>RULES</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/welcome" onClick={clickHandler}><p><span><HiOutlineLogout /></span>LOGOUT</p>  <span><FaArrowRight /></span>   </Link></li>
+              <li > <Link to="/sign-in" onClick={clickHandler}><p><span><HiOutlineLogout /></span>LOGOUT</p>  <span><FaArrowRight /></span>   </Link></li>
 
             </ul>
 
