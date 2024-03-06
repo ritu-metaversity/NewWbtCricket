@@ -90,7 +90,7 @@ const apiHandler: (arg: ApiServiceInterface) => Promise<ApiResponse> = async (
       result = { error: error.response?.data };
       if (error?.response?.status === 401) {
         localStorage.clear();
-        window.location.replace("/welcome");
+        window.location.replace("/sign-in");
         result.error = {};
       }
     })

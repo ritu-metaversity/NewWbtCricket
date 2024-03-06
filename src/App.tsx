@@ -225,10 +225,10 @@ function App() {
             <Routes>
 
 
-              <Route
+              {/* <Route
                 path="/welcome"
                 element={<LoginDashboard isSignedIn={isSignedIn} />}
-              />
+              /> */}
               <Route
                 path="/sign-in"
                 element={<Login setShow={setWelcomePopup} setIsSignedIn={setIsSignedIn} />}
