@@ -113,37 +113,37 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
     }
   }, [])
 
-  const handleDemoAccount = () => {
-    // setLoadingLogin(true)
+  // const handleDemoAccount = () => {
+  //   // setLoadingLogin(true)
 
-    axios
-      .post(
-        `${REACT_APP_API_URL}/login/demo-user-creation-login`,
-        { appUrl: window.location.hostname.replace('www.','') }
-      )
-      .then((response) => {
-        if (response?.data?.token) {
-          axios.defaults.headers.common.Authorization = `Bearer ${response?.data?.token}`
-          localStorage.setItem("token", response?.data?.token);
-          localStorage.setItem("userid", response?.data?.userId);
-          localStorage.setItem("passwordType", response?.data?.passwordtype);
-          localStorage.setItem("userTypeInfo", response?.data?.userTypeInfo);
-          // QTECH APPPIIIIIIIIIIIII
-          setIsSignedIn(true);
-          setShow(true)
-          // setLoadingLogin(false)
-          navigate("/", { replace: true });
-        } else {
-          if (response?.data?.status === false) {
-            snackBarUtil.error(response?.data?.message)
-          }
-        }
-      })
-      .catch((err) => {
-        console.log(err, "fsdsdfsdfsd");
+  //   axios
+  //     .post(
+  //       `${REACT_APP_API_URL}/login/demo-user-creation-login`,
+  //       { appUrl: window.location.hostname.replace('www.','') }
+  //     )
+  //     .then((response) => {
+  //       if (response?.data?.token) {
+  //         axios.defaults.headers.common.Authorization = `Bearer ${response?.data?.token}`
+  //         localStorage.setItem("token", response?.data?.token);
+  //         localStorage.setItem("userid", response?.data?.userId);
+  //         localStorage.setItem("passwordType", response?.data?.passwordtype);
+  //         localStorage.setItem("userTypeInfo", response?.data?.userTypeInfo);
+  //         // QTECH APPPIIIIIIIIIIIII
+  //         setIsSignedIn(true);
+  //         setShow(true)
+  //         // setLoadingLogin(false)
+  //         navigate("/", { replace: true });
+  //       } else {
+  //         if (response?.data?.status === false) {
+  //           snackBarUtil.error(response?.data?.message)
+  //         }
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err, "fsdsdfsdfsd");
 
-      })
-  }
+  //     })
+  // }
   return (
     <div className="loginBackground new-login-content log1">
       <div className="logo-img">
@@ -186,11 +186,11 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
           {/* </div> */}
         </form>
 
-        <button className="login_loginnn" onClick={handleDemoAccount}>
+        {/* <button className="login_loginnn" onClick={handleDemoAccount}>
           <span> Login with demo ID</span>
           <LoginIcon style={{ rotate: "180deg", fontSize: "18px" }} />
-        </button>
-        {selfsignup === true ?
+        </button> */}
+        {/* {selfsignup === true ?
 
           // <div className="login_main" onClick={handleSign}>
           <button className="login_loginnn" onClick={handleSign}>
@@ -200,7 +200,7 @@ const Login: FC<Props> = ({ setIsSignedIn, setShow }) => {
           : ""
 
 
-        }
+        } */}
 
         <div className="_term_section">
           <div className="sub_term">

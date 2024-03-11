@@ -125,28 +125,28 @@ const Headers: FC<Props> = ({ setIsSignedIn }) => {
   useEffect(() => {
 
     if (TokenId) {
-axios
-  .post(
-    `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
-    {},
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${TokenId}`,
-      },
-    }
-  )
-  .then((response) => {
-    console.log(response, "dfsdfksdjfkuhsdjn");
+      axios
+        .post(
+          `${REACT_APP_API_URL_PLAY_INDIA}/api/qtech/authentication`,
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${TokenId}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response, "dfsdfksdjfkuhsdjn");
 
-    localStorage.setItem("GameToken", response?.data?.data?.access_token);
-  })
-  .catch((error) => {
-    if (error?.response?.data?.status === false) {
-      navigation("/sign-in");
-      localStorage.clear();
-    }
-  });
+          localStorage.setItem("GameToken", response?.data?.data?.access_token);
+        })
+        .catch((error) => {
+          if (error?.response?.data?.status === false) {
+            navigation("/sign-in");
+            localStorage.clear();
+          }
+        });
 
       const timers = setInterval(
         () => {
@@ -273,28 +273,19 @@ axios
               justifyContent: "center",
               flexWrap: "wrap"
             }}>
-              {/* <HeaderTextStyle>Coins: {wallet.balance}</HeaderTextStyle>
-            <HeaderTextStyle>Liability: {wallet.libality}</HeaderTextStyle> */}
-              {/* <HeaderTextStyle className="home_icon"> */}
-              {/* <div> */}
+
               <Link to={(localStorage.getItem("passwordType") === "new") ? "/" : "OldChangePassword"} className="home_btn">
-
-
-                {/* <img src="https://bmxpro.in/home-page-50.png" alt="" style={{ height: "28px", width: "28px", marginBottom: "0" }} /> */}
-
-                <FaHome style={{fontSize:"28px", color:"#fff" }}/>
-
+                <FaHome style={{ fontSize: "28px", color: "#fff" }} />
                 <p className="home_lable" style={{ color: "rgb(255, 255, 255)", marginLeft: "4px", margin: '0' }} >HOME</p>
               </Link>
-              {/* </div> */}
-              {/* </HeaderTextStyle> */}
+
             </Box>
-            <div className="Username_chip">
+            <div className="Username_chip" style={{width:"40%"}}>
               <span>
                 {userid}
               </span>
               <span >
-                chips:{wallet.balance}
+                Balance: {wallet.balance}
 
               </span>
             </div>
@@ -364,7 +355,7 @@ axios
               {/* <li > <Link to="/login-history" onClick={() => setDrawerOpen(false)}><p><span><AiOutlineHistory /></span>LOGIN HISTORY</p>  <span><FaArrowRight /></span>   </Link></li> */}
               <li > <Link to="/current-bet" onClick={() => setDrawerOpen(false)}><p><span><MdSportsScore /></span>CURRENT BET</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/bet-history" onClick={() => setDrawerOpen(false)}><p><span><MdWorkHistory /></span>BET HISTORY</p>  <span><FaArrowRight /></span>   </Link></li>
-              <li > <Link to="/set-button-value" onClick={() => setDrawerOpen(false)}><p><span><BsFillMenuButtonFill /></span>SET BUTTON VALUE</p>  <span><FaArrowRight /></span>   </Link></li>
+              {/* <li > <Link to="/set-button-value" onClick={() => setDrawerOpen(false)}><p><span><BsFillMenuButtonFill /></span>SET BUTTON VALUE</p>  <span><FaArrowRight /></span>   </Link></li> */}
               <li > <Link to="/terms" onClick={() => setDrawerOpen(false)}><p><span><BsFileEarmarkRuled /></span>RULES</p>  <span><FaArrowRight /></span>   </Link></li>
               <li > <Link to="/sign-in" onClick={clickHandler}><p><span><HiOutlineLogout /></span>LOGOUT</p>  <span><FaArrowRight /></span>   </Link></li>
 
@@ -396,7 +387,7 @@ axios
                 </span>
               </button>)
           } */}
-          <span>Chips: {Number(wallet.balance).toFixed(2)}</span>
+          <span>Currency: {Number(wallet.balance).toFixed(2)}</span>
           {" "}
           <Link to="/current-bet" style={{ padding: "0px 0px 0px 14px" }}>
             <span>Expo : <span style={{ color: "red" }}>
@@ -509,11 +500,11 @@ axios
           </MenuItem>
         </Link>
 
-        <Link to="/set-button-value">
+        {/* <Link to="/set-button-value">
           <MenuItem className="profitepopup">
             <BsFillMenuButtonFill /> Set button value
           </MenuItem>
-        </Link>
+        </Link> */}
         <Divider />
 
         <MenuItem onClick={clickHandler}>

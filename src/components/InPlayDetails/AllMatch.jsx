@@ -395,7 +395,7 @@ const AllMatch = ({ bet, setBet, buttonData, event, sportsId }) => {
                         <div className="Bet-succ">
 
                             <h2 id="parent-modal-title" style={{ color: betResultMessage?.data === false ? "red" : "white" }}>{betResultMessage?.message}</h2>
-                            <button className="Bet-SuccBtn" onClick={handleClose}>OK</button>
+                            {/* <button className="Bet-SuccBtn" onClick={handleClose}>OK</button> */}
 
                         </div>
                     </Box>

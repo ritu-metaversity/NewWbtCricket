@@ -118,7 +118,7 @@ const Home: FC<Props> = ({ show, setShow }) => {
     <>
     <div className="main_container" >
       <div className="mid_container">
-        <Modal
+        {/* <Modal
           open={!!show}
           onClose={() => setShow(false)}
           aria-labelledby="parent-modal-title"
@@ -154,7 +154,7 @@ const Home: FC<Props> = ({ show, setShow }) => {
             </div>
           </div>
 
-        </Modal>
+        </Modal> */}
 
 
         <Link to={"/in-play"} className="single_container"   >
@@ -170,40 +170,40 @@ const Home: FC<Props> = ({ show, setShow }) => {
 
         </Link>
 
-        <Link to={"/profile"} className="single_container"   >
+        {/* <Link to={"/profile"} className="single_container"   >
 
           <img className="img_container card_3d" src={"/my_profile.gif"} alt="" />
           <span>Profile</span>
 
-        </Link>
+        </Link> */}
         <Link to={"/password-change"} className="single_container"   >
 
           <img className="img_container card_3d" src={"/password.gif"} alt="" />
           <span>Change Password</span>
 
         </Link>
-        <Link to={"/Account_Statement_Page"} className="single_container"   >
+        {/* <Link to={"/Account_Statement_Page"} className="single_container"   >
 
           <img className="img_container card_3d" src={"/account-statement.gif"} alt=""  style={{backgroundColor:"#061e5e",padding: "27px"}}/>
           <span>Statement</span>
 
-        </Link>
+        </Link> */}
 
 
-        <Link to={"/current-bet"} className="single_container"   >
+        {/* <Link to={"/current-bet"} className="single_container"   >
 
           <img className="img_container card_3d" src={"/now_5579093.png"} alt="" style={{backgroundColor:"#061e5e",padding: "13px"}}/>
           <span>Current Bet</span>
 
-        </Link>
-        <Link to={"/profit-and-loss"} className="single_container"   >
+        </Link> */}
+        {/* <Link to={"/profit-and-loss"} className="single_container"   >
 
           <img className="img_container card_3d" src={"/pandl.gif"} alt=""  style={{backgroundColor:"#061e5e",padding: "13px"}}/>
           <span>Profit and Loss</span>
 
-        </Link>
+        </Link> */}
 
-        {gameAura?.active === true ?
+        {/* {gameAura?.active === true ?
           <Link to={"/india_casion"} className="single_container"   >
 
             <img className="img_container" src="/indian-casino.png" alt=""  style={{backgroundColor:"#061e5e",padding: "13px"}}/>
@@ -218,9 +218,9 @@ const Home: FC<Props> = ({ show, setShow }) => {
 
             </Link> : ""
 
-        }
+        } */}
 
-        {gameQtech?.active === true ?
+        {/* {gameQtech?.active === true ?
 
           <Link to={"/Live-casino"} className="single_container"   >
 
@@ -229,10 +229,10 @@ const Home: FC<Props> = ({ show, setShow }) => {
 
           </Link>
           : ""
-        }
+        } */}
 
 
-        {gameQtech?.active === true ?
+        {/* {gameQtech?.active === true ?
           <Link to={"/lottery-casino"} className="single_container"   >
 
             <img className="img_container" src={"/lottery.png"} alt="" style={{backgroundColor:"#061e5e",padding: "13px"}}/>
@@ -261,7 +261,7 @@ const Home: FC<Props> = ({ show, setShow }) => {
           </Link>
 
           : ""
-        }
+        } */}
 
 
         
@@ -271,10 +271,10 @@ const Home: FC<Props> = ({ show, setShow }) => {
       <Outlet />
 
     </div >
-    <div>
+    {/* <div>
 
       <Fotter/>
-    </div>
+    </div> */}
 
     </>
   );

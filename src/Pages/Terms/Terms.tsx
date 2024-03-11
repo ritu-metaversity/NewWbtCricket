@@ -92,7 +92,7 @@ const Terms = () => {
 
         <div className="term-and-condition" >
           <h1 style={{ textAlign: "center" }}>
-            <span style={{ fontSize: 20 }}>
+            {/* <span style={{ fontSize: 20 }}>
               <em style={{ boxSizing: "border-box" }}>
                 <strong>
                   <a
@@ -102,7 +102,7 @@ const Terms = () => {
                   </a>
                 </strong>
               </em>
-            </span>
+            </span> */}
             <span style={{ color: "#000000" }}> </span>
             <span style={{ fontSize: 20 }}>
               <em>
@@ -119,7 +119,7 @@ const Terms = () => {
               </em>
             </span>
           </h1>
-          <div id="hindi-rules">
+          {/* <div id="hindi-rules">
             <h1 >
               <span style={{ color: "#000000" }}>
                 <span style={{ fontSize: 20 }}>
@@ -1486,9 +1486,9 @@ const Terms = () => {
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table> */}
           <h1 style={{ textAlign: "center" }}>
-            <span style={{ fontSize: 20 }}>
+            {/* <span style={{ fontSize: 20 }}>
               <em>
                 <strong>
                   <a
@@ -1501,7 +1501,7 @@ const Terms = () => {
                   </a>
                 </strong>
               </em>
-            </span>
+            </span> */}
           </h1>
           <ul>
             <li>

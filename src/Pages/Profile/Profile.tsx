@@ -90,7 +90,7 @@ const Profile = () => {
         <Grid {...gridItemProps}>{prolile?.doj}</Grid>
         <Grid {...gridItemProps}>Address:</Grid>
         <Grid {...gridItemProps}>{prolile?.city}</Grid>
-        <Grid {...gridItemProps}>Chips:</Grid>
+        <Grid {...gridItemProps}>Amount(INR):</Grid>
         <Grid {...gridItemProps}>{prolile?.balance}</Grid>{" "}
         <Grid {...gridItemProps}>Win:</Grid>
         <Grid {...gridItemProps}>{Number(prolile?.win).toFixed(2)}</Grid>{" "}

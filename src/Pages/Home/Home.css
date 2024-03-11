@@ -60,7 +60,7 @@
 }
 
 .single_container {
-    width: 40%;
+    /* width: 40%; */
     display: flex;
     flex-direction: column;
     align-items: center;

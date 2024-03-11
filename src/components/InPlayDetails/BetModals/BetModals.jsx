@@ -50,7 +50,7 @@ const BetModals = ({
   useEffect(() => {
     const timers = setTimeout(() => {
       setShow(false);
-    }, 5000);
+    }, 3000);
     return () => clearInterval(timers);
   }, [Show]);
 

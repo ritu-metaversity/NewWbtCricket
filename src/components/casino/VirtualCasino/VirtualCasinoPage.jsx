@@ -41,7 +41,7 @@ const VirtualCasinoPage = () => {
                         Back
                     </span>
                 </button>
-                <span>Chips: {Number(walletBalance).toFixed(2)}</span>
+                <span>Amount(INR): {Number(walletBalance).toFixed(2)}</span>
                 <span>Expo : <span style={{ color: "red" }}>{Number(walletLibality).toFixed(2)}</span></span>
             </div>
 

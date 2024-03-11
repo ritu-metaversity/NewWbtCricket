@@ -589,9 +589,9 @@ const Bet: FC<any> = (props: { event: number, sportsId: any }) => {
               }}>
               {betResultMessage?.message}
             </h2>
-            <button className="Bet-SuccBtn" onClick={handleClose}>
+            {/* <button className="Bet-SuccBtn" onClick={handleClose}>
               OK
-            </button>
+            </button> */}
           </div>
         </Box>
       </Modal>

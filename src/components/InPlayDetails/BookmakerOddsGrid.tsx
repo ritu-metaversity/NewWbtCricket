@@ -111,28 +111,28 @@ const BookMakerOddsgrid: FC<{
 
               </th>
               <th
-                className="bet-place-tbl-th lagai-box-color desktop desktopSize"
+                className="bet-place-tbl-th Back-box-color desktop desktopSize"
 
               >
 
               </th>
               <th
-                className="bet-place-tbl-th lagai-box-color desktop desktopSize"
+                className="bet-place-tbl-th Back-box-color desktop desktopSize"
 
               >
 
               </th>
               <th
-                className="bet-place-tbl-th lagai-box-color desktopSize"
+                className="bet-place-tbl-th Back-box-color desktopSize"
 
               >
-                LAGAI
+                Back
               </th>
               <th
                 className="bet-place-tbl-th khai-box-color desktopSize"
 
               >
-                KHAI
+                Lay
               </th>
               <th
                 className="bet-place-tbl-th khai-box-color desktop desktopSize"
@@ -207,7 +207,7 @@ const BookMakerOddsgrid: FC<{
                       false,
                       item.t,
                       item.nation,
-                      "LAGAI"
+                      "Back"
 
                     )
                   }>
@@ -230,7 +230,7 @@ const BookMakerOddsgrid: FC<{
                     false,
                     item.t,
                     item.nation,
-                    "KHAI"
+                    "Lay"
                   )
                 }>
                   <span>{item.l1}</span>

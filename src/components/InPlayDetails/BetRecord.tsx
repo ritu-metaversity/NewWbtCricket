@@ -40,7 +40,7 @@ const BetRecord = (props: { item: any }) => {
           <StickyTable
             rows={betRecord[key].map((value: any, index: string) => {
               value.color = value.back ? "#b3d9f5" : "#f5bad0";
-              value.back = value.back ? "Lagai" : "Khayi";
+              value.back = value.back ? "Back" : "Lay";
               value.sr = index + 1;
 
               return value;

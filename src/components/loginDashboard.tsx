@@ -64,7 +64,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
             >
               Login
             </Button>
-            {appData?.selfAllowed && (
+            {/* {appData?.selfAllowed && (
               <Button
                 sx={{ fontSize: "0.7rem", color: "black" }}
                 style={{ marginLeft: "10px" }}
@@ -74,7 +74,7 @@ const LoginDashboard: FC<Props> = ({ isSignedIn }) => {
               >
                 Sign Up
               </Button>
-            )}
+            )} */}
           </div>
         </div>
 

@@ -155,12 +155,12 @@ export const MatchOddsGrid: FC<Props> = ({
                 </div>
               </th>
               <th style={{ width: "22%" }}
-                className="bet-place-tbl-th lagai-box-color desktopSize"
-              >LAGAI</th>
+                className="bet-place-tbl-th Back-box-color desktopSize"
+              >Back</th>
               <th style={{ width: "22%" }}
                 className="bet-place-tbl-th khai-box-color desktopSize"
               >
-                KHAI
+                Lay
               </th>
             </tr>
           </thead>
@@ -208,7 +208,7 @@ export const MatchOddsGrid: FC<Props> = ({
                             +item.ex.availableToBack[0].price,
                             false,
                             item.name,
-                            "LAGAI"
+                            "Back"
                           )
                         }
                       >
@@ -245,7 +245,7 @@ export const MatchOddsGrid: FC<Props> = ({
                             +item.ex.availableToLay[0].price,
                             false,
                             item.name,
-                            "KHAI"
+                            "Lay"
                           )
                         }
                       >

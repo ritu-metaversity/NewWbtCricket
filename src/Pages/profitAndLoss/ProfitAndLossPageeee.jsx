@@ -214,7 +214,7 @@ const ProfitAndLossPageeee = () => {
                 <th className="ldg-tbl-th match-box-color padddddd">WON BY</th>
                 <th className="ldg-tbl-th match-box-color padddddd">WON</th>
                 <th className="ldg-tbl-th match-box-color padddddd">LOST</th>
-                <th className="ldg-tbl-th match-box-color padddddd">HISAB</th>
+                <th className="ldg-tbl-th match-box-color padddddd">Profit/Loss</th>
                 {/* <th className="ldg-tbl-th match-box-color">WON</th>
                   <th className="ldg-tbl-th match-box-color">LOST</th>
                   <th className="ldg-tbl-th match-box-color">HISAB</th> */}

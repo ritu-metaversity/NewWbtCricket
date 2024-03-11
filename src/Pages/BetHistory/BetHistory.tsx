@@ -144,7 +144,7 @@ const BetHistory = () => {
           onChange={handleChange}
           style={{ cursor: "pointer" }}
         />
-        <label htmlFor="back">Lagai</label>
+        <label htmlFor="back">Back</label>
         <br />
         <input
           type="radio"
@@ -155,7 +155,7 @@ const BetHistory = () => {
           onChange={handleChange}
           style={{ cursor: "pointer" }}
         />
-        <label htmlFor="lay">Khayi</label>
+        <label htmlFor="lay">Lay</label>
         <br />
 
         {/* <input

@@ -15,7 +15,7 @@ interface InplayInterface {
   sportId: string;
   sportid: number;
   sportImage: string;
-  sportName:string;
+  sportName: string;
   matchList: SummaryCardProps[]; // Assuming SummaryCardProps is imported
 }
 
@@ -99,7 +99,10 @@ const Sports = () => {
 
   return (
     <>
-    <UpperBanner />
+      <UpperBanner />
+
+      <BackBtn />
+
 
       {/* <Box sx={{ marginBottom: '40px' }} maxWidth={900} mx="auto"
         style={{ border: "0.5px solid black" }}
@@ -152,9 +155,9 @@ const Sports = () => {
       <div>
         <ul className='games-types'>
           {activeSportList?.map((item: InplayInterface) => {
-            if(item?.sportName == "Kabaddi" || item?.sportName == "Tennis" || item?.sportName == "Football" || item?.sportName == "Horse racing") return <></>
+            if (item?.sportName == "Kabaddi" || item?.sportName == "Tennis" || item?.sportName == "Football" || item?.sportName == "Horse racing") return <></>
             return (
-              <li className={+item?.sportId == gameIdForItemPage ? "active" : ""} key={item.sportId} 
+              <li className={+item?.sportId == gameIdForItemPage ? "active" : ""} key={item.sportId}
               // onClick={() => handleMatchId(+item?.sportId)}
               >
 
@@ -168,7 +171,7 @@ const Sports = () => {
       </div>
       {
         activeEventList?.map((res) => {
-          if(res?.bm === false) return null
+          if (res?.bm === false) return null
           return (
             <div className='old-matches-list live-match' onClick={() =>
               navigate(
@@ -182,12 +185,12 @@ const Sports = () => {
                   {res?.matchName}
                   {
                     res?.inPlay && <span className='d-inline-flex align-items-center float-left mx-2'>
-                    <div className='blink'>
+                      <div className='blink'>
 
-                    </div>
-                  </span>
+                      </div>
+                    </span>
                   }
-                  
+
                 </Link>
               </div>
               <div className='old-match-details'>
@@ -222,7 +225,7 @@ const Sports = () => {
           )
         })
       }
- <BackBtn />
+      <BackBtn />
     </>
 
   );

@@ -383,7 +383,7 @@ const Register = ({ setShow }) => {
               }
 
             </div>
-            <button className="login_loginnn" type="submit">
+            {/* <button className="login_loginnn" type="submit">
 
               {
                 loadinLogin === true ?
@@ -397,7 +397,7 @@ const Register = ({ setShow }) => {
                     <LoginIcon style={{ fontSize: "18px" }} />
                   </>
               }
-            </button>
+            </button> */}
           </form>
 
           <button className="login_loginnn" onClick={handleClickLogin}>

@@ -76,14 +76,14 @@ const NewBookMaker: FC<{
                             className="FontTextWhite10px"
 
                         >
-                            Lagai
+                            Back
                         </th>
                         <th
                             style={{ width: "22%", verticalAlign: "middle", backgroundColor: "#002D5B", textAlign: "center", textTransform: "uppercase" }}
 
                             className="FontTextWhite10px"
                         >
-                            Khai
+                            Lay
                         </th>
                     </tr>
                 </thead>
@@ -113,7 +113,7 @@ const NewBookMaker: FC<{
                                                 false,
                                                 res.t,
                                                 res.nation,
-                                                "LAGAI"
+                                                "Back"
 
                                             )
                                         }
@@ -135,7 +135,7 @@ const NewBookMaker: FC<{
                                                 false,
                                                 res.t,
                                                 res.nation,
-                                                "KHAI"
+                                                "Lay"
                                             )
                                         }
                                     >

@@ -60,7 +60,7 @@ import IndianCasion from "./components/casino/indianCasion/IndianCasion";
 import SuperNowa from "./components/casino/indianCasion/SuperNowa/SuperNowa";
 import SuperNowaPage from "./components/casino/indianCasion/SuperNowa/SuperNowaPage";
 import SportBook from "./Pages/Home/SportBook";
-import WhatsAppIcon from "./components/whatsAppIcon/WhatsAppIcon";
+// import WhatsAppIcon from "./components/whatsAppIcon/WhatsAppIcon";
 
 
 interface LoadingType {
@@ -290,9 +290,9 @@ function App() {
 
             </Routes>
           </main>
-          {
+          {/* {
             !isSignedIn &&  <WhatsAppIcon />
-          }
+          } */}
          
           <SnackbarUtilsConfigurator />
         </SnackbarProvider>

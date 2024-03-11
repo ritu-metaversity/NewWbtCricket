@@ -181,10 +181,10 @@ const Account = () => {
                   <th className="ldg-tbl-th match-box-color">WON BY</th>
                   <th className="ldg-tbl-th match-box-color">WON</th>
                   <th className="ldg-tbl-th match-box-color">LOST</th>
-                  <th className="ldg-tbl-th match-box-color">HISAB</th>
+                  <th className="ldg-tbl-th match-box-color">Profit/Loss</th>
                   {/* <th className="ldg-tbl-th match-box-color">WON</th>
                   <th className="ldg-tbl-th match-box-color">LOST</th>
-                  <th className="ldg-tbl-th match-box-color">HISAB</th> */}
+                  <th className="ldg-tbl-th match-box-color">Profit/Loss</th> */}
                 </tr>
               </thead>
               <tbody style={{ fontSize: 12 }}>
